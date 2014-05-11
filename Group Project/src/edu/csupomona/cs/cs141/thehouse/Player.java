@@ -5,7 +5,7 @@
  * Group Project: The House
  *
  * A turn-based text game based where the player must go through and find a briefcase without getting
- * caught by enemy spies. (Description is subject to change)
+ * caught by enemy ninjas. (Description is subject to change)
  * 
  * Team BA^2KD
  * Ben Nickerson
