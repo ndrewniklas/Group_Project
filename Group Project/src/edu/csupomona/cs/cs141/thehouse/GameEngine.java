@@ -1,34 +1,127 @@
 /**
+ * CS 141: Introduction to Programming and Problem Solving
+ * Professor: Edwin Rodríguez
+ *
+ * Group Project: The House
+ *
+ * A turn-based text game based where the player must go through and find a briefcase without getting
+ * caught by enemy spies. (Description is subject to change)
  * 
+ * Team BA^2KD
+ * Ben Nickerson
+ * Andrew Niklas
+ * Andrew Nipp
+ * Kurt Newcomb
+ * Dylan Nguyen
  */
+
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * @author Andrew
- *
+ * @author Andrew Nipp
+ * 
+ *	GameEngine is where almost everything from the other classes contribute to the game
+ *	The GameEngine takes user commands from {@link UserInterace}, checks with {@link Player},
+ * 	and then performs the tasks. It is also where the {@link Enemy} class performs the actions 
+ * 	it decides on. GameEngine updates the grid and retrieves positions from it. GameEngine
+ * 	also checks to see if the {@link Player} has picked up any {@link PowerUp}s or if they have 
+ * 	ammo left.
  */
 public class GameEngine {
-	private UserInterface ui;
-	private Grid grid;
-	private Player plr;
-	private Enemy enemy;
-	private PowerUp pwrup;
 	
+	
+	/**
+	 * Instantiation for {@link UserInterface}
+	 */
+	private UserInterface ui;
+	/**
+	 * Instantiation for {@link Grid}
+	 */
+	private Grid grid;
+	/**
+	 * Instantiation for {@link Player}
+	 */
+	private Player plr;
+	/**
+	 * Instantiation for {@link Enemy}
+	 */
+	private Enemy enemy;
+	/**
+	 * Instantiation for {@link Shield}
+	 */
+	private Shield shield;
+	/**
+	 * Instantiation for {@link Radar}
+	 */
+	private Radar radar;
+	/**
+	 * Instantiation for {@link ExtraAmmo}
+	 */
+	private ExtraAmmo extraAmmo;
+		
+	/**
+	 * Saves the {@link Player}'s current position for use later
+	 */
 	private int[][] plrCurrentPos;
+	/**
+	 * Saves the {@link Player}'s last known position for use later
+	 */
 	private int[][] plrPrevPos;
+	/**
+	 * Saves the {@link Enemy}'s current position for use later
+	 */
 	private int[][] enemyCurrentPos;
+	/**
+	 * Saves the {@link Enemy}'s last known position for use later
+	 */
 	private int[][] enemyPrevPos;
+	/**
+	 * Saves the location of {@link ExtraAmmo} for use later
+	 */
 	private int[][] extraAmmoPos;
+	/**
+	 * Saves the location of {@link Radar} for use later
+	 */
 	private int[][] radarPos;
+	/**
+	 * Saves the location of {@link Shield} for use later
+	 */
 	private int[][] shieldPos;
+	/**
+	 * Saves the location of the first room
+	 */
 	private int[][] roomOnePos;
+	/**
+	 * Saves the location of the second room
+	 */
 	private int[][] roomTwoPos;
+	/**
+	 * Saves the location of the third room
+	 */
 	private int[][] roomThreePos;
+	/**
+	 * Saves the location of the fourth room
+	 */
 	private int[][] roomFourPos;
+	/**
+	 * Saves the location of the fifth room
+	 */
 	private int[][] roomFivePos;
+	/**
+	 * Saves the location of the sixth room
+	 */
 	private int[][] roomSixPos;
+	/**
+	 * Saves the location of the seventh room
+	 */
 	private int[][] roomSevenPos;
+	/**
+	 * Saves the location of the eighth room
+	 */
 	private int[][] roomEightPos;
+	/**
+	 * Saves the location of the ninth room
+	 */
 	private int[][] roomNinePos;
 	private int plrCommand;
 	private boolean plrDead;
@@ -41,7 +134,13 @@ public class GameEngine {
 	
 
     public GameEngine(){
-    	
+    	ui = new UserInterface();
+    	grid = new Grid();
+    	plr = new Player();
+    	enemy = new Enemy();
+    	shield = new Shield();
+    	radar = new Radar();
+    	extraAmmo = new ExtraAmmo();
     }
     
     // Main game methods
