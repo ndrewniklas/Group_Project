@@ -1,15 +1,18 @@
 /**
  * CS 141: Introduction to Programming and Problem Solving
- * Professor: Edwin Rodr&iacute;guez
+ * Professor: Edwin Rodríguez
  *
- * Programming Group Project
+ * Group Project: The House
  *
- *   Team BAAKD
- *   Ben Nickerson
- *   Andrew Nipp
- *   Dylan Nguyen
- *   Kurt Newcomb
- *   Andrew Niklas 
+ * A turn-based text game based where the player must go through and find a briefcase without getting
+ * caught by enemy spies. (Description is subject to change)
+ * 
+ * Team BA^2KD
+ * Ben Nickerson
+ * Andrew Niklas
+ * Andrew Nipp
+ * Kurt Newcomb
+ * Dylan Nguyen
  */
 
 
