@@ -18,6 +18,13 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
+/**
+ * @author Dylan Nguyen
+ * The {@link Enemy} class has parameters that will define the position of the enemy ninja
+ * as well as status of life. Furthermore, the methods that will be contained in this class
+ * will allow for the ninja to move, check for the player, kill the player, and die by the player.
+ */
+
 public class Enemy {
 
 	boolean ninjaLive;

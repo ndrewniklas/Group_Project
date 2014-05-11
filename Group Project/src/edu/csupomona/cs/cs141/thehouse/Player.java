@@ -20,7 +20,9 @@ package edu.csupomona.cs.cs141.thehouse;
 
 /**
  * @author Dylan Nguyen
- *
+ * This {@link Player} class will contain parameters that will define the player's status, upgrade status, position, and number
+ * of lives. In addition, the methods contained within the class will give the player actions (look, shoot, move, pick up items)
+ * as well as reactions (death, invincibility, radar, new bullet).
  */
 public class Player {
 
