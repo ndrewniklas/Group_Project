@@ -29,11 +29,6 @@ package edu.csupomona.cs.cs141.thehouse;
  */
 public class GameEngine {
 	
-	
-	/**
-	 * Instantiation for {@link UserInterface}
-	 */
-	private UserInterface ui;
 	/**
 	 * Instantiation for {@link Grid}
 	 */
@@ -123,10 +118,6 @@ public class GameEngine {
 	 */
 	private int[][] roomNinePos;
 	/**
-	 * Saves the user's command number from {@link UserInterface}
-	 */
-	private int userCommand;
-	/**
 	 * Checks to see if the player is dead
 	 */
 	private boolean plrDead;
@@ -158,6 +149,27 @@ public class GameEngine {
 	 * Checks to see if the {@link Player} has ammo left
 	 */
 	private boolean hasAmmo;
+	/**
+	 * This field holds the choice of the user. There are  xx potential values for the user to select:
+	 * left,
+	 * right,
+	 * up,
+	 * down,
+	 * shoot,
+	 * save,
+	 * exit
+	 */
+	private String choice;
+	
+	/**
+	 * This field holds the choice of direction for which the user will "look" before each turn.
+	 * There are four directions: 
+	 * left,
+	 * right,
+	 * up,
+	 * down
+	 */
+	private String lookDir;
 	
 
     /**
@@ -168,7 +180,6 @@ public class GameEngine {
      */
     public GameEngine(){
     	gameOver = false;
-    	ui = new UserInterface();
     	grid = new Grid();
     	plr = new Player();
     	enemy = new Enemy();
@@ -209,8 +220,9 @@ public class GameEngine {
     /**
      * The method that will interpret the command integer from {@link UserInterace}.
      * It will then move the player in the direction specified.
+     * @param moveChoice 
      */
-    public void plrMoveCMD(){
+    public void plrMoveCMD(int moveChoice){
     	
     }
     
@@ -231,28 +243,28 @@ public class GameEngine {
     /**
      * The method that sets {@link #plrPrevPos} to the last known position of the {@link Player}.
      */
-    public void getPlrPreviousPosition(){
+    public void setPlrPreviousPosition(){
     	
     }
     
     /**
      * The method that sets {@link #plrCurrentPos} to the current position of the {@link Player}.
      */
-    public void getPlrCurrentPosition(){
+    public void setPlrCurrentPosition(){
     	
     }
     
     /**
      * The method that sets {@link #enemyPrevPos} to the last known position of the {@link Enemy}.
      */
-    public void getEnemyPreviousPosition(){
+    public void setEnemyPreviousPosition(){
     	
     }
     
     /**
      * The method that sets {@link #enemyCurrentPos} to the current position of the {@link Enemy}.
      */
-    public void getEnemyCurrentPosition(){
+    public void setEnemyCurrentPosition(){
     	
     }
     
@@ -267,10 +279,16 @@ public class GameEngine {
     // Methods to check/send fields to other classes    
     /**
      * Used to send out {@link #userCommand} which is set by {@link #performUserAction()}.
-     * @return {@link #userCommand} value
-     */
-    public int getUserCMD(){
-    	return userCommand;
+     * @param
+     * 		lookDir - The direction chosen by the user to look, saved to a {@code String}
+     * @param
+     * 		choice - The choice of the user saved to a {@code String}.
+     * 
+     * 		 
+     */		
+    public void setUserCMD(String lookDir, String choice){
+    	this.lookDir = lookDir;
+    	this.choice = choice;
     }
 
     /**
@@ -421,4 +439,8 @@ public class GameEngine {
     public boolean plrFoundShield(){
     	return hasShield;
     }
+
+	public Grid getGrid() {
+		return grid;
+	}
 }
