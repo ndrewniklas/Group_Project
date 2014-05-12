@@ -56,67 +56,67 @@ public class GameEngine {
 	/**
 	 * Saves the {@link Player}'s current position for use later
 	 */
-	private int[][] plrCurrentPos;
+	private String[][] plrCurrentPos;
 	/**
 	 * Saves the {@link Player}'s last known position for use later
 	 */
-	private int[][] plrPrevPos;
+	private String[][] plrPrevPos;
 	/**
 	 * Saves the {@link Enemy}'s current position for use later
 	 */
-	private int[][] enemyCurrentPos;
+	private String[][] enemyCurrentPos;
 	/**
 	 * Saves the {@link Enemy}'s last known position for use later
 	 */
-	private int[][] enemyPrevPos;
+	private String[][] enemyPrevPos;
 	/**
 	 * Saves the location of {@link ExtraAmmo} for use later
 	 */
-	private int[][] extraAmmoPos;
+	private String[][] extraAmmoPos;
 	/**
 	 * Saves the location of {@link Radar} for use later
 	 */
-	private int[][] radarPos;
+	private String[][] radarPos;
 	/**
 	 * Saves the location of {@link Shield} for use later
 	 */
-	private int[][] shieldPos;
+	private String[][] shieldPos;
 	/**
 	 * Saves the location of the first room
 	 */
-	private int[][] roomOnePos;
+	private String[][] roomOnePos;
 	/**
 	 * Saves the location of the second room
 	 */
-	private int[][] roomTwoPos;
+	private String[][] roomTwoPos;
 	/**
 	 * Saves the location of the third room
 	 */
-	private int[][] roomThreePos;
+	private String[][] roomThreePos;
 	/**
 	 * Saves the location of the fourth room
 	 */
-	private int[][] roomFourPos;
+	private String[][] roomFourPos;
 	/**
 	 * Saves the location of the fifth room
 	 */
-	private int[][] roomFivePos;
+	private String[][] roomFivePos;
 	/**
 	 * Saves the location of the sixth room
 	 */
-	private int[][] roomSixPos;
+	private String[][] roomSixPos;
 	/**
 	 * Saves the location of the seventh room
 	 */
-	private int[][] roomSevenPos;
+	private String[][] roomSevenPos;
 	/**
 	 * Saves the location of the eighth room
 	 */
-	private int[][] roomEightPos;
+	private String[][] roomEightPos;
 	/**
 	 * Saves the location of the ninth room
 	 */
-	private int[][] roomNinePos;
+	private String[][] roomNinePos;
 	/**
 	 * Checks to see if the player is dead
 	 */
@@ -130,7 +130,7 @@ public class GameEngine {
 	 */
 	private boolean foundBriefcase;
 	/** 
-	 * Checks to see if the user quit from within {@link UserInterface}
+	 * Checks to see if the user quit 
 	 */
 	private boolean userQuit;
 	/**
@@ -150,7 +150,7 @@ public class GameEngine {
 	 */
 	private boolean hasAmmo;
 	/**
-	 * This field holds the choice of the user. There are  xx potential values for the user to select:
+	 * This field holds the choice of the user. There are xx potential values for the user to select:
 	 * left,
 	 * right,
 	 * up,
@@ -159,7 +159,7 @@ public class GameEngine {
 	 * save,
 	 * exit
 	 */
-	private String choice;
+	private String userChoice;
 	
 	/**
 	 * This field holds the choice of direction for which the user will "look" before each turn.
@@ -169,7 +169,7 @@ public class GameEngine {
 	 * up,
 	 * down
 	 */
-	private String lookDir;
+	private String lookDirection;
 	
 
     /**
@@ -201,7 +201,7 @@ public class GameEngine {
     }
     
     /**
-     * The method that will take {@link #userCommand} and perform actions based around it.
+     * The method that will take {@link #userChoice} and perform actions based around it.
      * For example, if the user chooses to move it will call the {@link #plrMoveCMD()} method.
      */
     public void performUserAction(){
@@ -209,20 +209,20 @@ public class GameEngine {
     }
     
     /**
-     * The method that will interpret the command integer from {@link UserInterface}.
-     * Then it will check to see if the {@link Player} has any bullets left.
-     * Finally it will fire the gun.
+     * The method that will have the player shoot the gun.
+     * First it will check to see if the {@link Player} has any bullets left.
+     * Then it will fire the gun.
      */
     public void plrShootCMD(){
     	
     }
     
     /**
-     * The method that will interpret the command integer from {@link UserInterace}.
-     * It will then move the player in the direction specified.
-     * @param moveChoice 
+     * The method that will have the player move
+     * It will move the player in the direction specified.
+     * @param moveChoice, which is the direction the user chooses
      */
-    public void plrMoveCMD(int moveChoice){
+    public void plrMoveCMD(String moveChoice){
     	
     }
     
@@ -270,7 +270,7 @@ public class GameEngine {
     
     /**
      * The method that will retrieve the position of each room from {@link Grid} and save 
-     * them to the corresponding 2d int array.
+     * them to the corresponding local 2d String array.
      */
     public void setRoomPositions(){
     	
@@ -278,17 +278,14 @@ public class GameEngine {
     
     // Methods to check/send fields to other classes    
     /**
-     * Used to send out {@link #userCommand} which is set by {@link #performUserAction()}.
+     * Used to set {@link #lookDirection} and {@link #userChoice}.
      * @param
-     * 		lookDir - The direction chosen by the user to look, saved to a {@code String}
+     * 		lookDir - The direction chosen by the user to look, saved to {@link #lookDirection}
      * @param
-     * 		choice - The choice of the user saved to a {@code String}.
-     * 
-     * 		 
+     * 		choice - The choice of the user saved to a {@link #userChoice}. 		 
      */		
     public void setUserCMD(String lookDir, String choice){
-    	this.lookDir = lookDir;
-    	this.choice = choice;
+    	
     }
 
     /**
@@ -322,13 +319,12 @@ public class GameEngine {
     public boolean isGameOver(){
     	return gameOver;
     }
- 
     
     /**
      * Used to send out {@link #plrCurrentPos} which is set within {@link #getPlrCurrentPosition()}.
      * @return {@link #plrCurrentPos} value
      */
-    public int[][] playerCurrentPosition(){
+    public String[][] playerCurrentPosition(){
 		return plrCurrentPos;
     }
     
@@ -336,7 +332,7 @@ public class GameEngine {
      * Used to send out {@link #plrPrevPos} which is set within {@link #getPlrPreviousPosition()}.
      * @return {@link #plrPrevPos} value
      */
-    public int[][] playerPreviousPosition(){
+    public String[][] playerPreviousPosition(){
     	return plrPrevPos;
     }
     
@@ -344,7 +340,7 @@ public class GameEngine {
      * Used to send out {@link #enemyCurrentPos} which is set with {@link #getEnemyCurrentPosition()}.
      * @return {@link #enemyCurrentPos} value
      */
-    public int[][] enemyCurrentPosition(){
+    public String[][] enemyCurrentPosition(){
     	return enemyCurrentPos;
     }
     
@@ -352,7 +348,7 @@ public class GameEngine {
      * Used to send out {@link #enemyPrevPos} which is set with {@link #getEnemyPreviousPosition()}.
      * @return {@link #enemyPrevPos} value
      */
-    public int[][] enemyPreviousPosition(){
+    public String[][] enemyPreviousPosition(){
     	return enemyPrevPos;
     }
     
@@ -360,7 +356,7 @@ public class GameEngine {
      * Used to send out and set {@link #extraAmmoPos}.
      * @return {@link #extraAmmoPos}
      */
-    public int[][] extraAmmoPosition(){
+    public String[][] extraAmmoPosition(){
     	return extraAmmoPos;
     }
     
@@ -368,7 +364,7 @@ public class GameEngine {
      * Used to send out and set {@link #radarPos}.
      * @return {@link #radarPos}
      */
-    public int[][] radarPosition(){
+    public String[][] radarPosition(){
     	return radarPos;
     }
     
@@ -376,7 +372,7 @@ public class GameEngine {
      * Used to send out and set {@link #shieldPos}.
      * @return {@link #shieldPos}
      */
-    public int[][] shieldPosition(){
+    public String[][] shieldPosition(){
     	return shieldPos;
     }
    
@@ -385,7 +381,7 @@ public class GameEngine {
      * @param roomNum is to check which room we want.
      * @return The corresponding room number.
      */
-    public int[][] roomPositions(int roomNum){
+    public String[][] roomPositions(int roomNum){
     	if(roomNum == 1)
     		return roomOnePos;
     	else if(roomNum == 2)
@@ -440,6 +436,10 @@ public class GameEngine {
     	return hasShield;
     }
 
+	/**
+	 * Used to send to send the {@link Grid} to the other classes
+	 * @return
+	 */
 	public Grid getGrid() {
 		return grid;
 	}
