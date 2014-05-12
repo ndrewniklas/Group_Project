@@ -1,6 +1,7 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
+import java.util.*;
 /**
  * @author Ben, Andrew
  *
@@ -12,16 +13,26 @@ public class Grid {
 	 */
 	private GameObject[][] go = new GameObject[9][9];	
 	
+	private Dice die;
 	/**
 	 * This field holds the briefcase, it will be the same as the {@code String[1][1]} for 
 	 * {@link #tempRoomBlock}.
 	 */
-	private String briefcase = "[!]";
+	private String briefcase = "[B]";
+	
+	/**
+	 * Checks to see if we should print the name of the briefcase 
+	 */
+	private boolean showBriefcase;
 	
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
+	 * Makes a new {@link Dice}
+	 * Sets {@link #showBriefcase}
 	 */
 	public Grid() {
+		die = new Dice();
+		showBriefcase = true;
 		for(int i = 0; i < go.length; ++i){
 			for(int j = 0; j < go[i].length; ++j){
 				go[i][j] = new GameObject();
@@ -57,12 +68,38 @@ public class Grid {
 	}
 	
 	/**
+	 * If {@link #showBriefcase} is {@code true} then show the {@link #briefcase} name
+	 * If it is {@code false} then show the default room name
+	 * @return
+	 * 		-The value of the if-then statement, either {@link #briefcase} or {@code "[R]"}
+	 */
+	public String createBriefcase(){
+		if(showBriefcase)
+			return briefcase;
+		else
+			return "[R]";
+	}
+	
+	/**
 	 * This method randomly places the briefcase by calling {@link Dice#roll()}. It then creates a temporary
 	 * {@code String[][]} that stores the briefcase. Any time a {@link Player} enters a room, it checks to
 	 * see if that room corresponds to the temporary room, holding the case. If so, the player wins and the 
 	 * game ends.
+	 * 
+	 * AMN: Creates two local ints. Uses {@link Dice#roll(int)} to randomly choose 1, 4, or 7 (which are the
+	 * rooms locations). Then it will set {@link GameObject#setObjectName(String)} to {@link #createBriefcase()}
 	 */
-	private void setBriefcase() {
+	public void setBriefcase() {
+		int firstRandom, secondRandom;
+		firstRandom = die.roll(8);
+		while(firstRandom != 1 && firstRandom != 4 && firstRandom != 7){
+			firstRandom = die.roll(8);
+		}
+		secondRandom = die.roll(8);
+		while(secondRandom != 1 && secondRandom != 4 && secondRandom != 7){
+			secondRandom = die.roll(8);
+		}
+		go[firstRandom][secondRandom].setObjectName(createBriefcase());
 	}
 	
 }

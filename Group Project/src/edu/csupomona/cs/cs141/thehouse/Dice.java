@@ -31,12 +31,14 @@ public class Dice {
 	private Random dice = new Random();
 	
 	/**
-	 * This method rolls two die and returns their totat.
+	 * This method rolls two die and returns their total.
+	 * @param
+	 * 		dieNumber - used to specify the number of sides
 	 * @return
-	 * 		dieTotal - a random number between 2 and 12 saved as an {@code int}.
+	 * 		dieTotal - a random number between 0 and dieNumber saved as an {@code int}.
 	 */
-	public int roll() {
-		int dieTotal = dice.nextInt(10) + 2;
+	public int roll(int dieNumber) {
+		int dieTotal = dice.nextInt(dieNumber);
 		return dieTotal;
 	}
 }
