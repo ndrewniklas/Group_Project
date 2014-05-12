@@ -1,3 +1,19 @@
+/**
+ * CS 141: Introduction to Programming and Problem Solving
+ * Professor: Edwin Rodríguez
+ *
+ * Group Project: The House
+ *
+ * A turn-based text game based where the player must go through and find a briefcase without getting
+ * caught by enemy ninjas. (Description is subject to change)
+ * 
+ * Team BA^2KD
+ * Ben Nickerson
+ * Andrew Niklas
+ * Andrew Nipp
+ * Kurt Newcomb
+ * Dylan Nguyen
+ */
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
@@ -15,7 +31,6 @@ public class ExtraAmmo extends PowerUp {
 	 * This is the string for holding the amount of bullets.
 	 */
 	private String ExtraAmmo;
-	
 	
 	/**
 	 * This is the method that gives powerup its type.  

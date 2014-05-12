@@ -1,3 +1,19 @@
+/**
+ * CS 141: Introduction to Programming and Problem Solving
+ * Professor: Edwin Rodríguez
+ *
+ * Group Project: The House
+ *
+ * A turn-based text game based where the player must go through and find a briefcase without getting
+ * caught by enemy ninjas. (Description is subject to change)
+ * 
+ * Team BA^2KD
+ * Ben Nickerson
+ * Andrew Niklas
+ * Andrew Nipp
+ * Kurt Newcomb
+ * Dylan Nguyen
+ */
 package edu.csupomona.cs.cs141.thehouse;
 /**
 * @author Kurt
@@ -9,26 +25,27 @@ package edu.csupomona.cs.cs141.thehouse;
 public abstract class PowerUp {
 	
 	/**
-	 *  @link #PowerUp This is the boolean that tracks the state of the power up
+	 *  {@link PowerUp} This is the boolean that tracks the state of the power up
 	 */
 	public boolean pwrActive;
 	
 	/**
-	 *  @link #PowerUp This is the string that holds the name of the powerup
+	 *  {@link PowerUp} This is the string that holds the name of the powerup
 	 */
-	public String PowerUp;
+	public String powerUp;
 	
 	
 	/**
-	 * @link #Powerup This method sets what type of pwoer-up the player picks up
+	 * {@link PowerUp} This method sets what type of power-up the player picks up
+	 * @return {@link #powerUp}
 	 */
 	public String setPowerUp(){
 	//set the type of powerup so the program knows what  	
-		return PowerUp;
+		return powerUp;
 	}
 	
 	/**
-	 *  @link #PowerUp This method checks what powerup it is. 
+	 *  {@link PowerUp} This method checks what powerup it is. 
 	 */
 	public void getPowerup(){
 	// checks the value of the powerup 	
@@ -37,10 +54,9 @@ public abstract class PowerUp {
 	/**
 	 *  This method is the power-up.
 	 */
-	public void PowerUp() {
+	public PowerUp() {
 		// TODO Auto-generated constructor stub
 		boolean pwrActive = false; // false means the player doesn't have a buff 
-		String PowerUp;
 	}
 
 }

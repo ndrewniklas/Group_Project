@@ -38,8 +38,7 @@ public class Player {
 	int xPosition;
 	int yPosition;
 	int numLives;
-	
-	
+
 	/**
 	 * {@link #movePlayer()} This method will move the player based on user input
 	 */
@@ -67,7 +66,7 @@ public class Player {
 	 * {@link #checkBulletPossession()} This method will check if there is a bullet in the gun of the
 	 * player
 	 * @return Will be used to determine if {@link #pickUpBullet(boolean)} and
-	 * {@link #useBullet()} can be executed or not
+	 * {@link #useBullet(boolean)} can be executed or not
 	 */
 	public boolean checkBulletPossession() {
 		return true;
@@ -104,7 +103,7 @@ public class Player {
 	}
 	
 	/**
-	 * {@link #useInvincibility()} This method will toggle the {@link Shield} upgrade
+	 * {@link #useShield()} This method will toggle the {@link Shield} upgrade
 	 * @return The return value will determine if the player can die or not
 	 */
 	public boolean useShield() {
@@ -129,14 +128,14 @@ public class Player {
 	 * {@link #playerDies(boolean)} This method will check if the enemy has attack the player
 	 * and kill the player if the parameter is true
 	 * @param enemyContact Is the boolean parameter that will determine if the player dies
-	 * @return The return value will determine if {@link #looseLife(boolean)} will execute
+	 * @return
 	 */
 	public boolean playerDies(boolean enemyContact) {
 		return true;
 	}
 	
 	/**
-	 * {@link #getBriefCase(boolean)} This method will check if there is briefcase in front of the player
+	 * This method will check if there is briefcase in front of the player
 	 * @return This return value will return true if there is a briefcase in front of the player
 	 */
 	public boolean getBriefCase() {

@@ -21,7 +21,7 @@ package edu.csupomona.cs.cs141.thehouse;
  * @author Andrew Nipp
  * 
  *	GameEngine is where almost everything from the other classes contribute to the game.
- *	The GameEngine takes user commands from {@link UserInterace}, checks with {@link Player},
+ *	The GameEngine takes user commands from {@link UserInterface}, checks with {@link Player},
  * 	and then performs the tasks. It is also where the {@link Enemy} class performs the actions 
  * 	it decides. GameEngine updates the {@link Grid} and retrieves positions from it. GameEngine
  * 	also checks to see if the {@link Player} has picked up any {@link PowerUp}s or if they have 
@@ -134,7 +134,7 @@ public class GameEngine {
 	 */
 	private boolean userQuit;
 	/**
-	 * Checks to see if the {@link Player} has found the {@link ExtraBullet}
+	 * Checks to see if the {@link Player} has found the {@link ExtraAmmo}
 	 */
 	private boolean hasExtraBullet;
 	/**
@@ -160,7 +160,6 @@ public class GameEngine {
 	 * exit
 	 */
 	private String userChoice;
-	
 	/**
 	 * This field holds the choice of direction for which the user will "look" before each turn.
 	 * There are four directions: 
@@ -170,9 +169,8 @@ public class GameEngine {
 	 * down
 	 */
 	private String lookDirection;
-	
-
-    /**
+    
+	/**
      * The default constructor for GameEngine.
      * 
      * Currently it is only filling up the instances of the classes and forcing {@link #gameOver}
@@ -202,7 +200,7 @@ public class GameEngine {
     
     /**
      * The method that will take {@link #userChoice} and perform actions based around it.
-     * For example, if the user chooses to move it will call the {@link #plrMoveCMD()} method.
+     * For example, if the user chooses to move it will call the {@link #plrMoveCMD(String)} method.
      */
     public void performUserAction(){
     	
@@ -321,7 +319,7 @@ public class GameEngine {
     }
     
     /**
-     * Used to send out {@link #plrCurrentPos} which is set within {@link #getPlrCurrentPosition()}.
+     * Used to send out {@link #plrCurrentPos} which is set within {@link #setPlrCurrentPosition()}.
      * @return {@link #plrCurrentPos} value
      */
     public String[][] playerCurrentPosition(){
@@ -329,7 +327,7 @@ public class GameEngine {
     }
     
     /**
-     * Used to send out {@link #plrPrevPos} which is set within {@link #getPlrPreviousPosition()}.
+     * Used to send out {@link #plrPrevPos} which is set within {@link #setPlrPreviousPosition()}.
      * @return {@link #plrPrevPos} value
      */
     public String[][] playerPreviousPosition(){
@@ -337,7 +335,7 @@ public class GameEngine {
     }
     
     /**
-     * Used to send out {@link #enemyCurrentPos} which is set with {@link #getEnemyCurrentPosition()}.
+     * Used to send out {@link #enemyCurrentPos} which is set with {@link #setEnemyCurrentPosition()}.
      * @return {@link #enemyCurrentPos} value
      */
     public String[][] enemyCurrentPosition(){
@@ -345,7 +343,7 @@ public class GameEngine {
     }
     
     /**
-     * Used to send out {@link #enemyPrevPos} which is set with {@link #getEnemyPreviousPosition()}.
+     * Used to send out {@link #enemyPrevPos} which is set with {@link #setEnemyPreviousPosition()}.
      * @return {@link #enemyPrevPos} value
      */
     public String[][] enemyPreviousPosition(){
@@ -438,7 +436,7 @@ public class GameEngine {
 
 	/**
 	 * Used to send to send the {@link Grid} to the other classes
-	 * @return
+	 * @return grid
 	 */
 	public Grid getGrid() {
 		return grid;

@@ -40,7 +40,8 @@ public class Grid {
 	}
 	
 	/**
-	 * This method will give the grid in its entirety, to whatever calls it. Chiefly {@link GameEngine#setGrid(String[][]).
+ 	 * This method will give the grid in its entirety, to whatever calls it. Chiefly {@link GameEngine #setGrid(String[][])}.
+	 * @return fullGrid
 	 */
 	public String[][] getfullGrid() {
 		return fullGrid;
