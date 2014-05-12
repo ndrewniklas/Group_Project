@@ -6,15 +6,29 @@ package edu.csupomona.cs.cs141.thehouse;
  * 
  */
 public class ExtraAmmo extends PowerUp {
-	private boolean ExtraAmmo;
-	private boolean pwrup;
+
+	/**
+	 * this is the name of the powerup.
+	 */
+	private String pwrup;
+	/**
+	 * This is the string for holding the amount of bullets.
+	 */
+	private String ExtraAmmo;
 	
-	public ExtraAmmo() {
+	
+	/**
+	 * This is the method that gives powerup its type.  
+	 */
+	public void ExtraAmmo() {
 		// TODO Auto-generated constructor stub
 		pwrup = ExtraAmmo;
 		
 	}
-	
+	 
+	/**
+	 * This is the method that adds another bullet to the clip. 
+	 */
 	public void addAmmo(){
 		
 	}
