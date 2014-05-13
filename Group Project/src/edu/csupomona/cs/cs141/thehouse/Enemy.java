@@ -27,7 +27,6 @@ package edu.csupomona.cs.cs141.thehouse;
 public class Enemy {
 
 	boolean ninjaLive;
-	boolean ninjaDead;
 	
 	int initialX;
 	int initialY;

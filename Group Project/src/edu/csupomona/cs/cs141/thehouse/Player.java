@@ -28,7 +28,6 @@ public class Player extends GameObject{
 	
 	boolean isAlive;
 	boolean isInvincible;
-	boolean isDead;
 	boolean hasBullet;
 	boolean hasInvincibility;
 	boolean hasRadar;
