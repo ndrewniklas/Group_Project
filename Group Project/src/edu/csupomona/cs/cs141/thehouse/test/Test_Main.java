@@ -26,6 +26,7 @@ public class Test_Main {
 		System.out.println("Grid: Print Test 1");
 		System.out.println("R is the room");
 		Grid grid = new Grid();
+		grid.printGrid();
 		System.out.println("-----------------------------------------------------");
 	}
 	
@@ -33,6 +34,7 @@ public class Test_Main {
 		System.out.println("Grid: Print Test 2");
 		System.out.println("B is the briefcase, R is the room, P is the player");
 		Grid grid = new Grid();
+		grid.printGrid();
 		grid.setBriefcase();
 		
 		System.out.println("-----------------------------------------------------");
@@ -57,11 +59,13 @@ public class Test_Main {
 		System.out.println("Player movement test 2");
 		Player ply = new Player();
 		Grid grid = new Grid();
+		grid.printGrid();
 		
 		while(true){
 			Scanner sc = new Scanner(System.in);
 			String input=sc.next();
 			ply.movePlayer(input);
+			grid.rePopulateGrid(ply);
 			grid.printGrid();
 			
 		}

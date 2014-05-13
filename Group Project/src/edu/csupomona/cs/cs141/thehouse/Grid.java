@@ -15,10 +15,6 @@ public class Grid {
 	
 	private Room room;
 	
-	private GameObject go = new GameObject();
-	
-	private Player ply =new Player();
-	
 	private Dice die;
 	/**
 	 * This field holds the briefcase, it will be the same as the {@code String[1][1]} for 
@@ -46,7 +42,6 @@ public class Grid {
 		}
 		populateGrid();
 		setBriefcase();
-		printGrid();
 	}
 	
 	/**
@@ -74,9 +69,15 @@ public class Grid {
 		gog[1][7] = new Room();
 		gog[4][7] = new Room();
 		gog[7][7] = new Room();
-		gog[ply.yPosition][ply.xPosition] = ply;
 	}
 	
+	public Player rePopulateGrid(Player ply) {
+		gog[ply.get_yPosition()][ply.get_xPosition()] = ply;
+		gog[ply.getYPre()][ply.getXPre()]= new GameObject();
+		populateGrid();
+		
+		return ply;
+	}
 	/**
 	 * This method randomly places the briefcase by calling {@link Dice#roll()}. It then creates a temporary
 	 * {@code String[][]} that stores the briefcase. Any time a {@link Player} enters a room, it checks to

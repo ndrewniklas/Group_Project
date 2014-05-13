@@ -28,15 +28,18 @@ import java.util.Scanner;
  */
 public class Player extends GameObject{
 	
-	boolean isAlive;
-	boolean isInvincible;
-	boolean hasBullet;
-	boolean hasInvincibility;
-	boolean hasRadar;
+	private boolean isAlive;
+	private boolean isInvincible;
+	private boolean hasBullet;
+	private boolean hasInvincibility;
+	private boolean hasRadar;
 	
-	int xPosition;
-	int yPosition;
-	int numLives;
+	private int xPosition;
+	private int yPosition;
+	private int xpre;
+	private int ypre;
+	
+	private int numLives;
 
 	public Player(){
 		super("[P]",0,8);
@@ -51,6 +54,8 @@ public class Player extends GameObject{
 	public void movePlayer(String input) {
 		
 		String cmd=input.toLowerCase();
+		xpre=xPosition;
+		ypre=yPosition;
 		switch (cmd) {
 		case "up":
 			setXY(xPosition, --yPosition);
@@ -69,6 +74,34 @@ public class Player extends GameObject{
 			System.out.println("Invalid command: Try again");
 			break;
 		}
+	}
+	
+	/**
+	 * @return
+	 */
+	public int get_yPosition() {
+		return yPosition;
+	}
+	
+	/**
+	 * @return
+	 */
+	public int get_xPosition() {
+		return xPosition;
+	}
+	
+	/**
+	 * @return
+	 */
+	public int getYPre() {
+		return ypre;
+	}
+	
+	/**
+	 * @return
+	 */
+	public int getXPre() {
+		return xpre;
 	}
 	
 	/**
