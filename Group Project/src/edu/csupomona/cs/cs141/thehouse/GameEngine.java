@@ -56,67 +56,67 @@ public class GameEngine {
 	/**
 	 * Saves the {@link Player}'s current position for use later
 	 */
-	private String[][] plrCurrentPos;
+	private GameObject[][] plrCurrentPos;
 	/**
 	 * Saves the {@link Player}'s last known position for use later
 	 */
-	private String[][] plrPrevPos;
+	private GameObject[][] plrPrevPos;
 	/**
 	 * Saves the {@link Enemy}'s current position for use later
 	 */
-	private String[][] enemyCurrentPos;
+	private GameObject[][] enemyCurrentPos;
 	/**
 	 * Saves the {@link Enemy}'s last known position for use later
 	 */
-	private String[][] enemyPrevPos;
+	private GameObject[][] enemyPrevPos;
 	/**
 	 * Saves the location of {@link ExtraAmmo} for use later
 	 */
-	private String[][] extraAmmoPos;
+	private GameObject[][] extraAmmoPos;
 	/**
 	 * Saves the location of {@link Radar} for use later
 	 */
-	private String[][] radarPos;
+	private GameObject[][] radarPos;
 	/**
 	 * Saves the location of {@link Shield} for use later
 	 */
-	private String[][] shieldPos;
+	private GameObject[][] shieldPos;
 	/**
 	 * Saves the location of the first room
 	 */
-	private String[][] roomOnePos;
+	private GameObject[][] roomOnePos;
 	/**
 	 * Saves the location of the second room
 	 */
-	private String[][] roomTwoPos;
+	private GameObject[][] roomTwoPos;
 	/**
 	 * Saves the location of the third room
 	 */
-	private String[][] roomThreePos;
+	private GameObject[][] roomThreePos;
 	/**
 	 * Saves the location of the fourth room
 	 */
-	private String[][] roomFourPos;
+	private GameObject[][] roomFourPos;
 	/**
 	 * Saves the location of the fifth room
 	 */
-	private String[][] roomFivePos;
+	private GameObject[][] roomFivePos;
 	/**
 	 * Saves the location of the sixth room
 	 */
-	private String[][] roomSixPos;
+	private GameObject[][] roomSixPos;
 	/**
 	 * Saves the location of the seventh room
 	 */
-	private String[][] roomSevenPos;
+	private GameObject[][] roomSevenPos;
 	/**
 	 * Saves the location of the eighth room
 	 */
-	private String[][] roomEightPos;
+	private GameObject[][] roomEightPos;
 	/**
 	 * Saves the location of the ninth room
 	 */
-	private String[][] roomNinePos;
+	private GameObject[][] roomNinePos;
 	/**
 	 * Checks to see if the player is dead
 	 */
@@ -322,7 +322,7 @@ public class GameEngine {
      * Used to send out {@link #plrCurrentPos} which is set within {@link #setPlrCurrentPosition()}.
      * @return {@link #plrCurrentPos} value
      */
-    public String[][] playerCurrentPosition(){
+    public GameObject[][] playerCurrentPosition(){
 		return plrCurrentPos;
     }
     
@@ -330,7 +330,7 @@ public class GameEngine {
      * Used to send out {@link #plrPrevPos} which is set within {@link #setPlrPreviousPosition()}.
      * @return {@link #plrPrevPos} value
      */
-    public String[][] playerPreviousPosition(){
+    public GameObject[][] playerPreviousPosition(){
     	return plrPrevPos;
     }
     
@@ -338,7 +338,7 @@ public class GameEngine {
      * Used to send out {@link #enemyCurrentPos} which is set with {@link #setEnemyCurrentPosition()}.
      * @return {@link #enemyCurrentPos} value
      */
-    public String[][] enemyCurrentPosition(){
+    public GameObject[][] enemyCurrentPosition(){
     	return enemyCurrentPos;
     }
     
@@ -346,7 +346,7 @@ public class GameEngine {
      * Used to send out {@link #enemyPrevPos} which is set with {@link #setEnemyPreviousPosition()}.
      * @return {@link #enemyPrevPos} value
      */
-    public String[][] enemyPreviousPosition(){
+    public GameObject[][] enemyPreviousPosition(){
     	return enemyPrevPos;
     }
     
@@ -354,7 +354,7 @@ public class GameEngine {
      * Used to send out and set {@link #extraAmmoPos}.
      * @return {@link #extraAmmoPos}
      */
-    public String[][] extraAmmoPosition(){
+    public GameObject[][] extraAmmoPosition(){
     	return extraAmmoPos;
     }
     
@@ -362,7 +362,7 @@ public class GameEngine {
      * Used to send out and set {@link #radarPos}.
      * @return {@link #radarPos}
      */
-    public String[][] radarPosition(){
+    public GameObject[][] radarPosition(){
     	return radarPos;
     }
     
@@ -370,38 +370,10 @@ public class GameEngine {
      * Used to send out and set {@link #shieldPos}.
      * @return {@link #shieldPos}
      */
-    public String[][] shieldPosition(){
+    public GameObject[][] shieldPosition(){
     	return shieldPos;
     }
-   
-    /**
-     * Checks to see which room position is asked for then returns that room's position.
-     * @param roomNum is to check which room we want.
-     * @return The corresponding room number.
-     */
-    public String[][] roomPositions(int roomNum){
-    	if(roomNum == 1)
-    		return roomOnePos;
-    	else if(roomNum == 2)
-    		return roomTwoPos;
-    	else if(roomNum == 3)
-    		return roomThreePos;
-    	else if(roomNum == 4)
-    		return roomFourPos;
-    	else if(roomNum == 5)
-    		return roomFivePos;
-    	else if(roomNum == 6)
-    		return roomSixPos;
-    	else if(roomNum == 7)
-    		return roomSevenPos;
-    	else if(roomNum == 8)
-    		return roomEightPos;
-    	else if(roomNum == 9)
-    		return roomNinePos;
-    	else
-    		return null;
-    }
-    
+       
     /**
      * Checks to see if the {@link Player} {@link #hasAmmo}.
      * @return {@link #hasAmmo} value

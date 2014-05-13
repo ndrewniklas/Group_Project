@@ -22,15 +22,15 @@ public class Test_Main {
 		System.out.println("Grid: Print Test 1");
 		System.out.println("R is the room");
 		Grid grid = new Grid();
-		grid.createRooms();
+		grid.populateGrid();
 		grid.printGrid();
 		System.out.println("-----------------------------------------------------");
 	}
 	public static void printGrid_Test2(){
 		System.out.println("Grid: Print Test 2");
-		System.out.println("B is the briefcase, R is the room");
+		System.out.println("B is the briefcase, R is the room, P is the player");
 		Grid grid = new Grid();
-		grid.createRooms();
+		grid.populateGrid();
 		grid.setBriefcase();
 		grid.printGrid();
 		

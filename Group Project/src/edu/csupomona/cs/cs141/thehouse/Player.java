@@ -24,8 +24,8 @@ package edu.csupomona.cs.cs141.thehouse;
  * of lives. In addition, the methods contained within the class will give the player actions (look, shoot, move, pick up items)
  * as well as reactions (death, shield, radar, new bullet).
  */
-public class Player {
-
+public class Player extends GameObject{
+	
 	boolean isAlive;
 	boolean isInvincible;
 	boolean isDead;
@@ -39,6 +39,9 @@ public class Player {
 	int yPosition;
 	int numLives;
 
+	public Player(){
+		setObjectName("[P]");
+	}
 	/**
 	 * {@link #movePlayer()} This method will move the player based on user input
 	 */

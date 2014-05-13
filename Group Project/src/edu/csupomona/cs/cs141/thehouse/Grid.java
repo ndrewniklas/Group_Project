@@ -12,7 +12,8 @@ public class Grid {
 	 * The grid is a 9x9 array of GameObject
 	 */
 	private GameObject[][] go = new GameObject[9][9];	
-	
+	private Player player;
+	private Room room;
 	private Dice die;
 	/**
 	 * This field holds the briefcase, it will be the same as the {@code String[1][1]} for 
@@ -53,31 +54,19 @@ public class Grid {
 	}
 	
 	/**
-	 * Sets the name of each room at that position in {@link #go}
+	 * Populates the grid with rooms, player, enemy, and powerups in the position at {@link #go}
 	 */
-	public void createRooms(){
-		go[1][1].setObjectName("[R]");
-		go[4][1].setObjectName("[R]");
-		go[7][1].setObjectName("[R]");
-		go[1][4].setObjectName("[R]");
-		go[4][4].setObjectName("[R]");
-		go[7][4].setObjectName("[R]");
-		go[1][7].setObjectName("[R]");
-		go[4][7].setObjectName("[R]");
-		go[7][7].setObjectName("[R]");
-	}
-	
-	/**
-	 * If {@link #showBriefcase} is {@code true} then show the {@link #briefcase} name
-	 * If it is {@code false} then show the default room name
-	 * @return
-	 * 		-The value of the if-then statement, either {@link #briefcase} or {@code "[R]"}
-	 */
-	public String createBriefcase(){
-		if(showBriefcase)
-			return briefcase;
-		else
-			return "[R]";
+	public void populateGrid(){
+		go[1][1] = new Room();
+		go[4][1] = new Room();
+		go[7][1] = new Room();
+		go[1][4] = new Room();
+		go[4][4] = new Room();
+		go[7][4] = new Room();
+		go[1][7] = new Room();
+		go[4][7] = new Room();
+		go[7][7] = new Room();
+		go[8][0] = new Player();
 	}
 	
 	/**
@@ -87,7 +76,7 @@ public class Grid {
 	 * game ends.
 	 * 
 	 * AMN: Creates two local ints. Uses {@link Dice#roll(int)} to randomly choose 1, 4, or 7 (which are the
-	 * rooms locations). Then it will set {@link GameObject#setObjectName(String)} to {@link #createBriefcase()}
+	 * rooms locations). Then it will create a new {@link Room(boolean)} which the value of {@link #showBriefcase}
 	 */
 	public void setBriefcase() {
 		int firstRandom, secondRandom;
@@ -99,7 +88,7 @@ public class Grid {
 		while(secondRandom != 1 && secondRandom != 4 && secondRandom != 7){
 			secondRandom = die.roll(8);
 		}
-		go[firstRandom][secondRandom].setObjectName(createBriefcase());
+		go[firstRandom][secondRandom] = new Room(showBriefcase);
 	}
 	
 }
