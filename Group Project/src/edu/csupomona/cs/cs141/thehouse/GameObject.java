@@ -14,11 +14,22 @@ public class GameObject {
 	 */
 	private String objName;
 	
+	
+	int[] pos =new int[2];
+
 	/**
 	 * The constructor sets the default name for {@link #objName}
 	 */
 	public GameObject() {
-		objName = "[ ]";
+		objName = "   ";
+	}
+	
+	public GameObject(String name, int x, int y){
+		
+		objName = name;
+		
+		pos[0]=x;
+		pos[1]=y;
 	}
 		
 	/**
@@ -26,9 +37,8 @@ public class GameObject {
 	 * @param name, the name we want to set the object to
 	 * @return {@link #objName}
 	 */
-	public String setObjectName(String name){
+	public void setObjectName(String name){
 		objName = name;
-		return objName;
 	}
 	
 	/**
@@ -37,5 +47,18 @@ public class GameObject {
 	 */
 	public String getObjectName(){
 		return objName;
+	}
+	
+	public void setXY(int x, int y) {
+		pos[0]=x;
+		pos[1]=y;
+	}
+	
+	public int[] getPosition() {
+		return pos;
+	}
+	
+	public void printObject() {
+		System.out.print(objName);
 	}
 }

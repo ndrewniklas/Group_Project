@@ -18,6 +18,8 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
+import java.util.Scanner;
+
 /**
  * @author Dylan Nguyen
  * This {@link Player} class will contain parameters that will define the player's status, upgrade status, position, and number
@@ -26,26 +28,80 @@ package edu.csupomona.cs.cs141.thehouse;
  */
 public class Player extends GameObject{
 	
-	boolean isAlive;
-	boolean isInvincible;
-	boolean hasBullet;
-	boolean hasInvincibility;
-	boolean hasRadar;
+	private boolean isAlive;
+	private boolean isInvincible;
+	private boolean hasBullet;
+	private boolean hasInvincibility;
+	private boolean hasRadar;
 	
-	int initialX;
-	int initialY;
-	int xPosition;
-	int yPosition;
-	int numLives;
+	private int xPosition;
+	private int yPosition;
+	private int xpre;
+	private int ypre;
+	
+	private int numLives;
 
 	public Player(){
-		setObjectName("[P]");
+		super("[P]",0,8);
+		
+		xPosition=0;
+		yPosition=8;
 	}
+	
 	/**
 	 * {@link #movePlayer()} This method will move the player based on user input
 	 */
-	public void movePlayer() {
+	public void movePlayer(String input) {
 		
+		String cmd=input.toLowerCase();
+		xpre=xPosition;
+		ypre=yPosition;
+		switch (cmd) {
+		case "up":
+			setXY(xPosition, --yPosition);
+			break;
+		case "down":
+			setXY(xPosition, ++yPosition);
+			break;
+		case "left":
+			setXY(--xPosition, yPosition);
+			break;
+		case "right":
+			setXY(++xPosition, yPosition);
+			break;
+
+		default:
+			System.out.println("Invalid command: Try again");
+			break;
+		}
+	}
+	
+	/**
+	 * @return
+	 */
+	public int get_yPosition() {
+		return yPosition;
+	}
+	
+	/**
+	 * @return
+	 */
+	public int get_xPosition() {
+		return xPosition;
+	}
+	
+	/**
+	 * @return
+	 */
+	public int getYPre() {
+		return ypre;
+	}
+	
+	/**
+	 * @return
+	 */
+	public int getXPre() {
+		return xpre;
 	}
 	
 	/**
