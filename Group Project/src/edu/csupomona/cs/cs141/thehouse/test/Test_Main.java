@@ -58,10 +58,9 @@ public class Test_Main {
 		Player ply = new Player();
 		Grid grid = new Grid();
 		
-		String input="h";
-		while(input!= "Q"){
+		while(true){
 			Scanner sc = new Scanner(System.in);
-			input=sc.next();
+			String input=sc.next();
 			ply.movePlayer(input);
 			grid.printGrid();
 			

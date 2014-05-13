@@ -11,9 +11,14 @@ public class Grid {
 	/**
 	 * The grid is a 9x9 array of GameObject
 	 */
-	private GameObject[][] go = new GameObject[9][9];	
-	private Player player;
+	private GameObject[][] gog = new GameObject[9][9];	
+	
 	private Room room;
+	
+	private GameObject go = new GameObject();
+	
+	private Player ply =new Player();
+	
 	private Dice die;
 	/**
 	 * This field holds the briefcase, it will be the same as the {@code String[1][1]} for 
@@ -34,20 +39,23 @@ public class Grid {
 	public Grid() {
 		die = new Dice();
 		showBriefcase = true;
-		for(int i = 0; i < go.length; ++i){
-			for(int j = 0; j < go[i].length; ++j){
-				go[i][j] = new GameObject();
+		for(int i = 0; i < gog.length; ++i){
+			for(int j = 0; j < gog[i].length; ++j){
+				gog[i][j] = new GameObject();
 			}
 		}
+		populateGrid();
+		setBriefcase();
+		printGrid();
 	}
 	
 	/**
 	 * Prints out the name of the object at that location
 	 */
 	public void printGrid(){
-		for(int i = 0; i < go.length; ++i){
-			for(int j = 0; j < go[i].length; ++j){
-				System.out.print(go[i][j].getObjectName());
+		for(int i = 0; i < gog.length; ++i){
+			for(int j = 0; j < gog[i].length; ++j){
+				gog[i][j].printObject();
 			}
 			System.out.println();
 		}
@@ -57,16 +65,16 @@ public class Grid {
 	 * Populates the grid with rooms, player, enemy, and powerups in the position at {@link #go}
 	 */
 	public void populateGrid(){
-		go[1][1] = new Room();
-		go[4][1] = new Room();
-		go[7][1] = new Room();
-		go[1][4] = new Room();
-		go[4][4] = new Room();
-		go[7][4] = new Room();
-		go[1][7] = new Room();
-		go[4][7] = new Room();
-		go[7][7] = new Room();
-		go[8][0] = new Player();
+		gog[1][1] = new Room();
+		gog[4][1] = new Room();
+		gog[7][1] = new Room();
+		gog[1][4] = new Room();
+		gog[4][4] = new Room();
+		gog[7][4] = new Room();
+		gog[1][7] = new Room();
+		gog[4][7] = new Room();
+		gog[7][7] = new Room();
+		gog[ply.yPosition][ply.xPosition] = ply;
 	}
 	
 	/**
@@ -88,7 +96,7 @@ public class Grid {
 		while(secondRandom != 1 && secondRandom != 4 && secondRandom != 7){
 			secondRandom = die.roll(8);
 		}
-		go[firstRandom][secondRandom] = new Room(showBriefcase);
+		gog[firstRandom][secondRandom] = new Room(showBriefcase);
 	}
 	
 }

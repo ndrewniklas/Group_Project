@@ -18,6 +18,8 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
+import java.util.Scanner;
+
 /**
  * @author Dylan Nguyen
  * This {@link Player} class will contain parameters that will define the player's status, upgrade status, position, and number
@@ -32,20 +34,41 @@ public class Player extends GameObject{
 	boolean hasInvincibility;
 	boolean hasRadar;
 	
-	int initialX;
-	int initialY;
 	int xPosition;
 	int yPosition;
 	int numLives;
 
 	public Player(){
-		setObjectName("[P]");
+		super("[P]",0,8);
+		
+		xPosition=0;
+		yPosition=8;
 	}
+	
 	/**
 	 * {@link #movePlayer()} This method will move the player based on user input
 	 */
-	public void movePlayer() {
+	public void movePlayer(String input) {
 		
+		String cmd=input.toLowerCase();
+		switch (cmd) {
+		case "up":
+			setXY(xPosition, --yPosition);
+			break;
+		case "down":
+			setXY(xPosition, ++yPosition);
+			break;
+		case "left":
+			setXY(--xPosition, yPosition);
+			break;
+		case "right":
+			setXY(++xPosition, yPosition);
+			break;
+
+		default:
+			System.out.println("Invalid command: Try again");
+			break;
+		}
 	}
 	
 	/**
