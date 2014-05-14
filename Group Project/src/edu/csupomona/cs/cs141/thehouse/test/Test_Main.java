@@ -60,9 +60,13 @@ public class Test_Main {
 		System.out.println("Player movement test 2");
 		Player ply = new Player();
 		Grid grid = new Grid();
+		grid.rePopulateGrid(ply);
 		grid.printGrid();
 		
 		while(true){
+			for(int i:ply.getPosition()){
+				System.out.println(i);
+			}
 			Scanner sc = new Scanner(System.in);
 			String input=sc.next();
 			ply.movePlayer(input);

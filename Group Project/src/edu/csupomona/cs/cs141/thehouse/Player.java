@@ -58,32 +58,40 @@ public class Player extends GameObject{
         boolean rightPossible = roomExists(xPosition + 1, yPosition);
         boolean leftPossible = roomExists(xPosition - 1, yPosition);
         
-        System.out.println("Where would you like to go :");
-        if (upPossible) {
-            System.out.print(" up");
-        }
-        if (rightPossible) {
-            System.out.print(" right");
-        }
-        if (downPossible) {
-            System.out.print(" down");
-        }
-        if (leftPossible) {
-            System.out.print(" left");
-        }
-        System.out.print(" ? \n");
+//        System.out.println("Where would you like to go :");
+//        if (upPossible) {
+//            System.out.print(" up");
+//        }
+//        if (rightPossible) {
+//            System.out.print(" right");
+//        }
+//        if (downPossible) {
+//            System.out.print(" down");
+//        }
+//        if (leftPossible) {
+//            System.out.print(" left");
+//        }
+//        System.out.print(" ? \n");
         
         String cmd=input.toLowerCase();
 		xpre=xPosition;
 		ypre=yPosition;
         if (cmd.equals("up") && upPossible) {
-        	setXY(xPosition, --yPosition);
+        	if (yPosition-1 >= 0 && yPosition-1 <= 8) {
+				setXY(xPosition, --yPosition);
+			}
         } else if (cmd.equals("down") && downPossible) {
-        	setXY(xPosition, ++yPosition);
+        	if (yPosition+1 >= 0 && yPosition+1 <= 8) {
+				setXY(xPosition, ++yPosition);
+			}
         } else if (cmd.equals("right") && rightPossible) {
-        	setXY(++xPosition, yPosition);
+        	if (xPosition+1 >= 0 && xPosition+1 <= 8) {
+				setXY(++xPosition, yPosition);
+			}
         } else if (cmd.equals("left") && leftPossible) {
-        	setXY(--xPosition, yPosition);
+        	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
+				setXY(--xPosition, yPosition);
+			}
         }
     }
 	
