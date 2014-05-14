@@ -20,6 +20,7 @@ public class Test_Main {
 		printGrid_Test2();
 //		movementTest_Basic();
 		playerMove();
+//		playerMoveControl();
 	}
 	
 	public static void printGrid_Test1(){
@@ -70,4 +71,19 @@ public class Test_Main {
 			
 		}
 	}
+	
+//	public static void playerMoveControl() {
+//		System.out.println("Control of player movement test");
+//		PlayerControl ply = new PlayerControl();
+//		Grid grid = new Grid();
+//		grid.printGrid();
+//		
+//		while(true){
+//			Scanner sc = new Scanner(System.in);
+//			String input=sc.next();
+//			ply.movePlayerTest(input);
+//			grid.rePopulateGrid(ply);
+//			grid.printGrid();
+//		}
+//	}
 }

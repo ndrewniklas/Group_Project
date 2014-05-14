@@ -26,6 +26,10 @@ public class Grid {
 	 * Checks to see if we should print the name of the briefcase 
 	 */
 	private boolean showBriefcase;
+
+	private int BCy;
+
+	private int BCx;
 	
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
@@ -72,9 +76,14 @@ public class Grid {
 	}
 	
 	public Player rePopulateGrid(Player ply) {
+		
 		gog[ply.get_yPosition()][ply.get_xPosition()] = ply;
+		
 		gog[ply.getYPre()][ply.getXPre()]= new GameObject();
+		
 		populateGrid();
+		
+		gog[BCy][BCx] = new Room(showBriefcase);
 		
 		return ply;
 	}
@@ -98,6 +107,9 @@ public class Grid {
 			secondRandom = die.roll(8);
 		}
 		gog[firstRandom][secondRandom] = new Room(showBriefcase);
+		
+		BCy=firstRandom;
+		BCx=secondRandom;
 	}
 	
 }
