@@ -52,10 +52,12 @@ public class Player extends GameObject{
 	 * {@link #movePlayer()} This method will move the player based on user input
 	 */
 	public void movePlayer(String input){
+		
         boolean upPossible = roomExists(xPosition, yPosition - 1);
-        boolean downPossible = true;
+        boolean downPossible = roomExists(xPosition, yPosition + 1);
         boolean rightPossible = roomExists(xPosition + 1, yPosition);
         boolean leftPossible = roomExists(xPosition - 1, yPosition);
+        
         System.out.print("Where would you like to go :");
         if (upPossible) {
             System.out.print(" up");
@@ -70,18 +72,35 @@ public class Player extends GameObject{
             System.out.print(" left");
         }
         System.out.print(" ? ");
-       
-        if (input.equals("up") && upPossible) {
-            yPosition--;
-        } else if (input.equals("down") && downPossible) {
-            yPosition++;
-        } else if (input.equals("right") && rightPossible) {
-            xPosition++;
-        } else if (input.equals("left") && leftPossible) {
-            xPosition--;
+        
+        String cmd=input.toLowerCase();
+		xpre=xPosition;
+		ypre=yPosition;
+        if (cmd.equals("up") && upPossible) {
+        	setXY(xPosition, --yPosition);
+        } else if (cmd.equals("down") && downPossible) {
+        	setXY(xPosition, ++yPosition);
+        } else if (cmd.equals("right") && rightPossible) {
+        	setXY(++xPosition, yPosition);
+        } else if (cmd.equals("left") && leftPossible) {
+        	setXY(--xPosition, yPosition);
         }
     }
 	
+	/**
+	 * @param xPosition2
+	 * @param yPosition2
+	 * @return
+	 */
+	private boolean inRoom(int xPosition2, int yPosition2) {
+		if(xPosition2 == 1 ||xPosition2 == 4||xPosition2 == 7){
+			if(yPosition2==1||yPosition2==4||yPosition2==7){
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * @param xPosition2
 	 * @param i
