@@ -75,9 +75,14 @@ public class Grid {
 		gog[7][7] = new Room();
 	}
 	
-	public Player rePopulateGrid(Player ply) {
+	public void rePopulateGrid(Player ply) {
 		
-		gog[ply.get_yPosition()][ply.get_xPosition()] = ply;
+		try {
+			gog[ply.get_yPosition()][ply.get_xPosition()] = ply;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Invalid Command: Please try again.");
+			ply.setXY(ply.getXPre(), ply.getYPre());
+		}
 		
 		gog[ply.getYPre()][ply.getXPre()]= new GameObject();
 		
@@ -85,7 +90,7 @@ public class Grid {
 		
 		gog[BCy][BCx] = new Room(showBriefcase);
 		
-		return ply;
+		//return ply;
 	}
 	/**
 	 * This method randomly places the briefcase by calling {@link Dice#roll()}. It then creates a temporary

@@ -21,7 +21,7 @@ public class GameObject {
 	 * The constructor sets the default name for {@link #objName}
 	 */
 	public GameObject() {
-		objName = "   ";
+		objName = "| |";
 	}
 	
 	public GameObject(String name, int x, int y){
