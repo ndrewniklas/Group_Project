@@ -22,10 +22,6 @@ package edu.csupomona.cs.cs141.thehouse;
  * 
  */
 public class Radar extends PowerUp {
-	/**
-	 * the string that holds the name of the powerup
-	 */
-	private String pwrup;
 	
 	/**
 	 * This is the string for the name of the radar.
@@ -37,7 +33,7 @@ public class Radar extends PowerUp {
 	public Radar() {
 		// TODO Auto-generated constructor stub
 		// The radar powerup
-		pwrup = Radar;
+		setPowerUpName("[N]");
 	}
 	
 	/**

@@ -76,19 +76,15 @@ public class Grid {
 	}
 	
 	public void rePopulateGrid(Player ply) {
-		
 		gog[ply.get_yPosition()][ply.get_xPosition()] = ply;
-
 		gog[ply.getYPre()][ply.getXPre()] = ply;
-
 		if (ply.get_yPosition() == ply.getYPre() && ply.get_xPosition() == ply.getXPre()) {
 				System.out.println("Invalid Command: Please try again.");
 		}
 		else{
 			gog[ply.getYPre()][ply.getXPre()] = new GameObject();
-			populateGrid();
-		
-			gog[BCy][BCx] = new Room(showBriefcase);
+			//populateGrid();
+			//gog[BCy][BCx] = new Room(showBriefcase);
 		}
 		
 	}
@@ -113,7 +109,6 @@ public class Grid {
 			secondRandom = die.roll(8);
 		}
 		gog[firstRandom][secondRandom] = new Room(showBriefcase);
-		
 		BCy=firstRandom;
 		BCx=secondRandom;
 	}

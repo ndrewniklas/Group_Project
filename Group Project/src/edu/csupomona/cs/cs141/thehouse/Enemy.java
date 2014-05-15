@@ -24,7 +24,7 @@ package edu.csupomona.cs.cs141.thehouse;
  * will allow for the ninja to move, check for the player, kill the player, and die by the player.
  */
 
-public class Enemy {
+public class Enemy extends GameObject {
 
 	boolean ninjaLive;
 	
@@ -35,6 +35,9 @@ public class Enemy {
 	int ninjaLife;
 	int roomNumber;
 	
+	public Enemy(){
+		setObjectName("[E]");
+	}
 	/**
 	 * {@link #moveNinja()} This method will move the ninja
 	 */

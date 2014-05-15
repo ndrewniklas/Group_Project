@@ -22,25 +22,25 @@ package edu.csupomona.cs.cs141.thehouse;
 * This class will have the behaviors for all the powerups and how they will interact with the character.
 */
 
-public abstract class PowerUp {
+public abstract class PowerUp extends GameObject {
 	
 	/**
 	 *  {@link PowerUp} This is the boolean that tracks the state of the power up
 	 */
-	public boolean pwrActive;
+	private boolean pwrActive;
 	
 	/**
 	 *  {@link PowerUp} This is the string that holds the name of the powerup
 	 */
-	public String powerUp;
-	
+	private String powerUp;
 	
 	/**
 	 * {@link PowerUp} This method sets what type of power-up the player picks up
 	 * @return {@link #powerUp}
 	 */
-	public String setPowerUp(){
+	public String setPowerUpName(String name){
 	//set the type of powerup so the program knows what  	
+		name = powerUp;
 		return powerUp;
 	}
 	
@@ -55,8 +55,8 @@ public abstract class PowerUp {
 	 *  This method is the power-up.
 	 */
 	public PowerUp() {
-		// TODO Auto-generated constructor stub
-		boolean pwrActive = false; // false means the player doesn't have a buff 
+		setObjectName(powerUp);
+		pwrActive = false; // false means the player doesn't have a buff 
 	}
 
 }
