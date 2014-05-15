@@ -38,7 +38,7 @@ public class Grid {
 	 */
 	public Grid() {
 		die = new Dice();
-		showBriefcase = true;
+		showBriefcase = false;
 		for(int i = 0; i < gog.length; ++i){
 			for(int j = 0; j < gog[i].length; ++j){
 				gog[i][j] = new GameObject();
@@ -83,8 +83,6 @@ public class Grid {
 		}
 		else{
 			gog[ply.getYPre()][ply.getXPre()] = new GameObject();
-			//populateGrid();
-			//gog[BCy][BCx] = new Room(showBriefcase);
 		}
 		
 	}

@@ -41,7 +41,6 @@ public class PlayerControl extends GameObject{
 		case "right":
 			setXY(++xPosition, yPosition);
 			break;
-
 		default:
 			System.out.println("Invalid command: Try again");
 			break;
