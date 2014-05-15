@@ -102,9 +102,9 @@ public class Grid {
 		while(firstRandom != 1 && firstRandom != 4 && firstRandom != 7){
 			firstRandom = die.roll(8);
 		}
-		secondRandom = die.roll(8);
+		secondRandom = die.roll();
 		while(secondRandom != 1 && secondRandom != 4 && secondRandom != 7){
-			secondRandom = die.roll(8);
+			secondRandom = die.roll();
 		}
 		gog[firstRandom][secondRandom] = new Room(showBriefcase);
 		BCy=firstRandom;

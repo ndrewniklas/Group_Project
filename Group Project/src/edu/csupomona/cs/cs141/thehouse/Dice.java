@@ -41,4 +41,8 @@ public class Dice {
 		int dieTotal = dice.nextInt(dieNumber);
 		return dieTotal;
 	}
+	public int roll(){
+		int die = dice.nextInt(8);
+		return die;
+	}
 }
