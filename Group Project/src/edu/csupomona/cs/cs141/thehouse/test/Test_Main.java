@@ -81,6 +81,8 @@ public class Test_Main {
 		System.out.println("Grid: Print Test 3");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
 		Grid grid = new Grid();
+		grid.setBriefcase();
+		grid.setEnemy();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");

@@ -15,13 +15,13 @@ public class GameObject {
 	private String objName;
 	
 	
-	int[] pos =new int[2];
+	int[] pos = new int[2];
 
 	/**
 	 * The constructor sets the default name for {@link #objName}
 	 */
 	public GameObject() {
-		objName = "| |";
+		getEmptyObjectName();
 	}
 	
 	public GameObject(String name, int x, int y){
@@ -46,6 +46,11 @@ public class GameObject {
 	 * @return {@link #objName}
 	 */
 	public String getObjectName(){
+		return objName;
+	}
+	
+	public String getEmptyObjectName(){
+		objName = "| |";
 		return objName;
 	}
 	

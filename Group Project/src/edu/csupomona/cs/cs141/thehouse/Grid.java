@@ -13,7 +13,12 @@ public class Grid {
 	 */
 	private GameObject[][] gog = new GameObject[9][9];	
 	
-	private Room room;
+	/**
+	 * The grid is filled with this
+	 */
+	private GameObject gameObj = new GameObject();
+	
+	private Room room = new Room();
 	
 	private Enemy enemy;
 	
@@ -50,12 +55,11 @@ public class Grid {
 		showBriefcase = true;
 		for(int i = 0; i < gog.length; ++i){
 			for(int j = 0; j < gog[i].length; ++j){
+				//Old way, fill with new GameObject()
 				gog[i][j] = new GameObject();
 			}
 		}
 		populateGrid();
-		setBriefcase();
-		setEnemy();
 	}
 	
 	/**
@@ -131,17 +135,17 @@ public class Grid {
 
 		for (int i = 0; i < 6;) {
 			spawnOne = die.roll(8);
-			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7) {
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 1) {
 				spawnOne = die.roll(8);
 			}
 			
 			spawnTwo = die.roll();
-			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7) {
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 7) {
 				spawnTwo = die.roll();
 			}
 			
-			if (gog[spawnOne][spawnTwo].getObjectName().equals("| |")) {
-
+			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName()) 
+				&& gog[spawnOne][spawnTwo].getObjectName().compareTo(room.getObjectName())!= 1) {
 				gog[spawnOne][spawnTwo] = new Enemy();
 				EPx = spawnOne;
 				EPy = spawnTwo;
