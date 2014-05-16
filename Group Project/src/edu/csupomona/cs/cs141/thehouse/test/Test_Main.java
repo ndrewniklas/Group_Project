@@ -32,6 +32,7 @@ public class Test_Main {
 		playerMove_Test3();
 		//printGrid_Test6 is an infinite loop which should move the enemies
 //		printGrid_Test6();
+//		playerMove_Test4();
 	}
 	
 	public static void printGrid_Test1(){
@@ -183,8 +184,34 @@ public class Test_Main {
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
 		while(true){
-			enemy.moveEnemy();
+			grid.moveEnemyOnGrid();
 			grid.printGrid();
+			System.out.println("-----------------------------------------------------");
+		}
+	}
+	public static void playerMove_Test4() {
+		System.out.println("Player movement test 4");
+		Player ply = new Player();
+		Grid grid = new Grid();
+		grid.rePopulateGrid(ply);
+		grid.setBriefcase();
+		grid.setEnemy();
+		grid.setPowerUps();
+		grid.printGrid();
+		System.out.println("Number of Enemies: " + grid.getNumEnemies());
+		System.out.println("-----------------------------------------------------");
+		
+		while(true){
+			for(int i:ply.getPosition()){
+				System.out.println(i);
+			}
+			Scanner sc = new Scanner(System.in);
+			String input=sc.next();
+			ply.movePlayer(input);
+			grid.moveEnemyOnGrid();
+			grid.rePopulateGrid(ply);
+			grid.printGrid();
+			System.out.println("Number of Enemies: " + grid.getNumEnemies());
 			System.out.println("-----------------------------------------------------");
 		}
 	}

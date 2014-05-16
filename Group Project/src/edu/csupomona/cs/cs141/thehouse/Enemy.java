@@ -51,36 +51,26 @@ public class Enemy extends GameObject {
 	/**
 	 * {@link #moveEnemy()} This method will move the player based on user input
 	 */
-	public void moveEnemy(){	
+	public void moveEnemy(int ranNum){	
 		xpre = xPosition;
 		ypre = yPosition;
-		String cmd;
-		int ranNum = die.roll(4);
-		switch(ranNum){
-			case 0:	
-				cmd = "up";
-			case 1:
-				cmd = "down";
-			case 2:
-				cmd = "right";
-			case 3:
-				cmd = "left";
-			default: 
-				cmd = "up";
-		}
-        if (cmd.equals("up") && upPossible()) {
+		
+        if (ranNum == 0 && upPossible()) {
         	if (yPosition-1 >= 0 && yPosition-1 <= 8) {
 				setXY(xPosition, --yPosition);
 			}
-        } else if (cmd.equals("down") && downPossible()) {
+        } 
+        if (ranNum == 1 && downPossible()) {
         	if (yPosition+1 >= 0 && yPosition+1 <= 8) {
 				setXY(xPosition, ++yPosition);
 			}
-        } else if (cmd.equals("right") && rightPossible()) {
+        } 
+        if (ranNum == 2 && rightPossible()) {
         	if (xPosition+1 >= 0 && xPosition+1 <= 8) {
 				setXY(++xPosition, yPosition);
 			}
-        } else if (cmd.equals("left") && leftPossible()) {
+        } 
+        if (ranNum == 3 && leftPossible()) {
         	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
 				setXY(--xPosition, yPosition);
 			}

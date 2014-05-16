@@ -18,9 +18,10 @@ public class Grid {
 	 */
 	private GameObject gameObj = new GameObject();
 	
-	private Room room = new Room();
+	private Room blankRoom = new Room();
+	private Room[] room = new Room[9];
 	
-	private Enemy enemy;
+	private Enemy[] enemy = new Enemy[6];
 	
 	private Dice die;
 	/**
@@ -83,15 +84,18 @@ public class Grid {
 	 * Populates the grid with rooms, player, enemy, and powerups in the position at {@link #go}
 	 */
 	public void populateGrid(){
-		gog[1][1] = new Room();
-		gog[4][1] = new Room();
-		gog[7][1] = new Room();
-		gog[1][4] = new Room();
-		gog[4][4] = new Room();
-		gog[7][4] = new Room();
-		gog[1][7] = new Room();
-		gog[4][7] = new Room();
-		gog[7][7] = new Room();
+		for(int i = 0; i < 9; ++i){
+			room[i] = new Room();
+		}
+		gog[1][1] = room[0];
+		gog[4][1] = room[1];
+		gog[7][1] = room[2];
+		gog[1][4] = room[3];
+		gog[4][4] = room[4];
+		gog[7][4] = room[5];
+		gog[1][7] = room[6];
+		gog[4][7] = room[7];
+		gog[7][7] = room[8];
 	}
 	
 	public void rePopulateGrid(Player ply) {
@@ -138,6 +142,9 @@ public class Grid {
 		int spawnTwo;
 		boolean showEnemy = true;
 
+		for(int i = 0; i < 6; ++i){
+			enemy[i] = new Enemy();
+		}
 		for (int i = 0; i < 6;) {
 			spawnOne = die.roll(8);
 			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
@@ -150,8 +157,8 @@ public class Grid {
 			}
 			
 			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName()) 
-				&& gog[spawnOne][spawnTwo].getObjectName().compareTo(room.getObjectName())!= 1) {
-				gog[spawnOne][spawnTwo] = new Enemy();
+				&& gog[spawnOne][spawnTwo].getObjectName().compareTo(blankRoom.getObjectName())!= 1) {
+				gog[spawnOne][spawnTwo] = enemy[i];
 				EPx = spawnOne;
 				EPy = spawnTwo;
 				i++;
@@ -160,6 +167,14 @@ public class Grid {
 		}
 	}
 
+	public void moveEnemyOnGrid(){
+		int ranNum = 0;
+		for(int i = 0; i < 6; ++i){
+			ranNum = die.roll(3);
+			enemy[i].moveEnemy(ranNum);
+		}
+	}
+	
 	/**
 	 * @return the numEnemies
 	 */
@@ -198,7 +213,7 @@ public class Grid {
 			}
 		
 			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName()) 
-					&& gog[spawnOne][spawnTwo].getObjectName().compareTo(room.getObjectName())!= 1) {
+					&& gog[spawnOne][spawnTwo].getObjectName().compareTo(blankRoom.getObjectName())!= 1) {
 				gog[spawnOne][spawnTwo] = new Radar();
 				radX = spawnOne;
 				radY = spawnTwo;
@@ -221,7 +236,7 @@ public class Grid {
 			}
 		
 			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName()) 
-					&& gog[spawnOne][spawnTwo].getObjectName().compareTo(room.getObjectName())!= 1) {
+					&& gog[spawnOne][spawnTwo].getObjectName().compareTo(blankRoom.getObjectName())!= 1) {
 				gog[spawnOne][spawnTwo] = new ExtraAmmo();
 				ammoX = spawnOne;
 				ammoY = spawnTwo;
@@ -244,7 +259,7 @@ public class Grid {
 			}
 		
 			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName()) 
-					&& gog[spawnOne][spawnTwo].getObjectName().compareTo(room.getObjectName())!= 1) {
+					&& gog[spawnOne][spawnTwo].getObjectName().compareTo(blankRoom.getObjectName())!= 1) {
 				gog[spawnOne][spawnTwo] = new Shield();
 				shieldX = spawnOne;
 				shieldY = spawnTwo;
