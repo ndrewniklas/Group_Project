@@ -55,8 +55,8 @@ public class GameObject {
 	}
 	
 	public void setXY(int x, int y) {
-		pos[0]=x;
-		pos[1]=y;
+		pos[0] = x;
+		pos[1] = y;
 	}
 	
 	public int[] getPosition() {
@@ -66,4 +66,43 @@ public class GameObject {
 	public void printObject() {
 		System.out.print(objName);
 	}
+	
+	/**
+	 * @param xPosition2
+	 * @param i
+	 * @return
+	 */
+	private boolean roomExists(int xPosition2, int i) {
+		if(xPosition2 == 1 ||xPosition2 == 4||xPosition2 == 7){
+			if(i==1||i==4||i==7){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+    public boolean upPossible(){
+    	if(roomExists(pos[0], pos[1] - 1))
+    		return true;
+    	else
+    		return false;
+    }
+    public boolean downPossible(){
+    	if(roomExists(pos[0], pos[1] + 1))
+    		return true;
+    	else
+    		return false;
+    }
+    public boolean rightPossible(){
+    	if(roomExists(pos[0] + 1, pos[1]))
+    		return true;
+    	else
+    		return false;
+    }
+    public boolean leftPossible(){
+    	if(roomExists(pos[0] - 1, pos[1]))
+    		return true;
+    	else
+    		return false;
+    }
 }

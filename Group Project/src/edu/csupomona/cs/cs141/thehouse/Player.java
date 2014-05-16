@@ -44,8 +44,8 @@ public class Player extends GameObject{
 	public Player(){
 		super("[P]",0,8);
 		
-		xPosition=0;
-		yPosition=8;
+		xPosition = 0;
+		yPosition = 8;
 	}
 	
 	/**
@@ -53,10 +53,10 @@ public class Player extends GameObject{
 	 */
 	public void movePlayer(String input){
 		
-        boolean upPossible = roomExists(xPosition, yPosition - 1);
+/*        boolean upPossible = roomExists(xPosition, yPosition - 1);
         boolean downPossible = roomExists(xPosition, yPosition + 1);
         boolean rightPossible = roomExists(xPosition + 1, yPosition);
-        boolean leftPossible = roomExists(xPosition - 1, yPosition);
+        boolean leftPossible = roomExists(xPosition - 1, yPosition);*/
         
 //        System.out.println("Where would you like to go :");
 //        if (upPossible) {
@@ -73,42 +73,27 @@ public class Player extends GameObject{
 //        }
 //        System.out.print(" ? \n");
         
-        String cmd=input.toLowerCase();
-		xpre=xPosition;
-		ypre=yPosition;
-        if (cmd.equals("up") && upPossible) {
+        String cmd = input.toLowerCase();
+		xpre = xPosition;
+		ypre = yPosition;
+        if (cmd.equals("up") && upPossible()) {
         	if (yPosition-1 >= 0 && yPosition-1 <= 8) {
 				setXY(xPosition, --yPosition);
 			}
-        } else if (cmd.equals("down") && downPossible) {
+        } else if (cmd.equals("down") && downPossible()) {
         	if (yPosition+1 >= 0 && yPosition+1 <= 8) {
 				setXY(xPosition, ++yPosition);
 			}
-        } else if (cmd.equals("right") && rightPossible) {
+        } else if (cmd.equals("right") && rightPossible()) {
         	if (xPosition+1 >= 0 && xPosition+1 <= 8) {
 				setXY(++xPosition, yPosition);
 			}
-        } else if (cmd.equals("left") && leftPossible) {
+        } else if (cmd.equals("left") && leftPossible()) {
         	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
 				setXY(--xPosition, yPosition);
 			}
         }
     }
-	
-	/**
-	 * @param xPosition2
-	 * @param i
-	 * @return
-	 */
-	private boolean roomExists(int xPosition2, int i) {
-		if(xPosition2 == 1 ||xPosition2 == 4||xPosition2 == 7){
-			if(i==1||i==4||i==7){
-				return false;
-			}
-		}
-		
-		return true;
-	}
 	
 	/**
 	 * @return

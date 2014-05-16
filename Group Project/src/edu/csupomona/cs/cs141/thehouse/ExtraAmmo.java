@@ -21,7 +21,7 @@ package edu.csupomona.cs.cs141.thehouse;
  * This class will assign the power-up to the Extra Bullet powerup.
  * 
  */
-public class ExtraAmmo extends PowerUp {
+public class ExtraAmmo extends GameObject {
 
 	/**
 	 * This is the string for holding the amount of bullets.
@@ -31,9 +31,9 @@ public class ExtraAmmo extends PowerUp {
 	/**
 	 * This is the method that gives powerup its type.  
 	 */
-	public void ExtraAmmo() {
+	public ExtraAmmo() {
 		// TODO Auto-generated constructor stub
-		setPowerUpName("[A]");
+		setObjectName("[A]");
 		
 	}
 	 

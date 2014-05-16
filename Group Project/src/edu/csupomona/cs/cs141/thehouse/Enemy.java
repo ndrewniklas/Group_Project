@@ -26,14 +26,14 @@ package edu.csupomona.cs.cs141.thehouse;
 
 public class Enemy extends GameObject {
 
-	boolean ninjaLive;
-	
-	int initialX;
-	int initialY;
-	int xPosition;
-	int yPosition;
-	int ninjaLife;
-	int roomNumber;
+	private boolean enemyDead;
+	private Dice die = new Dice();
+	private int initialX;
+	private int initialY;
+	private int xPosition;
+	private int yPosition;
+	private int xpre;
+	private int ypre;
 	
 	public Enemy(){
 		setObjectName("[E]");
@@ -44,16 +44,75 @@ public class Enemy extends GameObject {
 		if(showEnemy)
 			setObjectName("[E]");
 		else
-			setObjectName("[U]");
+			setObjectName("| |");
+	}
+	
+	
+	/**
+	 * {@link #moveEnemy()} This method will move the player based on user input
+	 */
+	public void moveEnemy(){	
+		xpre = xPosition;
+		ypre = yPosition;
+		String cmd;
+		int ranNum = die.roll(4);
+		switch(ranNum){
+			case 0:	
+				cmd = "up";
+			case 1:
+				cmd = "down";
+			case 2:
+				cmd = "right";
+			case 3:
+				cmd = "left";
+			default: 
+				cmd = "up";
+		}
+        if (cmd.equals("up") && upPossible()) {
+        	if (yPosition-1 >= 0 && yPosition-1 <= 8) {
+				setXY(xPosition, --yPosition);
+			}
+        } else if (cmd.equals("down") && downPossible()) {
+        	if (yPosition+1 >= 0 && yPosition+1 <= 8) {
+				setXY(xPosition, ++yPosition);
+			}
+        } else if (cmd.equals("right") && rightPossible()) {
+        	if (xPosition+1 >= 0 && xPosition+1 <= 8) {
+				setXY(++xPosition, yPosition);
+			}
+        } else if (cmd.equals("left") && leftPossible()) {
+        	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
+				setXY(--xPosition, yPosition);
+			}
+        }
+    }
+	
+	/**
+	 * @return
+	 */
+	public int get_yPosition() {
+		return yPosition;
 	}
 	
 	/**
-	 * {@link #moveNinja()} This method will move the ninja
-	 * @return 
+	 * @return
 	 */
+	public int get_xPosition() {
+		return xPosition;
+	}
 	
-	public void moveNinja() {
-		
+	/**
+	 * @return
+	 */
+	public int getYPre() {
+		return ypre;
+	}
+	
+	/**
+	 * @return
+	 */
+	public int getXPre() {
+		return xpre;
 	}
 	
 	/**

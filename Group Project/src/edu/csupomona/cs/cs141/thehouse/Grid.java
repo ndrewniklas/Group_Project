@@ -35,14 +35,19 @@ public class Grid {
 	private boolean showBriefcase;
 
 	private int BCy;
-
 	private int BCx;
 	
 	//enemy position y
 	private int EPy;
-	
 	private int EPx;
 
+	private int radY;
+	private int radX;
+	private int shieldY;
+	private int shieldX;
+	private int ammoY;
+	private int ammoX;
+	
 	private int numEnemies=0;
 	
 	/**
@@ -135,13 +140,13 @@ public class Grid {
 
 		for (int i = 0; i < 6;) {
 			spawnOne = die.roll(8);
-			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 1) {
-				spawnOne = die.roll(8);
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
+				spawnOne = die.roll(9);
 			}
 			
 			spawnTwo = die.roll();
-			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 7) {
-				spawnTwo = die.roll();
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
+				spawnTwo = die.roll(9);
 			}
 			
 			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName()) 
@@ -152,9 +157,7 @@ public class Grid {
 				i++;
 				setNumEnemies(getNumEnemies() + 1);
 			}
-
 		}
-
 	}
 
 	/**
@@ -171,4 +174,82 @@ public class Grid {
 		this.numEnemies = numEnemies;
 	}
 	
+	/**
+	 * This method randomly places 6 enemies.
+	 */
+	public void setPowerUps() {
+		boolean showPowerUps = true;
+		spawnRadar();
+		spawnExtraAmmo();
+		spawnShield();
+	}	
+	public void spawnRadar(){
+		int spawnOne;
+		int spawnTwo;
+		for(int i = 0; i < 1;){
+			spawnOne = die.roll(9);
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
+				spawnOne = die.roll(9);
+			}
+		
+			spawnTwo = die.roll();
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
+				spawnTwo = die.roll(9);
+			}
+		
+			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName()) 
+					&& gog[spawnOne][spawnTwo].getObjectName().compareTo(room.getObjectName())!= 1) {
+				gog[spawnOne][spawnTwo] = new Radar();
+				radX = spawnOne;
+				radY = spawnTwo;
+				++i;
+			}
+		}
+	}
+	public void spawnExtraAmmo(){
+		int spawnOne;
+		int spawnTwo;
+		for(int i = 0; i < 1;){
+			spawnOne = die.roll(9);
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
+				spawnOne = die.roll(9);
+			}
+		
+			spawnTwo = die.roll();
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
+				spawnTwo = die.roll(9);
+			}
+		
+			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName()) 
+					&& gog[spawnOne][spawnTwo].getObjectName().compareTo(room.getObjectName())!= 1) {
+				gog[spawnOne][spawnTwo] = new ExtraAmmo();
+				ammoX = spawnOne;
+				ammoY = spawnTwo;
+				++i;
+			}
+		}
+	}
+	public void spawnShield(){
+		int spawnOne;
+		int spawnTwo;
+		for(int i = 0; i < 1;){
+			spawnOne = die.roll(9);
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
+				spawnOne = die.roll(9);
+			}
+		
+			spawnTwo = die.roll();
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
+				spawnTwo = die.roll(9);
+			}
+		
+			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName()) 
+					&& gog[spawnOne][spawnTwo].getObjectName().compareTo(room.getObjectName())!= 1) {
+				gog[spawnOne][spawnTwo] = new Shield();
+				shieldX = spawnOne;
+				shieldY = spawnTwo;
+				++i;
+			}
+		}
+	}
 }

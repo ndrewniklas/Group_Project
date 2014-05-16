@@ -21,7 +21,7 @@ package edu.csupomona.cs.cs141.thehouse;
  * This class will assign the power-up to the Radar powerup.
  * 
  */
-public class Radar extends PowerUp {
+public class Radar extends GameObject {
 	
 	/**
 	 * This is the string for the name of the radar.
@@ -33,7 +33,7 @@ public class Radar extends PowerUp {
 	public Radar() {
 		// TODO Auto-generated constructor stub
 		// The radar powerup
-		setPowerUpName("[N]");
+		setObjectName("[N]");
 	}
 	
 	/**

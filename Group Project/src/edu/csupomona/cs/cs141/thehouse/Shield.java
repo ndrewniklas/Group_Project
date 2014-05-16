@@ -21,7 +21,7 @@ package edu.csupomona.cs.cs141.thehouse;
  * This class will assign the power-up to the invincibility powerup.
  * 
  */
-public class Shield extends PowerUp {
+public class Shield extends GameObject {
 
 	
 	/**
@@ -34,7 +34,7 @@ public class Shield extends PowerUp {
 	 */
 	public Shield() {
 		// Invincibility, just felt like making it shield so it is quicker to type
-		setPowerUpName("[S]");
+		setObjectName("[S]");
 	}
 	
 	/**
