@@ -36,11 +36,22 @@ public class Enemy extends GameObject {
 	int roomNumber;
 	
 	public Enemy(){
-		setObjectName("[E]");
+		super("[E]", 1, 3);
 	}
+	
+	//This method will show enemy dependent on boolean value taken
+	public Enemy(boolean showEnemy) {
+		if(showEnemy)
+			setObjectName("[E]");
+		else
+			setObjectName("[U]");
+	}
+	
 	/**
 	 * {@link #moveNinja()} This method will move the ninja
+	 * @return 
 	 */
+	
 	public void moveNinja() {
 		
 	}

@@ -15,6 +15,8 @@ public class Grid {
 	
 	private Room room;
 	
+	private Enemy enemy;
+	
 	private Dice die;
 	/**
 	 * This field holds the briefcase, it will be the same as the {@code String[1][1]} for 
@@ -31,6 +33,11 @@ public class Grid {
 
 	private int BCx;
 	
+	//enemy position y
+	private int EPy;
+	
+	private int EPx;
+	
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
 	 * Makes a new {@link Dice}
@@ -38,7 +45,7 @@ public class Grid {
 	 */
 	public Grid() {
 		die = new Dice();
-		showBriefcase = false;
+		showBriefcase = true;
 		for(int i = 0; i < gog.length; ++i){
 			for(int j = 0; j < gog[i].length; ++j){
 				gog[i][j] = new GameObject();
@@ -109,6 +116,32 @@ public class Grid {
 		gog[firstRandom][secondRandom] = new Room(showBriefcase);
 		BCy=firstRandom;
 		BCx=secondRandom;
+	}
+	
+	/**
+	 * THis method randomly places 6 enemies.
+	 */
+	public void setEnemy() {
+		int firstRandom, secondRandom;
+		boolean showEnemy = true;
+		
+		for(int i=0; i < 5; i++) {
+			firstRandom = die.roll(8);
+			while(firstRandom == 1 && firstRandom == 4 && firstRandom == 7){
+				firstRandom = die.roll(8);
+			}
+			secondRandom = die.roll();
+			while(secondRandom == 1 && secondRandom == 4 && secondRandom == 7){
+				secondRandom = die.roll();
+			}
+			
+			gog[firstRandom][secondRandom] = new Enemy(showEnemy);
+			EPx = firstRandom;
+			EPy = secondRandom;
+		}
+		
+		
+		
 	}
 	
 }
