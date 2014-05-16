@@ -17,6 +17,8 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -45,4 +47,5 @@ public class Dice {
 		int die = dice.nextInt(8);
 		return die;
 	}
+	
 }

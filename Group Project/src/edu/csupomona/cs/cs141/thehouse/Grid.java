@@ -120,25 +120,30 @@ public class Grid {
 	}
 	
 	/**
-	 * THis method randomly places 6 enemies.
+	 * This method randomly places 6 enemies.
 	 */
 	public void setEnemy() {
-		int spawnOne, spawnTwo;
+		int spawnOne = 0, spawnTwo = 0;
 		boolean showEnemy = true;
 		
-		for(int i=0; i < 6; i++) {
-			spawnOne = die.roll(8);
-			while(spawnOne == 1 && spawnOne == 4 && spawnOne == 7){
+		if (gog[spawnOne][spawnTwo].getObjectName().equals("| |")) {
+				EPx = spawnOne;
+				EPy = spawnTwo;
+			for(int i=0; i < 6; i++) {
 				spawnOne = die.roll(8);
-			}
-			spawnTwo = die.roll();
-			while(spawnTwo == 1 && spawnTwo == 4 && spawnTwo == 7){
+				while(spawnOne == 1 && spawnOne == 4 && spawnOne == 7){
+					spawnOne = die.roll(8);
+				}
 				spawnTwo = die.roll();
+				while(spawnTwo == 1 && spawnTwo == 4 && spawnTwo == 7){
+					spawnTwo = die.roll();
+				}
+				
+				gog[spawnOne][spawnTwo] = new Enemy();
+				EPx = spawnOne;
+				EPy = spawnTwo;
 			}
-			
-			gog[spawnOne][spawnTwo] = new Enemy();
-			EPx = spawnOne;
-			EPy = spawnTwo;
+		
 		}
 		
 		
