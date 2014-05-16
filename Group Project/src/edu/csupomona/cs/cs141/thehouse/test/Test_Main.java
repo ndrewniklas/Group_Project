@@ -78,10 +78,11 @@ public class Test_Main {
 	}
 
 	public static void printGrid_Test3(){
-		System.out.println("Grid: Print Test 2");
-		System.out.println("B is the briefcase, R is the room, P is the player");
+		System.out.println("Grid: Print Test 3");
+		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
 		Grid grid = new Grid();
 		grid.printGrid();
+		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
 	}
 //	public static void playerMoveControl() {

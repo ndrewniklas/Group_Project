@@ -37,6 +37,8 @@ public class Grid {
 	private int EPy;
 	
 	private int EPx;
+
+	private int numEnemies=0;
 	
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
@@ -123,31 +125,46 @@ public class Grid {
 	 * This method randomly places 6 enemies.
 	 */
 	public void setEnemy() {
-		int spawnOne = 0, spawnTwo = 0;
+		int spawnOne;
+		int spawnTwo;
 		boolean showEnemy = true;
-		
-		if (gog[spawnOne][spawnTwo].getObjectName().equals("| |")) {
-				EPx = spawnOne;
-				EPy = spawnTwo;
-			for(int i=0; i < 6; i++) {
+
+		for (int i = 0; i < 6;) {
+			spawnOne = die.roll(8);
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7) {
 				spawnOne = die.roll(8);
-				while(spawnOne == 1 && spawnOne == 4 && spawnOne == 7){
-					spawnOne = die.roll(8);
-				}
+			}
+			
+			spawnTwo = die.roll();
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7) {
 				spawnTwo = die.roll();
-				while(spawnTwo == 1 && spawnTwo == 4 && spawnTwo == 7){
-					spawnTwo = die.roll();
-				}
-				
+			}
+			
+			if (gog[spawnOne][spawnTwo].getObjectName().equals("| |")) {
+
 				gog[spawnOne][spawnTwo] = new Enemy();
 				EPx = spawnOne;
 				EPy = spawnTwo;
+				i++;
+				setNumEnemies(getNumEnemies() + 1);
 			}
-		
+
 		}
-		
-		
-		
+
+	}
+
+	/**
+	 * @return the numEnemies
+	 */
+	public int getNumEnemies() {
+		return numEnemies;
+	}
+
+	/**
+	 * @param numEnemies the numEnemies to set
+	 */
+	public void setNumEnemies(int numEnemies) {
+		this.numEnemies = numEnemies;
 	}
 	
 }
