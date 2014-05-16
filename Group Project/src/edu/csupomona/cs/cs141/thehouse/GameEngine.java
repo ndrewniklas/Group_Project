@@ -53,70 +53,8 @@ public class GameEngine {
 	 * Instantiation for {@link ExtraAmmo}
 	 */
 	private ExtraAmmo extraAmmo;
-	/**
-	 * Saves the {@link Player}'s current position for use later
-	 */
-	private GameObject[][] plrCurrentPos;
-	/**
-	 * Saves the {@link Player}'s last known position for use later
-	 */
-	private GameObject[][] plrPrevPos;
-	/**
-	 * Saves the {@link Enemy}'s current position for use later
-	 */
-	private GameObject[][] enemyCurrentPos;
-	/**
-	 * Saves the {@link Enemy}'s last known position for use later
-	 */
-	private GameObject[][] enemyPrevPos;
-	/**
-	 * Saves the location of {@link ExtraAmmo} for use later
-	 */
-	private GameObject[][] extraAmmoPos;
-	/**
-	 * Saves the location of {@link Radar} for use later
-	 */
-	private GameObject[][] radarPos;
-	/**
-	 * Saves the location of {@link Shield} for use later
-	 */
-	private GameObject[][] shieldPos;
-	/**
-	 * Saves the location of the first room
-	 */
-	private GameObject[][] roomOnePos;
-	/**
-	 * Saves the location of the second room
-	 */
-	private GameObject[][] roomTwoPos;
-	/**
-	 * Saves the location of the third room
-	 */
-	private GameObject[][] roomThreePos;
-	/**
-	 * Saves the location of the fourth room
-	 */
-	private GameObject[][] roomFourPos;
-	/**
-	 * Saves the location of the fifth room
-	 */
-	private GameObject[][] roomFivePos;
-	/**
-	 * Saves the location of the sixth room
-	 */
-	private GameObject[][] roomSixPos;
-	/**
-	 * Saves the location of the seventh room
-	 */
-	private GameObject[][] roomSevenPos;
-	/**
-	 * Saves the location of the eighth room
-	 */
-	private GameObject[][] roomEightPos;
-	/**
-	 * Saves the location of the ninth room
-	 */
-	private GameObject[][] roomNinePos;
+
+	private int[] plrPos = new int[2];
 	/**
 	 * Checks to see if the player is dead
 	 */
@@ -196,6 +134,12 @@ public class GameEngine {
     	while(!gameOver){
     		
     	}
+    }
+    
+    public int[] playerPosition(){
+    	plrPos[0] = plr.get_yPosition();
+    	plrPos[1] =  plr.get_xPosition();
+    	return plrPos;    	
     }
     
     /**
@@ -317,63 +261,7 @@ public class GameEngine {
     public boolean isGameOver(){
     	return gameOver;
     }
-    
-    /**
-     * Used to send out {@link #plrCurrentPos} which is set within {@link #setPlrCurrentPosition()}.
-     * @return {@link #plrCurrentPos} value
-     */
-    public GameObject[][] playerCurrentPosition(){
-		return plrCurrentPos;
-    }
-    
-    /**
-     * Used to send out {@link #plrPrevPos} which is set within {@link #setPlrPreviousPosition()}.
-     * @return {@link #plrPrevPos} value
-     */
-    public GameObject[][] playerPreviousPosition(){
-    	return plrPrevPos;
-    }
-    
-    /**
-     * Used to send out {@link #enemyCurrentPos} which is set with {@link #setEnemyCurrentPosition()}.
-     * @return {@link #enemyCurrentPos} value
-     */
-    public GameObject[][] enemyCurrentPosition(){
-    	return enemyCurrentPos;
-    }
-    
-    /**
-     * Used to send out {@link #enemyPrevPos} which is set with {@link #setEnemyPreviousPosition()}.
-     * @return {@link #enemyPrevPos} value
-     */
-    public GameObject[][] enemyPreviousPosition(){
-    	return enemyPrevPos;
-    }
-    
-    /**
-     * Used to send out and set {@link #extraAmmoPos}.
-     * @return {@link #extraAmmoPos}
-     */
-    public GameObject[][] extraAmmoPosition(){
-    	return extraAmmoPos;
-    }
-    
-    /**
-     * Used to send out and set {@link #radarPos}.
-     * @return {@link #radarPos}
-     */
-    public GameObject[][] radarPosition(){
-    	return radarPos;
-    }
-    
-    /**
-     * Used to send out and set {@link #shieldPos}.
-     * @return {@link #shieldPos}
-     */
-    public GameObject[][] shieldPosition(){
-    	return shieldPos;
-    }
-       
+  
     /**
      * Checks to see if the {@link Player} {@link #hasAmmo}.
      * @return {@link #hasAmmo} value

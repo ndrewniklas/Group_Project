@@ -53,6 +53,7 @@ public class Grid {
 		}
 		populateGrid();
 		setBriefcase();
+		setEnemy();
 	}
 	
 	/**
@@ -122,22 +123,22 @@ public class Grid {
 	 * THis method randomly places 6 enemies.
 	 */
 	public void setEnemy() {
-		int firstRandom, secondRandom;
+		int spawnOne, spawnTwo;
 		boolean showEnemy = true;
 		
-		for(int i=0; i < 5; i++) {
-			firstRandom = die.roll(8);
-			while(firstRandom == 1 && firstRandom == 4 && firstRandom == 7){
-				firstRandom = die.roll(8);
+		for(int i=0; i < 6; i++) {
+			spawnOne = die.roll(8);
+			while(spawnOne == 1 && spawnOne == 4 && spawnOne == 7){
+				spawnOne = die.roll(8);
 			}
-			secondRandom = die.roll();
-			while(secondRandom == 1 && secondRandom == 4 && secondRandom == 7){
-				secondRandom = die.roll();
+			spawnTwo = die.roll();
+			while(spawnTwo == 1 && spawnTwo == 4 && spawnTwo == 7){
+				spawnTwo = die.roll();
 			}
 			
-			gog[firstRandom][secondRandom] = new Enemy(showEnemy);
-			EPx = firstRandom;
-			EPy = secondRandom;
+			gog[spawnOne][spawnTwo] = new Enemy();
+			EPx = spawnOne;
+			EPy = spawnTwo;
 		}
 		
 		

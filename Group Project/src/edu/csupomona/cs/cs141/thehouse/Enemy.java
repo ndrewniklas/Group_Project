@@ -36,7 +36,7 @@ public class Enemy extends GameObject {
 	int roomNumber;
 	
 	public Enemy(){
-		super("[E]", 1, 3);
+		setObjectName("[E]");
 	}
 	
 	//This method will show enemy dependent on boolean value taken

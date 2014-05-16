@@ -19,8 +19,9 @@ public class Test_Main {
 		printGrid_Test1();
 		printGrid_Test2();
 //		movementTest_Basic();
-		playerMove();
+//		playerMove();
 //		playerMoveControl();
+		printGrid_Test3();
 	}
 	
 	public static void printGrid_Test1(){
@@ -75,7 +76,14 @@ public class Test_Main {
 			
 		}
 	}
-	
+
+	public static void printGrid_Test3(){
+		System.out.println("Grid: Print Test 2");
+		System.out.println("B is the briefcase, R is the room, P is the player");
+		Grid grid = new Grid();
+		grid.printGrid();
+		System.out.println("-----------------------------------------------------");
+	}
 //	public static void playerMoveControl() {
 //		System.out.println("Control of player movement test");
 //		PlayerControl ply = new PlayerControl();
