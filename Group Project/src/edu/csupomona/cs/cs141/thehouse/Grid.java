@@ -79,6 +79,12 @@ public class Grid {
 		}
 	}
 	
+	public int gridSize(){
+		int size = 0;
+		size = gog.length;
+		return size;
+	}
+	
 	/**
 	 * Populates the grid with rooms, player, enemy, and powerups in the position at {@link #go}
 	 */
@@ -113,6 +119,12 @@ public class Grid {
 		return go;
 	}
 	
+	public boolean checkIfLocationFree(int posY, int posX){
+		if(getObjectAtLocation(posY, posX).equals(gameObj))
+			return true;
+		else
+			return false;
+	}
 	/**
 	 * This method randomly places the briefcase by calling {@link Dice#roll()}. It then creates a temporary
 	 * {@code String[][]} that stores the briefcase. Any time a {@link Player} enters a room, it checks to
@@ -151,12 +163,11 @@ public class Grid {
 		
 		for (int i = 0; i < 6;) {
 			spawnOne = die.roll(8);
-			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 1) {
 				spawnOne = die.roll(9);
 			}
-			
 			spawnTwo = die.roll();
-			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 7) {
 				spawnTwo = die.roll(9);
 			}
 			

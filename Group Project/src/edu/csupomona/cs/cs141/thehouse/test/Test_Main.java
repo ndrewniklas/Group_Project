@@ -29,11 +29,12 @@ public class Test_Main {
 		//printGrid_Test5 is an infinite loop used to test to see if anything spawns outside the boundaries 
 //		printGrid_Test5();
 		//playerMove_Test3() should spawn the powerups and enemies
-		playerMove_Test3();
+//		playerMove_Test3();
 		//printGrid_Test6 is an infinite loop which should move the enemies
 //		printGrid_Test6();
 		//Enemy movement
 //		playerMove_Test4();
+		printGrid_Test7();
 	}
 	
 	public static void printGrid_Test1(){
@@ -176,6 +177,7 @@ public class Test_Main {
 	public static void printGrid_Test6(){
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
+		System.out.println("Enemies will move every loop");
 		Grid grid = new Grid();
 		grid.setBriefcase();
 		grid.setEnemy();
@@ -191,6 +193,7 @@ public class Test_Main {
 	}
 	public static void playerMove_Test4() {
 		System.out.println("Player movement test 4");
+		System.out.println("Enemies will move with player");
 		Player ply = new Player();
 		Grid grid = new Grid();
 		grid.setEnemy();
@@ -215,4 +218,26 @@ public class Test_Main {
 			System.out.println("-----------------------------------------------------");
 		}
 	}
+	public static void printGrid_Test7(){
+		System.out.println("Grid: Print Test 7");
+		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
+		System.out.println("Checks if the object is free then prints out the object at each location");
+		Grid grid = new Grid();
+		Player ply = new Player();
+		grid.setBriefcase();
+		grid.setEnemy();
+		grid.setPowerUps();
+		grid.rePopulateGrid(ply);
+		for(int i = 0; i < grid.gridSize(); ++i){
+			for(int j = 0; j < grid.gridSize(); ++j){
+				System.out.print("Location (" + i + "," + j + "): " );
+				System.out.print(grid.checkIfLocationFree(i, j));
+				System.out.println(" Object Name: " + grid.getObjectAtLocation(i, j));
+			}
+		}
+		grid.printGrid();
+		System.out.println("Number of Enemies: " + grid.getNumEnemies());
+		System.out.println("-----------------------------------------------------");
+	}
+	
 }
