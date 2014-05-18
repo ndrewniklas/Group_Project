@@ -11,42 +11,30 @@ public class Grid {
 	/**
 	 * The grid is a 9x9 array of GameObject
 	 */
-	private GameObject[][] gog = new GameObject[9][9];	
+	private GameObject[][] gog;
 	
 	private GameObject go;
 	/**
 	 * The grid is filled with this
 	 */
-	private GameObject gameObj = new GameObject();
+	private GameObject gameObj;
 	
-	private Room[] room = new Room[9];
+	private Room[] room ;
 	
-	private Enemy[] enemy = new Enemy[6];
+	private Enemy[] enemy;
 	
 	private Dice die;
-	/**
-	 * This field holds the briefcase, it will be the same as the {@code String[1][1]} for 
-	 * {@link #tempRoomBlock}.
-	 */
-	private String briefcase = "[B]";
 	
 	/**
 	 * Checks to see if we should print the name of the briefcase 
 	 */
 	private boolean showBriefcase;
-
-	private int BCy;
-	private int BCx;
 	
-	//enemy position y
+	private int[] briefcasePos = new int[2];
 	private int[] enemyPos = new int[2];
-
-	private int radY;
-	private int radX;
-	private int shieldY;
-	private int shieldX;
-	private int ammoY;
-	private int ammoX;
+	private int[] shieldPos = new int[2];
+	private int[] radarPos = new int[2];
+	private int[] ammoPos = new int[2];
 	
 	private int numEnemies=0;
 	
@@ -56,6 +44,10 @@ public class Grid {
 	 * Sets {@link #showBriefcase}
 	 */
 	public Grid() {
+		gog = new GameObject[9][9];
+		gameObj = new GameObject();
+		room = new Room[9];
+		enemy = new Enemy[6];
 		die = new Dice();
 		showBriefcase = true;
 		for(int i = 0; i < gog.length; ++i){
@@ -105,7 +97,6 @@ public class Grid {
 	
 	public void rePopulateGrid(Player ply) {
 		gog[ply.get_yPosition()][ply.get_xPosition()] = ply;
-		gog[ply.getYPre()][ply.getXPre()] = ply;
 		if (ply.get_yPosition() == ply.getYPre() && ply.get_xPosition() == ply.getXPre()) {
 				System.out.println("Invalid Command: Please try again.");
 		}
@@ -145,8 +136,8 @@ public class Grid {
 			secondRandom = die.roll();
 		}
 		gog[firstRandom][secondRandom] = new Room(showBriefcase);
-		BCy = firstRandom;
-		BCx = secondRandom;
+		briefcasePos[0] = firstRandom;
+		briefcasePos[1] = secondRandom;
 	}
 	
 	/**
@@ -163,18 +154,18 @@ public class Grid {
 		
 		for (int i = 0; i < 6;) {
 			spawnOne = die.roll(8);
-			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 1) {
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 2) {
 				spawnOne = die.roll(9);
 			}
 			spawnTwo = die.roll();
-			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 7) {
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 6) {
 				spawnTwo = die.roll(9);
 			}
 			
-			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName())) {
+			if (checkIfLocationFree(spawnOne, spawnTwo)) {
 				gog[spawnOne][spawnTwo] = enemy[i];
-				enemyPos[0] = spawnTwo;
-				enemyPos[1] = spawnOne;
+				enemyPos[0] = spawnOne;
+				enemyPos[1] = spawnTwo;
 				i++;
 				setNumEnemies(getNumEnemies() + 1);
 			}
@@ -225,10 +216,10 @@ public class Grid {
 				spawnTwo = die.roll(9);
 			}
 		
-			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName())){
+			if (checkIfLocationFree(spawnOne, spawnTwo)){
 				gog[spawnOne][spawnTwo] = new Radar();
-				radX = spawnTwo;
-				radY = spawnOne;
+				radarPos[0] = spawnOne;
+				radarPos[1] = spawnTwo;
 				++i;
 			}
 		}
@@ -247,10 +238,10 @@ public class Grid {
 				spawnTwo = die.roll(9);
 			}
 		
-			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName())){
+			if (checkIfLocationFree(spawnOne, spawnTwo)){
 				gog[spawnOne][spawnTwo] = new ExtraAmmo();
-				ammoX = spawnTwo;
-				ammoY = spawnOne;
+				ammoPos[0] = spawnOne;
+				ammoPos[1] = spawnTwo;
 				++i;
 			}
 		}
@@ -268,10 +259,10 @@ public class Grid {
 				spawnTwo = die.roll(9);
 			}
 		
-			if (gog[spawnOne][spawnTwo].getObjectName().equals(gameObj.getEmptyObjectName())){
+			if (checkIfLocationFree(spawnOne, spawnTwo)){
 				gog[spawnOne][spawnTwo] = new Shield();
-				shieldX = spawnTwo;
-				shieldY = spawnOne;
+				shieldPos[0] = spawnOne;
+				shieldPos[1] = spawnTwo;
 				++i;
 			}
 		}

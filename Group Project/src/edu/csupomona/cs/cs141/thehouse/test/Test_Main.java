@@ -15,26 +15,19 @@ public class Test_Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		printGrid_Test1();
 		printGrid_Test2();
 //		movementTest_Basic();
 //		playerMove_Test1();
 //		playerMoveControl();
 		printGrid_Test3();
-		
 //		playerMove_Test2();
-		printGrid_Test4();
-		
-		//printGrid_Test5 is an infinite loop used to test to see if anything spawns outside the boundaries 
+		printGrid_Test4();		
 //		printGrid_Test5();
-		//playerMove_Test3() should spawn the powerups and enemies
-//		playerMove_Test3();
-		//printGrid_Test6 is an infinite loop which should move the enemies
 //		printGrid_Test6();
-		//Enemy movement
-//		playerMove_Test4();
-		printGrid_Test7();
+//		playerMove_Test3();
+//		printGrid_Test7();
+		playerMove_Test4();
 	}
 	
 	public static void printGrid_Test1(){
@@ -103,14 +96,14 @@ public class Test_Main {
 	
 	public static void playerMove_Test2() {
 		System.out.println("Player movement test 2");
+		System.out.println("Player movement w/ Other Object Spawn");
 		Player ply = new Player();
 		Grid grid = new Grid();
 		grid.rePopulateGrid(ply);
 		grid.setBriefcase();
 		grid.setEnemy();
+		grid.setPowerUps();
 		grid.printGrid();
-		System.out.println("Number of Enemies: " + grid.getNumEnemies());
-		System.out.println("-----------------------------------------------------");
 		
 		while(true){
 			for(int i:ply.getPosition()){
@@ -128,6 +121,7 @@ public class Test_Main {
 	public static void printGrid_Test4(){
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
+		System.out.println("Spawn PowerUps, Enemies, and the Briefcase room");
 		Grid grid = new Grid();
 		grid.setBriefcase();
 		grid.setEnemy();
@@ -139,36 +133,12 @@ public class Test_Main {
 	public static void printGrid_Test5(){
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
+		System.out.println("Spawn PowerUps, Enemies, and the Briefcase room in an infinte loop");
 		while(true){
 			Grid grid = new Grid();
 			grid.setBriefcase();
 			grid.setEnemy();
 			grid.setPowerUps();
-			grid.printGrid();
-			System.out.println("Number of Enemies: " + grid.getNumEnemies());
-			System.out.println("-----------------------------------------------------");
-		}
-	}
-	public static void playerMove_Test3() {
-		System.out.println("Player movement test 3");
-		Player ply = new Player();
-		Grid grid = new Grid();
-		grid.rePopulateGrid(ply);
-		grid.setBriefcase();
-		grid.setEnemy();
-		grid.setPowerUps();
-		grid.printGrid();
-		System.out.println("Number of Enemies: " + grid.getNumEnemies());
-		System.out.println("-----------------------------------------------------");
-		
-		while(true){
-			for(int i:ply.getPosition()){
-				System.out.println(i);
-			}
-			Scanner sc = new Scanner(System.in);
-			String input=sc.next();
-			ply.movePlayer(input);
-			grid.rePopulateGrid(ply);
 			grid.printGrid();
 			System.out.println("Number of Enemies: " + grid.getNumEnemies());
 			System.out.println("-----------------------------------------------------");
@@ -191,7 +161,7 @@ public class Test_Main {
 			System.out.println("-----------------------------------------------------");
 		}
 	}
-	public static void playerMove_Test4() {
+	public static void playerMove_Test3() {
 		System.out.println("Player movement test 4");
 		System.out.println("Enemies will move with player");
 		Player ply = new Player();
@@ -238,6 +208,44 @@ public class Test_Main {
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
+	}
+	public static void playerMove_Test4() {
+		System.out.println("Player movement test 3");
+		System.out.println("Standard Player Movement w/ Other Object Spawn and Object Testing");
+		System.out.println("|-----------------------------------------------------------");
+		Player ply = new Player();
+		Grid grid = new Grid();
+		grid.rePopulateGrid(ply);
+		grid.setBriefcase();
+		grid.setEnemy();
+		grid.setPowerUps();
+		for(int i = 0; i < grid.gridSize(); ++i){
+			for(int j = 0; j < grid.gridSize(); ++j){
+				System.out.print("|Location [" + i + "," + j + "]: " );
+				System.out.print(grid.checkIfLocationFree(i, j));
+				System.out.println(" Object Name: " + grid.getObjectAtLocation(i, j));
+			}
+			System.out.println("|-----------------------------------------------------------");
+		}
+		grid.printGrid();
+		System.out.println("|---------------------------------------------------------------");
+		while(true){
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Input the direction: ");
+			String input = sc.next();
+			ply.movePlayer(input);
+			grid.rePopulateGrid(ply);
+			for(int i = 0; i < grid.gridSize(); ++i){
+				for(int j = 0; j < grid.gridSize(); ++j){
+					System.out.print("|Location (" + i + "," + j + "): " );
+					System.out.print(grid.checkIfLocationFree(i, j));
+					System.out.println(" Object Name: " + grid.getObjectAtLocation(i, j));
+				}
+				System.out.println("|-----------------------------------------------------------");
+			}
+			grid.printGrid();
+			System.out.println("|-----------------------------------------------------------");
+		}
 	}
 	
 }
