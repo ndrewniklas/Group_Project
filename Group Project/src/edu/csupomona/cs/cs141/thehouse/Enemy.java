@@ -34,9 +34,13 @@ public class Enemy extends GameObject {
 	private int yPosition;
 	private int xpre;
 	private int ypre;
+	private Grid grid;
 	
 	public Enemy(){
+		grid = new Grid();
 		setObjectName("[E]");
+		yPosition = grid.getEnemyPosition()[0];
+		xPosition = grid.getEnemyPosition()[1];
 	}
 	
 	//This method will show enemy dependent on boolean value taken
@@ -51,36 +55,14 @@ public class Enemy extends GameObject {
 	/**
 	 * {@link #moveEnemy()} This method will move the player based on user input
 	 */
-	public void moveEnemy(int ranNum){	
-		xpre = xPosition;
-		ypre = yPosition;
-		
-        if (ranNum == 0 && upPossible()) {
-        	if (yPosition-1 >= 0 && yPosition-1 <= 8) {
-				setXY(xPosition, --yPosition);
-			}
-        } 
-        if (ranNum == 1 && downPossible()) {
-        	if (yPosition+1 >= 0 && yPosition+1 <= 8) {
-				setXY(xPosition, ++yPosition);
-			}
-        } 
-        if (ranNum == 2 && rightPossible()) {
-        	if (xPosition+1 >= 0 && xPosition+1 <= 8) {
-				setXY(++xPosition, yPosition);
-			}
-        } 
-        if (ranNum == 3 && leftPossible()) {
-        	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
-				setXY(--xPosition, yPosition);
-			}
-        }
+	public void moveEnemy(){	
     }
 	
 	/**
 	 * @return
 	 */
 	public int get_yPosition() {
+
 		return yPosition;
 	}
 	
@@ -88,6 +70,7 @@ public class Enemy extends GameObject {
 	 * @return
 	 */
 	public int get_xPosition() {
+
 		return xPosition;
 	}
 	

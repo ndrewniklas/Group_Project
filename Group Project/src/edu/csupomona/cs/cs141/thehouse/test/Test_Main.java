@@ -32,6 +32,7 @@ public class Test_Main {
 		playerMove_Test3();
 		//printGrid_Test6 is an infinite loop which should move the enemies
 //		printGrid_Test6();
+		//Enemy movement
 //		playerMove_Test4();
 	}
 	
@@ -176,7 +177,6 @@ public class Test_Main {
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
 		Grid grid = new Grid();
-		Enemy enemy = new Enemy();
 		grid.setBriefcase();
 		grid.setEnemy();
 		grid.setPowerUps();
@@ -193,9 +193,9 @@ public class Test_Main {
 		System.out.println("Player movement test 4");
 		Player ply = new Player();
 		Grid grid = new Grid();
+		grid.setEnemy();
 		grid.rePopulateGrid(ply);
 		grid.setBriefcase();
-		grid.setEnemy();
 		grid.setPowerUps();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());

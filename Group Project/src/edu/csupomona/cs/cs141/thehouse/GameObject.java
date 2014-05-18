@@ -28,8 +28,8 @@ public class GameObject {
 		
 		objName = name;
 		
-		pos[0]=x;
-		pos[1]=y;
+		pos[0] = x;
+		pos[1] = y;
 	}
 		
 	/**
@@ -80,7 +80,6 @@ public class GameObject {
 		}
 		return true;
 	}
-	
     public boolean upPossible(){
     	if(roomExists(pos[0], pos[1] - 1))
     		return true;
