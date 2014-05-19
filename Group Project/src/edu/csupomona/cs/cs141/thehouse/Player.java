@@ -125,7 +125,7 @@ public class Player extends GameObject{
 		return xpre;
 	}
 	
-	public boolean getIsAlive() {
+	public boolean isAlive() {
 		return isAlive;
 	}
 	

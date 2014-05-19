@@ -3,16 +3,14 @@
  */
 package edu.csupomona.cs.cs141.thehouse;
 
+import java.util.Scanner;
+
 /**
  * @author Andrew
  *
  */
 public class UserInterface {
 	
-	/**
-	 * This field instantiates the {@link GameEngine}
-	 */
-	private GameEngine game;
 	/**
 	 * This field holds the choice of the user. There are 7 potential values for the user to select:
 	 * left,
@@ -24,11 +22,10 @@ public class UserInterface {
 	 * exit
 	 */
 	private String choice;
+
+	private String input;
 	
-	/**
-	 * This field holds the direction chosen by the user to look.
-	 */
-	private String lookDir;
+	Scanner sc = new Scanner(System.in);
 
 	/**
 	 * This constructor will build the {@link UserInterface} for use with {@link GameEngine}.
@@ -36,7 +33,7 @@ public class UserInterface {
 	 * results.
 	 */
 	public UserInterface() {
-		game = new GameEngine();
+		
 	}
 	
 	/**
@@ -54,13 +51,36 @@ public class UserInterface {
 	public void printGrid() {
 		
 	}
-	
+
 	/**
-	 * This method will give the user several options in terms of what can be done, the options are listed
-	 * under {@link #choice}.
+	 * 
 	 */
-	public void userAction() {
-		game.setUserCMD(lookDir, choice);
+	public void welcome() {
+		// TODO Auto-generated method stub
+		
 	}
-	
+
+	/**
+	 * 
+	 */
+	public void turnMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * @return
+	 */
+	public String getOption() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * 
+	 */
+	public String getInput() {
+		input = sc.nextLine();
+		return input;
+	}	
 }

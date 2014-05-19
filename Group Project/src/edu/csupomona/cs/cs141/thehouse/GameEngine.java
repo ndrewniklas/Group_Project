@@ -18,7 +18,6 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * @author Andrew Nipp
  * 
  *	GameEngine is where almost everything from the other classes contribute to the game.
  *	The GameEngine takes user commands from {@link UserInterface}, checks with {@link Player},
@@ -48,34 +47,14 @@ public class GameEngine {
 	 * Checks to see if the briefcase is found
 	 */
 	private boolean foundBriefcase;
-	
-	/** 
-	 * Checks to see if the user quit 
-	 */
-	private boolean userQuit;
-	
-	/**
-	 * This field holds the choice of the user. There are xx potential values for the user to select:
-	 * left,
-	 * right,
-	 * up,
-	 * down,
-	 * shoot,
-	 * save,
-	 * exit
-	 */
-	private String userChoice;
-	
-	/**
-	 * This field holds the choice of direction for which the user will "look" before each turn.
-	 * There are four directions: 
-	 * left,
-	 * right,
-	 * up,
-	 * down
-	 */
-	private String lookDirection;
-    
+
+	private UserInterface ui;
+
+	private String input;
+
+	private String option;
+
+	private String cmd;
 	
 	/**
      * The default constructor for GameEngine.
@@ -85,48 +64,45 @@ public class GameEngine {
      */
     public GameEngine(){
     	gameOver = false;
-    	grid = new Grid();
+    	foundBriefcase=false;
     	plr = new Player();
+    	grid = new Grid();
+    	ui = new UserInterface();
+    	
     }
     
-    // Main game methods
     /**
      * The main loop of the game, this is where all the checks and actions go.
      * The loop is finished once {@link #gameOver} is set to be true either from
      * finding the briefcase, the player dying, or the user quitting.
      */
     public void gameLoop(){
-    	while(!gameOver && plr.getIsAlive()){
+    	while(!gameOver){
+    		grid.printGrid();
+    		ui.turnMenu(); //print options available during each turn
+    		option = ui.getOption(); //gets menu choice from player
+    		
+    		switch (option) {
+			case "move":
+				cmd = ui.getInput();
+				plr.movePlayer(cmd);
+				break;
+				
+			case "look":
+				cmd = ui.getInput();
+				plr.lookCheck();
+				break;
+			
+			case "":
+				
+				break;
+
+			default:
+				break;
+			}
+    		plr.movePlayer(input);
     		
     	}
-    }
-    
-    /**
-     * The method that will retrieve the position of each room from {@link Grid} and save 
-     * them to the corresponding local 2d String array.
-     */
-    public void setRoomPositions(){
-    	
-    }
-    
-    // Methods to check/send fields to other classes    
-    /**
-     * Used to set {@link #lookDirection} and {@link #userChoice}.
-     * @param
-     * 		lookDir - The direction chosen by the user to look, saved to {@link #lookDirection}
-     * @param
-     * 		choice - The choice of the user saved to a {@link #userChoice}. 		 
-     */		
-    public void setUserCMD(String lookDir, String choice){
-    	
-    }
-
-    /**
-     * Used to send out {@link #userQuit} which is checked by {@link #performUserAction()}.
-     * @return {@link #userQuit} value
-     */
-    public boolean userQuitGame(){
-    	return userQuit;
     }
 
     /**
@@ -136,60 +112,12 @@ public class GameEngine {
     public boolean plrFoundBriefcase(){
     	return foundBriefcase;
     }
-    
-    /**
-     * Used to send out {@link #plrDead} which is checked within {@link #gameLoop()}.
-     * @return {@link #plrDead} value
-     */
-    public boolean isPlrDead(){
-    	return plrDead;
-    }
-    
-    /**
-     * Used to send out {@link #gameOver} which is checked within {@link #gameLoop()}.
-     * @return {@link #gameOver} value
-     */
-    public boolean isGameOver(){
-    	return gameOver;
-    }
-  
-    /**
-     * Checks to see if the {@link Player} {@link #hasAmmo}.
-     * @return {@link #hasAmmo} value
-     */
-    public boolean plrHasAmmo(){
-    	return hasAmmo;
-    }    
-    
-    /**
-     * Checks to see if the {@link Player} has found the {@link ExtraAmmo}.
-     * @return {@link #hasExtraBullet} value
-     */
-    public boolean plrFoundExtraAmmo(){
-    	return hasExtraBullet;
-    }
-    
-    /**
-     * Checks to see if the {@link Player} has found the {@link Radar}.
-     * @return {@link #hasRadar} value
-     */
-    public boolean plrFoundRadar(){
-    	return hasRadar;
-    }
-    
-    /**
-     * Checks to see if the {@link Player} has found the {@link Shield}.
-     * @return {@link #hasShield} value
-     */
-    public boolean plrFoundShield(){
-    	return hasShield;
-    }
 
 	/**
-	 * Used to send to send the {@link Grid} to the other classes
-	 * @return grid
+	 * 
 	 */
-	public Grid getGrid() {
-		return grid;
+	public void startGame() {
+		ui.welcome();
+		gameLoop();
 	}
 }
