@@ -33,60 +33,27 @@ public class GameEngine {
 	 * Instantiation for {@link Grid}
 	 */
 	private Grid grid;
+	
 	/**
 	 * Instantiation for {@link Player}
 	 */
 	private Player plr;
-	/**
-	 * Instantiation for {@link Enemy}
-	 */
-	private Enemy enemy;
-	/**
-	 * Instantiation for {@link Shield}
-	 */
-	private Shield shield;
-	/**
-	 * Instantiation for {@link Radar}
-	 */
-	private Radar radar;
-	/**
-	 * Instantiation for {@link ExtraAmmo}
-	 */
-	private ExtraAmmo extraAmmo;
-
-	private int[] plrPos = new int[2];
-	/**
-	 * Checks to see if the player is dead
-	 */
-	private boolean plrDead;
+	
 	/**
 	 * Checks to see if the game is over
 	 */
 	private boolean gameOver;
+	
 	/**
 	 * Checks to see if the briefcase is found
 	 */
 	private boolean foundBriefcase;
+	
 	/** 
 	 * Checks to see if the user quit 
 	 */
 	private boolean userQuit;
-	/**
-	 * Checks to see if the {@link Player} has found the {@link ExtraAmmo}
-	 */
-	private boolean hasExtraBullet;
-	/**
-	 * Checks to see if the {@link Player} has found the {@link Radar}
-	 */
-	private boolean hasRadar;
-	/**
-	 * Checks to see if the {@link Player} has found the {@link Shield}
-	 */
-	private boolean hasShield;
-	/**
-	 * Checks to see if the {@link Player} has ammo left
-	 */
-	private boolean hasAmmo;
+	
 	/**
 	 * This field holds the choice of the user. There are xx potential values for the user to select:
 	 * left,
@@ -98,6 +65,7 @@ public class GameEngine {
 	 * exit
 	 */
 	private String userChoice;
+	
 	/**
 	 * This field holds the choice of direction for which the user will "look" before each turn.
 	 * There are four directions: 
@@ -108,6 +76,7 @@ public class GameEngine {
 	 */
 	private String lookDirection;
     
+	
 	/**
      * The default constructor for GameEngine.
      * 
@@ -118,10 +87,6 @@ public class GameEngine {
     	gameOver = false;
     	grid = new Grid();
     	plr = new Player();
-    	enemy = new Enemy();
-    	shield = new Shield();
-    	radar = new Radar();
-    	extraAmmo = new ExtraAmmo();
     }
     
     // Main game methods
@@ -131,83 +96,9 @@ public class GameEngine {
      * finding the briefcase, the player dying, or the user quitting.
      */
     public void gameLoop(){
-    	while(!gameOver){
+    	while(!gameOver && plr.getIsAlive()){
     		
     	}
-    }
-    
-    public int[] playerPosition(){
-    	plrPos[0] = plr.get_yPosition();
-    	plrPos[1] =  plr.get_xPosition();
-    	return plrPos;    	
-    }
-    
-    /**
-     * The method that will take {@link #userChoice} and perform actions based around it.
-     * For example, if the user chooses to move it will call the {@link #plrMoveCMD(String)} method.
-     */
-    public void performUserAction(){
-    	
-    }
-    
-    /**
-     * The method that will have the player shoot the gun.
-     * First it will check to see if the {@link Player} has any bullets left.
-     * Then it will fire the gun.
-     */
-    public void plrShootCMD(){
-    	
-    }
-    
-    /**
-     * The method that will have the player move
-     * It will move the player in the direction specified.
-     * @param moveChoice, which is the direction the user chooses
-     */
-    public void plrMoveCMD(String moveChoice){
-    	
-    }
-    
-    /**
-     * The method that will have the {@link Enemy} attack the {@link Player}.
-     */
-    public void enemyAttack(){
-    	
-    }
-    
-    /**
-     * The method that will have the {@link Enemy} move.
-     */
-    public void enemyMove(){
-    	
-    }
-    
-    /**
-     * The method that sets {@link #plrPrevPos} to the last known position of the {@link Player}.
-     */
-    public void setPlrPreviousPosition(){
-    	
-    }
-    
-    /**
-     * The method that sets {@link #plrCurrentPos} to the current position of the {@link Player}.
-     */
-    public void setPlrCurrentPosition(){
-    	
-    }
-    
-    /**
-     * The method that sets {@link #enemyPrevPos} to the last known position of the {@link Enemy}.
-     */
-    public void setEnemyPreviousPosition(){
-    	
-    }
-    
-    /**
-     * The method that sets {@link #enemyCurrentPos} to the current position of the {@link Enemy}.
-     */
-    public void setEnemyCurrentPosition(){
-    	
     }
     
     /**
