@@ -20,14 +20,14 @@ public class Test_Main {
 //		movementTest_Basic();
 //		playerMove_Test1();
 //		playerMoveControl();
-		printGrid_Test3();
+//		printGrid_Test3();
 //		playerMove_Test2();
-		printGrid_Test4();		
+//		printGrid_Test4();		
 //		printGrid_Test5();
 //		printGrid_Test6();
-//		playerMove_Test3();
+		playerMove_Test3();
 //		printGrid_Test7();
-		playerMove_Test4();
+//		playerMove_Test4();
 	}
 	
 	public static void printGrid_Test1(){
@@ -42,9 +42,8 @@ public class Test_Main {
 		System.out.println("Grid: Print Test 2");
 		System.out.println("B is the briefcase, R is the room, P is the player");
 		Grid grid = new Grid();
-		grid.printGrid();
 		grid.setBriefcase();
-		
+		grid.printGrid();		
 		System.out.println("-----------------------------------------------------");
 	}
 	
@@ -107,9 +106,11 @@ public class Test_Main {
 		
 		while(true){
 			for(int i:ply.getPosition()){
-				System.out.println(i);
+				System.out.print(i + " ");
 			}
+			System.out.println();
 			Scanner sc = new Scanner(System.in);
+			System.out.print("Input direction: ");
 			String input=sc.next();
 			ply.movePlayer(input);
 			grid.rePopulateGrid(ply);
@@ -215,10 +216,10 @@ public class Test_Main {
 		System.out.println("|-----------------------------------------------------------");
 		Player ply = new Player();
 		Grid grid = new Grid();
-		grid.rePopulateGrid(ply);
 		grid.setBriefcase();
 		grid.setEnemy();
 		grid.setPowerUps();
+		grid.rePopulateGrid(ply);
 		for(int i = 0; i < grid.gridSize(); ++i){
 			for(int j = 0; j < grid.gridSize(); ++j){
 				System.out.print("|Location [" + i + "," + j + "]: " );
@@ -234,6 +235,7 @@ public class Test_Main {
 			System.out.print("Input the direction: ");
 			String input = sc.next();
 			ply.movePlayer(input);
+			grid.moveEnemyOnGrid();
 			grid.rePopulateGrid(ply);
 			for(int i = 0; i < grid.gridSize(); ++i){
 				for(int j = 0; j < grid.gridSize(); ++j){

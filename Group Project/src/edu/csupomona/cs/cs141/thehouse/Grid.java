@@ -103,6 +103,17 @@ public class Grid {
 		else{
 			gog[ply.getYPre()][ply.getXPre()] = gameObj;
 		}
+		for(int i = 0; i < enemy.length; ++i){
+			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
+			gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
+		}
+	}
+
+	public void rePopulateGrid(){
+		for(int i = 0; i < enemy.length; ++i){
+			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
+			gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
+		}	
 	}
 	
 	public GameObject getObjectAtLocation(int posY, int posX){
@@ -112,6 +123,12 @@ public class Grid {
 	
 	public boolean checkIfLocationFree(int posY, int posX){
 		if(getObjectAtLocation(posY, posX).equals(gameObj))
+			return true;
+		else
+			return false;
+	}
+	public boolean checkIfLocationFree(int posY, int posX, GameObject obj){
+		if(getObjectAtLocation(posY, posX).equals(obj))
 			return true;
 		else
 			return false;
@@ -164,21 +181,28 @@ public class Grid {
 			
 			if (checkIfLocationFree(spawnOne, spawnTwo)) {
 				gog[spawnOne][spawnTwo] = enemy[i];
-				enemyPos[0] = spawnOne;
-				enemyPos[1] = spawnTwo;
+				enemy[i].setYPosition(spawnOne);
+				enemy[i].setXPosition(spawnTwo);
 				i++;
 				setNumEnemies(getNumEnemies() + 1);
 			}
 		}
 	}
-
-	public int[] getEnemyPosition(){
-		return enemyPos;
+	
+	public GameObject[] getEnemy(){
+		return enemy;
 	}
+
 	
 	public void moveEnemyOnGrid(){
+		for(int i = 0; i < enemy.length; ++i){
+			int ranNum;
+			ranNum = die.roll(4);
+			enemy[i].moveEnemy(ranNum);
+		}
 	}
 	
+
 	/**
 	 * @return the numEnemies
 	 */

@@ -14,6 +14,7 @@ public class GameObject {
 	 */
 	private String objName;
 	
+	private final String EMPTY_OBJECT = "| |";
 	
 	int[] pos = new int[2];
 
@@ -50,13 +51,13 @@ public class GameObject {
 	}
 	
 	public String getEmptyObjectName(){
-		objName = "| |";
+		objName = EMPTY_OBJECT;
 		return objName;
 	}
 	
 	public void setXY(int x, int y) {
-		pos[0] = x;
-		pos[1] = y;
+		pos[0] = y;
+		pos[1] = x;
 	}
 	
 	public int[] getPosition() {
