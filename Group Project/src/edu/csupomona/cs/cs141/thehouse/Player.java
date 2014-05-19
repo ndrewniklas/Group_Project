@@ -46,6 +46,8 @@ public class Player extends GameObject{
 		
 		xPosition = 0;
 		yPosition = 8;
+		
+		isAlive=true;
 	}
 	
 	/**
@@ -121,6 +123,10 @@ public class Player extends GameObject{
 	 */
 	public int getXPre() {
 		return xpre;
+	}
+	
+	public boolean getIsAlive() {
+		return isAlive;
 	}
 	
 	/**
