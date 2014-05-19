@@ -33,60 +33,74 @@ public class GameEngine {
 	 * Instantiation for {@link Grid}
 	 */
 	private Grid grid;
+	
 	/**
 	 * Instantiation for {@link Player}
 	 */
 	private Player plr;
+	
 	/**
 	 * Instantiation for {@link Enemy}
 	 */
 	private Enemy enemy;
+	
 	/**
 	 * Instantiation for {@link Shield}
 	 */
 	private Shield shield;
+
 	/**
 	 * Instantiation for {@link Radar}
 	 */
 	private Radar radar;
+	
 	/**
 	 * Instantiation for {@link ExtraAmmo}
 	 */
 	private ExtraAmmo extraAmmo;
 
 	private int[] plrPos = new int[2];
+	
 	/**
 	 * Checks to see if the player is dead
 	 */
 	private boolean plrDead;
+	
 	/**
 	 * Checks to see if the game is over
 	 */
 	private boolean gameOver;
+	
 	/**
 	 * Checks to see if the briefcase is found
 	 */
 	private boolean foundBriefcase;
+	
 	/** 
 	 * Checks to see if the user quit 
 	 */
 	private boolean userQuit;
+	
 	/**
 	 * Checks to see if the {@link Player} has found the {@link ExtraAmmo}
 	 */
 	private boolean hasExtraBullet;
+	
 	/**
 	 * Checks to see if the {@link Player} has found the {@link Radar}
 	 */
 	private boolean hasRadar;
+	
 	/**
 	 * Checks to see if the {@link Player} has found the {@link Shield}
 	 */
 	private boolean hasShield;
+	
 	/**
 	 * Checks to see if the {@link Player} has ammo left
 	 */
 	private boolean hasAmmo;
+	
 	/**
 	 * This field holds the choice of the user. There are xx potential values for the user to select:
 	 * left,
@@ -98,6 +112,7 @@ public class GameEngine {
 	 * exit
 	 */
 	private String userChoice;
+	
 	/**
 	 * This field holds the choice of direction for which the user will "look" before each turn.
 	 * There are four directions: 
