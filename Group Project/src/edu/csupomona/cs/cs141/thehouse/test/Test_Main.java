@@ -157,7 +157,7 @@ public class Test_Main {
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
 		while(true){
-			grid.moveEnemyOnGrid();
+			grid.moveEnemy(grid);
 			grid.printGrid();
 			System.out.println("-----------------------------------------------------");
 		}
@@ -182,7 +182,7 @@ public class Test_Main {
 			Scanner sc = new Scanner(System.in);
 			String input=sc.next();
 			ply.movePlayer(input);
-			grid.moveEnemyOnGrid();
+			grid.moveEnemy(grid);
 			grid.rePopulateGrid(ply);
 			grid.printGrid();
 			System.out.println("Number of Enemies: " + grid.getNumEnemies());
@@ -235,7 +235,7 @@ public class Test_Main {
 			System.out.print("Input the direction: ");
 			String input = sc.next();
 			ply.movePlayer(input);
-			grid.moveEnemyOnGrid();
+			grid.moveEnemy(grid);
 			grid.rePopulateGrid(ply);
 			for(int i = 0; i < grid.gridSize(); ++i){
 				for(int j = 0; j < grid.gridSize(); ++j){

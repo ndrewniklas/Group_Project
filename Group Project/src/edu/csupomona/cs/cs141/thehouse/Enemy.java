@@ -34,12 +34,11 @@ public class Enemy extends GameObject {
 	private int yPosition;
 	private int xpre;
 	private int ypre;
-	private Grid grid;
+	
 	
 	private int[] newPos = new int[2];
 	
 	public Enemy(){
-		grid = new Grid();
 		setObjectName("[E]");
 	}
 	
@@ -54,30 +53,36 @@ public class Enemy extends GameObject {
 	/**
 	 * {@link #moveEnemy()} This method will move the player based on user input
 	 */
-	public void moveEnemy(int ranNum){
-		xpre = xPosition;
-		ypre = yPosition;
-        if (ranNum == 0 && upPossible()) {
-        	if (yPosition-1 >= 0 && yPosition-1 <= 8) {
-        		if(grid.checkIfLocationFree(yPosition-1, xPosition))
-        			setXY(xPosition, --yPosition);
+	public void moveEnemy(Grid grid){
+		
+			int ranNum = die.roll(4);
+			setXY(xPosition, yPosition);		
+			xpre = xPosition;
+			ypre = yPosition;
+			if (ranNum == 0 && upPossible()) {
+				if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
+					if (grid.checkIfLocationFree(yPosition - 1, xPosition))
+						setXY(xPosition, --yPosition);
+				}
+			} else if (ranNum == 1 && downPossible()) {
+				if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
+					if (grid.checkIfLocationFree(yPosition + 1, xPosition))
+						setXY(xPosition, ++yPosition);
+				}
+			} else if (ranNum == 2 && rightPossible()) {
+				if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
+					if (grid.checkIfLocationFree(yPosition, xPosition + 1))
+						setXY(++xPosition, yPosition);
+				}
+			} else if (ranNum == 3 && leftPossible()) {
+				if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
+					if (grid.checkIfLocationFree(yPosition, xPosition - 1))
+						setXY(--xPosition, yPosition);
+				}
+			} else {
+				ranNum = die.roll(4);
+				moveEnemy(grid);
 			}
-        } else if (ranNum == 1 && downPossible()) {
-        	if (yPosition+1 >= 0 && yPosition+1 <= 8) {
-        		if(grid.checkIfLocationFree(yPosition+1, xPosition))
-        			setXY(xPosition, ++yPosition);
-			}
-        } else if (ranNum == 2 && rightPossible()) {
-        	if (xPosition+1 >= 0 && xPosition+1 <= 8) {
-        		if(grid.checkIfLocationFree(yPosition, xPosition+1))
-        			setXY(++xPosition, yPosition);
-			}
-        } else if (ranNum == 3 && leftPossible()) {
-        	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
-        		if(grid.checkIfLocationFree(yPosition, xPosition-1))
-        			setXY(--xPosition, yPosition);
-			}
-        }
 	}
 	
 	/**

@@ -103,9 +103,14 @@ public class Grid {
 		else{
 			gog[ply.getYPre()][ply.getXPre()] = gameObj;
 		}
+		
 		for(int i = 0; i < enemy.length; ++i){
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
-			gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
+			if (enemy[i].getYPosition() == enemy[i].getYPre() && enemy[i].getXPosition() == enemy[i].getXPre()) {
+			}
+			else{
+				gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
+			}
 		}
 	}
 
@@ -122,7 +127,7 @@ public class Grid {
 	}
 	
 	public boolean checkIfLocationFree(int posY, int posX){
-		if(getObjectAtLocation(posY, posX).equals(gameObj))
+		if(gog[posY][posX].equals(gameObj))
 			return true;
 		else
 			return false;
@@ -166,11 +171,11 @@ public class Grid {
 		
 		for (int i = 0; i < 6;) {
 			spawnOne = die.roll(8);
-			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 2) {
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne > 6) {
 				spawnOne = die.roll(9);
 			}
 			spawnTwo = die.roll();
-			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 6) {
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo < 2) {
 				spawnTwo = die.roll(9);
 			}
 			
@@ -187,16 +192,12 @@ public class Grid {
 	public GameObject[] getEnemy(){
 		return enemy;
 	}
-
 	
-	public void moveEnemyOnGrid(){
-		for(int i = 0; i < enemy.length; ++i){
-			int ranNum;
-			ranNum = die.roll(4);
-			enemy[i].moveEnemy(ranNum);
+	public void moveEnemy(Grid grid) {
+		for (int i = 0; i < enemy.length; i++) {
+			enemy[i].moveEnemy(grid);
 		}
 	}
-	
 
 	/**
 	 * @return the numEnemies
