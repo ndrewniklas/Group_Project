@@ -82,25 +82,25 @@ public class GameObject {
 		return true;
 	}
     public boolean upPossible(){
-    	if(roomExists(pos[0], pos[1] - 1))
+    	if(roomExists(pos[0] - 1, pos[1]))
     		return true;
     	else
     		return false;
     }
     public boolean downPossible(){
-    	if(roomExists(pos[0], pos[1] + 1))
-    		return true;
-    	else
-    		return false;
-    }
-    public boolean rightPossible(){
     	if(roomExists(pos[0] + 1, pos[1]))
     		return true;
     	else
     		return false;
     }
+    public boolean rightPossible(){
+    	if(roomExists(pos[0], pos[1] + 1))
+    		return true;
+    	else
+    		return false;
+    }
     public boolean leftPossible(){
-    	if(roomExists(pos[0] - 1, pos[1]))
+    	if(roomExists(pos[0], pos[1] - 1))
     		return true;
     	else
     		return false;

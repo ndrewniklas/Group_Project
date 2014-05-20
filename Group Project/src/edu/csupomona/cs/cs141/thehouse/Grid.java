@@ -127,12 +127,7 @@ public class Grid {
 		else
 			return false;
 	}
-	public boolean checkIfLocationFree(int posY, int posX, GameObject obj){
-		if(getObjectAtLocation(posY, posX).equals(obj))
-			return true;
-		else
-			return false;
-	}
+	
 	/**
 	 * This method randomly places the briefcase by calling {@link Dice#roll()}. It then creates a temporary
 	 * {@code String[][]} that stores the briefcase. Any time a {@link Player} enters a room, it checks to

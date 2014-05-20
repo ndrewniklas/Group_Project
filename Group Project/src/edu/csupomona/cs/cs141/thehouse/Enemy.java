@@ -86,16 +86,19 @@ public class Enemy extends GameObject {
 	public int getYPosition() {
 		return yPosition;
 	}
+	
 	public int setYPosition(int y){
 		yPosition = y;
 		return yPosition;
 	}
+	
 	/**
 	 * @return
 	 */
 	public int getXPosition() {
 		return xPosition;
 	}
+	
 	public int setXPosition(int x){
 		xPosition = x;
 		return xPosition;
