@@ -57,29 +57,36 @@ public class Enemy extends GameObject {
 	 */
 	public void moveEnemy(Grid grid){
 		
-			int ranNum = die.roll(4);
-//			setXY(xPosition, yPosition);		
+			int ranNum = die.roll(4);		
 			xpre = xPosition;
 			ypre = yPosition;
 			if (ranNum == 0 && upPossible()) {
 				if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
-					if (grid.checkIfLocationFree(yPosition - 1, xPosition))
+					if (grid.checkEnemiesStacked()){
 						setXY(xPosition, --yPosition);
+						cleanEnemies(grid);
+					}
 				}
 			} else if (ranNum == 1 && downPossible()) {
 				if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
-					if (grid.checkIfLocationFree(yPosition + 1, xPosition))
+					if (grid.checkEnemiesStacked()){
 						setXY(xPosition, ++yPosition);
+						cleanEnemies(grid);
+					}
 				}
 			} else if (ranNum == 2 && rightPossible()) {
 				if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
-					if (grid.checkIfLocationFree(yPosition, xPosition + 1))
+					if (grid.checkEnemiesStacked()){
 						setXY(++xPosition, yPosition);
+						cleanEnemies(grid);
+					}
 				}
 			} else if (ranNum == 3 && leftPossible()) {
 				if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
-					if (grid.checkIfLocationFree(yPosition, xPosition - 1))
+					if (grid.checkEnemiesStacked()){
 						setXY(--xPosition, yPosition);
+						cleanEnemies(grid);
+					}
 				}
 			} else {
 				ranNum = die.roll(4);
@@ -87,6 +94,13 @@ public class Enemy extends GameObject {
 			}
 	}
 	
+	private void cleanEnemies(Grid grid) {
+		if (getYPosition() == getYPre() && getXPosition() == getXPre()) {
+		}
+		else{
+			grid.changeObjectIntoBlank(getYPre(), getXPre());
+		}
+	}
 	/**
 	 * @return
 	 */

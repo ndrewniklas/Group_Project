@@ -107,11 +107,7 @@ public class Grid {
 		
 		for(int i = 0; i < enemy.length; ++i){
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
-			if (enemy[i].getYPosition() == enemy[i].getYPre() && enemy[i].getXPosition() == enemy[i].getXPre()) {
-			}
-			else{
-				gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
-			}
+			
 		}
 	}
 
@@ -120,6 +116,10 @@ public class Grid {
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
 			gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
 		}	
+	}
+	
+	public void changeObjectIntoBlank(int posY, int posX){
+		gog[posY][posX] = gameObj;
 	}
 	
 	public GameObject getObjectAtLocation(int posY, int posX){
@@ -132,6 +132,25 @@ public class Grid {
 			return true;
 		else
 			return false;
+	}
+	
+	public void moveStackedEnemies(){
+		for(int i  = 0; i < enemy.length; ++i){
+			for(int j = 0; j < enemy.length; ++j){
+			}
+		}
+	}
+	
+	public boolean checkEnemiesStacked(){
+		for(int i  = 0; i < enemy.length; ++i){
+			for(int j = 0; j < enemy.length; ++j){
+				if(enemy[i].getYPosition() == enemy[j].getYPosition() && enemy[i].getXPosition() == enemy[j].getXPosition()){
+					return true;
+				}
+				return false;
+			}
+		}
+		return false;
 	}
 	
 	/**
