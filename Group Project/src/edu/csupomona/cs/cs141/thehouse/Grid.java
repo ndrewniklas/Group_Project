@@ -79,7 +79,7 @@ public class Grid {
 	}
 	
 	/**
-	 * Populates the grid with rooms, player, enemy, and powerups in the position at {@link #go}
+	 * Populates the grid with rooms in the position at {@link #go}
 	 */
 	public void populateGrid(){
 		for(int i = 0; i < 9; ++i){

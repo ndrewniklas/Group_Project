@@ -53,7 +53,7 @@ public class Enemy extends GameObject {
 	}
 	
 	/**
-	 * {@link #moveEnemy()} This method will move the player based on user input
+	 * {@link #moveEnemy()} This method will move the enemy
 	 */
 	public void moveEnemy(Grid grid){
 		
@@ -62,28 +62,28 @@ public class Enemy extends GameObject {
 			ypre = yPosition;
 			if (ranNum == 0 && upPossible()) {
 				if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
-					if (grid.checkEnemiesStacked()){
+					if (grid.checkIfLocationFree(yPosition, xPosition)){
 						setXY(xPosition, --yPosition);
 						cleanEnemies(grid);
 					}
 				}
 			} else if (ranNum == 1 && downPossible()) {
 				if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
-					if (grid.checkEnemiesStacked()){
+					if (grid.checkIfLocationFree(yPosition, xPosition)){
 						setXY(xPosition, ++yPosition);
 						cleanEnemies(grid);
 					}
 				}
 			} else if (ranNum == 2 && rightPossible()) {
 				if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
-					if (grid.checkEnemiesStacked()){
+					if (grid.checkIfLocationFree(yPosition, xPosition)){
 						setXY(++xPosition, yPosition);
 						cleanEnemies(grid);
 					}
 				}
 			} else if (ranNum == 3 && leftPossible()) {
 				if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
-					if (grid.checkEnemiesStacked()){
+					if (grid.checkIfLocationFree(yPosition, xPosition)){
 						setXY(--xPosition, yPosition);
 						cleanEnemies(grid);
 					}
