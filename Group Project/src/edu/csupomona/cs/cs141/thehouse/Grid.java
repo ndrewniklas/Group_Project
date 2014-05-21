@@ -134,20 +134,18 @@ public class Grid {
 			return false;
 	}
 	
-	public void moveStackedEnemies(){
-		for(int i  = 0; i < enemy.length; ++i){
-			for(int j = 0; j < enemy.length; ++j){
-			}
-		}
-	}
-	
 	public boolean checkEnemiesStacked(){
+		int x=0;
 		for(int i  = 0; i < enemy.length; ++i){
 			for(int j = 0; j < enemy.length; ++j){
 				if(enemy[i].getYPosition() == enemy[j].getYPosition() && enemy[i].getXPosition() == enemy[j].getXPosition()){
-					return true;
+					x++;
+					if(x==2)
+						return true;
 				}
-				return false;
+				else {
+					return false;	
+				}
 			}
 		}
 		return false;
@@ -218,6 +216,8 @@ public class Grid {
 			enemy[i].moveEnemy(grid);
 			
 			enemy[i].printEnemyPos(i);		// for testing purpose only
+			boolean free = checkIfLocationFree(enemy[i].getYPosition(), enemy[i].getXPosition());
+			System.out.println("free: " + free);
 		}
 	}
 

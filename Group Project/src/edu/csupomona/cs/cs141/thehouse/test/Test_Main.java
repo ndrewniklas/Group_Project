@@ -278,6 +278,8 @@ public class Test_Main {
 			ply.movePlayer(input);
 			
 			grid.moveEnemy(grid);
+			boolean stack = grid.checkEnemiesStacked();
+			System.out.println("stacked: " + stack);
 			grid.rePopulateGrid(ply);
 			grid.printGrid();
 		}
