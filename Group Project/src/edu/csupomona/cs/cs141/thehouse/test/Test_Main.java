@@ -25,10 +25,12 @@ public class Test_Main {
 //		printGrid_Test4();		
 //		printGrid_Test5();
 //		printGrid_Test6();
-		playerMove_Test3();
+//		playerMove_Test3();
 //		printGrid_Test7();
 //		playerMove_Test4();
+		enemyMovement_Test1();
 	}
+	
 	
 	public static void printGrid_Test1(){
 		System.out.println("Grid: Print Test 1");
@@ -119,6 +121,7 @@ public class Test_Main {
 			System.out.println("-----------------------------------------------------");
 		}
 	}
+	
 	public static void printGrid_Test4(){
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
@@ -131,6 +134,7 @@ public class Test_Main {
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
 	}
+	
 	public static void printGrid_Test5(){
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
@@ -145,6 +149,7 @@ public class Test_Main {
 			System.out.println("-----------------------------------------------------");
 		}
 	}
+	
 	public static void printGrid_Test6(){
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
@@ -162,6 +167,7 @@ public class Test_Main {
 			System.out.println("-----------------------------------------------------");
 		}
 	}
+	
 	public static void playerMove_Test3() {
 		System.out.println("Player movement test 4");
 		System.out.println("Enemies will move with player");
@@ -189,6 +195,7 @@ public class Test_Main {
 			System.out.println("-----------------------------------------------------");
 		}
 	}
+	
 	public static void printGrid_Test7(){
 		System.out.println("Grid: Print Test 7");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
@@ -210,6 +217,7 @@ public class Test_Main {
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
 	}
+	
 	public static void playerMove_Test4() {
 		System.out.println("Player movement test 3");
 		System.out.println("Standard Player Movement w/ Other Object Spawn and Object Testing");
@@ -249,5 +257,31 @@ public class Test_Main {
 			System.out.println("|-----------------------------------------------------------");
 		}
 	}
+	
+	/**
+	 * 
+	 */
+	private static void enemyMovement_Test1() {
+		System.out.println("Enemy Movement Test 1");
+		Player ply = new Player();
+		Grid grid = new Grid();
+		grid.setBriefcase();
+		grid.setEnemy();
+		grid.setPowerUps();
+		grid.rePopulateGrid(ply);
+		grid.printGrid();
+		
+		
+		while (true) {
+			Scanner sc = new Scanner(System.in);
+			String input=sc.nextLine();
+			ply.movePlayer(input);
+			
+			grid.moveEnemy(grid);
+			grid.rePopulateGrid(ply);
+			grid.printGrid();
+		}
+	}
+
 	
 }

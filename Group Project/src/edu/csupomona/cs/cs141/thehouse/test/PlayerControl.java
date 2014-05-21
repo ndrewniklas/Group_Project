@@ -83,7 +83,7 @@ public class PlayerControl extends GameObject{
 	 * @param i
 	 * @return
 	 */
-	private boolean roomExists(int xPosition2, int i) {
+	public boolean roomExists(int xPosition2, int i) {
 		if(xPosition2 == 1 ||xPosition2 == 4||xPosition2 == 7){
 			if(i==1||i==4||i==7){
 				return false;

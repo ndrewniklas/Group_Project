@@ -22,7 +22,7 @@ public class GameObject {
 	 * The constructor sets the default name for {@link #objName}
 	 */
 	public GameObject() {
-		getEmptyObjectName();
+		objName = EMPTY_OBJECT;
 	}
 	
 	public GameObject(String name, int x, int y){
@@ -50,11 +50,6 @@ public class GameObject {
 		return objName;
 	}
 	
-	public String getEmptyObjectName(){
-		objName = EMPTY_OBJECT;
-		return objName;
-	}
-	
 	public void setXY(int x, int y) {
 		pos[0] = y;
 		pos[1] = x;
@@ -73,7 +68,7 @@ public class GameObject {
 	 * @param i
 	 * @return
 	 */
-	private boolean roomExists(int xPosition2, int i) {
+	public boolean roomExists(int xPosition2, int i) {
 		if(xPosition2 == 1 ||xPosition2 == 4||xPosition2 == 7){
 			if(i==1||i==4||i==7){
 				return false;

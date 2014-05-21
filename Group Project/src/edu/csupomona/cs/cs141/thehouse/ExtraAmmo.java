@@ -28,12 +28,14 @@ public class ExtraAmmo extends GameObject {
 	 */
 	private String ExtraAmmo;
 	
+	private final String EXTRA_AMMO= "|A|";
+	
 	/**
 	 * This is the method that gives powerup its type.  
 	 */
 	public ExtraAmmo() {
 		// TODO Auto-generated constructor stub
-		setObjectName("[A]");
+		setObjectName(EXTRA_AMMO);
 		
 	}
 	 

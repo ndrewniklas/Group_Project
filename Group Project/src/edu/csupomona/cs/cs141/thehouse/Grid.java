@@ -14,6 +14,7 @@ public class Grid {
 	private GameObject[][] gog;
 	
 	private GameObject go;
+	
 	/**
 	 * The grid is filled with this
 	 */
@@ -127,7 +128,7 @@ public class Grid {
 	}
 	
 	public boolean checkIfLocationFree(int posY, int posX){
-		if(gog[posY][posX].equals(gameObj))
+		if(gog[posY][posX] instanceof GameObject)
 			return true;
 		else
 			return false;
@@ -196,6 +197,8 @@ public class Grid {
 	public void moveEnemy(Grid grid) {
 		for (int i = 0; i < enemy.length; i++) {
 			enemy[i].moveEnemy(grid);
+			
+			enemy[i].printEnemyPos(i);		// for testing purpose only
 		}
 	}
 

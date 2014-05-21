@@ -35,17 +35,19 @@ public class Enemy extends GameObject {
 	private int xpre;
 	private int ypre;
 	
+	private final String ENEMY_NAME = "|E|";
+	
 	
 	private int[] newPos = new int[2];
 	
 	public Enemy(){
-		setObjectName("[E]");
+		setObjectName(ENEMY_NAME);
 	}
 	
 	//This method will show enemy dependent on boolean value taken
 	public Enemy(boolean showEnemy) {
 		if(showEnemy)
-			setObjectName("[E]");
+			setObjectName(ENEMY_NAME);
 		else
 			setObjectName("| |");
 	}
@@ -56,7 +58,7 @@ public class Enemy extends GameObject {
 	public void moveEnemy(Grid grid){
 		
 			int ranNum = die.roll(4);
-			setXY(xPosition, yPosition);		
+//			setXY(xPosition, yPosition);		
 			xpre = xPosition;
 			ypre = yPosition;
 			if (ranNum == 0 && upPossible()) {
@@ -143,5 +145,9 @@ public class Enemy extends GameObject {
 	 */
 	public void ninjaDies() {
 		
+	}
+	
+	public void printEnemyPos(int i) {
+		System.out.println("Enemy"+ i + ": " + xPosition + " " + yPosition);
 	}
 }

@@ -29,12 +29,14 @@ public class Shield extends GameObject {
 	 */
 	private int Shield;
 	
+	private final String SHIELD = "|S|";
+	
 	/**
 	 * This is the constructor for the shield powerup
 	 */
 	public Shield() {
 		// Invincibility, just felt like making it shield so it is quicker to type
-		setObjectName("[S]");
+		setObjectName(SHIELD);
 	}
 	
 	/**

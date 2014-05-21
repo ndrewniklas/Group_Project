@@ -95,6 +95,7 @@ public class Player extends GameObject{
 				setXY(--xPosition, yPosition);
 			}
         }
+        
     }
 	
 	/**
