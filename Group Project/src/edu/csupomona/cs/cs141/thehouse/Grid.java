@@ -32,9 +32,13 @@ public class Grid {
 	private boolean showBriefcase;
 	
 	private int[] briefcasePos = new int[2];
+	
 	private int[] enemyPos = new int[2];
+	
 	private int[] shieldPos = new int[2];
+	
 	private int[] radarPos = new int[2];
+	
 	private int[] ammoPos = new int[2];
 	
 	private int numEnemies=0;
@@ -57,6 +61,9 @@ public class Grid {
 				gog[i][j] = gameObj;
 			}
 		}
+		setBriefcase();
+		setEnemy();
+		setPowerUps();
 		populateGrid();
 	}
 	
@@ -98,6 +105,7 @@ public class Grid {
 	
 	public void rePopulateGrid(Player ply) {
 		gog[ply.get_yPosition()][ply.get_xPosition()] = ply;
+		
 		if (ply.get_yPosition() == ply.getYPre() && ply.get_xPosition() == ply.getXPre()) {
 				System.out.println("Invalid Command: Please try again.");
 		}
@@ -107,11 +115,10 @@ public class Grid {
 		
 		for(int i = 0; i < enemy.length; ++i){
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
-			
 		}
 	}
 
-	public void rePopulateGrid(){
+	public void rePopulateGrid(){					//for testing only
 		for(int i = 0; i < enemy.length; ++i){
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
 			gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
@@ -142,9 +149,9 @@ public class Grid {
 					x++;
 					if(x==2)
 						return true;
-				}
-				else {
-					return false;	
+					else {
+						return false;	
+					}
 				}
 			}
 		}
@@ -202,7 +209,7 @@ public class Grid {
 				enemy[i].setYPosition(spawnOne);
 				enemy[i].setXPosition(spawnTwo);
 				i++;
-				setNumEnemies(getNumEnemies() + 1);
+				numEnemies += 1;
 			}
 		}
 	}
@@ -226,13 +233,6 @@ public class Grid {
 	 */
 	public int getNumEnemies() {
 		return numEnemies;
-	}
-
-	/**
-	 * @param numEnemies the numEnemies to set
-	 */
-	public void setNumEnemies(int numEnemies) {
-		this.numEnemies = numEnemies;
 	}
 	
 	/**

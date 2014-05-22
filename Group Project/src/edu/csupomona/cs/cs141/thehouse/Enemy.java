@@ -27,18 +27,17 @@ package edu.csupomona.cs.cs141.thehouse;
 public class Enemy extends GameObject {
 
 	private boolean enemyDead;
+	
 	private Dice die = new Dice();
-	private int initialX;
-	private int initialY;
+	
 	private int xPosition;
 	private int yPosition;
+	
 	private int xpre;
 	private int ypre;
 	
 	private final String ENEMY_NAME = "|E|";
 	
-	
-	private int[] newPos = new int[2];
 	
 	public Enemy(){
 		setObjectName(ENEMY_NAME);
@@ -62,31 +61,31 @@ public class Enemy extends GameObject {
 			ypre = yPosition;
 			if (ranNum == 0 && upPossible()) {
 				if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
-					if (grid.checkIfLocationFree(yPosition-1, xPosition)){
+//					if (grid.checkIfLocationFree(yPosition-1, xPosition)){
 						setXY(xPosition, --yPosition);
 						cleanEnemies(grid);
-					}
+//					}
 				}
 			} else if (ranNum == 1 && downPossible()) {
 				if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
-					if (grid.checkIfLocationFree(yPosition+1, xPosition)){
+//					if (grid.checkIfLocationFree(yPosition+1, xPosition)){
 						setXY(xPosition, ++yPosition);
 						cleanEnemies(grid);
-					}
+//					}
 				}
 			} else if (ranNum == 2 && rightPossible()) {
 				if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
-					if (grid.checkIfLocationFree(yPosition, xPosition+1)){
+//					if (grid.checkIfLocationFree(yPosition, xPosition+1)){
 						setXY(++xPosition, yPosition);
 						cleanEnemies(grid);
-					}
+//					}
 				}
 			} else if (ranNum == 3 && leftPossible()) {
 				if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
-					if (grid.checkIfLocationFree(yPosition, xPosition-2)){
+//					if (grid.checkIfLocationFree(yPosition, xPosition-2)){
 						setXY(--xPosition, yPosition);
 						cleanEnemies(grid);
-					}
+//					}
 				}
 			} else {
 				ranNum = die.roll(4);

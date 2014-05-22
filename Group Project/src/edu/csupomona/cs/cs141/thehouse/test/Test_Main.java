@@ -28,7 +28,8 @@ public class Test_Main {
 //		playerMove_Test3();
 //		printGrid_Test7();
 //		playerMove_Test4();
-		enemyMovement_Test1();
+//		enemyMovement_Test1();
+		enemyMovement_Test2(100);
 	}
 	
 	
@@ -44,7 +45,7 @@ public class Test_Main {
 		System.out.println("Grid: Print Test 2");
 		System.out.println("B is the briefcase, R is the room, P is the player");
 		Grid grid = new Grid();
-		grid.setBriefcase();
+//		grid.setBriefcase();
 		grid.printGrid();		
 		System.out.println("-----------------------------------------------------");
 	}
@@ -88,8 +89,8 @@ public class Test_Main {
 		System.out.println("Grid: Print Test 3");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
 		Grid grid = new Grid();
-		grid.setBriefcase();
-		grid.setEnemy();
+//		grid.setBriefcase();
+//		grid.setEnemy();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
@@ -101,9 +102,9 @@ public class Test_Main {
 		Player ply = new Player();
 		Grid grid = new Grid();
 		grid.rePopulateGrid(ply);
-		grid.setBriefcase();
-		grid.setEnemy();
-		grid.setPowerUps();
+//		grid.setBriefcase();
+//		grid.setEnemy();
+//		grid.setPowerUps();
 		grid.printGrid();
 		
 		while(true){
@@ -127,9 +128,9 @@ public class Test_Main {
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
 		System.out.println("Spawn PowerUps, Enemies, and the Briefcase room");
 		Grid grid = new Grid();
-		grid.setBriefcase();
-		grid.setEnemy();
-		grid.setPowerUps();
+//		grid.setBriefcase();
+//		grid.setEnemy();
+//		grid.setPowerUps();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
@@ -141,9 +142,9 @@ public class Test_Main {
 		System.out.println("Spawn PowerUps, Enemies, and the Briefcase room in an infinte loop");
 		while(true){
 			Grid grid = new Grid();
-			grid.setBriefcase();
-			grid.setEnemy();
-			grid.setPowerUps();
+//			grid.setBriefcase();
+//			grid.setEnemy();
+//			grid.setPowerUps();
 			grid.printGrid();
 			System.out.println("Number of Enemies: " + grid.getNumEnemies());
 			System.out.println("-----------------------------------------------------");
@@ -155,9 +156,9 @@ public class Test_Main {
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
 		System.out.println("Enemies will move every loop");
 		Grid grid = new Grid();
-		grid.setBriefcase();
-		grid.setEnemy();
-		grid.setPowerUps();
+//		grid.setBriefcase();
+//		grid.setEnemy();
+//		grid.setPowerUps();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
@@ -173,10 +174,10 @@ public class Test_Main {
 		System.out.println("Enemies will move with player");
 		Player ply = new Player();
 		Grid grid = new Grid();
-		grid.setEnemy();
+//		grid.setEnemy();
 		grid.rePopulateGrid(ply);
-		grid.setBriefcase();
-		grid.setPowerUps();
+//		grid.setBriefcase();
+//		grid.setPowerUps();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
@@ -202,9 +203,9 @@ public class Test_Main {
 		System.out.println("Checks if the object is free then prints out the object at each location");
 		Grid grid = new Grid();
 		Player ply = new Player();
-		grid.setBriefcase();
-		grid.setEnemy();
-		grid.setPowerUps();
+//		grid.setBriefcase();
+//		grid.setEnemy();
+//		grid.setPowerUps();
 		grid.rePopulateGrid(ply);
 		for(int i = 0; i < grid.gridSize(); ++i){
 			for(int j = 0; j < grid.gridSize(); ++j){
@@ -224,9 +225,9 @@ public class Test_Main {
 		System.out.println("|-----------------------------------------------------------");
 		Player ply = new Player();
 		Grid grid = new Grid();
-		grid.setBriefcase();
-		grid.setEnemy();
-		grid.setPowerUps();
+//		grid.setBriefcase();
+//		grid.setEnemy();
+//		grid.setPowerUps();
 		grid.rePopulateGrid(ply);
 		for(int i = 0; i < grid.gridSize(); ++i){
 			for(int j = 0; j < grid.gridSize(); ++j){
@@ -265,9 +266,9 @@ public class Test_Main {
 		System.out.println("Enemy Movement Test 1");
 		Player ply = new Player();
 		Grid grid = new Grid();
-		grid.setBriefcase();
-		grid.setEnemy();
-		grid.setPowerUps();
+//		grid.setBriefcase();
+//		grid.setEnemy();
+//		grid.setPowerUps();
 		grid.rePopulateGrid(ply);
 		grid.printGrid();
 		
@@ -285,5 +286,22 @@ public class Test_Main {
 		}
 	}
 
-	
+	private static void enemyMovement_Test2(int i) {
+		System.out.println("Enemy Movement Test 1");
+		Player ply = new Player();
+		Grid grid = new Grid();
+//		grid.setBriefcase();
+//		grid.setEnemy();
+//		grid.setPowerUps();
+		grid.rePopulateGrid(ply);
+		grid.printGrid();
+		
+		
+		while (i>=0) {
+			grid.moveEnemy(grid);
+			grid.rePopulateGrid(ply);
+			grid.printGrid();
+			i--;
+		}
+	}
 }
