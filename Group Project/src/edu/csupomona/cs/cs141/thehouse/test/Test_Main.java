@@ -28,8 +28,8 @@ public class Test_Main {
 //		playerMove_Test3();
 //		printGrid_Test7();
 //		playerMove_Test4();
-//		enemyMovement_Test1();
-		enemyMovement_Test2(100);
+		enemyMovement_Test1();
+//		enemyMovement_Test2(100);
 	}
 	
 	
@@ -279,8 +279,6 @@ public class Test_Main {
 			ply.movePlayer(input);
 			
 			grid.moveEnemy(grid);
-			boolean stack = grid.checkEnemiesStacked();
-			System.out.println("stacked: " + stack);
 			grid.rePopulateGrid(ply);
 			grid.printGrid();
 		}

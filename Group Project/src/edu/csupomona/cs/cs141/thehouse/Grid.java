@@ -155,7 +155,7 @@ public class Grid {
 				}
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	/**
@@ -223,8 +223,8 @@ public class Grid {
 			enemy[i].moveEnemy(grid);
 			
 			enemy[i].printEnemyPos(i);		// for testing purpose only
-			boolean free = checkIfLocationFree(enemy[i].getYPosition(), enemy[i].getXPosition());
-			System.out.println("free: " + free);
+			boolean stacked = checkEnemiesStacked();
+			System.out.println("Stacked: " + stacked);
 		}
 	}
 
