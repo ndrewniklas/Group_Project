@@ -39,6 +39,14 @@ public class Shield extends GameObject {
 		setObjectName(SHIELD);
 	}
 	
+	public Shield(boolean vis){
+		setRealName(SHIELD);
+		if(vis)
+			setObjectName(SHIELD);
+		else
+			setObjectName(getBlankName());		
+	}
+	
 	/**
 	 * {@link Player} This is the method that gives invincibility
 	 */

@@ -26,6 +26,12 @@ public class Grid {
 	
 	private Dice die;
 	
+	private Shield shield;
+	
+	private Radar radar;
+	
+	private ExtraAmmo extraAmmo;
+	
 	/**
 	 * Checks to see if we should print the name of the briefcase 
 	 */
@@ -42,6 +48,14 @@ public class Grid {
 	private int[] ammoPos = new int[2];
 	
 	private int numEnemies=0;
+
+	private boolean radarVis;
+
+	private boolean extraAmmoVis;
+
+	private boolean shieldVis;
+	
+	private boolean enemyVis;
 	
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
@@ -54,7 +68,9 @@ public class Grid {
 		room = new Room[9];
 		enemy = new Enemy[6];
 		die = new Dice();
-		showBriefcase = true;
+		shield = new Shield(shieldVis);
+		radar = new Radar(radarVis);
+		extraAmmo = new ExtraAmmo(extraAmmoVis);
 		for(int i = 0; i < gog.length; ++i){
 			for(int j = 0; j < gog[i].length; ++j){
 				//Old way, fill with new GameObject()
@@ -65,8 +81,49 @@ public class Grid {
 		setEnemy();
 		setPowerUps();
 		populateGrid();
+		//TODO CHANGE WHEN MOVE DEBUG MODE!!!!!!
+		debugMode(true);
 	}
 	
+	//TODO MOVE TO GAME ENGINE!!!!!!!!!
+	public void debugMode(boolean on){
+		if(on){
+			radarVis = true;
+			enemyVis = true;
+			showBriefcase = true;
+			shieldVis = true;
+			extraAmmoVis = true;	
+			changeObjectState(true);
+		}
+		else{
+			radarVis = false;
+			enemyVis = false;
+			showBriefcase = false;
+			shieldVis = false;
+			extraAmmoVis = false;
+			changeObjectState(false);
+		}
+		
+	}
+	
+	public void changeObjectState(boolean toggle) {
+		if(toggle){
+			shield.showName();
+			radar.showName();
+			extraAmmo.showName();
+			for(int i = 0; i < enemy.length; ++i){
+				enemy[i].showName();
+			}
+		}else{
+			shield.hideName();
+			radar.hideName();
+			extraAmmo.hideName();
+			for(int i = 0; i < enemy.length; ++i){
+				enemy[i].hideName();
+			}
+		}	
+	}
+
 	/**
 	 * Prints out the name of the object at that location
 	 */
@@ -119,10 +176,13 @@ public class Grid {
 	}
 
 	public void rePopulateGrid(){					//for testing only
-		for(int i = 0; i < enemy.length; ++i){
+		/*for(int i = 0; i < enemy.length; ++i){
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
 			gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
-		}	
+		}	*/
+		for(int i = 0; i < enemy.length; ++i){
+			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
+		}
 	}
 	
 	public void changeObjectIntoBlank(int posY, int posX){
@@ -209,7 +269,7 @@ public class Grid {
 		boolean showEnemy = true;
 
 		for(int i = 0; i < 6; ++i){
-			enemy[i] = new Enemy();
+			enemy[i] = new Enemy(enemyVis);
 		}
 		
 		for (int i = 0; i < 6;) {
@@ -277,7 +337,7 @@ public class Grid {
 			}
 		
 			if (checkIfLocationFree(spawnOne, spawnTwo)){
-				gog[spawnOne][spawnTwo] = new Radar();
+				gog[spawnOne][spawnTwo] = radar;
 				radarPos[0] = spawnOne;
 				radarPos[1] = spawnTwo;
 				++i;
@@ -299,7 +359,7 @@ public class Grid {
 			}
 		
 			if (checkIfLocationFree(spawnOne, spawnTwo)){
-				gog[spawnOne][spawnTwo] = new ExtraAmmo();
+				gog[spawnOne][spawnTwo] = extraAmmo;
 				ammoPos[0] = spawnOne;
 				ammoPos[1] = spawnTwo;
 				++i;
@@ -320,7 +380,7 @@ public class Grid {
 			}
 		
 			if (checkIfLocationFree(spawnOne, spawnTwo)){
-				gog[spawnOne][spawnTwo] = new Shield();
+				gog[spawnOne][spawnTwo] = shield;
 				shieldPos[0] = spawnOne;
 				shieldPos[1] = spawnTwo;
 				++i;

@@ -94,8 +94,7 @@ public class Player extends GameObject{
         	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
 				setXY(--xPosition, yPosition);
 			}
-        }
-        
+        }        
     }
 	
 	/**

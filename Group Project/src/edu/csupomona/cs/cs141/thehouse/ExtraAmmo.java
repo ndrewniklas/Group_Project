@@ -38,6 +38,13 @@ public class ExtraAmmo extends GameObject {
 		setObjectName(EXTRA_AMMO);
 		
 	}
+	public ExtraAmmo(boolean vis){
+		setRealName(EXTRA_AMMO);
+		if(vis)
+			setObjectName(EXTRA_AMMO);
+		else
+			setObjectName(getBlankName());
+	}
 	 
 	/**
 	 * This is the method that adds another bullet to the clip. 

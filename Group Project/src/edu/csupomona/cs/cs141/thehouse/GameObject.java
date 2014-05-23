@@ -14,6 +14,8 @@ public class GameObject {
 	 */
 	private String objName;
 	
+	private String realName;
+	
 	private final String EMPTY_OBJECT = "| |";
 	
 	int[] pos = new int[2];
@@ -25,12 +27,20 @@ public class GameObject {
 		objName = EMPTY_OBJECT;
 	}
 	
+	/**
+	 * ONLY CALLED FOR PLAYER!
+	 * @param name
+	 * @param x
+	 * @param y
+	 */
 	public GameObject(String name, int x, int y){
-		
 		objName = name;
-		
 		pos[0] = x;
 		pos[1] = y;
+	}
+	
+	public String getBlankName(){
+		return EMPTY_OBJECT;
 	}
 		
 	/**
@@ -40,6 +50,10 @@ public class GameObject {
 	 */
 	public void setObjectName(String name){
 		objName = name;
+	}
+	
+	public void setRealName(String name){
+		realName = name;
 	}
 	
 	/**
@@ -61,6 +75,14 @@ public class GameObject {
 	
 	public void printObject() {
 		System.out.print(objName);
+	}
+	
+	public void showName(){
+		setObjectName(realName);
+	}
+	
+	public void hideName(){
+		setObjectName(EMPTY_OBJECT);
 	}
 	
 	/**

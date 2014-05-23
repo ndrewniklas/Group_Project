@@ -15,8 +15,8 @@ public class Test_Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		printGrid_Test1();
-		printGrid_Test2();
+//		printGrid_Test1();
+//		printGrid_Test2();
 //		movementTest_Basic();
 //		playerMove_Test1();
 //		playerMoveControl();
@@ -28,8 +28,9 @@ public class Test_Main {
 //		playerMove_Test3();
 //		printGrid_Test7();
 //		playerMove_Test4();
-		enemyMovement_Test1();
+//		enemyMovement_Test1();
 //		enemyMovement_Test2(100);
+		toggleDebug_Test1();
 	}
 	
 	
@@ -300,6 +301,39 @@ public class Test_Main {
 			grid.rePopulateGrid(ply);
 			grid.printGrid();
 			i--;
+		}
+	}
+	
+	public static void toggleDebug_Test1(){
+		System.out.println("Enemy Movement Test 1");
+		Player ply = new Player();
+		Grid grid = new Grid();
+//		grid.setBriefcase();
+//		grid.setEnemy();
+//		grid.setPowerUps();
+		grid.rePopulateGrid();
+		grid.printGrid();
+		
+		
+		while (true) {
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Please Select 'on' or 'off' (all lowercase): ");
+			String input = sc.nextLine();
+			switch(input){
+				case "on":
+					grid.debugMode(true);
+					System.out.println("WECLOME TO DEBUG MODE");
+					break;
+				case "off":
+					grid.debugMode(false);
+					System.out.println("I guess you like being blind...");
+					break;
+				default:
+					System.out.println("BAD CMD");
+			}
+			grid.moveEnemy(grid);
+			grid.rePopulateGrid();
+			grid.printGrid();
 		}
 	}
 }

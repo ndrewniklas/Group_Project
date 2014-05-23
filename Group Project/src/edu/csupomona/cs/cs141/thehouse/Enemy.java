@@ -46,10 +46,11 @@ public class Enemy extends GameObject {
 	
 	//This method will show enemy dependent on boolean value taken
 	public Enemy(boolean showEnemy) {
+		setRealName(ENEMY_NAME);
 		if(showEnemy)
 			setObjectName(ENEMY_NAME);
 		else
-			setObjectName("| |");
+			setObjectName(getBlankName());
 	}
 	
 	/**
