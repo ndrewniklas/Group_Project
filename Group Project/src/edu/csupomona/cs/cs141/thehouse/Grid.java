@@ -141,6 +141,24 @@ public class Grid {
 			return false;
 	}
 	
+	/**
+	 * @param yPosition
+	 * @param i
+	 * @return
+	 */
+	public boolean checkForEnemy(int yPos, int xPos) {
+		if(gog[yPos][xPos] instanceof Enemy){
+//			if(gog[yPos][xPos] instanceof Player){
+			System.out.println("false");
+				return false;
+//			}
+		}
+		else{
+			System.out.println("true");
+		}
+		return true;
+	}
+	
 	public boolean checkEnemiesStacked(){
 		int x=0;
 		for(int i  = 0; i < enemy.length; ++i){
@@ -223,8 +241,8 @@ public class Grid {
 			enemy[i].moveEnemy(grid);
 			
 			enemy[i].printEnemyPos(i);		// for testing purpose only
-			boolean stacked = checkEnemiesStacked();
-			System.out.println("Stacked: " + stacked);
+//			boolean stacked = checkEnemiesStacked();
+//			System.out.println("Stacked: " + stacked);
 		}
 	}
 

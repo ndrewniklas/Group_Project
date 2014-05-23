@@ -37,6 +37,10 @@ public class Enemy extends GameObject {
 	private int ypre;
 	
 	private final String ENEMY_NAME = "|E|";
+
+	private int xCheck;
+
+	private int yCheck;
 	
 	
 	public Enemy(){
@@ -59,33 +63,39 @@ public class Enemy extends GameObject {
 			int ranNum = die.roll(4);		
 			xpre = xPosition;
 			ypre = yPosition;
+//			xCheck = xPosition+1;
+//			yCheck = yPosition+1;
 			if (ranNum == 0 && upPossible()) {
+				yCheck = yPosition-1;
 				if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
-//					if (grid.checkIfLocationFree(yPosition-1, xPosition)){
+					if (grid.checkForEnemy(yCheck, xPosition)){
 						setXY(xPosition, --yPosition);
 						cleanEnemies(grid);
-//					}
+					}
 				}
 			} else if (ranNum == 1 && downPossible()) {
+				yCheck = yPosition+1;
 				if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
-//					if (grid.checkIfLocationFree(yPosition+1, xPosition)){
+					if (grid.checkForEnemy(yCheck, xPosition)){
 						setXY(xPosition, ++yPosition);
 						cleanEnemies(grid);
-//					}
+					}
 				}
 			} else if (ranNum == 2 && rightPossible()) {
+				xCheck = xPosition+1;
 				if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
-//					if (grid.checkIfLocationFree(yPosition, xPosition+1)){
+					if (grid.checkForEnemy(yPosition, xCheck)){
 						setXY(++xPosition, yPosition);
 						cleanEnemies(grid);
-//					}
+					}
 				}
 			} else if (ranNum == 3 && leftPossible()) {
+				xCheck = xPosition-1;
 				if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
-//					if (grid.checkIfLocationFree(yPosition, xPosition-2)){
+					if (grid.checkForEnemy(yPosition, xCheck)){
 						setXY(--xPosition, yPosition);
 						cleanEnemies(grid);
-//					}
+					}
 				}
 			} else {
 				ranNum = die.roll(4);
