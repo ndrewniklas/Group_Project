@@ -27,21 +27,18 @@ package edu.csupomona.cs.cs141.thehouse;
 public class Enemy extends GameObject {
 
 	private boolean enemyDead;
-	
 	private Dice die = new Dice();
-	
+	private int initialX;
+	private int initialY;
 	private int xPosition;
 	private int yPosition;
-	
 	private int xpre;
 	private int ypre;
 	
 	private final String ENEMY_NAME = "|E|";
-
-	private int xCheck;
-
-	private int yCheck;
 	
+	
+	private int[] newPos = new int[2];
 	
 	public Enemy(){
 		setObjectName(ENEMY_NAME);
@@ -63,36 +60,30 @@ public class Enemy extends GameObject {
 			int ranNum = die.roll(4);		
 			xpre = xPosition;
 			ypre = yPosition;
-//			xCheck = xPosition+1;
-//			yCheck = yPosition+1;
 			if (ranNum == 0 && upPossible()) {
-				yCheck = yPosition-1;
 				if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
-					if (grid.checkForEnemy(yCheck, xPosition)){
+					if (grid.checkIfLocationFree(yPosition-1, xPosition)){
 						setXY(xPosition, --yPosition);
 						cleanEnemies(grid);
 					}
 				}
 			} else if (ranNum == 1 && downPossible()) {
-				yCheck = yPosition+1;
 				if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
-					if (grid.checkForEnemy(yCheck, xPosition)){
+					if (grid.checkIfLocationFree(yPosition+1, xPosition)){
 						setXY(xPosition, ++yPosition);
 						cleanEnemies(grid);
 					}
 				}
 			} else if (ranNum == 2 && rightPossible()) {
-				xCheck = xPosition+1;
 				if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
-					if (grid.checkForEnemy(yPosition, xCheck)){
+					if (grid.checkIfLocationFree(yPosition, xPosition+1)){
 						setXY(++xPosition, yPosition);
 						cleanEnemies(grid);
 					}
 				}
 			} else if (ranNum == 3 && leftPossible()) {
-				xCheck = xPosition-1;
 				if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
-					if (grid.checkForEnemy(yPosition, xCheck)){
+					if (grid.checkIfLocationFree(yPosition, xPosition-2)){
 						setXY(--xPosition, yPosition);
 						cleanEnemies(grid);
 					}
