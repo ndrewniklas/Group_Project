@@ -59,7 +59,6 @@ public class GameEngine {
 	 * Checks to see if the briefcase is found
 	 */
 	private boolean foundBriefcase;
-<<<<<<< HEAD
 	
 	/** 
 	 * Checks to see if the user quit 
@@ -95,8 +94,6 @@ public class GameEngine {
 	 * 
 	 */
 	private String menuSelection;
-
-	private UserInterface ui;
 
 	private String input;
 
@@ -212,24 +209,25 @@ public class GameEngine {
     		option = ui.getOption(); //gets menu choice from player
     		
     		switch (option) {
-			case "move":
-				cmd = ui.getInput();
-				plr.movePlayer(cmd);
-				break;
+				case "move":
+					cmd = ui.getInput();
+					plr.movePlayer(cmd);
+					break;
+					
+				case "look":
+					cmd = ui.getInput();
+					plr.lookCheck();
+					break;
 				
-			case "look":
-				cmd = ui.getInput();
-				plr.lookCheck();
-				break;
-			
-			case "":
-				
-				break;
-
-			default:
-				break;
-			}
-    		plr.movePlayer(input);    		
+				case "":
+					
+					break;
+	
+				default:
+					break;
+				}
+	    	plr.movePlayer(input);    		
+    		}
     	}
     }
     
@@ -244,7 +242,7 @@ public class GameEngine {
 			case "move":
 				ui.moveTurn();
 				moveChoice = in.next();
-				plr.movePlayer(moveChoice, ui);
+				plr.movePlayer(moveChoice);
 				break;
 			case "shoot":
 				break;

@@ -100,6 +100,7 @@ public class UserInterface {
 		System.out.println("Options");
 		System.out.println("Exit");
 		System.out.println("Please enter one of the commands:");
+	}
 
 	public void welcome() {
 		// TODO Auto-generated method stub
