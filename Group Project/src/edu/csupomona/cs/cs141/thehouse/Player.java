@@ -78,19 +78,19 @@ public class Player extends GameObject{
         String cmd = input.toLowerCase();
 		xpre = xPosition;
 		ypre = yPosition;
-        if (cmd.equals("up") && upPossible()) {
+        if (cmd.equals("up") || cmd.equals("u") || cmd.equals("1") && upPossible()) {
         	if (yPosition-1 >= 0 && yPosition-1 <= 8) {
 				setXY(xPosition, --yPosition);
 			}
-        } else if (cmd.equals("down") && downPossible()) {
+        } else if (cmd.equals("down") || cmd.equals("d") || cmd.equals("2")&& downPossible()) {
         	if (yPosition+1 >= 0 && yPosition+1 <= 8) {
 				setXY(xPosition, ++yPosition);
 			}
-        } else if (cmd.equals("right") && rightPossible()) {
+        } else if (cmd.equals("right") || cmd.equals("r") || cmd.equals("3") && rightPossible()) {
         	if (xPosition+1 >= 0 && xPosition+1 <= 8) {
 				setXY(++xPosition, yPosition);
 			}
-        } else if (cmd.equals("left") && leftPossible()) {
+        } else if (cmd.equals("left") || cmd.equals("l") || cmd.equals("4")&& leftPossible()) {
         	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
 				setXY(--xPosition, yPosition);
 			}

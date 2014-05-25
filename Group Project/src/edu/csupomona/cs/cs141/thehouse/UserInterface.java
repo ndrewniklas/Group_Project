@@ -40,12 +40,12 @@ public class UserInterface {
 		System.out.println("Welcome to the House Game!");
 		System.out.println();
 		System.out.println("What would you like to do?");
-		System.out.println("New");
-		System.out.println("Continue");
-		System.out.println("Rules");
-		System.out.println("Options");
-		System.out.println("Exit");
-		System.out.println("Please enter one of the commands:");
+		System.out.println("1)New");
+		System.out.println("2)Continue");
+		System.out.println("3)Rules");
+		System.out.println("4)Options");
+		System.out.println("0)Exit");
+		System.out.println("Please enter one of the commands or the corresponding number:");
 	}
 	
 	/**
@@ -71,14 +71,14 @@ public class UserInterface {
 		System.out.println("7. Save - use this to save the game, and return to it later by selecting"
 				                  + " 'continue' in the main menu.");
 		System.out.println("8. Exit - use this to quit the game, be aware that progress will not be saved.");
-		System.out.println("Type \"return\" to return to the main menu:");
+		System.out.println("Type \"return\" or 0 to return to the main menu:");
 	}
 	
 	public void options() {
 		System.out.println("You can change the options here:");
-		System.out.println("1. AI - ");
-		System.out.println("2. Debug Mode");
-		System.out.println("Type \"return\" to return to the main menu:");
+		System.out.println("1) AI - ");
+		System.out.println("2) Debug Mode");
+		System.out.println("Type \"return\" or 0 to return to the main menu:");
 	}
 	 
 	/**
@@ -92,11 +92,11 @@ public class UserInterface {
 
 	public void mainGameCMD() {
 		System.out.println("What would you like to do?");
-		System.out.println("Look");
-		System.out.println("Move");
-		System.out.println("Shoot");
-		System.out.println("Options");
-		System.out.println("Exit");
+		System.out.println("1)Look");
+		System.out.println("2)Move");
+		System.out.println("3)Shoot");
+		System.out.println("4)Options");
+		System.out.println("0)Exit");
 		System.out.println("Please enter one of the commands:");
 	}
 	
@@ -110,11 +110,11 @@ public class UserInterface {
 
 	public void moveTurn() {
 		System.out.println("Which direction will you move?");
-		System.out.println("Up");
-		System.out.println("Down");
-		System.out.println("Left");
-		System.out.println("Right");
-		System.out.println("Please enter one of the commands:");
+		System.out.println("1)Up");
+		System.out.println("2)Down");
+		System.out.println("3)Right");
+		System.out.println("4)Left");
+		System.out.println("Please enter one of the commands, command numbers, or the letter:");
 	}
 
 	public void invalidCMD() {

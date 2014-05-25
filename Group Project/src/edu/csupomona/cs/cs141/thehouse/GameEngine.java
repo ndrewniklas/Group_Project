@@ -187,6 +187,38 @@ public class GameEngine {
 					//TODO: We need a less... destructive way to deal with this
 					System.exit(0);
 					break;
+				case "n":
+					gameLoop();
+					break;
+				case "1":
+					gameLoop();
+					break;
+				case "c":
+					break;
+				case "2":
+					break;
+				case "r":
+					ui.rules();
+					returnToMain();
+					break;
+				case "3":
+					ui.rules();
+					returnToMain();
+					break;
+				case "o":
+					//TODO: fix this to match option case
+					returnToMain();
+					break;
+				case "4":
+					//TODO: fix this for it to match the option part
+					returnToMain();
+					break;
+				case "e":
+					System.exit(0);
+					break;
+				case "0":
+					System.exit(0);
+					break;					
 				default:
 					ui.invalidCMD();
 					repeat = true;
@@ -205,7 +237,13 @@ public class GameEngine {
 			menuSelection = menuSelection.toLowerCase();
 			switch (menuSelection) {
 			case "return":
-				ui.mainMenu();
+				//ui.mainMenu();
+				mainMenuSelect();
+				break;
+			case "r":
+				mainMenuSelect();
+				break;
+			case "0":
 				mainMenuSelect();
 				break;
 			default:
@@ -227,7 +265,23 @@ public class GameEngine {
 			case "look":
 				ui.printGrid(grid);
 				break;
+			case "l":
+				ui.printGrid(grid);
+				break;
+			case "1":
+				ui.printGrid(grid);
+				break;
 			case "move":
+				ui.printGrid(grid);
+				ui.moveTurn();
+				movePlayerForTurn();
+				break;
+			case "m":
+				ui.printGrid(grid);
+				ui.moveTurn();
+				movePlayerForTurn();
+				break;
+			case "2":
 				ui.printGrid(grid);
 				ui.moveTurn();
 				movePlayerForTurn();
@@ -235,10 +289,28 @@ public class GameEngine {
 			case "shoot":
 				ui.printGrid(grid);
 				break;
+			case "s":
+				ui.printGrid(grid);
+				break;
+			case "3":
+				ui.printGrid(grid);
+				break;
 			case "options":
 				ui.printGrid(grid);
 				break;
+			case "o":
+				ui.printGrid(grid);
+				break;
+			case "4":
+				ui.printGrid(grid);
+				break;				
 			case "exit":
+				System.exit(0);
+				break;
+			case "e":
+				System.exit(0);
+				break;
+			case "0":
 				System.exit(0);
 				break;
 			default:
@@ -259,11 +331,24 @@ public class GameEngine {
 	    	case "ai":
 	    		returnToMain();
 	    		break;
+	    	case "1":
+	    		returnToMain();
+	    		break;
 	    	case "debug":
 	    		setDebug();
 	    		returnToMain();
 	    		break;
+	    	case "2":
+	    		setDebug();
+	    		returnToMain();
+	    		break;
 	    	case "exit":
+	    		returnToMain();
+	    		break;
+	    	case "e":
+	    		returnToMain();
+	    		break;
+	    	case "0":
 	    		returnToMain();
 	    		break;
 	    	default:
@@ -278,7 +363,15 @@ public class GameEngine {
 				grid.debugMode(true);
 				System.out.println("WECLOME TO DEBUG MODE");
 				break;
+			case "1":
+				grid.debugMode(true);
+				System.out.println("WECLOME TO DEBUG MODE");
+				break;
 			case "off":
+				grid.debugMode(false);
+				System.out.println("I guess you like being blind...");
+				break;
+			case "2":
 				grid.debugMode(false);
 				System.out.println("I guess you like being blind...");
 				break;
