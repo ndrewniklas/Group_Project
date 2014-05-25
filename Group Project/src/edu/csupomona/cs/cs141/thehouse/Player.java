@@ -74,7 +74,7 @@ public class Player extends GameObject{
 //            System.out.print(" left");
 //        }
 //        System.out.print(" ? \n");
-        
+  
         String cmd = input.toLowerCase();
 		xpre = xPosition;
 		ypre = yPosition;

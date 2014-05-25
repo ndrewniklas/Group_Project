@@ -30,7 +30,8 @@ public class Test_Main {
 //		playerMove_Test4();
 //		enemyMovement_Test1();
 //		enemyMovement_Test2(100);
-		toggleDebug_Test1();
+//		toggleDebug_Test1();
+		ui_Test1();
 	}
 	
 	
@@ -335,5 +336,9 @@ public class Test_Main {
 			grid.rePopulateGrid();
 			grid.printGrid();
 		}
+	}
+	public static void ui_Test1(){
+		GameEngine ge = new GameEngine();
+		ge.startGame();		
 	}
 }

@@ -21,7 +21,7 @@ public class UserInterface {
 	 * save,
 	 * exit
 	 */
-	private String choice;
+	private String userChoice;
 
 	private String input;
 	
@@ -31,9 +31,6 @@ public class UserInterface {
 	 * Then it will check after each round whether or not the game has ended and print out the appropriate
 	 * results.
 	 */
-	public UserInterface() {
-		mainMenu();
-	}
 	
 	/**
 	 * This method will print the main menu of the game to the user and give options such as, "continue"
@@ -80,7 +77,8 @@ public class UserInterface {
 	public void options() {
 		System.out.println("You can change the options here:");
 		System.out.println("1. AI - ");
-		System.out.println("2. ");
+		System.out.println("2. Debug Mode");
+		System.out.println("Type \"return\" to return to the main menu:");
 	}
 	 
 	/**
@@ -92,7 +90,7 @@ public class UserInterface {
 		grid.printGrid();
 	}
 
-	public void topTurn() {
+	public void mainGameCMD() {
 		System.out.println("What would you like to do?");
 		System.out.println("Look");
 		System.out.println("Move");
@@ -101,10 +99,13 @@ public class UserInterface {
 		System.out.println("Exit");
 		System.out.println("Please enter one of the commands:");
 	}
-
-	public void welcome() {
-		// TODO Auto-generated method stub
-		
+	
+	public void setChoice(String choice){
+		userChoice = choice;
+	}
+	
+	public String getChoice(){
+		return userChoice;
 	}
 
 	public void moveTurn() {
@@ -116,25 +117,10 @@ public class UserInterface {
 		System.out.println("Please enter one of the commands:");
 	}
 
-	public void invalid() {
-		System.out.println("Invalid Command: Try Again");
-		
-	}
-	/**
-	 * 
-	 */
-	public void turnMenu() {
-		// TODO Auto-generated method stub
-		
+	public void invalidCMD() {
+		System.out.println("Invalid Command: Please try again");
 	}
 
-	/**
-	 * @return
-	 */
-	public String getOption() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/**
 	 * 

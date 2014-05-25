@@ -101,6 +101,8 @@ public class GameEngine {
 
 	private String cmd;
 	
+	private boolean didPlayerMove;
+	
 	/**
 	 * This field will repeat a do while loop if {@code true} in either {@link #mainMenuSelect()}
 	 * or {@link #returnToMain()}.
@@ -118,10 +120,33 @@ public class GameEngine {
     	foundBriefcase=false;
     	plr = new Player();
     	ui = new UserInterface();
-    	mainMenuSelect();
     	grid = new Grid();
     	ui = new UserInterface();
-    	
+    }
+    
+	/**
+	 * 
+	 */
+	public void startGame() {
+		mainMenuSelect();
+	}
+    
+    /**
+     * The main loop of the game, this is where all the checks and actions go.
+     * The loop is finished once {@link #gameOver} is set to be true either from
+     * finding the briefcase, the player dying, or the user quitting.
+     */
+    public void gameLoop(){
+    	while(!gameOver){
+    		grid.rePopulateGrid(plr);
+    		ui.printGrid(grid);
+    		didPlayerMove = false;
+    		while(!didPlayerMove){
+    			ui.mainGameCMD(); //print options available during each turn
+    			turnSelect();
+    		}
+			grid.moveEnemy(grid);
+    	} 	
     }
     
     //For use with navigating the main menu
@@ -138,31 +163,35 @@ public class GameEngine {
      */
     private void mainMenuSelect() {
 		do {
+			ui.mainMenu();
     		menuSelection = in.next();
     		menuSelection = menuSelection.toLowerCase();
     		repeat = false;
     		switch(menuSelection) {
-			case "new": 
-				gameLoop();
-				break;
-			case "continue":
-				break;
-			case "rules":
-				ui.rules();
-				returnToMain();
-				break;
-			case "options":
-				ui.options();
-				returnToMain();
-				break;
-			case "exit":
-				System.exit(0);
-				break;
-			default:
-				ui.invalid();
-				repeat = true;
-				break;
-			}
+				case "new": 
+					gameLoop();
+					break;
+				case "continue":
+					break;
+				case "rules":
+					ui.rules();
+					returnToMain();
+					break;
+				case "options":
+					ui.options();
+					String pickOption = in.nextLine().toLowerCase();
+					setOption(pickOption);
+					returnToMain();
+					break;
+				case "exit":
+					//TODO: We need a less... destructive way to deal with this
+					System.exit(0);
+					break;
+				default:
+					ui.invalidCMD();
+					repeat = true;
+					break;
+				}
 		} while(repeat == true);
 	}
 
@@ -180,7 +209,7 @@ public class GameEngine {
 				mainMenuSelect();
 				break;
 			default:
-				ui.invalid();
+				ui.invalidCMD();
 				repeat = true;
 				break;
 			}
@@ -188,85 +217,75 @@ public class GameEngine {
 	}
 
 	// Main game methods
-    /**
-     * The main loop of the game, this is where all the checks and actions go.
-     * The loop is finished once {@link #gameOver} is set to be true either from
-     * finding the briefcase, the player dying, or the user quitting.
-     */
-    public void gameLoop(){
-    	grid.setBriefcase();
-    	grid.setEnemy();
-    	grid.rePopulateGrid(plr);
-    	ui.printGrid(grid);
-    	while(true) {
-    		ui.topTurn();
-    		topTurnSelect();
-    		grid.rePopulateGrid(plr);
-    		ui.printGrid(grid);
-    	while(!gameOver){
-    		grid.printGrid();
-    		ui.turnMenu(); //print options available during each turn
-    		option = ui.getOption(); //gets menu choice from player
-    		
-    		switch (option) {
-				case "move":
-					cmd = ui.getInput();
-					plr.movePlayer(cmd);
-					break;
-					
-				case "look":
-					cmd = ui.getInput();
-					plr.lookCheck();
-					break;
-				
-				case "":
-					
-					break;
-	
-				default:
-					break;
-				}
-	    	plr.movePlayer(input);    		
-    		}
-    	}
-    }
     
-    private void topTurnSelect() {
+    private void turnSelect() {
 		do{
 			userChoice = in.next();
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
 			case "look":
+				ui.printGrid(grid);
 				break;
 			case "move":
+				ui.printGrid(grid);
 				ui.moveTurn();
-				moveChoice = in.next();
-				plr.movePlayer(moveChoice);
+				movePlayerForTurn();
 				break;
 			case "shoot":
+				ui.printGrid(grid);
 				break;
 			case "options":
+				ui.printGrid(grid);
 				break;
 			case "exit":
 				System.exit(0);
 				break;
 			default:
-				ui.invalid();
+				ui.invalidCMD();
 				repeat = true;
 				break;
 			}
 		} while(repeat == true);
 	}
 
-	/**
-     * The method that will retrieve the position of each room from {@link Grid} and save 
-     * them to the corresponding local 2d String array.
-     */
-    public void setRoomPositions(){
-    	
+    private void movePlayerForTurn(){
+		String input = in.next();
+		plr.movePlayer(input);
+    	didPlayerMove = true;
     }
-    
+    private void setOption(String setOption){
+    	switch(setOption){
+	    	case "ai":
+	    		returnToMain();
+	    		break;
+	    	case "debug":
+	    		setDebug();
+	    		returnToMain();
+	    		break;
+	    	case "exit":
+	    		returnToMain();
+	    		break;
+	    	default:
+	    		ui.invalidCMD();
+    	}
+    }
+    private void setDebug(){
+		System.out.print("Please Select 'on' or 'off' (all lowercase): ");
+		String input = in.nextLine().toLowerCase();
+		switch(input){
+			case "on":
+				grid.debugMode(true);
+				System.out.println("WECLOME TO DEBUG MODE");
+				break;
+			case "off":
+				grid.debugMode(false);
+				System.out.println("I guess you like being blind...");
+				break;
+			default:
+				ui.invalidCMD();
+		}    	
+    }
     // Methods to check/send fields to other classes    
     /**
      * Used to set {@link #lookDirection} and {@link #userChoice}.
@@ -295,11 +314,5 @@ public class GameEngine {
     	return foundBriefcase;
     }
 
-	/**
-	 * 
-	 */
-	public void startGame() {
-		ui.welcome();
-		gameLoop();
-	}
+
 }
