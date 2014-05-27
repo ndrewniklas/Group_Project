@@ -109,6 +109,10 @@ public class GameEngine {
 	 */
 	private boolean repeat;
 
+	private String pickOption = null;
+
+	private String debugSelect;
+
 	/**
      * The default constructor for GameEngine.
      * 
@@ -178,9 +182,7 @@ public class GameEngine {
 					returnToMain();
 					break;
 				case "options":
-					ui.options();
-					String pickOption = in.nextLine().toLowerCase();
-					setOption(pickOption);
+					setOption();
 					returnToMain();
 					break;
 				case "exit":
@@ -207,10 +209,12 @@ public class GameEngine {
 					break;
 				case "o":
 					//TODO: fix this to match option case
+					setOption();
 					returnToMain();
 					break;
 				case "4":
 					//TODO: fix this for it to match the option part
+					setOption();
 					returnToMain();
 					break;
 				case "e":
@@ -351,54 +355,71 @@ public class GameEngine {
     public void stopPlayerLook(String dir){
     	plr.stopLooking(grid, dir);
     }
-    private void setOption(String setOption){
-    	switch(setOption){
-	    	case "ai":
-	    		returnToMain();
-	    		break;
-	    	case "1":
-	    		returnToMain();
-	    		break;
-	    	case "debug":
-	    		setDebug();
-	    		returnToMain();
-	    		break;
-	    	case "2":
-	    		setDebug();
-	    		returnToMain();
-	    		break;
-	    	case "exit":
-	    		returnToMain();
-	    		break;
-	    	case "e":
-	    		returnToMain();
-	    		break;
-	    	case "0":
-	    		returnToMain();
-	    		break;
-	    	default:
-	    		ui.invalidCMD();
-    	}
+    private void setOption(){
+    	ui.options();
+    	do {
+    		pickOption = in.next();
+        	pickOption = pickOption.toLowerCase();
+        	switch(pickOption){
+    	    	case "ai":
+    	    		returnToMain();
+    	    		break;
+    	    	case "a":
+    	    		returnToMain();
+    	    	case "1":
+    	    		returnToMain();
+    	    		break;
+    	    	case "debug":
+    	    		setDebug();
+    	    		returnToMain();
+    	    		break;
+    	    	case "d":
+    	    		setDebug();
+    	    		returnToMain();
+    	    	case "2":
+    	    		setDebug();
+    	    		returnToMain();
+    	    		break;
+    	    	case "exit":
+    	    		returnToMain();
+    	    		break;
+    	    	case "e":
+    	    		returnToMain();
+    	    		break;
+    	    	case "0":
+    	    		returnToMain();
+    	    		break;
+    	    	default:
+    	    		ui.invalidCMD();
+        	}
+    	} while(repeat == false);
+    	
     }
     private void setDebug(){
-		System.out.print("Please Select 'on' or 'off' (all lowercase): ");
-		String input = in.nextLine().toLowerCase();
-		switch(input){
+		System.out.println("Please Select 'on' or 'off' (all lowercase): ");
+		debugSelect = in.next();
+		debugSelect = debugSelect.toLowerCase();
+		
+		switch(debugSelect){
 			case "on":
 				grid.debugMode(true);
 				System.out.println("WECLOME TO DEBUG MODE");
+				setOption();
 				break;
 			case "1":
 				grid.debugMode(true);
 				System.out.println("WECLOME TO DEBUG MODE");
+				setOption();
 				break;
 			case "off":
 				grid.debugMode(false);
 				System.out.println("I guess you like being blind...");
+				setOption();
 				break;
 			case "2":
 				grid.debugMode(false);
 				System.out.println("I guess you like being blind...");
+				setOption();
 				break;
 			default:
 				ui.invalidCMD();
