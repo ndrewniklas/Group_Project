@@ -77,12 +77,11 @@ public class Grid {
 				gog[i][j] = gameObj;
 			}
 		}
-		setBriefcase();
 		setEnemy();
 		setPowerUps();
 		populateGrid();
-		//TODO CHANGE WHEN MOVE DEBUG MODE!!!!!!
 		debugMode(false);
+		setBriefcase();
 	}
 	
 	//TODO MOVE TO GAME ENGINE!!!!!!!!!
@@ -93,6 +92,7 @@ public class Grid {
 			showBriefcase = true;
 			shieldVis = true;
 			extraAmmoVis = true;	
+			showBriefcase = true;
 			changeAllObjectStates(true);
 		}
 		else{
@@ -101,6 +101,7 @@ public class Grid {
 			showBriefcase = false;
 			shieldVis = false;
 			extraAmmoVis = false;
+			showBriefcase = false;
 			changeAllObjectStates(false);
 		}
 		
@@ -161,7 +162,7 @@ public class Grid {
 	 */
 	public void populateGrid(){
 		for(int i = 0; i < 9; ++i){
-			room[i] = new Room();
+			room[i] = new Room(false, false);
 		}
 		gog[1][1] = room[0];
 		gog[4][1] = room[1];
@@ -269,7 +270,7 @@ public class Grid {
 		while(secondRandom != 1 && secondRandom != 4 && secondRandom != 7){
 			secondRandom = die.roll();
 		}
-		gog[firstRandom][secondRandom] = new Room(showBriefcase);
+		gog[firstRandom][secondRandom] = new Room(true, showBriefcase);
 		briefcasePos[0] = firstRandom;
 		briefcasePos[1] = secondRandom;
 	}
