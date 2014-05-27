@@ -1,0 +1,3 @@
+Enemies move off grid, array out of bounds - Found by Ben on 5/26
+Enemies stack
+Options don't work
