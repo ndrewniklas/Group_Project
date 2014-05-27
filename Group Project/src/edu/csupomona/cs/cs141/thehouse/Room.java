@@ -8,11 +8,15 @@ package edu.csupomona.cs.cs141.thehouse;
  *
  */
 public class Room extends GameObject {
+	private final String ROOM_NAME = "[R]";
+	private final String BRIEFCASE_NAME = "[B]";
 	/**
 	 * Sets the name of the room
 	 */
 	public Room(){
-		setObjectName("[R]");
+		setObjectName(ROOM_NAME);
+		setHiddenName(ROOM_NAME);
+		setRealName(ROOM_NAME);
 	}
 	
 	/**
@@ -21,9 +25,15 @@ public class Room extends GameObject {
 	 * 			-A boolean that determines the name of the Room with the briefcase
 	 */
 	public Room(boolean showBriefcase){
-		if(showBriefcase)
-			setObjectName("[B]");
-		else
-			setObjectName("[R]");
+		if(showBriefcase){
+			setObjectName(BRIEFCASE_NAME);
+			setRealName(BRIEFCASE_NAME);
+			setHiddenName(ROOM_NAME);
+		}
+		else{
+			setRealName(ROOM_NAME);
+			setObjectName(ROOM_NAME);
+			setHiddenName(ROOM_NAME);
+		}
 	}
 }

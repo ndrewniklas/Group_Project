@@ -37,6 +37,7 @@ public class Shield extends GameObject {
 	public Shield() {
 		// Invincibility, just felt like making it shield so it is quicker to type
 		setObjectName(SHIELD);
+		setHiddenName(getBlankName());
 	}
 	
 	public Shield(boolean vis){
@@ -44,7 +45,7 @@ public class Shield extends GameObject {
 		if(vis)
 			setObjectName(SHIELD);
 		else
-			setObjectName(getBlankName());		
+			setHiddenName(getBlankName());		
 	}
 	
 	/**

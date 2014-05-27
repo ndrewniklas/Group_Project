@@ -36,14 +36,14 @@ public class ExtraAmmo extends GameObject {
 	public ExtraAmmo() {
 		// TODO Auto-generated constructor stub
 		setObjectName(EXTRA_AMMO);
-		
+		setHiddenName(getBlankName());		
 	}
 	public ExtraAmmo(boolean vis){
 		setRealName(EXTRA_AMMO);
 		if(vis)
 			setObjectName(EXTRA_AMMO);
 		else
-			setObjectName(getBlankName());
+			setHiddenName(getBlankName());
 	}
 	 
 	/**

@@ -32,6 +32,7 @@ public class Radar extends GameObject {
 	 */
 	public Radar() {
 		setObjectName(RADAR);
+		setHiddenName(getBlankName());
 	}
 	
 	public Radar(boolean vis){
@@ -39,7 +40,7 @@ public class Radar extends GameObject {
 		if(vis)
 			setObjectName(RADAR);
 		else
-			setObjectName(getBlankName());
+			setHiddenName(getBlankName());
 	}
 	
 	/**

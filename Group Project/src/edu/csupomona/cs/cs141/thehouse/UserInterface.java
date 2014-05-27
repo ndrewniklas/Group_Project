@@ -114,7 +114,17 @@ public class UserInterface {
 		System.out.println("2)Down");
 		System.out.println("3)Right");
 		System.out.println("4)Left");
-		System.out.println("Please enter one of the commands, command numbers, or the letter:");
+		System.out.println("Please enter one of the commands, command numbers, or the letter: ");
+	}
+	
+	public void lookDirections(){
+		System.out.println("Which direction will you look?");
+		System.out.println("1)Up");
+		System.out.println("2)Down");
+		System.out.println("3)Right");
+		System.out.println("4)Left");
+		//TODO: make it so it accepts multiple values
+		System.out.println("Please enter one of the full command: ");
 	}
 
 	public void invalidCMD() {

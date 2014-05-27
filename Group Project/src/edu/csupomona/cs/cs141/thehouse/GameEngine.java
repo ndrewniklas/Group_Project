@@ -258,18 +258,37 @@ public class GameEngine {
     
     private void turnSelect() {
 		do{
+			String dir;
 			userChoice = in.next();
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
 			case "look":
 				ui.printGrid(grid);
+				ui.lookDirections();
+				in.reset();
+				dir = in.next();
+				playerLook(dir);
+				ui.printGrid(grid);
+				stopPlayerLook(dir);
 				break;
 			case "l":
 				ui.printGrid(grid);
+				ui.lookDirections();
+				in.reset();
+				dir = in.next();
+				playerLook(dir);
+				ui.printGrid(grid);
+				stopPlayerLook(dir);
 				break;
 			case "1":
 				ui.printGrid(grid);
+				ui.lookDirections();
+				in.reset();
+				dir = in.next();
+				playerLook(dir);
+				ui.printGrid(grid);
+				stopPlayerLook(dir);
 				break;
 			case "move":
 				ui.printGrid(grid);
@@ -321,10 +340,16 @@ public class GameEngine {
 		} while(repeat == true);
 	}
 
-    private void movePlayerForTurn(){
+    public void movePlayerForTurn(){
 		String input = in.next();
 		plr.movePlayer(input);
     	didPlayerMove = true;
+    }
+    public void playerLook(String dir){
+    	plr.playerLook(grid, dir);
+    }
+    public void stopPlayerLook(String dir){
+    	plr.stopLooking(grid, dir);
     }
     private void setOption(String setOption){
     	switch(setOption){
