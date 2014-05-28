@@ -150,7 +150,7 @@ public class GameEngine {
     		ui.printGrid(grid);
     		didPlayerTakeTurn = false;
     		while(!didPlayerTakeTurn){
-    			ui.mainGameCMD(); //print options available during each turn
+    			ui.mainGameCMD(); 		//print options available during each turn
     			System.out.println("Ammo Left: " + plr.ammoAmount());
     			turnSelect();
         		if(plr.getHasBriefCase())
@@ -281,7 +281,8 @@ public class GameEngine {
 					System.out.println("show, hide, check, on, off");
 					String cmd = in.next();
 					devMenu(cmd);
-					break;	
+					break;
+					
 				case "look":
 				case "l":
 				case "1":
