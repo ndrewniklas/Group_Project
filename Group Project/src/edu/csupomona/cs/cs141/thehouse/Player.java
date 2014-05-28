@@ -313,8 +313,8 @@ public class Player extends GameObject{
 	 * {@link #useBullet(boolean)} can be executed or not
 	 */
 	public boolean checkBulletPossession() {
-		if(ammo > 1)
-			return hasBullet;
+		if(ammo > 0)
+			return true;
 		else
 			return false;
 	}
@@ -323,10 +323,18 @@ public class Player extends GameObject{
 	 * {@link #pickUpBullet(boolean)} This method will allow the user to pick up a bullet based on the 
 	 * @param hasBullet
 	 */
-	public void pickUpBullet() {
+	public void pickUpBullet(boolean hasBullet) {
 		++ammo;
 	}
-		
+	
+	/**
+	 * {@link #useBullet(boolean)} This method will will make the player use the bullet in his possession
+	 * if the @param hasBullet is true
+	 */
+	public void useBullet() {
+		--ammo;
+	}
+	
 	/**
 	 * {@link #checkBulletHit()} This method will check if the bullet hit the enemy ninja
 	 */
