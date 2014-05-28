@@ -146,20 +146,19 @@ public class GameEngine {
      */
     public void gameLoop(){
     	while(!gameOver){
-    		if(plr.getHasBriefCase())
-    			gameOver = true;
     		grid.rePopulateGrid(plr);
     		ui.printGrid(grid);
     		didPlayerMove = false;
     		while(!didPlayerMove){
+        		if(plr.getHasBriefCase())
+        			gameOver = true;
     			ui.mainGameCMD(); //print options available during each turn
     			turnSelect();
     		}
     		objectCheck();
 			grid.moveEnemy(grid);
     	}
-    	
-
+    	ui.endScreen();
     }
     
     private void objectCheck() {
