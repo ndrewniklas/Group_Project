@@ -18,7 +18,9 @@ public class GameObject {
 	
 	private String hiddenName;
 	
-	private final String EMPTY_OBJECT = "| |";
+	private final String EMPTY_OBJECT = "|X|";
+	
+	private final String EMPTY_OBJECT_REAL = "| |";
 	
 	
 	int[] pos = new int[2];
@@ -28,7 +30,7 @@ public class GameObject {
 	 */
 	public GameObject() {
 		objName = EMPTY_OBJECT;
-		realName = EMPTY_OBJECT;
+		realName = EMPTY_OBJECT_REAL;
 		hiddenName = EMPTY_OBJECT;
 	}
 	

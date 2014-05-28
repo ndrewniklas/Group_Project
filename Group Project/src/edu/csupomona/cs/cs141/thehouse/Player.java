@@ -44,8 +44,6 @@ public class Player extends GameObject{
 
 	private int[] firstLookPos = new int[2];
 	private int[] secondLookPos = new int[2];
-	private int[] thirdLookPos = new int[2];
-	private int[] fourthLookPos = new int[2];
 	
 	public Player(){
 		super("[P]",0,8);
@@ -144,19 +142,19 @@ public class Player extends GameObject{
 		switch(direction){
 		case "up":
 			lookUp();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, thirdLookPos, fourthLookPos, true);
+			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, true);
 			break;
 		case "down":
 			lookDown();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, thirdLookPos, fourthLookPos, true);
+			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, true);
 			break;
 		case "right":
 			lookRight();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, thirdLookPos, fourthLookPos, true);
+			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, true);
 			break;
 		case "left":
 			lookLeft();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, thirdLookPos, fourthLookPos, true);
+			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, true);
 			break;
 		default:
 			System.out.println("Something went wrong");
@@ -167,19 +165,19 @@ public class Player extends GameObject{
 		switch(direction){
 		case "up":
 			lookUp();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, thirdLookPos, fourthLookPos, false);
+			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, false);
 			break;
 		case "down":
 			lookDown();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, thirdLookPos, fourthLookPos, false);
+			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, false);
 			break;
 		case "right":
 			lookRight();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, thirdLookPos, fourthLookPos, false);
+			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, false);
 			break;
 		case "left":
 			lookLeft();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, thirdLookPos, fourthLookPos, false);
+			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, false);
 			break;
 		default:
 			System.out.println("Something went wrong");
@@ -188,91 +186,52 @@ public class Player extends GameObject{
 	
 	public void lookUp(){
 		//Up one
-		if(yPosition-1 >= 0 && yPosition-1 <= 7 ){
+		if(yPosition-1 >= 0 && yPosition-1 <= 8 ){
 			firstLookPos[0] = yPosition - 1;	
 			firstLookPos[1] = xPosition;
 		}
-		//Up two, left one
-		if(yPosition - 2 >= 0 && yPosition - 2 <= 7 && xPosition - 1 >= 0 && xPosition - 1 <= 7){
-			secondLookPos[0] = yPosition - 2;
-			secondLookPos[1] = xPosition - 1;
-		}
 		//Up two
-		if(yPosition - 2 >= 0 && yPosition - 2 <= 7 && xPosition >= 0 && xPosition <= 7){
-			thirdLookPos[0] = yPosition - 2;
-			thirdLookPos[1] = xPosition;
+		if(yPosition - 2 >= 0 && yPosition - 2 <= 8 && xPosition >= 0 && xPosition <= 8){
+			secondLookPos[0] = yPosition - 2;
+			secondLookPos[1] = xPosition;
 		}
-		//Up two, right one
-		if(yPosition - 2 >= 0 && yPosition - 2 <= 7 && xPosition + 1 >= 0 && xPosition + 1 <= 7){
-			fourthLookPos[0] = yPosition - 2;
-			fourthLookPos[1] = xPosition + 1;
-		}		
 	}
 	public void lookDown(){
 		//Down one
-		if(yPosition+1 >= 0 && yPosition+1 <= 7){
+		if(yPosition+1 >= 0 && yPosition+1 <= 8){
 			firstLookPos[0] = yPosition + 1;	
 			firstLookPos[1] = xPosition;
 		}
-		//Down two, left one
-		if(yPosition + 2 >= 0 && yPosition + 2 <= 7 && xPosition - 1 >= 0 && xPosition - 1 <= 7){
-			secondLookPos[0] = yPosition + 2;
-			secondLookPos[1] = xPosition - 1;
-		}
 		//Down two
-		if(yPosition + 2 >= 0 && yPosition + 2 <= 7 && xPosition >= 0 && xPosition <= 7){
-			thirdLookPos[0] = yPosition + 2;
-			thirdLookPos[1] = xPosition;
+		if(yPosition + 2 >= 0 && yPosition + 2 <= 8 && xPosition >= 0 && xPosition <= 8){
+			secondLookPos[0] = yPosition + 2;
+			secondLookPos[1] = xPosition;
 		}
-		//Down two, right one
-		if(yPosition + 2 >= 0 && yPosition + 2 <= 7 && xPosition + 1 >= 0 && xPosition + 1 <= 7){
-			fourthLookPos[0] = yPosition + 2;
-			fourthLookPos[1] = xPosition + 1;
-		}		
+	
 	}
 	public void lookRight(){
 		//Right one
-		if(xPosition + 1 >= 0 && xPosition + 1 <= 7){
+		if(xPosition + 1 >= 0 && xPosition + 1 <= 8){
 			firstLookPos[0] = yPosition;	
 			firstLookPos[1] = xPosition + 1;
 		}
-		//right two, up one
-		if(xPosition + 2 >= 0 && xPosition + 2 <= 7 && yPosition - 1 >= 0 && yPosition - 1 <= 7){
-			secondLookPos[0] = yPosition - 1;
+		//right two
+		if(xPosition + 2 >= 0 && xPosition + 2 <= 8 && yPosition >= 0 && yPosition <= 8){
+			secondLookPos[0] = yPosition;
 			secondLookPos[1] = xPosition + 2;
 		}
-		//right two
-		if(xPosition + 2 >= 0 && xPosition + 2 <= 7 && yPosition >= 0 && yPosition <= 7){
-			thirdLookPos[0] = yPosition;
-			thirdLookPos[1] = xPosition + 2;
-		}
-		//Right two, down one
-		if(xPosition + 2 >= 0 && xPosition + 2 <= 7 && yPosition + 1 >= 0 && yPosition + 1 <= 7){
-			fourthLookPos[0] = yPosition + 1;
-			fourthLookPos[1] = xPosition + 2;
-		}		
 	}
 	public void lookLeft(){
 		//Left one
-		if(xPosition - 1 >= 0 && xPosition - 1 <= 7){
+		if(xPosition - 1 >= 0 && xPosition - 1 <= 8){
 			firstLookPos[0] = yPosition;	
 			firstLookPos[1] = xPosition - 1;
 		}
-		//left two, up one
-		if(xPosition - 2 >= 0 && xPosition - 2 <= 7 && yPosition - 1 >= 0 && yPosition - 1 <= 7){
-			secondLookPos[0] = yPosition - 1;
-			secondLookPos[1] = xPosition - 2;
-		}
 		//left two
-		if(xPosition - 2 >= 0 && xPosition - 2 <= 7 && yPosition >= 0 && yPosition <= 7){
-			thirdLookPos[0] = yPosition;
-			thirdLookPos[1] = xPosition - 2;
-		}
-		//Right two, down one
-		if(xPosition - 2 >= 0 && xPosition - 2 <= 7 && yPosition + 1 >= 0 && yPosition + 1 <= 7){
-			fourthLookPos[0] = yPosition + 1;
-			fourthLookPos[1] = xPosition - 2;
-		}		
+		if(xPosition - 2 >= 0 && xPosition - 2 <= 8 && yPosition >= 0 && yPosition <= 8){
+			secondLookPos[0] = yPosition;
+			secondLookPos[1] = xPosition - 2;
+		}	
 	}
 	
 	

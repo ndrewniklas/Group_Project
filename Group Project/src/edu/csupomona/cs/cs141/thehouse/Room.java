@@ -41,10 +41,12 @@ public class Room extends GameObject {
 	}
 	public void changeRoomState(boolean change){
 		if(briefcaseRoom && change){
-			setObjectName(BRIEFCASE_NAME);
+			setHiddenName(ROOM_NAME);
+			setObjectName(ROOM_NAME);
 			setRealName(BRIEFCASE_NAME);
 		}else{
-			setObjectName(ROOM_NAME);
+			setHiddenName(ROOM_NAME);
+			setObjectName(BRIEFCASE_NAME);
 			setRealName(BRIEFCASE_NAME);
 		}
 	}
