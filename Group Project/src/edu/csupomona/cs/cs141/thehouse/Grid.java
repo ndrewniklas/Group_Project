@@ -129,17 +129,13 @@ public class Grid {
 		}	
 	}
 	
-	public void showObjectsWithinLocation(int[] location1, int[] location2, int[] location3, int[] location4, boolean toggle){
+	public void showObjectsWithinLocation(int[] location1, int[] location2, boolean toggle){
 		if(toggle){
 			gog[location1[0]][location1[1]].showName();
 			gog[location2[0]][location2[1]].showName();
-			gog[location3[0]][location3[1]].showName();
-			gog[location4[0]][location4[1]].showName();
 		}else{
 			gog[location1[0]][location1[1]].hideName();
 			gog[location2[0]][location2[1]].hideName();
-			gog[location3[0]][location3[1]].hideName();
-			gog[location4[0]][location4[1]].hideName();
 		}
 	}
 	
