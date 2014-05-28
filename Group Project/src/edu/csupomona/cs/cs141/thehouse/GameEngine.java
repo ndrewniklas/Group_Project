@@ -184,57 +184,38 @@ public class GameEngine {
     		menuSelection = menuSelection.toLowerCase();
     		repeat = false;
     		switch(menuSelection) {
-				case "new": 
-					gameLoop();
-					break;
-				case "continue":
-					break;
-				case "rules":
-					ui.rules();
-					returnToMain();
-					break;
-				case "options":
-					setOption();
-					returnToMain();
-					break;
-				case "exit":
-					//TODO: We need a less... destructive way to deal with this
-					System.exit(0);
-					break;
+				case "new":
 				case "n":
-					gameLoop();
-					break;
 				case "1":
 					gameLoop();
 					break;
+					
+				case "continue":
 				case "c":
-					break;
 				case "2":
 					break;
+					
+				case "rules":
 				case "r":
-					ui.rules();
-					returnToMain();
-					break;
 				case "3":
 					ui.rules();
 					returnToMain();
 					break;
+					
+				case "options":
 				case "o":
-					//TODO: fix this to match option case
-					setOption();
-					returnToMain();
-					break;
 				case "4":
-					//TODO: fix this for it to match the option part
 					setOption();
 					returnToMain();
 					break;
+					
+				case "exit":
 				case "e":
+				case "0":
+					//TODO: We need a less... destructive way to deal with this
 					System.exit(0);
 					break;
-				case "0":
-					System.exit(0);
-					break;					
+				
 				default:
 					ui.invalidCMD();
 					repeat = true;
