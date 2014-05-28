@@ -260,6 +260,14 @@ public class GameEngine {
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
+			case "show":
+				grid.changeAllObjectStates(true);
+				ui.printGrid(grid);
+				break;
+			case "hide":
+				grid.changeAllObjectStates(false);
+				ui.printGrid(grid);
+				break;
 			case "look":
 				ui.printGrid(grid);
 				ui.lookDirections();
