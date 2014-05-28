@@ -220,7 +220,7 @@ public class GameEngine {
 					ui.invalidCMD();
 					repeat = true;
 					break;
-				}
+			}
 		} while(repeat == true);
 	}
 
@@ -228,27 +228,24 @@ public class GameEngine {
 	 * This method contains a switch statement and do while loop that essentially serves to return the 
 	 * user to the main menu.
 	 */
-	private void returnToMain() {
-		do{
-			menuSelection = in.next();
-			menuSelection = menuSelection.toLowerCase();
+    private void returnToMain() {
+    	do{
+    		menuSelection = in.next();
+    		menuSelection = menuSelection.toLowerCase();
 			switch (menuSelection) {
-			case "return":
-				//ui.mainMenu();
-				mainMenuSelect();
-				break;
-			case "r":
-				mainMenuSelect();
-				break;
-			case "0":
-				mainMenuSelect();
-				break;
-			default:
-				ui.invalidCMD();
-				repeat = true;
-				break;
+				case "return":
+				case "r":
+				case "0":
+					// ui.mainMenu();
+					mainMenuSelect();
+					break;
+
+				default:
+					ui.invalidCMD();
+					repeat = true;
+					break;
 			}
-		} while(repeat == true);
+		} while (repeat == true);
 	}
 
 	// Main game methods
@@ -260,75 +257,44 @@ public class GameEngine {
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
-			case "look":
-				ui.printGrid(grid);
-				ui.lookDirections();
-				in.reset();
-				dir = in.next();
-				playerLook(dir);
-				ui.printGrid(grid);
-				stopPlayerLook(dir);
-				break;
-			case "l":
-				ui.printGrid(grid);
-				ui.lookDirections();
-				in.reset();
-				dir = in.next();
-				playerLook(dir);
-				ui.printGrid(grid);
-				stopPlayerLook(dir);
-				break;
-			case "1":
-				ui.printGrid(grid);
-				ui.lookDirections();
-				in.reset();
-				dir = in.next();
-				playerLook(dir);
-				ui.printGrid(grid);
-				stopPlayerLook(dir);
-				break;
-			case "move":
-				ui.printGrid(grid);
-				ui.moveTurn();
-				movePlayerForTurn();
-				break;
-			case "m":
-				ui.printGrid(grid);
-				ui.moveTurn();
-				movePlayerForTurn();
-				break;
-			case "2":
-				ui.printGrid(grid);
-				ui.moveTurn();
-				movePlayerForTurn();
-				break;
-			case "shoot":
-				ui.printGrid(grid);
-				break;
-			case "s":
-				ui.printGrid(grid);
-				break;
-			case "3":
-				ui.printGrid(grid);
-				break;
-			case "options":
-				ui.printGrid(grid);
-				break;
-			case "o":
-				ui.printGrid(grid);
-				break;
-			case "4":
-				ui.printGrid(grid);
-				break;				
-			case "exit":
-				System.exit(0);
-				break;
-			case "e":
-				System.exit(0);
-				break;
-			case "0":
-				System.exit(0);
-				break;
+				case "look":
+				case "l":
+				case "1":
+					ui.printGrid(grid);
+					ui.lookDirections();
+					in.reset();
+					dir = in.next();
+					playerLook(dir);
+					ui.printGrid(grid);
+					stopPlayerLook(dir);
+					break;
+
+				case "move":
+				case "m":
+				case "2":
+					ui.printGrid(grid);
+					ui.moveTurn();
+					movePlayerForTurn();
+					break;
+
+				case "shoot":
+				case "s":
+				case "3":
+					ui.printGrid(grid);
+					break;
+			
+				case "options":
+				case "o":
+				case "4":	
+					ui.printGrid(grid);
+					break;
+							
+				case "exit":
+				case "e":
+				case "0":
+					System.exit(0);
+					break;
+			
 			default:
 				ui.invalidCMD();
 				repeat = true;
@@ -355,33 +321,24 @@ public class GameEngine {
         	pickOption = pickOption.toLowerCase();
         	switch(pickOption){
     	    	case "ai":
-    	    		returnToMain();
-    	    		break;
     	    	case "a":
-    	    		returnToMain();
     	    	case "1":
     	    		returnToMain();
     	    		break;
+
     	    	case "debug":
-    	    		setDebug();
-    	    		returnToMain();
-    	    		break;
     	    	case "d":
-    	    		setDebug();
-    	    		returnToMain();
     	    	case "2":
     	    		setDebug();
     	    		returnToMain();
     	    		break;
+
     	    	case "exit":
-    	    		returnToMain();
-    	    		break;
     	    	case "e":
-    	    		returnToMain();
-    	    		break;
     	    	case "0":
     	    		returnToMain();
     	    		break;
+    	    	
     	    	default:
     	    		ui.invalidCMD();
         	}
@@ -395,25 +352,19 @@ public class GameEngine {
 		
 		switch(debugSelect){
 			case "on":
-				grid.debugMode(true);
-				System.out.println("WECLOME TO DEBUG MODE");
-				setOption();
-				break;
 			case "1":
 				grid.debugMode(true);
 				System.out.println("WECLOME TO DEBUG MODE");
 				setOption();
 				break;
+			
 			case "off":
-				grid.debugMode(false);
-				System.out.println("I guess you like being blind...");
-				setOption();
-				break;
 			case "2":
 				grid.debugMode(false);
 				System.out.println("I guess you like being blind...");
 				setOption();
 				break;
+			
 			default:
 				ui.invalidCMD();
 		}    	
