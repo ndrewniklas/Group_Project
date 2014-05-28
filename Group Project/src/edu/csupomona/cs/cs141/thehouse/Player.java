@@ -28,11 +28,12 @@ import java.util.Scanner;
  */
 public class Player extends GameObject{
 	
-	private boolean isAlive;
-	private boolean isInvincible;
-	private boolean hasBullet;
-	private boolean hasInvincibility;
-	private boolean hasRadar;
+	private boolean isAlive = true;
+	private boolean isInvincible = false;
+	private boolean hasBullet = true;
+	private boolean hasShield = false;
+	private boolean hasRadar = false;
+	private boolean hasBriefCase = false;
 	
 	private int xPosition;
 	private int yPosition;
@@ -290,7 +291,7 @@ public class Player extends GameObject{
 	 * @param hasBullet
 	 */
 	public void pickUpBullet(boolean hasBullet) {
-		
+		hasBullet = true;
 	}
 	
 	/**
@@ -298,7 +299,7 @@ public class Player extends GameObject{
 	 * if the @param hasBullet is true
 	 */
 	public void useBullet(boolean hasBullet) {
-		
+		hasBullet = false;
 	}
 	
 	/**
@@ -310,49 +311,52 @@ public class Player extends GameObject{
 	
 	/**
 	 * {@link #pickUpInvincibility()} This method will allow the user to pick up the invincibility upgrade
+	 * @return 
 	 */
-	public void pickUpInvincibility() {
-		
+	public void pickUpInvincibility(boolean hasShield) {
+		hasShield = true;
 	}
 	
 	/**
 	 * {@link #useShield()} This method will toggle the {@link Shield} upgrade
 	 * @return The return value will determine if the player can die or not
 	 */
-	public boolean useShield() {
-		return true;
+	public void useShield(boolean hasShield) {
+		
+		hasShield = false;
 	}
 	
 	/**
 	 * {@link #pickUpRadar()} This method will let the user pick up the radar upgrade
 	 */
-	public void pickUpRadar() {
-		
+	public void pickUpRadar(boolean hasRadar) {
+		hasRadar = true;
 	}
 	
 	/**
 	 * {@link #useRadar()} This method will reveal the location of the briefcase
 	 */
-	public void useRadar() {
-		
+	public void useRadar(boolean hasRadar) {
+		hasRadar = false;
 	}
 	
 	/**
 	 * {@link #playerDies(boolean)} This method will check if the enemy has attack the player
 	 * and kill the player if the parameter is true
 	 * @param enemyContact Is the boolean parameter that will determine if the player dies
+	 * @return 
 	 * @return
 	 */
-	public boolean playerDies(boolean enemyContact) {
-		return true;
+	public void playerDies(boolean enemyContact) {
+		isAlive = false;
 	}
 	
 	/**
 	 * This method will check if there is briefcase in front of the player
 	 * @return This return value will return true if there is a briefcase in front of the player
 	 */
-	public boolean getBriefCase() {
-		return true;
+	public void getBriefCase() {
+		hasBriefCase = true;
 	}
 	
 }

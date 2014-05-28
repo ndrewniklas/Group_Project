@@ -139,9 +139,14 @@ public class UserInterface {
 		input = sc.nextLine();
 		return input;
 	}
-
+	
 	public void radarActivated() {
 		System.out.println("You've picked up the radar!");
 		System.out.println("You can now see which room holds the briefcase!");
-	}	
+	}
+	
+	public void killEnemy() {
+		System.out.println("You've killed an enemy!");
+		System.out.println("But you are out of ammo...");
+	}
 }
