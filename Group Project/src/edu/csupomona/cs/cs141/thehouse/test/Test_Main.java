@@ -309,6 +309,7 @@ public class Test_Main {
 		System.out.println("Enemy Movement Test 1");
 		Player ply = new Player();
 		Grid grid = new Grid();
+		GameEngine ge = new GameEngine();
 //		grid.setBriefcase();
 //		grid.setEnemy();
 //		grid.setPowerUps();
@@ -322,11 +323,11 @@ public class Test_Main {
 			String input = sc.nextLine();
 			switch(input){
 				case "on":
-					grid.debugMode(true);
+					ge.debugMode(true);
 					System.out.println("WECLOME TO DEBUG MODE");
 					break;
 				case "off":
-					grid.debugMode(false);
+					ge.debugMode(false);
 					System.out.println("I guess you like being blind...");
 					break;
 				default:

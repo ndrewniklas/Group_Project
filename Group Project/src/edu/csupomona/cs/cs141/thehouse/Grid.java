@@ -86,32 +86,11 @@ public class Grid {
 		setEnemy();
 		setPowerUps();
 		populateGrid();
-		debugMode(false);
 		setBriefcase();
 	}
 	
 	//TODO MOVE TO GAME ENGINE!!!!!!!!!
-	public void debugMode(boolean on){
-		if(on){
-			radarVis = true;
-			enemyVis = true;
-			showBriefcase = true;
-			shieldVis = true;
-			extraAmmoVis = true;	
-			showBriefcase = true;
-			changeAllObjectStates(true);
-		}
-		else{
-			radarVis = false;
-			enemyVis = false;
-			showBriefcase = false;
-			shieldVis = false;
-			extraAmmoVis = false;
-			showBriefcase = false;
-			changeAllObjectStates(false);
-		}
-		
-	}
+
 	
 	public void changeAllObjectStates(boolean toggle) {
 		if(toggle){
@@ -518,5 +497,26 @@ public class Grid {
 				System.out.println("Enemy did not die");
 			}
 		}
+	}
+	
+	public boolean getEnemyVis(boolean vis){
+		enemyVis = vis;
+		return enemyVis;		
+	}
+	public boolean getRadarVis(boolean vis){
+		radarVis = vis;
+		return radarVis;
+	}
+	public boolean getExtraAmmoVis(boolean vis){
+		extraAmmoVis = vis;
+		return extraAmmoVis;
+	}
+	public boolean getShieldVis(boolean vis){
+		shieldVis = vis;
+		return shieldVis;
+	}
+	public boolean getBriefcaseVis(boolean vis){
+		showBriefcase = vis;
+		return showBriefcase;
 	}
 }

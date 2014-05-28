@@ -171,7 +171,7 @@ public class GameEngine {
     		ui.radarActivated();
     	}
     	if (plr.get_yPosition() == extraAmmoPos[0] && plr.get_xPosition() == extraAmmoPos[1]) {
-    		grid.getExtraAmmo().addAmmo(plr);
+    		grid.getExtraAmmo().addAmmo(plr,1);
     		ui.ammoActivated();
     	}
     	if (plr.get_yPosition() == shieldPos[0] && plr.get_xPosition() == shieldPos[1]) {
@@ -275,24 +275,13 @@ public class GameEngine {
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
-				case "check":
+				case "dev":
 					in.reset();
-					System.out.println("Select y");
-					int ydir = in.nextInt();
-					System.out.println("Select x");
-					int xdir = in.nextInt();
-					System.out.println(grid.checkForEnemy(ydir, xdir));
-					break;					
-				case "show":
-					grid.changeAllObjectStates(true);
-					ui.printGrid(grid);
-					break;
-				
-				case "hide":
-					grid.changeAllObjectStates(false);
-					ui.printGrid(grid);
-					break;
-				
+					System.out.println("Which dev command do you want to execute?");
+					System.out.println("show, hide, check, on, off");
+					String cmd = in.next();
+					devMenu(cmd);
+					break;	
 				case "look":
 				case "l":
 				case "1":
@@ -350,6 +339,37 @@ public class GameEngine {
 			}
 		} while(repeat == true);
 	}
+    
+    public void devMenu(String cmd){
+    	switch(cmd){
+			case "check":
+				in.reset();
+				System.out.println("Select y");
+				int ydir = in.nextInt();
+				System.out.println("Select x");
+				int xdir = in.nextInt();
+				System.out.println(grid.checkForEnemy(ydir, xdir));
+				break;					
+			case "show":
+				grid.changeAllObjectStates(true);
+				ui.printGrid(grid);
+				break;
+			case "hide":
+				grid.changeAllObjectStates(false);
+				ui.printGrid(grid);
+				break;
+			case "on":
+				debugMode(true);
+				ui.printGrid(grid);
+				break;
+			case "off":
+				debugMode(false);	
+				ui.printGrid(grid);
+				break;
+			default:
+				ui.invalidCMD();
+    	}
+    }
 
     public void movePlayerForTurn(){
 		String input = in.next();
@@ -401,14 +421,14 @@ public class GameEngine {
 		switch(debugSelect){
 			case "on":
 			case "1":
-				grid.debugMode(true);
+				debugMode(true);
 				System.out.println("WECLOME TO DEBUG MODE");
 				setOption();
 				break;
 			
 			case "off":
 			case "2":
-				grid.debugMode(false);
+				debugMode(false);
 				System.out.println("I guess you like being blind...");
 				setOption();
 				break;
@@ -451,5 +471,25 @@ public class GameEngine {
     	return foundBriefcase;
     }
 
+	public void debugMode(boolean on){
+		if(on){
+			grid.getRadarVis(true);
+			grid.getEnemyVis(true);
+			grid.getBriefcaseVis(true);
+			grid.getShieldVis(true);
+			grid.getExtraAmmoVis(true);	
+			grid.changeAllObjectStates(true);
+			grid.getExtraAmmo().addAmmo(plr, 9001);
+		}
+		else{
+			grid.getRadarVis(false);
+			grid.getEnemyVis(false);
+			grid.getBriefcaseVis(false);
+			grid.getShieldVis(false);
+			grid.getExtraAmmoVis(false);	
+			grid.changeAllObjectStates(false);
+			grid.getExtraAmmo().addAmmo(plr, 1);
+		}
+	}
 
 }
