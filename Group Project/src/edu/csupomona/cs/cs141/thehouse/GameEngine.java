@@ -310,6 +310,8 @@ public class GameEngine {
 				ui.moveTurn();
 				movePlayerForTurn();
 				break;
+			case "3":
+			case "s":
 			case "shoot":
 				ui.printGrid(grid);
 				ui.shootTurn();
@@ -323,12 +325,6 @@ public class GameEngine {
 				} else {
 					ui.noBullet();
 				}
-				break;
-			case "s":
-				ui.printGrid(grid);
-				break;
-			case "3":
-				ui.printGrid(grid);
 				break;
 			case "options":
 				ui.printGrid(grid);
