@@ -149,6 +149,7 @@ public class GameEngine {
     		didPlayerMove = false;
     		while(!didPlayerMove){
     			ui.mainGameCMD(); //print options available during each turn
+    			plr.playerDefaultVision(grid);
     			turnSelect();
     		}
     		objectCheck();
