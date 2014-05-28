@@ -442,7 +442,7 @@ public class Grid {
 	
 	public void shootGunCheck(int yplr, int xplr, String dir) {
 		switch (dir) {
-		case "right" :
+		case "up":
 			for (int i = yplr; i < gog.length; i++) {
 				checkForEnemy(i, xplr);
 				System.out.println(enemyInstance);
