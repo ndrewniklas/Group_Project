@@ -443,6 +443,8 @@ public class Grid {
 	public void shootGunCheck(int yplr, int xplr, String dir) {
 		switch (dir) {
 		case "up":
+		case "u":
+		case "1":
 			for (int i = yplr; i < gog.length; i++) {
 				checkForEnemy(i, xplr);
 				System.out.println(enemyInstance);
@@ -450,6 +452,43 @@ public class Grid {
 					killEnemy(i, xplr);
 				}
 			}
+			break;
+			
+		case "down":
+		case "d":
+		case "2":
+			for (int i = yplr; i > 0; i--) {
+				checkForEnemy(i, xplr);
+				System.out.println(enemyInstance);
+				if (enemyInstance == true) {
+					killEnemy(i, xplr);
+				}
+			}
+			break;
+			
+		case "right":
+		case "r":
+		case "3":
+			for (int i = xplr; i < gog.length; i++) {
+				checkForEnemy(yplr, i);
+				System.out.println(enemyInstance);
+				if (enemyInstance == true) {
+					killEnemy(i, xplr);
+				}
+			}
+			break;
+			
+		case "left":
+		case "l":
+		case "4":
+			for (int i = yplr; i > 0; i--) {
+				checkForEnemy(yplr, i);
+				System.out.println(enemyInstance);
+				if (enemyInstance == true) {
+					killEnemy(i, xplr);
+				}
+			}
+			break;
 		}
 	}
 
