@@ -187,7 +187,7 @@ public class Player extends GameObject{
 	
 	public void lookUp(){
 		//Up one
-		if(yPosition-1 >= 0 && yPosition-1 <= 7 && upPossible()){
+		if(yPosition-1 >= 0 && yPosition-1 <= 7 ){
 			firstLookPos[0] = yPosition - 1;	
 			firstLookPos[1] = xPosition;
 		}

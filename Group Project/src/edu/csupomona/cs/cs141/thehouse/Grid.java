@@ -20,6 +20,8 @@ public class Grid {
 	 */
 	private GameObject gameObj;
 	
+	private Room bcRoom;
+	
 	private Room[] room ;
 	
 	private Enemy[] enemy;
@@ -162,7 +164,7 @@ public class Grid {
 	 */
 	public void populateGrid(){
 		for(int i = 0; i < 9; ++i){
-			room[i] = new Room(false, false);
+			room[i] = new Room(false);
 		}
 		gog[1][1] = room[0];
 		gog[4][1] = room[1];
@@ -262,6 +264,7 @@ public class Grid {
 	 */
 	public void setBriefcase() {
 		int firstRandom, secondRandom;
+		bcRoom = new Room(true);
 		firstRandom = die.roll(8);
 		while(firstRandom != 1 && firstRandom != 4 && firstRandom != 7){
 			firstRandom = die.roll(8);
@@ -270,9 +273,13 @@ public class Grid {
 		while(secondRandom != 1 && secondRandom != 4 && secondRandom != 7){
 			secondRandom = die.roll();
 		}
-		gog[firstRandom][secondRandom] = new Room(true, false);
+		gog[firstRandom][secondRandom] = bcRoom;
 		briefcasePos[0] = firstRandom;
 		briefcasePos[1] = secondRandom;
+	}
+	
+	public Room getBriefcaseRoom(){
+		return bcRoom;
 	}
 	
 	/**
@@ -359,6 +366,9 @@ public class Grid {
 			}
 		}
 	}
+	public Radar getRadar(){
+		return radar;
+	}
 	public void spawnExtraAmmo(){
 		int spawnOne;
 		int spawnTwo;
@@ -408,6 +418,6 @@ public class Grid {
 	}
 
 	public void activateRadar() {
-		gog[briefcasePos[0]][briefcasePos[1]] = new Room(true, showBriefcase);
+		radar.activateRadar(bcRoom);
 	}
 }

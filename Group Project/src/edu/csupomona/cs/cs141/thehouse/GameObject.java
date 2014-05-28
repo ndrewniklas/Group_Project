@@ -107,6 +107,7 @@ public class GameObject {
 		}
 		return true;
 	}
+
     public boolean upPossible(){
     	if(roomExists(pos[0] - 1, pos[1]))
     		return true;

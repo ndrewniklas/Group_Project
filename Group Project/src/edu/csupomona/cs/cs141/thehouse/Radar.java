@@ -46,8 +46,11 @@ public class Radar extends GameObject {
 	/**
 	 * {@link Radar} This is the method that activates the radar powerup
 	 */
-	public void activateRadar(){
-		
+	public void activateRadar(Room bcRoom){
+		bcRoom.changeRoomState(true);
+	}
+	public void unactivateRadar(Room bcRoom){
+		bcRoom.changeRoomState(false);
 	}
 	
 }
