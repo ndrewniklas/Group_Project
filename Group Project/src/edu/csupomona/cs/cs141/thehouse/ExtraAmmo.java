@@ -49,8 +49,8 @@ public class ExtraAmmo extends GameObject {
 	/**
 	 * This is the method that adds another bullet to the clip. 
 	 */
-	public void addAmmo(){
-		
+	public void addAmmo(Player ply){
+		ply.pickUpBullet();
 	}
 
 }

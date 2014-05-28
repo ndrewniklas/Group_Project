@@ -162,12 +162,16 @@ public class GameEngine {
     }
     
     private void objectCheck() {
-    	int [] radarPos = grid.getRadarPos();
+    	int[] radarPos = grid.getRadarPos();
+    	int[] extraAmmoPos = grid.getExtraAmmoPos();
     	if (plr.get_yPosition() == radarPos[0] && plr.get_xPosition() == radarPos[1]) {
     		grid.activateRadar();
     		ui.radarActivated();
     	}
-		
+    	if (plr.get_yPosition() == extraAmmoPos[0] && plr.get_xPosition() == extraAmmoPos[1]) {
+    		grid.getExtraAmmo().addAmmo(plr);
+    		ui.ammoActivated();
+    	}
 	}
 
 	//For use with navigating the main menu

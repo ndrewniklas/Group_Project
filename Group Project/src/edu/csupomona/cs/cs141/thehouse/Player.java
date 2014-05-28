@@ -54,7 +54,7 @@ public class Player extends GameObject{
 		xPosition = 0;
 		yPosition = 8;	
 		isAlive=true;
-		ammo = 100000;
+		ammo = 1;
 	}
 	
 	/**
@@ -325,7 +325,7 @@ public class Player extends GameObject{
 	 * {@link #pickUpBullet(boolean)} This method will allow the user to pick up a bullet based on the 
 	 * @param hasBullet
 	 */
-	public void pickUpBullet(boolean hasBullet) {
+	public void pickUpBullet() {
 		++ammo;
 	}
 	

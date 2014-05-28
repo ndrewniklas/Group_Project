@@ -389,6 +389,9 @@ public class Grid {
 	public Radar getRadar(){
 		return radar;
 	}
+	public ExtraAmmo getExtraAmmo(){
+		return extraAmmo;
+	}
 	public void spawnExtraAmmo(){
 		int spawnOne;
 		int spawnTwo;
@@ -439,6 +442,9 @@ public class Grid {
 
 	public void activateRadar() {
 		radar.activateRadar(bcRoom);
+	}
+	public int[] getExtraAmmoPos(){
+		return ammoPos;
 	}
 	
 	public void shootGunCheck(int yplr, int xplr, String dir) {

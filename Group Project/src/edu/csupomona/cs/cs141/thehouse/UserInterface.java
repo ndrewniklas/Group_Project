@@ -145,6 +145,10 @@ public class UserInterface {
 		System.out.println("You can now see which room holds the briefcase!");
 	}
 	
+	public void ammoActivated(){
+		System.out.println("You have picked up ammo!");
+	}
+	
 	public void killEnemy() {
 		System.out.println("You've killed an enemy!");
 		System.out.println("But you are out of ammo...");
