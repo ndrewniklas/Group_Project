@@ -149,4 +149,23 @@ public class UserInterface {
 		System.out.println("You've killed an enemy!");
 		System.out.println("But you are out of ammo...");
 	}
+	
+	public void shotFired() {
+		System.out.println("You fired your bullet...");
+		
+	}
+
+	public void shootTurn() {
+		System.out.println("Which direction will you fire?");
+		System.out.println("1)Up");
+		System.out.println("2)Down");
+		System.out.println("3)Right");
+		System.out.println("4)Left");
+		System.out.println("Please enter one of the full command: ");
+	}
+
+	public void noBullet() {
+		System.out.println("You have no bullet to fire.");
+		
+	}	
 }

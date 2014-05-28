@@ -59,6 +59,10 @@ public class Grid {
 	
 	private boolean enemyVis;
 	
+	private boolean enemyInstance;
+
+	private boolean enemydied;
+	
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
 	 * Makes a new {@link Dice}
@@ -435,5 +439,29 @@ public class Grid {
 
 	public void activateRadar() {
 		radar.activateRadar(bcRoom);
+	}
+	
+	public void shootGunCheck(int yplr, int xplr, String dir) {
+		switch (dir) {
+		case "right" :
+			for (int i = yplr; i < gog.length; i++) {
+				checkForEnemy(i, xplr);
+				System.out.println(enemyInstance);
+				if (enemyInstance == true) {
+					killEnemy(i, xplr);
+				}
+			}
+		}
+	}
+
+	private void killEnemy(int ypos, int xpos) {
+		for(int i = 0; i < enemy.length; i++) {
+			if (enemy[i].pos[0] == ypos && enemy[i].pos[1] == xpos) {
+				enemydied = true;
+				System.out.println("Enemy died");
+			} else {
+				System.out.println("Enemy did not die");
+			}
+		}
 	}
 }

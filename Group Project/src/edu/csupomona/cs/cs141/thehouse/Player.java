@@ -310,7 +310,7 @@ public class Player extends GameObject{
 	 * {@link #useBullet(boolean)} can be executed or not
 	 */
 	public boolean checkBulletPossession() {
-		return true;
+		return hasBullet;
 	}
 	
 	/**
@@ -318,15 +318,17 @@ public class Player extends GameObject{
 	 * @param hasBullet
 	 */
 	public void pickUpBullet(boolean hasBullet) {
-		hasBullet = true;
+		if (hasBullet = false) {
+			hasBullet = true;
+		}
 	}
 	
 	/**
 	 * {@link #useBullet(boolean)} This method will will make the player use the bullet in his possession
 	 * if the @param hasBullet is true
 	 */
-	public void useBullet(boolean hasBullet) {
-		hasBullet = false;
+	public boolean useBullet(boolean hasBullet) {
+		return hasBullet = false;
 	}
 	
 	/**

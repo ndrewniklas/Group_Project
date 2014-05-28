@@ -114,6 +114,8 @@ public class GameEngine {
 	private String debugSelect;
 
 	private boolean hasRadar = false;
+	
+	private boolean hasBullet = true;
 
 	/**
      * The default constructor for GameEngine.
@@ -258,55 +260,86 @@ public class GameEngine {
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
-				case "show":
-					grid.changeAllObjectStates(true);
-					ui.printGrid(grid);
-					break;
-				case "hide":
-					grid.changeAllObjectStates(false);
-					ui.printGrid(grid);
-					break;
-				case "look":
-				case "l":
-				case "1":
-					ui.printGrid(grid);
-					ui.lookDirections();
-					in.reset();
-					dir = in.next();
-					playerLook(dir);
-					ui.printGrid(grid);
-					stopPlayerLook(dir);
-					break;
-
-				case "move":
-				case "m":
-				case "2":
-					ui.printGrid(grid);
-					ui.moveTurn();
-					movePlayerForTurn();
-					break;
-
-				case "shoot":
-				case "s":
-				case "3":
-					ui.printGrid(grid);
-					break;
-			
-				case "options":
-				case "o":
-				case "4":	
-					ui.printGrid(grid);
-					break;
-							
-				case "exit":
-				case "e":
-				case "0":
-					System.exit(0);
-					break;
-				case "reset":
-					startGame();
-					break;
-			
+			case "look":
+				ui.printGrid(grid);
+				ui.lookDirections();
+				in.reset();
+				dir = in.next();
+				playerLook(dir);
+				ui.printGrid(grid);
+				stopPlayerLook(dir);
+				break;
+			case "l":
+				ui.printGrid(grid);
+				ui.lookDirections();
+				in.reset();
+				dir = in.next();
+				playerLook(dir);
+				ui.printGrid(grid);
+				stopPlayerLook(dir);
+				break;
+			case "1":
+				ui.printGrid(grid);
+				ui.lookDirections();
+				in.reset();
+				dir = in.next();
+				playerLook(dir);
+				ui.printGrid(grid);
+				stopPlayerLook(dir);
+				break;
+			case "move":
+				ui.printGrid(grid);
+				ui.moveTurn();
+				movePlayerForTurn();
+				break;
+			case "m":
+				ui.printGrid(grid);
+				ui.moveTurn();
+				movePlayerForTurn();
+				break;
+			case "2":
+				ui.printGrid(grid);
+				ui.moveTurn();
+				movePlayerForTurn();
+				break;
+			case "shoot":
+				ui.printGrid(grid);
+				ui.shootTurn();
+				in.reset();
+				dir = in.next();
+				hasBullet  = plr.checkBulletPossession();
+				if (hasBullet = true) {
+					hasBullet = plr.useBullet(hasBullet);
+					ui.shotFired();
+					grid.shootGunCheck(plr.get_yPosition(), plr.get_yPosition(), dir);
+				} else {
+					ui.noBullet();
+				}
+				break;
+			case "s":
+				ui.printGrid(grid);
+				break;
+			case "3":
+				ui.printGrid(grid);
+				break;
+			case "options":
+				ui.printGrid(grid);
+				break;
+			case "o":
+				ui.printGrid(grid);
+				break;
+			case "4":
+				ui.printGrid(grid);
+				break;				
+			case "exit":
+				System.exit(0);
+				break;
+			case "e":
+				System.exit(0);
+				break;
+			case "0":
+				System.exit(0);
+				break;
 			default:
 				ui.invalidCMD();
 				repeat = true;
