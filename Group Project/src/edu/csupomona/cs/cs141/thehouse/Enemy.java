@@ -164,6 +164,6 @@ public class Enemy extends GameObject {
 	}
 	
 	public void printEnemyPos(int i) {
-		System.out.println("Enemy"+ i + ": " + xPosition + " " + yPosition);
+		System.out.println("Enemy"+ i + ": " + yPosition + " " + xPosition);
 	}
 }
