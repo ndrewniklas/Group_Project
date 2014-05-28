@@ -28,11 +28,12 @@ import java.util.Scanner;
  */
 public class Player extends GameObject{
 	
-	private boolean isAlive;
-	private boolean isInvincible;
-	private boolean hasBullet;
-	private boolean hasInvincibility;
-	private boolean hasRadar;
+	private boolean isAlive = true;
+	private boolean isInvincible = false;
+	private boolean hasBullet = true;
+	private boolean hasShield = false;
+	private boolean hasRadar = false;
+	private boolean hasBriefCase = false;
 	
 	private int xPosition;
 	private int yPosition;
@@ -41,12 +42,12 @@ public class Player extends GameObject{
 	
 	private int numLives;
 
-	private int[] firstLookPos = new int[2];
-	private int[] secondLookPos = new int[2];
+	private int lookPosY1, lookPosY2, lookPosX1, lookPosX2;
 	
 	public Player(){
 		super("[P]",0,8);
 		setHiddenName("[P]");
+		setRealName("[P]");
 		setObjectName("[P]");
 		xPosition = 0;
 		yPosition = 8;	
@@ -141,19 +142,19 @@ public class Player extends GameObject{
 		switch(direction){
 		case "up":
 			lookUp();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, true);
+			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
 		case "down":
 			lookDown();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, true);
+			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
 		case "right":
 			lookRight();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, true);
+			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
 		case "left":
 			lookLeft();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, true);
+			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
 		default:
 			System.out.println("Something went wrong");
@@ -164,19 +165,19 @@ public class Player extends GameObject{
 		switch(direction){
 		case "up":
 			lookUp();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, false);
+			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, false);
 			break;
 		case "down":
 			lookDown();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, false);
+			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, false);
 			break;
 		case "right":
 			lookRight();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, false);
+			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, false);
 			break;
 		case "left":
 			lookLeft();
-			grid.showObjectsWithinLocation(firstLookPos, secondLookPos, false);
+			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, false);
 			break;
 		default:
 			System.out.println("Something went wrong");
@@ -186,51 +187,75 @@ public class Player extends GameObject{
 	public void lookUp(){
 		//Up one
 		if(yPosition-1 >= 0 && yPosition-1 <= 8 ){
-			firstLookPos[0] = yPosition - 1;	
-			firstLookPos[1] = xPosition;
+			lookPosY1 = yPosition - 1;	
+			lookPosX1 = xPosition;
+		}else{
+			lookPosY1 = yPosition;	
+			lookPosX1 = xPosition;
 		}
 		//Up two
 		if(yPosition - 2 >= 0 && yPosition - 2 <= 8 && xPosition >= 0 && xPosition <= 8){
-			secondLookPos[0] = yPosition - 2;
-			secondLookPos[1] = xPosition;
+			lookPosY2 = yPosition - 2;
+			lookPosX2 = xPosition;
+		}else{
+			lookPosY2 = yPosition;
+			lookPosX2 = xPosition;
 		}
 	}
 	public void lookDown(){
 		//Down one
 		if(yPosition+1 >= 0 && yPosition+1 <= 8){
-			firstLookPos[0] = yPosition + 1;	
-			firstLookPos[1] = xPosition;
+			lookPosY1 = yPosition + 1;	
+			lookPosX1 = xPosition;
+		}else{
+			lookPosY1 = yPosition;	
+			lookPosX1 = xPosition;
 		}
 		//Down two
 		if(yPosition + 2 >= 0 && yPosition + 2 <= 8 && xPosition >= 0 && xPosition <= 8){
-			secondLookPos[0] = yPosition + 2;
-			secondLookPos[1] = xPosition;
+			lookPosY2 = yPosition + 2;
+			lookPosX2 = xPosition;
+		}else{
+			lookPosY2 = yPosition ;
+			lookPosX2 = xPosition;
 		}
 	
 	}
 	public void lookRight(){
 		//Right one
 		if(xPosition + 1 >= 0 && xPosition + 1 <= 8){
-			firstLookPos[0] = yPosition;	
-			firstLookPos[1] = xPosition + 1;
+			lookPosY1 = yPosition;	
+			lookPosX1 = xPosition + 1;
+		}else{
+			lookPosY1 = yPosition;	
+			lookPosX1 = xPosition;
 		}
 		//right two
 		if(xPosition + 2 >= 0 && xPosition + 2 <= 8 && yPosition >= 0 && yPosition <= 8){
-			secondLookPos[0] = yPosition;
-			secondLookPos[1] = xPosition + 2;
+			lookPosY2 = yPosition;
+			lookPosX2 = xPosition + 2;
+		}else{
+			lookPosY2 = yPosition;
+			lookPosX2 = xPosition;
 		}
 	}
 	public void lookLeft(){
 		//Left one
 		if(xPosition - 1 >= 0 && xPosition - 1 <= 8){
-			firstLookPos[0] = yPosition;	
-			firstLookPos[1] = xPosition - 1;
+			lookPosY1 = yPosition;	
+			lookPosX1 = xPosition - 1;
+		}else{
+			lookPosY1 = yPosition;	
+			lookPosX1 = xPosition;
 		}
 		//left two
 		if(xPosition - 2 >= 0 && xPosition - 2 <= 8 && yPosition >= 0 && yPosition <= 8){
-			secondLookPos[0] = yPosition;
-			secondLookPos[1] = xPosition - 2;
-		}	
+			lookPosY2 = yPosition;
+			lookPosX2 = xPosition - 2;
+		}else{
+			lookPosY2 = yPosition;
+			lookPosX2 = xPosition;
+		}
 	}
 	
 	
@@ -249,7 +274,7 @@ public class Player extends GameObject{
 	 * @param hasBullet
 	 */
 	public void pickUpBullet(boolean hasBullet) {
-		
+		hasBullet = true;
 	}
 	
 	/**
@@ -257,7 +282,7 @@ public class Player extends GameObject{
 	 * if the @param hasBullet is true
 	 */
 	public void useBullet(boolean hasBullet) {
-		
+		hasBullet = false;
 	}
 	
 	/**
@@ -269,49 +294,52 @@ public class Player extends GameObject{
 	
 	/**
 	 * {@link #pickUpInvincibility()} This method will allow the user to pick up the invincibility upgrade
+	 * @return 
 	 */
-	public void pickUpInvincibility() {
-		
+	public void pickUpInvincibility(boolean hasShield) {
+		hasShield = true;
 	}
 	
 	/**
 	 * {@link #useShield()} This method will toggle the {@link Shield} upgrade
 	 * @return The return value will determine if the player can die or not
 	 */
-	public boolean useShield() {
-		return true;
+	public void useShield(boolean hasShield) {
+		
+		hasShield = false;
 	}
 	
 	/**
 	 * {@link #pickUpRadar()} This method will let the user pick up the radar upgrade
 	 */
-	public void pickUpRadar() {
-		
+	public void pickUpRadar(boolean hasRadar) {
+		hasRadar = true;
 	}
 	
 	/**
 	 * {@link #useRadar()} This method will reveal the location of the briefcase
 	 */
-	public void useRadar() {
-		
+	public void useRadar(boolean hasRadar) {
+		hasRadar = false;
 	}
 	
 	/**
 	 * {@link #playerDies(boolean)} This method will check if the enemy has attack the player
 	 * and kill the player if the parameter is true
 	 * @param enemyContact Is the boolean parameter that will determine if the player dies
+	 * @return 
 	 * @return
 	 */
-	public boolean playerDies(boolean enemyContact) {
-		return true;
+	public void playerDies(boolean enemyContact) {
+		isAlive = false;
 	}
 	
 	/**
 	 * This method will check if there is briefcase in front of the player
 	 * @return This return value will return true if there is a briefcase in front of the player
 	 */
-	public boolean getBriefCase() {
-		return true;
+	public void getBriefCase(boolean hasBriefCase) {
+		hasBriefCase = true;
 	}
 	
 }
