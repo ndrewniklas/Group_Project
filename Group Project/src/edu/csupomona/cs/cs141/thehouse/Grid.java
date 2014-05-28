@@ -449,7 +449,7 @@ public class Grid {
 		case "up":
 		case "u":
 		case "1":
-			for (int i =+ yplr; i > 0; i--) {
+			for (int i = yplr; i > 0; i--) {
 				enemyInstance = checkForEnemy(i, xplr);
 				System.out.println(enemyInstance);
 				if (enemyInstance == true) {
@@ -461,7 +461,7 @@ public class Grid {
 		case "down":
 		case "d":
 		case "2":
-			for (int i =+ yplr; i < gog.length; i++) {
+			for (int i = yplr; i < gog.length; i++) {
 				enemyInstance = checkForEnemy(i, xplr);
 				System.out.println(enemyInstance);
 				if (enemyInstance == true) {
@@ -473,7 +473,7 @@ public class Grid {
 		case "right":
 		case "r":
 		case "3":
-			for (int i =+ xplr; i > 0; i--) {
+			for (int i = xplr; i > 0; i--) {
 				enemyInstance = checkForEnemy(yplr, i);
 				System.out.println(enemyInstance);
 				if (enemyInstance == true) {
@@ -485,7 +485,7 @@ public class Grid {
 		case "left":
 		case "l":
 		case "4":
-			for (int i =+ xplr; i < gog.length; i++) {
+			for (int i = xplr; i < gog.length; i++) {
 				enemyInstance = checkForEnemy(yplr, i);
 				System.out.println(enemyInstance);
 				if (enemyInstance == true) {
