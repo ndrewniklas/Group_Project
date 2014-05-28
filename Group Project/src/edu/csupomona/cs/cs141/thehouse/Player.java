@@ -256,7 +256,7 @@ public class Player extends GameObject{
 			lookPosX1 = xPosition;
 		}
 		//Down two
-		if(yPosition + 2 >= 0 && yPosition + 2 <= 8 && xPosition >= 0 && xPosition <= 8 && roomExists(yPosition+2,xPosition)){
+		if(yPosition + 2 >= 0 && yPosition + 2 <= 8 && xPosition >= 0 && xPosition <= 8 && roomExists(yPosition+2,xPosition) && roomExists(yPosition+1,xPosition)){
 			lookPosY2 = yPosition + 2;
 			lookPosX2 = xPosition;
 		}else{
