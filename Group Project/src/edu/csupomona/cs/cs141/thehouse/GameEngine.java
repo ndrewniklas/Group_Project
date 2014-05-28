@@ -144,7 +144,6 @@ public class GameEngine {
      */
     public void gameLoop(){
     	while(!gameOver){
-    		grid.setBriefcase();
     		grid.rePopulateGrid(plr);
     		ui.printGrid(grid);
     		didPlayerMove = false;
