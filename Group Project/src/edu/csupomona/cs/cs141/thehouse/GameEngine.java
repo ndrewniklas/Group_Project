@@ -230,7 +230,7 @@ public class GameEngine {
 				case "exit":
 				case "e":
 				case "0":
-					//TODO: We need a less... destructive way to deal with this
+					ui.endScreen();
 					System.exit(0);
 					break;
 				
@@ -332,7 +332,8 @@ public class GameEngine {
 				case "exit":
 				case "e":
 				case "0":
-					System.exit(0);
+					ui.endScreen();
+					ui.mainMenu();
 					break;
 			
 				default:
