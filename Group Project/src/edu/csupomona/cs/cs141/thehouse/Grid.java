@@ -76,7 +76,7 @@ public class Grid {
 		for(int i = 0; i < gog.length; ++i){
 			for(int j = 0; j < gog[i].length; ++j){
 				//Old way, fill with new GameObject()
-				gog[i][j] = gameObj;
+				gog[i][j] = new GameObject();
 			}
 		}
 		setEnemy();
@@ -117,6 +117,7 @@ public class Grid {
 			for(int i = 0; i < enemy.length; ++i){
 				enemy[i].showName();
 			}
+			gameObj.showName();
 		}else{
 			shield.hideName();
 			radar.hideName();
@@ -124,6 +125,7 @@ public class Grid {
 			for(int i = 0; i < enemy.length; ++i){
 				enemy[i].hideName();
 			}
+			gameObj.hideName();
 		}	
 	}
 	
