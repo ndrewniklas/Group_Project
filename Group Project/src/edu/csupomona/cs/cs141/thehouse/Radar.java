@@ -27,6 +27,8 @@ public class Radar extends GameObject {
 	 * This is the string for the name of the radar.
 	 */
 	private final String RADAR = "|N|";
+	
+	private int objID;
 	/**
 	 * This is the constructor for the radar powerup
 	 */
@@ -37,6 +39,7 @@ public class Radar extends GameObject {
 	
 	public Radar(boolean vis){
 		setRealName(RADAR);
+		objID = setObjId(3);
 		if(vis)
 			setObjectName(RADAR);
 		else

@@ -34,7 +34,7 @@ public class Enemy extends GameObject {
 	private int yPosition;
 	private int xpre;
 	private int ypre;
-	
+	private int objID;
 	private final String ENEMY_NAME = "|E|";
 	
 	
@@ -49,6 +49,7 @@ public class Enemy extends GameObject {
 	public Enemy(boolean showEnemy) {
 		setRealName(ENEMY_NAME);
 		enemyDead = false;
+		objID = setObjId(1);
 		if(showEnemy)
 			setObjectName(ENEMY_NAME);
 		else
@@ -59,38 +60,21 @@ public class Enemy extends GameObject {
 	 * {@link #moveEnemy()} This method will move the enemy
 	 */
 	public void moveEnemy(Grid grid){
-		
 			int ranNum = die.roll(4);		
 			xpre = xPosition;
 			ypre = yPosition;
-			if (ranNum == 0 && upPossible()) {
-				if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
-					//if (grid.checkIfLocationFree(yPosition-1, xPosition)){
+			if (ranNum == 0 && upPossible() && yPosition - 1 >= 0 && yPosition - 1 <= 8 && !grid.checkForEnemy(yPosition - 1, xPosition)) {
 						setXY(xPosition, --yPosition);
 						cleanEnemies(grid);
-					//}
-				}
-			} else if (ranNum == 1 && downPossible()) {
-				if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
-					//if (grid.checkIfLocationFree(yPosition+1, xPosition)){
+			} else if (ranNum == 1 && downPossible() && yPosition + 1 >= 0 && yPosition + 1 <= 8 && !grid.checkForEnemy(yPosition+1, xPosition)) {
 						setXY(xPosition, ++yPosition);
 						cleanEnemies(grid);
-					//}
-				}
-			} else if (ranNum == 2 && rightPossible()) {
-				if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
-					//if (grid.checkIfLocationFree(yPosition, xPosition+1)){
+			} else if (ranNum == 2 && rightPossible() && xPosition + 1 >= 0 && xPosition + 1 <= 8 && !grid.checkForEnemy(yPosition, xPosition+1)) {
 						setXY(++xPosition, yPosition);
 						cleanEnemies(grid);
-					//}
-				}
-			} else if (ranNum == 3 && leftPossible()) {
-				if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
-					//if (grid.checkIfLocationFree(yPosition, xPosition-2)){
+			} else if (ranNum == 3 && leftPossible() && xPosition - 1 >= 0 && xPosition - 1 <= 8 && !grid.checkForEnemy(yPosition, xPosition-1)) {
 						setXY(--xPosition, yPosition);
 						cleanEnemies(grid);
-					//}
-				}
 			} else {
 				ranNum = die.roll(4);
 				moveEnemy(grid);

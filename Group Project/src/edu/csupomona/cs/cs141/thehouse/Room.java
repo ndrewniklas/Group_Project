@@ -11,6 +11,7 @@ public class Room extends GameObject {
 	private final String ROOM_NAME = "[R]";
 	private final String BRIEFCASE_NAME = "[B]";
 	private boolean briefcaseRoom;
+	private int objID;
 	/**
 	 * Sets the name of the room
 	 */
@@ -18,6 +19,7 @@ public class Room extends GameObject {
 		setObjectName(ROOM_NAME);
 		setHiddenName(ROOM_NAME);
 		setRealName(ROOM_NAME);
+		objID = setObjId(2);
 	}
 	
 	/**
@@ -38,6 +40,7 @@ public class Room extends GameObject {
 			setObjectName(ROOM_NAME);
 			setHiddenName(ROOM_NAME);
 		}
+		objID = setObjId(2);
 	}
 	public void changeRoomState(boolean change){
 		if(change){

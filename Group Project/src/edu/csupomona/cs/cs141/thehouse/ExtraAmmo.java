@@ -30,6 +30,8 @@ public class ExtraAmmo extends GameObject {
 	
 	private final String EXTRA_AMMO= "|A|";
 	
+	private int objID;
+	
 	/**
 	 * This is the method that gives powerup its type.  
 	 */
@@ -40,6 +42,7 @@ public class ExtraAmmo extends GameObject {
 	}
 	public ExtraAmmo(boolean vis){
 		setRealName(EXTRA_AMMO);
+		objID = setObjId(4);
 		if(vis)
 			setObjectName(EXTRA_AMMO);
 		else

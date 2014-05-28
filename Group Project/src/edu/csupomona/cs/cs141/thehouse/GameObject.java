@@ -7,7 +7,7 @@ package edu.csupomona.cs.cs141.thehouse;
  * @author Andrew
  *
  */
-public class GameObject {
+public class GameObject implements Comparable<GameObject>{
 
 	/**
 	 * The name of the object
@@ -17,6 +17,8 @@ public class GameObject {
 	private String realName;
 	
 	private String hiddenName;
+	
+	private int objId;
 	
 	private final String EMPTY_OBJECT = "|X|";
 	
@@ -134,4 +136,19 @@ public class GameObject {
     	else
     		return false;
     }
+    
+    public int setObjId(int id){
+    	objId = id;
+    	return objId;
+    }
+    
+    public int getObjID(){
+    	return objId;
+    }
+
+	@Override
+	public int compareTo(GameObject g) {
+		// TODO Auto-generated method stub
+		return this.getObjID() - g.getObjID();
+	}
 }

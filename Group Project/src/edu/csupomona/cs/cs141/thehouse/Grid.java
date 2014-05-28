@@ -224,7 +224,7 @@ public class Grid {
 	 */
 	public boolean checkForEnemy(int yPos, int xPos) {
 		boolean check = false;
-		if(gog[yPos][xPos] instanceof Enemy){
+		if(gog[yPos][xPos].compareTo(enemy[0]) == 0){
 			check = true;
 		}
 		else{

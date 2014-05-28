@@ -35,6 +35,8 @@ public class Player extends GameObject{
 	private boolean hasRadar = false;
 	private boolean hasBriefCase = false;
 	
+	private int objID;
+	
 	private int ammo;
 	
 	private int xPosition;
@@ -55,6 +57,7 @@ public class Player extends GameObject{
 		yPosition = 8;	
 		isAlive=true;
 		ammo = 1;
+		objID = setObjId(0);
 	}
 	
 	/**
