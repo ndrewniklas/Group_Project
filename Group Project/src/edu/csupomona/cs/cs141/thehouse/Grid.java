@@ -192,7 +192,7 @@ public class Grid {
 				System.out.println("Invalid Command: Please try again.");
 		}
 		else{
-			gog[ply.getYPre()][ply.getXPre()] = gameObj;
+			gog[ply.getYPre()][ply.getXPre()] = new GameObject();
 		}
 		
 		for(int i = 0; i < enemy.length; ++i){
@@ -211,7 +211,7 @@ public class Grid {
 	}
 	
 	public void changeObjectIntoBlank(int posY, int posX){
-		gog[posY][posX] = gameObj;
+		gog[posY][posX] = new GameObject();
 	}
 	
 	public GameObject getObjectAtLocation(int posY, int posX){
