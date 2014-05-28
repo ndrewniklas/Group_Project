@@ -54,7 +54,7 @@ public class Player extends GameObject{
 		xPosition = 0;
 		yPosition = 8;	
 		isAlive=true;
-		ammo = 1;
+		ammo = 100000;
 	}
 	
 	/**

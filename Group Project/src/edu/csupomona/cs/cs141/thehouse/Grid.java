@@ -246,11 +246,10 @@ public class Grid {
 	public boolean checkForEnemy(int yPos, int xPos) {
 		boolean check = false;
 		if(gog[yPos][xPos] instanceof Enemy){
-			System.out.println("false");
-				check = false;
+				check = true;
 		}
 		else{
-			check = true;
+			check = false;
 		}
 		return check;
 	}
@@ -445,11 +444,11 @@ public class Grid {
 		case "up":
 		case "u":
 		case "1":
-			for (int i = yplr; i < gog.length; i++) {
-				checkForEnemy(i, xplr);
+			for (int i =+ yplr; i > 0; i--) {
+				enemyInstance = checkForEnemy(i, xplr);
 				System.out.println(enemyInstance);
 				if (enemyInstance == true) {
-					killEnemy(i, xplr);
+//					killEnemy(i, xplr);
 				}
 			}
 			break;
@@ -457,11 +456,11 @@ public class Grid {
 		case "down":
 		case "d":
 		case "2":
-			for (int i = yplr; i > 0; i--) {
-				checkForEnemy(i, xplr);
+			for (int i =+ yplr; i < gog.length; i++) {
+				enemyInstance = checkForEnemy(i, xplr);
 				System.out.println(enemyInstance);
 				if (enemyInstance == true) {
-					killEnemy(i, xplr);
+//					killEnemy(i, xplr);
 				}
 			}
 			break;
@@ -469,11 +468,11 @@ public class Grid {
 		case "right":
 		case "r":
 		case "3":
-			for (int i = xplr; i < gog.length; i++) {
-				checkForEnemy(yplr, i);
+			for (int i =+ xplr; i > 0; i--) {
+				enemyInstance = checkForEnemy(yplr, i);
 				System.out.println(enemyInstance);
 				if (enemyInstance == true) {
-					killEnemy(i, xplr);
+//					killEnemy(yplr, i);
 				}
 			}
 			break;
@@ -481,11 +480,11 @@ public class Grid {
 		case "left":
 		case "l":
 		case "4":
-			for (int i = yplr; i > 0; i--) {
-				checkForEnemy(yplr, i);
+			for (int i =+ xplr; i < gog.length; i++) {
+				enemyInstance = checkForEnemy(yplr, i);
 				System.out.println(enemyInstance);
 				if (enemyInstance == true) {
-					killEnemy(i, xplr);
+//					killEnemy(yplr, i);
 				}
 			}
 			break;
