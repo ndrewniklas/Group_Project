@@ -148,6 +148,14 @@ public class Grid {
 			gog[y2][x2].hideName();
 		}
 	}
+	public void showPlayerDefaultVision(int y1, int x1, boolean toggle){
+		if(toggle){
+			gog[y1][x1].showName();
+		}else{
+			gog[y1][x1].hideName();
+		}
+	}
+
 	
 	/**
 	 * Prints out the name of the object at that location

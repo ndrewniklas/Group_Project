@@ -133,6 +133,10 @@ public class Player extends GameObject{
 		return isAlive;
 	}
 	
+	public void playerDefaultVision(Grid grid){
+		grid.showPlayerDefaultVision(yPosition, xPosition, true);
+	}
+	
 	/**
 	 * {@link #playerLook()} This method will reveal two spaces in the desired direction
 	 * on the grid based on user input
