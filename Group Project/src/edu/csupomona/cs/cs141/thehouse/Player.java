@@ -35,6 +35,8 @@ public class Player extends GameObject{
 	private boolean hasRadar = false;
 	private boolean hasBriefCase = false;
 	
+	private int ammo;
+	
 	private int xPosition;
 	private int yPosition;
 	private int xpre;
@@ -52,6 +54,7 @@ public class Player extends GameObject{
 		xPosition = 0;
 		yPosition = 8;	
 		isAlive=true;
+		ammo = 1;
 	}
 	
 	/**
@@ -310,7 +313,10 @@ public class Player extends GameObject{
 	 * {@link #useBullet(boolean)} can be executed or not
 	 */
 	public boolean checkBulletPossession() {
-		return hasBullet;
+		if(ammo > 0)
+			return true;
+		else
+			return false;
 	}
 	
 	/**
@@ -318,17 +324,15 @@ public class Player extends GameObject{
 	 * @param hasBullet
 	 */
 	public void pickUpBullet(boolean hasBullet) {
-		if (hasBullet = false) {
-			hasBullet = true;
-		}
+		++ammo;
 	}
 	
 	/**
 	 * {@link #useBullet(boolean)} This method will will make the player use the bullet in his possession
 	 * if the @param hasBullet is true
 	 */
-	public boolean useBullet(boolean hasBullet) {
-		return hasBullet = false;
+	public void useBullet() {
+		--ammo;
 	}
 	
 	/**

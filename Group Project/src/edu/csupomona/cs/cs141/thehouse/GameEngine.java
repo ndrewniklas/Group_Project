@@ -299,7 +299,7 @@ public class GameEngine {
 					dir = in.next();
 					hasBullet  = plr.checkBulletPossession();
 					if (hasBullet == true) {
-						hasBullet = plr.useBullet(hasBullet);
+						plr.useBullet();
 						ui.shotFired();
 						grid.shootGunCheck(plr.get_yPosition(), plr.get_yPosition(), dir);
 					} else {
