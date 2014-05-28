@@ -245,8 +245,13 @@ public class Grid {
 	 */
 	public boolean checkForEnemy(int yPos, int xPos) {
 		boolean check = false;
-		if(gog[yPos][xPos] instanceof Enemy){
-				check = true;
+		if(gog[yPos][xPos] == enemy[0]
+				|| gog[yPos][xPos] == enemy[1] 
+				|| gog[yPos][xPos] == enemy[2]
+				|| gog[yPos][xPos] == enemy[3]
+				|| gog[yPos][xPos] == enemy[4]
+				|| gog[yPos][xPos] == enemy[5]){
+			check = true;
 		}
 		else{
 			check = false;
