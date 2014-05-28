@@ -48,6 +48,7 @@ public class Enemy extends GameObject {
 	//This method will show enemy dependent on boolean value taken
 	public Enemy(boolean showEnemy) {
 		setRealName(ENEMY_NAME);
+		enemyDead = false;
 		if(showEnemy)
 			setObjectName(ENEMY_NAME);
 		else
@@ -159,8 +160,8 @@ public class Enemy extends GameObject {
 	/**
 	 * {@link #ninjaDies()} This method will kill the ninja if the player fires a bullet
 	 */
-	public void ninjaDies() {
-		
+	public boolean enemyDied() {
+		return enemyDead;
 	}
 	
 	public void printEnemyPos(int i) {

@@ -101,7 +101,7 @@ public class GameEngine {
 
 	private String cmd;
 	
-	private boolean didPlayerMove;
+	private boolean didPlayerTakeTurn;
 	
 	/**
 	 * This field will repeat a do while loop if {@code true} in either {@link #mainMenuSelect()}
@@ -115,7 +115,7 @@ public class GameEngine {
 
 	private boolean hasRadar = false;
 	
-	private boolean hasBullet = true;
+	private boolean hasBullet = false;
 
 	/**
      * The default constructor for GameEngine.
@@ -148,13 +148,13 @@ public class GameEngine {
     	while(!gameOver){
     		grid.rePopulateGrid(plr);
     		ui.printGrid(grid);
-    		didPlayerMove = false;
-    		while(!didPlayerMove){
-        		if(plr.getHasBriefCase())
-        			gameOver = true;
+    		didPlayerTakeTurn = false;
+    		while(!didPlayerTakeTurn){
     			ui.mainGameCMD(); //print options available during each turn
     			System.out.println("Ammo Left: " + plr.ammoAmount());
     			turnSelect();
+        		if(plr.getHasBriefCase())
+        			gameOver = true;
     		}
     		objectCheck();
 			grid.moveEnemy(grid);
@@ -292,6 +292,7 @@ public class GameEngine {
 					playerLook(dir);
 					ui.printGrid(grid);
 					stopPlayerLook(dir);
+					didPlayerTakeTurn = true;
 					break;
 				
 				case "move":
@@ -318,6 +319,7 @@ public class GameEngine {
 						ui.noBullet();
 					}
 					ui.printGrid(grid);
+					didPlayerTakeTurn = true;
 					break;
 					
 				case "options":
@@ -374,7 +376,7 @@ public class GameEngine {
     public void movePlayerForTurn(){
 		String input = in.next();
 		plr.movePlayer(input);
-    	didPlayerMove = true;
+    	didPlayerTakeTurn = true;
     }
     public void playerLook(String dir){
     	plr.playerLook(grid, dir); 
@@ -423,30 +425,19 @@ public class GameEngine {
 			case "1":
 				debugMode(true);
 				System.out.println("WECLOME TO DEBUG MODE");
-				setOption();
+				//setOption();
 				break;
 			
 			case "off":
 			case "2":
 				debugMode(false);
 				System.out.println("I guess you like being blind...");
-				setOption();
+				//setOption();
 				break;
 			
 			default:
 				ui.invalidCMD();
 		}    	
-    }
-    // Methods to check/send fields to other classes    
-    /**
-     * Used to set {@link #lookDirection} and {@link #userChoice}.
-     * @param
-     * 		lookDir - The direction chosen by the user to look, saved to {@link #lookDirection}
-     * @param
-     * 		choice - The choice of the user saved to a {@link #userChoice}. 		 
-     */		
-    public void setUserCMD(String lookDir, String choice){
-    	
     }
 
     /**
