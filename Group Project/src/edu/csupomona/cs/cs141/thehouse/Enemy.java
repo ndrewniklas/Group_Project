@@ -43,6 +43,7 @@ public class Enemy extends GameObject {
 	public Enemy(){
 		setObjectName(ENEMY_NAME);
 		setHiddenName(getBlankName());
+		objID = setObjId(1);
 	}
 	
 	//This method will show enemy dependent on boolean value taken
@@ -63,18 +64,34 @@ public class Enemy extends GameObject {
 			int ranNum = die.roll(4);		
 			xpre = xPosition;
 			ypre = yPosition;
-			if (ranNum == 0 && upPossible() && yPosition - 1 >= 0 && yPosition - 1 <= 8 && !grid.checkForEnemy(yPosition - 1, xPosition)) {
+			if (ranNum == 0 && upPossible()) {
+				if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
+					if (!grid.checkForEnemy(yPosition - 1, xPosition)){
 						setXY(xPosition, --yPosition);
 						cleanEnemies(grid);
-			} else if (ranNum == 1 && downPossible() && yPosition + 1 >= 0 && yPosition + 1 <= 8 && !grid.checkForEnemy(yPosition+1, xPosition)) {
+					}
+				}
+			} else if (ranNum == 1 && downPossible()) {
+				if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
+					if (!grid.checkForEnemy(yPosition+1, xPosition)){
 						setXY(xPosition, ++yPosition);
 						cleanEnemies(grid);
-			} else if (ranNum == 2 && rightPossible() && xPosition + 1 >= 0 && xPosition + 1 <= 8 && !grid.checkForEnemy(yPosition, xPosition+1)) {
+					}
+				}
+			} else if (ranNum == 2 && rightPossible()) {
+				if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
+					if (!grid.checkForEnemy(yPosition, xPosition+1)){
 						setXY(++xPosition, yPosition);
 						cleanEnemies(grid);
-			} else if (ranNum == 3 && leftPossible() && xPosition - 1 >= 0 && xPosition - 1 <= 8 && !grid.checkForEnemy(yPosition, xPosition-1)) {
+					}
+				}
+			} else if (ranNum == 3 && leftPossible()) {
+				if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
+					if (!grid.checkForEnemy(yPosition, xPosition-1)){
 						setXY(--xPosition, yPosition);
 						cleanEnemies(grid);
+					}
+				}
 			} else {
 				ranNum = die.roll(4);
 				moveEnemy(grid);
