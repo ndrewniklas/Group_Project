@@ -314,7 +314,7 @@ public class Player extends GameObject{
 	 * This method will check if there is briefcase in front of the player
 	 * @return This return value will return true if there is a briefcase in front of the player
 	 */
-	public void getBriefCase() {
+	public void getBriefCase(boolean hasBriefCase) {
 		hasBriefCase = true;
 	}
 	
