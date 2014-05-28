@@ -51,7 +51,7 @@ public class Shield extends GameObject {
 	/**
 	 * {@link Player} This is the method that gives invincibility
 	 */
-	public void blockAttack(){
+	public void activateShield(Player plr){
 		
 	}
 }

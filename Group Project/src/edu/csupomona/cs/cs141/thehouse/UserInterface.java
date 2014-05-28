@@ -148,6 +148,11 @@ public class UserInterface {
 	public void ammoActivated(){
 		System.out.println("You have picked up ammo!");
 	}
+	
+	public void shieldActivated() {
+		System.out.println("You have picked up the shield!");
+		System.out.println("You will block attacks for 5 turns");
+	}
 	public void getAmmoAmount(){
 		
 	}
@@ -178,4 +183,6 @@ public class UserInterface {
 	public void endScreen(){
 		System.out.println("Thanks for playing!");
 	}
+
+
 }

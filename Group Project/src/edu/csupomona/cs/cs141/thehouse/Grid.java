@@ -392,6 +392,12 @@ public class Grid {
 	public ExtraAmmo getExtraAmmo(){
 		return extraAmmo;
 	}
+	public Shield getShield(){
+		return shield;
+	}
+	public int[] getShieldPos(){
+		return shieldPos;
+	}
 	public void spawnExtraAmmo(){
 		int spawnOne;
 		int spawnTwo;

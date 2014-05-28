@@ -165,6 +165,7 @@ public class GameEngine {
     private void objectCheck() {
     	int[] radarPos = grid.getRadarPos();
     	int[] extraAmmoPos = grid.getExtraAmmoPos();
+    	int[] shieldPos = grid.getShieldPos();
     	if (plr.get_yPosition() == radarPos[0] && plr.get_xPosition() == radarPos[1]) {
     		grid.activateRadar();
     		ui.radarActivated();
@@ -172,6 +173,10 @@ public class GameEngine {
     	if (plr.get_yPosition() == extraAmmoPos[0] && plr.get_xPosition() == extraAmmoPos[1]) {
     		grid.getExtraAmmo().addAmmo(plr);
     		ui.ammoActivated();
+    	}
+    	if (plr.get_yPosition() == shieldPos[0] && plr.get_xPosition() == shieldPos[1]) {
+    		grid.getShield().activateShield(plr);
+    		ui.shieldActivated();
     	}
 	}
 
