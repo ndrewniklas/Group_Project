@@ -111,21 +111,31 @@ public class Grid {
 	
 	public void changeAllObjectStates(boolean toggle) {
 		if(toggle){
-			shield.showName();
+			/*shield.showName();
 			radar.showName();
 			extraAmmo.showName();
 			for(int i = 0; i < enemy.length; ++i){
 				enemy[i].showName();
 			}
-			gameObj.showName();
+			gameObj.showName();*/
+			for(int i = 0; i < gog.length; ++i){
+				for(int j = 0; j < gog[i].length; ++j){
+					gog[i][j].showName();
+				}
+			}
 		}else{
-			shield.hideName();
+		/*	shield.hideName();
 			radar.hideName();
 			extraAmmo.hideName();
 			for(int i = 0; i < enemy.length; ++i){
 				enemy[i].hideName();
 			}
-			gameObj.hideName();
+			gameObj.hideName();*/
+			for(int i = 0; i < gog.length; ++i){
+				for(int j = 0; j < gog[i].length; ++j){
+					gog[i][j].hideName();
+				}
+			}
 		}	
 	}
 	
