@@ -337,6 +337,10 @@ public class Player extends GameObject{
 		--ammo;
 	}
 	
+	public int ammoAmount(){
+		return ammo;
+	}
+	
 	/**
 	 * {@link #checkBulletHit()} This method will check if the bullet hit the enemy ninja
 	 */

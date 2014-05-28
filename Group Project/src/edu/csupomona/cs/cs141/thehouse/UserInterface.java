@@ -148,6 +148,9 @@ public class UserInterface {
 	public void ammoActivated(){
 		System.out.println("You have picked up ammo!");
 	}
+	public void getAmmoAmount(){
+		
+	}
 	
 	public void killEnemy() {
 		System.out.println("You've killed an enemy!");

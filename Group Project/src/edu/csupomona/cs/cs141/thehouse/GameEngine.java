@@ -153,6 +153,7 @@ public class GameEngine {
         		if(plr.getHasBriefCase())
         			gameOver = true;
     			ui.mainGameCMD(); //print options available during each turn
+    			System.out.println("Ammo Left: " + plr.ammoAmount());
     			turnSelect();
     		}
     		objectCheck();
@@ -174,6 +175,9 @@ public class GameEngine {
     	}
 	}
 
+    public Player getPlayer(){
+    	return plr;
+    }
 	//For use with navigating the main menu
     /**
      * This method is called after {@link UserInterface#mainMenu()} prints the menu. It uses a 
