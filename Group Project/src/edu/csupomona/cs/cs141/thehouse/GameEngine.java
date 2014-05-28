@@ -113,6 +113,8 @@ public class GameEngine {
 
 	private String debugSelect;
 
+	private boolean hasRadar = false;
+
 	/**
      * The default constructor for GameEngine.
      * 
@@ -142,6 +144,7 @@ public class GameEngine {
      */
     public void gameLoop(){
     	while(!gameOver){
+    		grid.setBriefcase();
     		grid.rePopulateGrid(plr);
     		ui.printGrid(grid);
     		didPlayerMove = false;
@@ -149,11 +152,21 @@ public class GameEngine {
     			ui.mainGameCMD(); //print options available during each turn
     			turnSelect();
     		}
+    		objectCheck();
 			grid.moveEnemy(grid);
     	} 	
     }
     
-    //For use with navigating the main menu
+    private void objectCheck() {
+    	int [] radarPos = grid.getRadarPos();
+    	if (plr.get_yPosition() == radarPos[0] && plr.get_xPosition() == radarPos[1]) {
+    		grid.activateRadar();
+    		ui.radarActivated();
+    	}
+		
+	}
+
+	//For use with navigating the main menu
     /**
      * This method is called after {@link UserInterface#mainMenu()} prints the menu. It uses a 
      * switch statement to check each potential command, and a do-while loop to ensure that 

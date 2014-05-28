@@ -270,7 +270,7 @@ public class Grid {
 		while(secondRandom != 1 && secondRandom != 4 && secondRandom != 7){
 			secondRandom = die.roll();
 		}
-		gog[firstRandom][secondRandom] = new Room(true, showBriefcase);
+		gog[firstRandom][secondRandom] = new Room(true, false);
 		briefcasePos[0] = firstRandom;
 		briefcasePos[1] = secondRandom;
 	}
@@ -401,5 +401,13 @@ public class Grid {
 				++i;
 			}
 		}
+	}
+	
+	public int[] getRadarPos() {
+			return radarPos;
+	}
+
+	public void activateRadar() {
+		gog[briefcasePos[0]][briefcasePos[1]] = new Room(true, showBriefcase);
 	}
 }
