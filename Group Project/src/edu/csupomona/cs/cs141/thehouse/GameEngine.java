@@ -198,8 +198,7 @@ public class GameEngine {
     private void mainMenuSelect() {
 		do {
 			ui.mainMenu();
-    		menuSelection = in.next();
-    		menuSelection = menuSelection.toLowerCase();
+    		menuSelection = in.next().toLowerCase();
     		repeat = false;
     		switch(menuSelection) {
 				case "new":

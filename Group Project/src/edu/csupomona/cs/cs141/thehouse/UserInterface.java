@@ -37,7 +37,7 @@ public class UserInterface {
 	 * 		or "new game".
 	 */
 	public void mainMenu() {
-		System.out.println("Welcome to the House Game!");
+		System.out.println("Welcome to The House Game!");
 		System.out.println();
 		System.out.println("What would you like to do?");
 		System.out.println("1)New");
