@@ -173,7 +173,7 @@ public class Player extends GameObject{
 		case "down":
 		case "d":
 		case "2":
-			lookDown();
+			lookDown(grid);
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
 			
@@ -208,7 +208,7 @@ public class Player extends GameObject{
 		case "down":
 		case "d":
 		case "2":
-			lookDown();
+			lookDown(grid);
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, false);
 			break;
 			
@@ -249,11 +249,12 @@ public class Player extends GameObject{
 			lookPosX2 = xPosition;
 		}
 	}
-	public void lookDown(){
+	public void lookDown(Grid grid){
 		//Down one
 		if(yPosition+1 >= 0 && yPosition+1 <= 8 ){
 			lookPosY1 = yPosition + 1;	
 			lookPosX1 = xPosition;
+			checkbreifcase(lookPosY1, lookPosX1, grid);
 		}else{
 			lookPosY1 = yPosition;	
 			lookPosX1 = xPosition;
@@ -268,6 +269,7 @@ public class Player extends GameObject{
 		}
 	
 	}
+
 	public void lookRight(){
 		//Right one
 		if(xPosition + 1 >= 0 && xPosition + 1 <= 8 && roomExists(yPosition,xPosition + 1)){
@@ -384,6 +386,19 @@ public class Player extends GameObject{
 		isAlive = false;
 	}
 	
+	private void checkbreifcase(int lookPosY1, int lookPosX1, Grid grid) {
+		int[] bcPos = grid.getBCpos();
+		if(lookPosY1==bcPos[0] && lookPosX1 == bcPos[1]){
+			hasBriefCase = true;
+		System.out.println("YOU FOUND THE BRIEFCASE");
+		}
+		else
+			hasBriefCase = false;			
+	}
+	
+	public boolean getHasBriefCase() {
+		return hasBriefCase;
+	}
 	/**
 	 * This method will check if there is briefcase in front of the player
 	 * @return This return value will return true if there is a briefcase in front of the player

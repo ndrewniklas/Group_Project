@@ -154,6 +154,8 @@ public class GameEngine {
     			turnSelect();
     		}
     		objectCheck();
+    		if(plr.getHasBriefCase())
+    			gameOver = true;
 			grid.moveEnemy(grid);
     	} 	
 
@@ -334,7 +336,7 @@ public class GameEngine {
     	didPlayerMove = true;
     }
     public void playerLook(String dir){
-    	plr.playerLook(grid, dir);
+    	plr.playerLook(grid, dir); 
     }
     public void stopPlayerLook(String dir){
     	plr.stopLooking(grid, dir);
@@ -414,6 +416,12 @@ public class GameEngine {
     	return userQuit;
     }
 
+    /**
+	 * @param lookPosY12
+	 * @param lookPosX12
+	 */
+	
+	
     /**
      * Used to send out {@link #foundBriefcase} which is checked within {@link #gameLoop()}.
      * @return {@link #foundBriefcase} value

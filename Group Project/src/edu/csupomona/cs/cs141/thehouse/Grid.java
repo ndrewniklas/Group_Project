@@ -300,7 +300,9 @@ public class Grid {
 		briefcasePos[0] = firstRandom;
 		briefcasePos[1] = secondRandom;
 	}
-	
+	public int[] getBCpos() {
+		return briefcasePos;
+	}
 	public Room getBriefcaseRoom(){
 		return bcRoom;
 	}
