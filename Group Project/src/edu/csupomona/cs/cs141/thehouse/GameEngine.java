@@ -149,12 +149,12 @@ public class GameEngine {
     		didPlayerMove = false;
     		while(!didPlayerMove){
     			ui.mainGameCMD(); //print options available during each turn
-    			plr.playerDefaultVision(grid);
     			turnSelect();
     		}
     		objectCheck();
 			grid.moveEnemy(grid);
     	} 	
+
     }
     
     private void objectCheck() {
@@ -302,6 +302,9 @@ public class GameEngine {
 				case "e":
 				case "0":
 					System.exit(0);
+					break;
+				case "reset":
+					startGame();
 					break;
 			
 			default:

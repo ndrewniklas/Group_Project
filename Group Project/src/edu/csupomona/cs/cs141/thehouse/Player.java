@@ -134,9 +134,25 @@ public class Player extends GameObject{
 	}
 	
 	public void playerDefaultVision(Grid grid){
-
+		if(yPosition+1 >= 0 && yPosition+1 <= 8 )
+			grid.showPlayerDefaultVision(yPosition + 1, xPosition, true);
+		if(yPosition-1 >= 0 && yPosition-1 <= 8 )
+			grid.showPlayerDefaultVision(yPosition - 1, xPosition, true);
+		if(xPosition - 1 >= 0 && xPosition - 1 <= 8 )
+			grid.showPlayerDefaultVision(yPosition, xPosition - 1, true);
+		if(xPosition+1 >= 0 && xPosition+1 <= 8 )
+			grid.showPlayerDefaultVision(yPosition, xPosition + 1, true);
 	}
-	
+	public void clearDefaultVision(Grid grid){
+		if(yPosition+1 >= 0 && yPosition+1 <= 8 )
+			grid.showPlayerDefaultVision(yPosition + 1, xPosition, false);
+		if(yPosition-1 >= 0 && yPosition-1 <= 8 )
+			grid.showPlayerDefaultVision(yPosition - 1, xPosition, false);
+		if(xPosition - 1 >= 0 && xPosition - 1 <= 8 )
+			grid.showPlayerDefaultVision(yPosition, xPosition - 1, false);
+		if(xPosition+1 >= 0 && xPosition+1 <= 8 )
+			grid.showPlayerDefaultVision(yPosition, xPosition + 1, false);
+	}
 	/**
 	 * {@link #playerLook()} This method will reveal two spaces in the desired direction
 	 * on the grid based on user input
@@ -211,9 +227,10 @@ public class Player extends GameObject{
 			System.out.println("Something went wrong");
 		}
 	}
+	
 	public void lookUp(){
 		//Up one
-		if(yPosition-1 >= 0 && yPosition-1 <= 8 ){
+		if(yPosition-1 >= 0 && yPosition-1 <= 8 && roomExists(yPosition-1,xPosition)){
 			lookPosY1 = yPosition - 1;	
 			lookPosX1 = xPosition;
 		}else{
@@ -221,7 +238,7 @@ public class Player extends GameObject{
 			lookPosX1 = xPosition;
 		}
 		//Up two
-		if(yPosition - 2 >= 0 && yPosition - 2 <= 8 && xPosition >= 0 && xPosition <= 8){
+		if(yPosition - 2 >= 0 && yPosition - 2 <= 8 && xPosition >= 0 && xPosition <= 8 && roomExists(yPosition-2,xPosition)){
 			lookPosY2 = yPosition - 2;
 			lookPosX2 = xPosition;
 		}else{
@@ -231,7 +248,7 @@ public class Player extends GameObject{
 	}
 	public void lookDown(){
 		//Down one
-		if(yPosition+1 >= 0 && yPosition+1 <= 8){
+		if(yPosition+1 >= 0 && yPosition+1 <= 8 ){
 			lookPosY1 = yPosition + 1;	
 			lookPosX1 = xPosition;
 		}else{
@@ -239,7 +256,7 @@ public class Player extends GameObject{
 			lookPosX1 = xPosition;
 		}
 		//Down two
-		if(yPosition + 2 >= 0 && yPosition + 2 <= 8 && xPosition >= 0 && xPosition <= 8){
+		if(yPosition + 2 >= 0 && yPosition + 2 <= 8 && xPosition >= 0 && xPosition <= 8 && roomExists(yPosition+2,xPosition)){
 			lookPosY2 = yPosition + 2;
 			lookPosX2 = xPosition;
 		}else{
@@ -250,7 +267,7 @@ public class Player extends GameObject{
 	}
 	public void lookRight(){
 		//Right one
-		if(xPosition + 1 >= 0 && xPosition + 1 <= 8){
+		if(xPosition + 1 >= 0 && xPosition + 1 <= 8 && roomExists(yPosition,xPosition + 1)){
 			lookPosY1 = yPosition;	
 			lookPosX1 = xPosition + 1;
 		}else{
@@ -258,7 +275,7 @@ public class Player extends GameObject{
 			lookPosX1 = xPosition;
 		}
 		//right two
-		if(xPosition + 2 >= 0 && xPosition + 2 <= 8 && yPosition >= 0 && yPosition <= 8){
+		if(xPosition + 2 >= 0 && xPosition + 2 <= 8 && yPosition >= 0 && yPosition <= 8 && roomExists(yPosition,xPosition + 2)){
 			lookPosY2 = yPosition;
 			lookPosX2 = xPosition + 2;
 		}else{
@@ -268,7 +285,7 @@ public class Player extends GameObject{
 	}
 	public void lookLeft(){
 		//Left one
-		if(xPosition - 1 >= 0 && xPosition - 1 <= 8){
+		if(xPosition - 1 >= 0 && xPosition - 1 <= 8 && roomExists(yPosition,xPosition-1)){
 			lookPosY1 = yPosition;	
 			lookPosX1 = xPosition - 1;
 		}else{
@@ -276,7 +293,7 @@ public class Player extends GameObject{
 			lookPosX1 = xPosition;
 		}
 		//left two
-		if(xPosition - 2 >= 0 && xPosition - 2 <= 8 && yPosition >= 0 && yPosition <= 8){
+		if(xPosition - 2 >= 0 && xPosition - 2 <= 8 && yPosition >= 0 && yPosition <= 8&& roomExists(yPosition,xPosition-2)){
 			lookPosY2 = yPosition;
 			lookPosX2 = xPosition - 2;
 		}else{
