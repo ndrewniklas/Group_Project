@@ -262,6 +262,14 @@ public class GameEngine {
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
+				case "check":
+					in.reset();
+					System.out.println("Select y");
+					int ydir = in.nextInt();
+					System.out.println("Select x");
+					int xdir = in.nextInt();
+					System.out.println(grid.checkForEnemy(ydir, xdir));
+					break;					
 				case "show":
 					grid.changeAllObjectStates(true);
 					ui.printGrid(grid);
@@ -303,7 +311,7 @@ public class GameEngine {
 					if (hasBullet == true) {
 						plr.useBullet();
 						ui.shotFired();
-						grid.shootGunCheck(plr.get_yPosition(), plr.get_yPosition(), dir);
+						grid.shootGunCheck(plr.get_yPosition(), plr.get_xPosition(), dir);
 					} else {
 						ui.noBullet();
 					}

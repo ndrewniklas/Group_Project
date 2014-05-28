@@ -168,4 +168,7 @@ public class UserInterface {
 		System.out.println("You have no bullet to fire.");
 		
 	}	
+	public void endScreen(){
+		System.out.println("Thanks for playing!");
+	}
 }
