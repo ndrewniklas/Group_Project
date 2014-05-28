@@ -146,6 +146,8 @@ public class GameEngine {
      */
     public void gameLoop(){
     	while(!gameOver){
+    		if(plr.getHasBriefCase())
+    			gameOver = true;
     		grid.rePopulateGrid(plr);
     		ui.printGrid(grid);
     		didPlayerMove = false;
@@ -154,10 +156,9 @@ public class GameEngine {
     			turnSelect();
     		}
     		objectCheck();
-    		if(plr.getHasBriefCase())
-    			gameOver = true;
 			grid.moveEnemy(grid);
-    	} 	
+    	}
+    	
 
     }
     
