@@ -141,21 +141,33 @@ public class Player extends GameObject{
 		direction = direction.toLowerCase();
 		switch(direction){
 		case "up":
+		case "u":
+		case "1":
 			lookUp();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
+			
 		case "down":
+		case "d":
+		case "2":
 			lookDown();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
+			
 		case "right":
+		case "r":
+		case "3":
 			lookRight();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
+			
 		case "left":
+		case "l":
+		case "4":
 			lookLeft();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
+			
 		default:
 			System.out.println("Something went wrong");
 		}
