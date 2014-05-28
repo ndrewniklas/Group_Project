@@ -244,16 +244,15 @@ public class Grid {
 	 * @return
 	 */
 	public boolean checkForEnemy(int yPos, int xPos) {
+		boolean check = false;
 		if(gog[yPos][xPos] instanceof Enemy){
-//			if(gog[yPos][xPos] instanceof Player){
 			System.out.println("false");
-				return false;
-//			}
+				check = false;
 		}
 		else{
-			System.out.println("true");
+			check = true;
 		}
-		return true;
+		return check;
 	}
 	
 	public boolean checkEnemiesStacked(){
