@@ -325,6 +325,7 @@ public class GameEngine {
 				} else {
 					ui.noBullet();
 				}
+				ui.printGrid(grid);
 				break;
 			case "options":
 				ui.printGrid(grid);
