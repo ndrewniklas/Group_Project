@@ -238,7 +238,7 @@ public class Player extends GameObject{
 			lookPosX1 = xPosition;
 		}
 		//Up two
-		if(yPosition - 2 >= 0 && yPosition - 2 <= 8 && xPosition >= 0 && xPosition <= 8 && roomExists(yPosition-2,xPosition)){
+		if(yPosition - 2 >= 0 && yPosition - 2 <= 8 && roomExists(yPosition-2,xPosition)&& roomExists(yPosition-1,xPosition)){
 			lookPosY2 = yPosition - 2;
 			lookPosX2 = xPosition;
 		}else{
@@ -275,7 +275,7 @@ public class Player extends GameObject{
 			lookPosX1 = xPosition;
 		}
 		//right two
-		if(xPosition + 2 >= 0 && xPosition + 2 <= 8 && yPosition >= 0 && yPosition <= 8 && roomExists(yPosition,xPosition + 2)){
+		if(xPosition + 2 >= 0 && xPosition + 2 <= 8 && yPosition >= 0 && yPosition <= 8 && roomExists(yPosition,xPosition + 2)&& roomExists(yPosition,xPosition + 1)){
 			lookPosY2 = yPosition;
 			lookPosX2 = xPosition + 2;
 		}else{
@@ -293,7 +293,7 @@ public class Player extends GameObject{
 			lookPosX1 = xPosition;
 		}
 		//left two
-		if(xPosition - 2 >= 0 && xPosition - 2 <= 8 && yPosition >= 0 && yPosition <= 8&& roomExists(yPosition,xPosition-2)){
+		if(xPosition - 2 >= 0 && xPosition - 2 <= 8 && yPosition >= 0 && yPosition <= 8&& roomExists(yPosition,xPosition-2)&& roomExists(yPosition,xPosition-1)){
 			lookPosY2 = yPosition;
 			lookPosX2 = xPosition - 2;
 		}else{
