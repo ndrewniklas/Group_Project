@@ -78,6 +78,7 @@ public class UserInterface {
 		System.out.println("You can change the options here:");
 		System.out.println("1) AI");
 		System.out.println("2) Debug Mode");
+		System.out.println("3) Save Game");
 		System.out.println("Type \"return\" or 0 to return to the main menu:");
 	}
 	 

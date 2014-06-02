@@ -54,13 +54,15 @@ public class File_Handler {
 	public void openFile() throws IOException {
 		fis = new FileInputStream(SAVE_FILE);
 		ois = new ObjectInputStream(fis);
+		
+		
 	}
 	
 	/**
 	 * @throws IOException 
 	 * 
 	 */
-	private void saveFile(Grid grid) throws IOException {
+	public void saveFile(Grid grid) throws IOException {
 		fos = new FileOutputStream(SAVE_FILE);
 		oos = new ObjectOutputStream(fos);
 		GameObject[][] gog = grid.getGOG();

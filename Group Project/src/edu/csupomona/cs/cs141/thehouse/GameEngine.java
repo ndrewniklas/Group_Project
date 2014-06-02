@@ -51,6 +51,11 @@ public class GameEngine {
 	private UserInterface ui;
 	
 	/**
+	 * Instantiation for {@link File_Handler}
+	 */
+	private File_Handler fh;
+	
+	/**
 	 * Checks to see if the game is over
 	 */
 	private boolean gameOver;
@@ -130,6 +135,7 @@ public class GameEngine {
     	ui = new UserInterface();
     	grid = new Grid();
     	ui = new UserInterface();
+    	fh = new File_Handler();
     }
     
 	/**
@@ -212,6 +218,7 @@ public class GameEngine {
 				case "continue":
 				case "c":
 				case "2":
+					fh.fileLander("Open", grid);
 					break;
 					
 				case "rules":
@@ -327,7 +334,7 @@ public class GameEngine {
 				case "4":
 					ui.printGrid(grid);
 					break;
-							
+					
 				case "exit":
 				case "e":
 				case "0":
@@ -406,6 +413,12 @@ public class GameEngine {
     	    		setDebug();
     	    		returnToMain();
     	    		break;
+    	    		
+    	    	case "save":
+				case "5":
+					fh.fileLander("Save", grid);
+					returnToMain();
+					break;
 
     	    	case "exit":
     	    	case "e":
