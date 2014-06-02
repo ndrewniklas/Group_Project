@@ -158,6 +158,10 @@ public class Enemy extends GameObject {
 		
 	}
 	
+	public void killEnemy(){
+		
+	}
+	
 	/**
 	 * {@link #ninjaDies()} This method will kill the ninja if the player fires a bullet
 	 */

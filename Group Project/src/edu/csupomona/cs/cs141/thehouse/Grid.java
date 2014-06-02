@@ -144,11 +144,15 @@ public class Grid {
 	 * Prints out the name of the object at that location
 	 */
 	public void printGrid(){
+
 		for(int i = 0; i < gog.length; ++i){
 			for(int j = 0; j < gog[i].length; ++j){
 				gog[i][j].printObject();
 			}
 			System.out.println();
+		}
+		for(int i = 0; i < enemy.length; ++i){
+			enemy[i].printEnemyPos(i);		// for testing purpose only
 		}
 	}
 	
@@ -186,9 +190,9 @@ public class Grid {
 			gog[ply.getYPre()][ply.getXPre()] = new GameObject();
 		}
 		
-		for(int i = 0; i < enemy.length; ++i){
+		/*for(int i = 0; i < enemy.length; ++i){
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
-		}
+		}*/
 	}
 
 	public void rePopulateGrid(){					//for testing only
@@ -224,14 +228,19 @@ public class Grid {
 	 */
 	public boolean checkForEnemy(int yPos, int xPos) {
 		boolean check = false;
-		if(gog[yPos][xPos].compareTo(enemy[0]) == 0){
-			check = true;
-		}
-		else{
-			check = false;
+		try{
+			if(gog[yPos][xPos].compareTo(enemy[0]) == 0){
+				check = true;
+			}
+			else{
+				check = false;
+			}
+		}catch(ArrayIndexOutOfBoundsException e){
+			//System.out.println("Out of the grid");
 		}
 		return check;
 	}
+	
 	
 	public boolean checkEnemiesStacked(){
 		int x=0;
@@ -287,7 +296,6 @@ public class Grid {
 	public void setEnemy() {
 		int spawnOne;
 		int spawnTwo;
-		boolean showEnemy = true;
 
 		for(int i = 0; i < 6; ++i){
 			enemy[i] = new Enemy(enemyVis);
@@ -320,10 +328,7 @@ public class Grid {
 	public void moveEnemy(Grid grid) {
 		for (int i = 0; i < enemy.length; i++) {
 			enemy[i].moveEnemy(grid);
-			
-			enemy[i].printEnemyPos(i);		// for testing purpose only
-//			boolean stacked = checkEnemiesStacked();
-//			System.out.println("Stacked: " + stacked);
+			rePopulateGrid();
 		}
 	}
 
@@ -441,10 +446,12 @@ public class Grid {
 				enemyInstance = checkForEnemy(i, xplr);
 				System.out.print(i + " " + xplr);
 				System.out.println(enemyInstance);
-				if (enemyInstance == true) {
-//					killEnemy(i, xplr);
+				if(enemyInstance){
+					gog[i][xplr] = new GameObject();
+					enemydied = true;
 				}
 			}
+			printGrid();
 			break;
 			
 		case "down":
@@ -454,9 +461,6 @@ public class Grid {
 				enemyInstance = checkForEnemy(i, xplr);
 				System.out.print(i + " " + xplr);
 				System.out.println(enemyInstance);
-				if (enemyInstance == true) {
-//					killEnemy(i, xplr);
-				}
 			}
 			break;
 			
@@ -467,9 +471,7 @@ public class Grid {
 				enemyInstance = checkForEnemy(yplr, i);
 				System.out.print(yplr + " " + i);
 				System.out.println(enemyInstance);
-				if (enemyInstance == true) {
-//					killEnemy(yplr, i);
-				}
+
 			}
 			break;
 			
@@ -480,25 +482,12 @@ public class Grid {
 				System.out.print(yplr + " " + i);
 				enemyInstance = checkForEnemy(yplr, i);
 				System.out.println(enemyInstance);
-				if (enemyInstance == true) {
-//					killEnemy(yplr, i);
-				}
+
 			}
 			break;
 		}
 	}
 
-	private void killEnemy(int ypos, int xpos) {
-		for(int i = 0; i < enemy.length; i++) {
-			if (enemy[i].pos[0] == ypos && enemy[i].pos[1] == xpos) {
-				enemydied = true;
-				System.out.println("Enemy died");
-			} else {
-				System.out.println("Enemy did not die");
-			}
-		}
-	}
-	
 	public boolean getEnemyVis(boolean vis){
 		enemyVis = vis;
 		return enemyVis;		

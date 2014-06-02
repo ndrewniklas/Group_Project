@@ -145,9 +145,11 @@ public class GameEngine {
      * finding the briefcase, the player dying, or the user quitting.
      */
     public void gameLoop(){
+		grid.rePopulateGrid(plr);
+		ui.printGrid(grid);
     	while(!gameOver){
     		grid.rePopulateGrid(plr);
-    		ui.printGrid(grid);
+    		//ui.printGrid(grid);
     		didPlayerTakeTurn = false;
     		while(!didPlayerTakeTurn){
     			ui.mainGameCMD(); 		//print options available during each turn
@@ -285,7 +287,6 @@ public class GameEngine {
 				case "look":
 				case "l":
 				case "1":
-					ui.printGrid(grid);
 					ui.lookDirections();
 					in.reset();
 					dir = in.next();
@@ -298,7 +299,6 @@ public class GameEngine {
 				case "move":
 				case "m":
 				case "2":
-					ui.printGrid(grid);
 					ui.moveTurn();
 					movePlayerForTurn();
 					break;
@@ -377,10 +377,13 @@ public class GameEngine {
     public void movePlayerForTurn(){
 		String input = in.next();
 		plr.movePlayer(input);
-    	didPlayerTakeTurn = true;
+		grid.rePopulateGrid(plr);
+		grid.printGrid();
+		didPlayerTakeTurn = true;
     }
     public void playerLook(String dir){
     	plr.playerLook(grid, dir); 
+    	grid.printGrid();
     }
     public void stopPlayerLook(String dir){
     	plr.stopLooking(grid, dir);
