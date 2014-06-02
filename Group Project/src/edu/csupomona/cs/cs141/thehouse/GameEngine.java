@@ -339,7 +339,7 @@ public class GameEngine {
 				case "e":
 				case "0":
 					ui.endScreen();
-					ui.mainMenu();
+					System.exit(0);
 					break;
 			
 				default:

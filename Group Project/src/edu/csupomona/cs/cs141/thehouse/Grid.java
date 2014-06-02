@@ -1,12 +1,13 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
+import java.io.Serializable;
 import java.util.*;
 /**
  * @author Ben, Andrew
  *
  */
-public class Grid {
+public class Grid implements Serializable{
 	
 	/**
 	 * The grid is a 9x9 array of GameObject
@@ -33,6 +34,8 @@ public class Grid {
 	private Radar radar;
 	
 	private ExtraAmmo extraAmmo;
+	
+	private File_Handler fileIO = new File_Handler();
 	
 	/**
 	 * Checks to see if we should print the name of the briefcase 
@@ -514,5 +517,9 @@ public class Grid {
 	 */
 	public GameObject[][] getGOG() {
 		return gog;
+	}
+	
+	public void overwriteGOG(GameObject[][] saveGOG){
+		gog = saveGOG;
 	}
 }

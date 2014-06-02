@@ -16,7 +16,9 @@ import java.io.ObjectOutputStream;
  */
 public class File_Handler {
 	
-	private final String SAVE_FILE = "saveData.house";
+	private final String SAVE_FILE = "save.objects";
+	
+	private final String SAVE_GRID_CLASS = "save.grid";
 	
 	private FileInputStream fis;
 	
@@ -26,13 +28,21 @@ public class File_Handler {
 	
 	private ObjectOutputStream oos;
 	
+	private FileOutputStream fosGrid;
+	
+	private ObjectOutputStream oosGrid;
+	
+	private FileInputStream fisGrid;
+	
+	private ObjectInputStream oisGrid;
+	
 	public void fileLander(String choice, Grid grid) {
 				
 		switch (choice) {
 		case "Open":
 			try {
-				openFile();
-			} catch (IOException e) {
+				openFile(grid);
+			} catch (IOException | ClassNotFoundException e) {
 				
 			}
 			break;
@@ -50,11 +60,16 @@ public class File_Handler {
 		}
 	}
 
-	public void openFile() throws IOException {
+	public void openFile(Grid grid) throws IOException, ClassNotFoundException {
 		fis = new FileInputStream(SAVE_FILE);
 		ois = new ObjectInputStream(fis);
-		
-		
+		grid.overwriteGOG((GameObject[][])ois.readObject());
+	}
+	
+	public Grid openGrid() throws IOException, ClassNotFoundException{
+		fisGrid = new FileInputStream(SAVE_GRID_CLASS);
+		oisGrid = new ObjectInputStream(fis);
+		return (Grid)oisGrid.readObject();
 	}
 	
 	/**
@@ -64,12 +79,10 @@ public class File_Handler {
 	public void saveFile(Grid grid) throws IOException {
 		fos = new FileOutputStream(SAVE_FILE);
 		oos = new ObjectOutputStream(fos);
+		fosGrid = new FileOutputStream(SAVE_GRID_CLASS);
+		oosGrid = new ObjectOutputStream(fos);
 		GameObject[][] gog = grid.getGOG();
-		
-		for (int i = 0; i <gog.length; i++) {
-			for (int j = 0; j < gog[i].length; j++) {
-				oos.writeObject(grid.getObjectAtLocation(i, j));
-			}
-		}
+		oos.writeObject(gog);
+		oosGrid.writeObject(grid);
 	}
 }
