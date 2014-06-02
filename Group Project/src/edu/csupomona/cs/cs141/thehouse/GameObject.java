@@ -3,11 +3,13 @@
  */
 package edu.csupomona.cs.cs141.thehouse;
 
+import java.io.Serializable;
+
 /**
  * @author Andrew
  *
  */
-public class GameObject implements Comparable<GameObject>{
+public class GameObject implements Comparable<GameObject>, Serializable{
 
 	/**
 	 * The name of the object

@@ -35,8 +35,6 @@ public class Grid implements Serializable{
 	
 	private ExtraAmmo extraAmmo;
 	
-	private File_Handler fileIO = new File_Handler();
-	
 	/**
 	 * Checks to see if we should print the name of the briefcase 
 	 */
@@ -86,6 +84,9 @@ public class Grid implements Serializable{
 				gog[i][j] = new GameObject();
 			}
 		}
+	}
+	
+	public void setUpGrid(){
 		setEnemy();
 		setPowerUps();
 		populateGrid();
@@ -520,6 +521,10 @@ public class Grid implements Serializable{
 	}
 	
 	public void overwriteGOG(GameObject[][] saveGOG){
-		gog = saveGOG;
+		for(int i = 0; i < gog.length; ++i){
+			for(int j = 0; j < gog[i].length; ++j){
+				gog[i][j] = saveGOG[i][j];
+			}
+		}
 	}
 }

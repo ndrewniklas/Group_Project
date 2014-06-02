@@ -1,3 +1,8 @@
-Enemies stack
-no death
-shield does not work
+Enemies stack - Fixed
+Enemies don't die
+Player doesn't die
+Shield does nothing
+Remove loading after the game is started, add save to the turnSelect
+Items disappear when enemies step on them
+Options require to enter 0 twice to exit
+

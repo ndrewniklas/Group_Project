@@ -17,6 +17,7 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
@@ -25,7 +26,7 @@ import java.util.Random;
  * @author Ben
  *
  */
-public class Dice {
+public class Dice implements Serializable{
 
 	/**
 	 * This field instantiates {@link Random}.

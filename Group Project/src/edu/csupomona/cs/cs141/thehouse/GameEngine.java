@@ -17,6 +17,8 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
+import java.io.EOFException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -122,6 +124,8 @@ public class GameEngine {
 	
 	private boolean hasBullet = false;
 
+	private boolean loadedSave = false;
+	
 	/**
      * The default constructor for GameEngine.
      * 
@@ -131,11 +135,12 @@ public class GameEngine {
     public GameEngine(){
     	gameOver = false;
     	foundBriefcase=false;
-    	plr = new Player();
-    	ui = new UserInterface();
-    	grid = new Grid();
     	ui = new UserInterface();
     	fh = new File_Handler();
+    	plr = new Player();
+    	grid = new Grid();
+    	ui = new UserInterface();
+    	grid.setUpGrid();
     }
     
 	/**
@@ -151,13 +156,13 @@ public class GameEngine {
      * finding the briefcase, the player dying, or the user quitting.
      */
     public void gameLoop(){
-		grid.rePopulateGrid(plr);
+    		grid.rePopulateGrid(plr);
 		ui.printGrid(grid);
     	while(!gameOver){
-    		grid.rePopulateGrid(plr);
     		//ui.printGrid(grid);
     		didPlayerTakeTurn = false;
     		while(!didPlayerTakeTurn){
+        		grid.rePopulateGrid(plr);
     			ui.mainGameCMD(); 		//print options available during each turn
     			System.out.println("Ammo Left: " + plr.ammoAmount());
     			turnSelect();
@@ -218,7 +223,11 @@ public class GameEngine {
 				case "continue":
 				case "c":
 				case "2":
-					fh.fileLander("Open", grid);
+					loadedSave = true;
+					grid = fh.openGrid();
+					fh.fileLander("load", grid, plr);
+					plr = fh.loadPlayer();
+					gameLoop();
 					break;
 					
 				case "rules":
@@ -283,6 +292,9 @@ public class GameEngine {
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
+				case "file":
+					saveLoadFile();
+					break;
 				case "dev":
 					in.reset();
 					System.out.println("Which dev command do you want to execute?");
@@ -416,7 +428,7 @@ public class GameEngine {
     	    		
     	    	case "save":
 				case "5":
-					fh.fileLander("Save", grid);
+					fh.fileLander("Save", grid, plr);
 					returnToMain();
 					break;
 
@@ -465,11 +477,22 @@ public class GameEngine {
     	return userQuit;
     }
 
-    /**
-	 * @param lookPosY12
-	 * @param lookPosX12
-	 */
-	
+    public void saveLoadFile(){
+    	Scanner userInput = new Scanner(System.in);
+    	System.out.println("Save or Load?");
+    	String choice = userInput.nextLine().toLowerCase();
+    	switch(choice){
+    		case "save":
+    			fh.fileLander("save", grid, plr);
+    			break;
+    		//case "load":
+    		//	//grid = fh.openGrid();
+    		//	fh.fileLander("load", grid);
+    		//		break;
+    			default: 
+    				ui.invalidCMD();
+    	}
+    }
 	
     /**
      * Used to send out {@link #foundBriefcase} which is checked within {@link #gameLoop()}.
