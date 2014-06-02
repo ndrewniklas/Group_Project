@@ -508,4 +508,11 @@ public class Grid {
 		showBriefcase = vis;
 		return showBriefcase;
 	}
+
+	/**
+	 * @return
+	 */
+	public GameObject[][] getGOG() {
+		return gog;
+	}
 }

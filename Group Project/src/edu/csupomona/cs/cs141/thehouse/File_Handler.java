@@ -26,7 +26,7 @@ public class File_Handler {
 	
 	private ObjectOutputStream oos;
 	
-	public void fileLander(String choice) {
+	public void fileLander(String choice, Grid grid) {
 		String cmd = choice;
 		
 		switch (choice) {
@@ -40,7 +40,7 @@ public class File_Handler {
 			
 		case "Save":
 			try {
-				saveFile();
+				saveFile(grid);
 			} catch (IOException e) {
 				
 			}
@@ -60,7 +60,15 @@ public class File_Handler {
 	 * @throws IOException 
 	 * 
 	 */
-	private void saveFile() throws IOException {
+	private void saveFile(Grid grid) throws IOException {
 		fos = new FileOutputStream(SAVE_FILE);
+		oos = new ObjectOutputStream(fos);
+		GameObject[][] gog = grid.getGOG();
+		
+		for (int i = 0; i <gog.length; i++) {
+			for (int j = 0; j < gog[i].length; j++) {
+				oos.writeObject(grid.getObjectAtLocation(i, j));
+			}
+		}
 	}
 }
