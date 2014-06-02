@@ -24,7 +24,7 @@ public class Grid {
 	
 	private Room[] room ;
 	
-	private Enemy[] enemy;
+	private ArrayList<Enemy> enemy;
 	
 	private Dice die;
 	
@@ -72,7 +72,7 @@ public class Grid {
 		gog = new GameObject[9][9];
 		gameObj = new GameObject();
 		room = new Room[9];
-		enemy = new Enemy[6];
+		enemy = new ArrayList<Enemy>(6);
 		die = new Dice();
 		shield = new Shield(shieldVis);
 		radar = new Radar(radarVis);
@@ -151,8 +151,8 @@ public class Grid {
 			}
 			System.out.println();
 		}
-		for(int i = 0; i < enemy.length; ++i){
-			enemy[i].printEnemyPos(i);		// for testing purpose only
+		for(int i = 0; i < enemy.size(); ++i){
+			enemy.get(i).printEnemyPos(i);		// for testing purpose only
 		}
 	}
 	
@@ -200,8 +200,8 @@ public class Grid {
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
 			gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
 		}	*/
-		for(int i = 0; i < enemy.length; ++i){
-			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
+		for(int i = 0; i < enemy.size(); ++i){
+			gog[enemy.get(i).getYPosition()][enemy.get(i).getXPosition()] = enemy.get(i);
 		}
 	}
 	
@@ -229,7 +229,7 @@ public class Grid {
 	public boolean checkForEnemy(int yPos, int xPos) {
 		boolean check = false;
 		try{
-			if(gog[yPos][xPos].compareTo(enemy[0]) == 0){
+			if(gog[yPos][xPos].compareTo(enemy.get(0)) == 0){
 				check = true;
 			}
 			else{
@@ -244,9 +244,9 @@ public class Grid {
 	
 	public boolean checkEnemiesStacked(){
 		int x=0;
-		for(int i  = 0; i < enemy.length; ++i){
-			for(int j = 0; j < enemy.length; ++j){
-				if(enemy[i].getYPosition() == enemy[j].getYPosition() && enemy[i].getXPosition() == enemy[j].getXPosition()){
+		for(int i  = 0; i < enemy.size(); ++i){
+			for(int j = 0; j < enemy.size(); ++j){
+				if(enemy.get(i).getYPosition() == enemy.get(i).getYPosition() && enemy.get(i).getXPosition() == enemy.get(i).getXPosition()){
 					x++;
 					if(x==2)
 						return true;
@@ -298,7 +298,7 @@ public class Grid {
 		int spawnTwo;
 
 		for(int i = 0; i < 6; ++i){
-			enemy[i] = new Enemy(enemyVis);
+			enemy.add(new Enemy(enemyVis));
 		}
 		
 		for (int i = 0; i < 6;) {
@@ -312,22 +312,22 @@ public class Grid {
 			}
 			
 			if (checkIfLocationFree(spawnOne, spawnTwo)) {
-				gog[spawnOne][spawnTwo] = enemy[i];
-				enemy[i].setYPosition(spawnOne);
-				enemy[i].setXPosition(spawnTwo);
+				gog[spawnOne][spawnTwo] = enemy.get(i);
+				enemy.get(i).setYPosition(spawnOne);
+				enemy.get(i).setXPosition(spawnTwo);
 				i++;
 				numEnemies += 1;
 			}
 		}
 	}
 	
-	public GameObject[] getEnemy(){
+	public ArrayList<Enemy> getEnemy(){
 		return enemy;
 	}
 	
 	public void moveEnemy(Grid grid) {
-		for (int i = 0; i < enemy.length; i++) {
-			enemy[i].moveEnemy(grid);
+		for (int i = 0; i < enemy.size(); i++) {
+			enemy.get(i).moveEnemy(grid);
 			rePopulateGrid();
 		}
 	}
