@@ -27,8 +27,7 @@ public class File_Handler {
 	private ObjectOutputStream oos;
 	
 	public void fileLander(String choice, Grid grid) {
-		String cmd = choice;
-		
+				
 		switch (choice) {
 		case "Open":
 			try {
