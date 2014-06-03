@@ -33,21 +33,6 @@ public class File_Handler {
 	
 	private ObjectOutputStream oos;
 	
-	private FileOutputStream fosGrid;
-	
-	private ObjectOutputStream oosGrid;
-	
-	private FileInputStream fisGrid;
-	
-	private ObjectInputStream oisGrid;
-	
-	private FileOutputStream fosPlr;
-	
-	private ObjectOutputStream oosPlr;
-	
-	private FileInputStream fisPlr;
-	
-	private ObjectInputStream oisPlr;
 	
 	public void fileLander(String choice, Grid grid, Player player) {
 		choice = choice.toLowerCase();
@@ -78,9 +63,9 @@ public class File_Handler {
 	
 	public Grid openGrid(){
 		try{
-			fisGrid = new FileInputStream(SAVE_GRID_CLASS);
-			oisGrid = new ObjectInputStream(fisGrid);
-			savedGrid = (Grid)oisGrid.readObject();		
+			fis = new FileInputStream(SAVE_GRID_CLASS);
+			ois = new ObjectInputStream(fis);
+			savedGrid = (Grid)ois.readObject();		
 		}catch(ClassNotFoundException | IOException e){
 			System.out.println("Something went wrong");
 			e.printStackTrace();
@@ -92,9 +77,9 @@ public class File_Handler {
 	public Player loadPlayer(){
 		Player savedPlayer = null;
 		try{
-			fisPlr = new FileInputStream(SAVE_PLAYER);
-			oisPlr = new ObjectInputStream(fisPlr);
-			savedPlayer = (Player)oisPlr.readObject();		
+			fis = new FileInputStream(SAVE_PLAYER);
+			ois = new ObjectInputStream(fis);
+			savedPlayer = (Player)ois.readObject();		
 		}catch(ClassNotFoundException | IOException e){
 			System.out.println("Something went wrong loading the player!");
 			e.printStackTrace();
@@ -113,14 +98,14 @@ public class File_Handler {
 			GameObject[][] gog = grid.getGOG();
 			oos.writeObject(gog);
 			oos.close();
-			fosGrid = new FileOutputStream(SAVE_GRID_CLASS);
-			oosGrid = new ObjectOutputStream(fosGrid);
-			oosGrid.writeObject(grid);
-			fosGrid.close();
-			fosPlr = new FileOutputStream(SAVE_PLAYER);
-			oosPlr = new ObjectOutputStream(fosPlr);
-			oosPlr.writeObject(plr);
-			fosPlr.close();
+			fos = new FileOutputStream(SAVE_GRID_CLASS);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(grid);
+			fos.close();
+			fos = new FileOutputStream(SAVE_PLAYER);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(plr);
+			fos.close();
 			
 		}catch(IOException e){
 			e.printStackTrace();

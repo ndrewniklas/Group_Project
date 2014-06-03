@@ -513,6 +513,19 @@ public class Grid implements Serializable{
 		return showBriefcase;
 	}
 
+	public void respawnRadar(){
+		if(!(gog[radarPos[0]][radarPos[1]] instanceof Enemy))
+			gog[radarPos[0]][radarPos[1]] = radar;
+	}
+	public void respawnEAmmo(){		
+		if(!(gog[ammoPos[0]][ammoPos[1]] instanceof Enemy))
+			gog[ammoPos[0]][ammoPos[1]] = extraAmmo;
+	}
+	public void respawnShield(){
+		if(!(gog[shieldPos[0]][shieldPos[1]] instanceof Enemy))
+			gog[shieldPos[0]][shieldPos[1]] = shield;
+	}
+	
 	/**
 	 * @return
 	 */
