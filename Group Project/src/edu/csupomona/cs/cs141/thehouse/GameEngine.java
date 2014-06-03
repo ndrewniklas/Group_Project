@@ -29,32 +29,32 @@ import java.util.Scanner;
  * 	ammo left.
  */
 public class GameEngine {
-	
+
 	/**
 	 * Instantiation for {@link Scanner}
 	 */
 	private Scanner sc = new Scanner(System.in);
-	
+
 	/**
 	 * Instantiation for {@link Grid}
 	 */
 	private Grid grid;
-	
+
 	/**
 	 * Instantiation for {@link Player}
 	 */
 	private Player ply;
-	
+
 	/**
 	 * Instantiation for {@link UserInterface}
 	 */
 	private UserInterface ui;
-	
+
 	/**
 	 * Instantiation for {@link File_Handler}
 	 */
 	private File_Handler fh;
-	
+
 	/**
 	 * This field holds the choice of the user. There are xx potential values for the user to select:
 	 * left,
@@ -66,7 +66,7 @@ public class GameEngine {
 	 * exit
 	 */
 	private String choice;
-	
+
 	/**
 	 * This field holds the choice of direction for which the user will "look" before each turn.
 	 * There are four directions: 
@@ -83,7 +83,7 @@ public class GameEngine {
 	private boolean gameOver;
 
 	private boolean didPlayerTakeTurn;
-	
+
 	/**
 	 * This field will repeat a do while loop if {@code true} in either {@link #mainMenuSelect()}
 	 * or {@link #returnToMain()}.
@@ -107,44 +107,45 @@ public class GameEngine {
 	/**
 	 * turns remaining on shield use
 	 */
-	private int m; 
-	
-	
+	private int m = 5; 
+
+
 	/**
-     * The default constructor for GameEngine.
-     * 
-     * Currently it is only filling up the instances of the classes and forcing {@link #gameOver}
-     * to be false.
-     */
-    public GameEngine(){
-    	gameOver = false;
-    	ui = new UserInterface();
-    	fh = new File_Handler();
-    	ply = new Player();
-    	grid = new Grid();
-    	ui = new UserInterface();
-    	grid.setUpGrid();
-    	moves = 0;
-    }
-    
+	 * The default constructor for GameEngine.
+	 * 
+	 * Currently it is only filling up the instances of the classes and forcing {@link #gameOver}
+	 * to be false.
+	 */
+	public GameEngine(){
+		gameOver = false;
+		ui = new UserInterface();
+		fh = new File_Handler();
+		ply = new Player();
+		grid = new Grid();
+		ui = new UserInterface();
+		grid.setUpGrid();
+		moves = 0;
+	}
+
 	/**
 	 * 
 	 */
 	public void startGame() {
 		mainMenuSelect();
 	}
-    
-    /**
-     * The main loop of the game, this is where all the checks and actions go.
-     * The loop is finished once {@link #gameOver} is set to be true either from
-     * finding the briefcase, the player dying, or the user quitting.
-     */
+
+	/**
+	 * The main loop of the game, this is where all the checks and actions go.
+	 * The loop is finished once {@link #gameOver} is set to be true either from
+	 * finding the briefcase, the player dying, or the user quitting.
+	 */
 	public void gameLoop(){
 		grid.rePopulateGrid(ply);
 		playerDefaultVision();
 		ui.printGrid(grid);
 		do{
 			didPlayerTakeTurn = false;
+			didPlayerLook = false;
 			while(!didPlayerTakeTurn){	
 				ui.printStats(ply, hasRadar, hasShield, m);
 				if(hasShield)
@@ -156,7 +157,8 @@ public class GameEngine {
 					gameOver = true;
 				}
 				removeDefaultVision();
-				if(didPlayerLook){
+				if(didPlayerLook &&!gameOver){
+					ui.printGrid(grid);
 					turnSelect2();
 					ply.stopLooking(grid, lookDirection);
 				}
@@ -180,7 +182,7 @@ public class GameEngine {
 			ui.printGrid(grid);
 			moves++;
 		}while(!gameOver);
-		
+
 		if(ply.getHasBriefCase()){
 			ui.congrats();
 		}else if(playerKilled){
@@ -188,179 +190,107 @@ public class GameEngine {
 		}
 		ui.endScreen();
 	}
-    
-    public void objectCheck() {
-    	int[] radarPos = grid.getRadarPos();
-    	int[] extraAmmoPos = grid.getExtraAmmoPos();
-    	int[] shieldPos = grid.getShieldPos();
-    	if (ply.get_yPosition() == radarPos[0] && ply.get_xPosition() == radarPos[1] && !hasRadar) {
-    		grid.activateRadar();
-    		hasRadar = true;
-    		ui.radarActivated();
-    	}
-    	if (ply.get_yPosition() == extraAmmoPos[0] && ply.get_xPosition() == extraAmmoPos[1] && !hasEAmmo) {
-    		grid.getExtraAmmo().addAmmo(ply,1);
-    		hasEAmmo = true;
-    		ui.ammoActivated();
-    	}
-    	if (ply.get_yPosition() == shieldPos[0] && ply.get_xPosition() == shieldPos[1] && !hasShield) {
-    		grid.getShield().activateShield(ply);
-    		hasShield = true;
-    		m = 5;
-    		ui.shieldActivated();
-    	}
-    	if(!hasRadar)
-    		grid.respawnRadar();
-    	if(!hasEAmmo)
-    		grid.respawnEAmmo();
-    	if(!hasShield)
-    		grid.respawnShield();
-    }
+
+	public void objectCheck() {
+		int[] radarPos = grid.getRadarPos();
+		int[] extraAmmoPos = grid.getExtraAmmoPos();
+		int[] shieldPos = grid.getShieldPos();
+		if (ply.get_yPosition() == radarPos[0] && ply.get_xPosition() == radarPos[1] && !hasRadar) {
+			grid.activateRadar();
+			hasRadar = true;
+			ui.radarActivated();
+		}
+		if (ply.get_yPosition() == extraAmmoPos[0] && ply.get_xPosition() == extraAmmoPos[1] && !hasEAmmo) {
+			grid.getExtraAmmo().addAmmo(ply,1);
+			hasEAmmo = true;
+			ui.ammoActivated();
+		}
+		if (ply.get_yPosition() == shieldPos[0] && ply.get_xPosition() == shieldPos[1] && !hasShield) {
+			grid.getShield().activateShield(ply);
+			hasShield = true;
+			m = 5;
+			ui.shieldActivated();
+		}
+		if(!hasRadar)
+			grid.respawnRadar();
+		if(!hasEAmmo)
+			grid.respawnEAmmo();
+		if(!hasShield)
+			grid.respawnShield();
+	}
 
 	//For use with navigating the main menu
-    /**
-     * This method is called after {@link UserInterface#mainMenu()} prints the menu. It uses a 
-     * switch statement to check each potential command, and a do-while loop to ensure that 
-     * proper input is received. When {@code default} is used, the code repeats, otherwise a 
-     * specific command is called:
-     * Specifically, "new" starts a new game
-     * 			   , "continue" continues the game from its last state
-     * 			   , "rules" calls {@link UserInterface#rules()}
-     * 			   , "options" calls {@link UserInterface#options()}
-     * 			   , "exit" exits the program 
-     */
-    public void mainMenuSelect() {
+	/**
+	 * This method is called after {@link UserInterface#mainMenu()} prints the menu. It uses a 
+	 * switch statement to check each potential command, and a do-while loop to ensure that 
+	 * proper input is received. When {@code default} is used, the code repeats, otherwise a 
+	 * specific command is called:
+	 * Specifically, "new" starts a new game
+	 * 			   , "continue" continues the game from its last state
+	 * 			   , "rules" calls {@link UserInterface#rules()}
+	 * 			   , "options" calls {@link UserInterface#options()}
+	 * 			   , "exit" exits the program 
+	 */
+	public void mainMenuSelect() {
 		do {
 			ui.mainMenu();
-    		choice = sc.nextLine().toLowerCase();
-    		repeat = true;
-    		switch(choice) {
-				case "new":
-				case "n":
-				case "1":
-					gameLoop();
-					break;
-					
-				case "continue":
-				case "c":
-				case "2":
-					grid = fh.openGrid();
-					fh.fileLander("load", grid, ply);
-					ply = fh.loadPlayer();
-					gameLoop();
-					break;
-					
-				case "rules":
-				case "r":
-				case "3":
-					ui.rules();
-					ui.pause();
-					break;
-					
-				case "options":
-				case "o":
-				case "4":
-					setOption();
-					break;
-					
-				case "exit":
-				case "e":
-				case "0":
-					ui.endScreen();
-					System.exit(0);
-					break;
-				
-				default:
-					ui.invalidCMD();
-					repeat = true;
-					break;
+			choice = sc.nextLine().toLowerCase();
+			repeat = true;
+			switch(choice) {
+			case "new":
+			case "n":
+			case "1":
+				gameLoop();
+				break;
+
+			case "continue":
+			case "c":
+			case "2":
+				grid = fh.openGrid();
+				fh.fileLander("load", grid, ply);
+				ply = fh.loadPlayer();
+				gameLoop();
+				break;
+
+			case "rules":
+			case "r":
+			case "3":
+				ui.rules();
+				ui.pause();
+				break;
+
+			case "options":
+			case "o":
+			case "4":
+				setOption();
+				break;
+
+			case "exit":
+			case "e":
+			case "0":
+				ui.endScreen();
+				System.exit(0);
+				break;
+
+			default:
+				ui.invalidCMD();
+				repeat = true;
+				break;
 			}
 		} while(repeat == true);
 	}
 
-// Main game methods
-    
-    /**
-     * first menu to print on each turn
-     */
-    public void turnSelect1() {
-    	ui.turnSelect1();
-    	do{
+	// Main game methods
+
+	/**
+	 * first menu to print on each turn
+	 */
+	public void turnSelect1() {
+		ui.turnSelect1();
+		do{
 			choice = sc.nextLine().toLowerCase();
 			repeat = false;
 			switch(choice) {
-				case "dev":
-					sc.reset();
-					System.out.println("Which dev command do you want to execute?");
-					System.out.println("show, hide, check, on, off");
-					String cmd = sc.nextLine();
-					devMenu(cmd);
-					didPlayerTakeTurn = false;
-					break;
-					
-				case "look":
-				case "l":
-				case "1":
-					didPlayerLook = true;
-					ui.lookDirections();
-					lookDirection = sc.nextLine();
-					ply.playerLook(grid, lookDirection);
-					didPlayerTakeTurn = true;
-					break;
-				
-				case "move":
-				case "m":
-				case "2":
-					ui.moveTurn();
-					movePlayerForTurn();
-					break;
-				
-				case "3":
-				case "s":
-				case "shoot":
-					ui.shootTurn();
-					choice = sc.nextLine();
-					hasBullet  = ply.checkBulletPossession();
-					if (hasBullet == true) {
-						ply.useBullet();
-						ui.shotFired();
-						grid.shootGunCheck(ply.get_yPosition(), ply.get_xPosition(), choice);
-					} else {
-						ui.noBullet();
-					}
-					didPlayerTakeTurn = true;
-					break;
-					
-				case "options":
-				case "o":
-				case "4":
-					setOption();
-					break;
-				case "exit":
-				case "e":
-				case "0":
-					ui.endScreen();
-					System.exit(0);
-					break;
-			
-				default:
-					ui.invalidCMD();
-					repeat = true;
-					break;
-			}
-		} while(repeat == true);
-	}
-    
-    /**
-	 * menu to print after player has looked
-	 * 		(second half of turn)
-	 */
-	public void turnSelect2() {
-		ui.turnSelect2();
-		do{
-		choice = sc.nextLine().toLowerCase();
-		repeat = false;
-		switch(choice) {
 			case "dev":
 				sc.reset();
 				System.out.println("Which dev command do you want to execute?");
@@ -369,14 +299,87 @@ public class GameEngine {
 				devMenu(cmd);
 				didPlayerTakeTurn = false;
 				break;
-				
+
+			case "look":
+			case "l":
+			case "1":
+				didPlayerLook = true;
+				ui.lookDirections();
+				lookDirection = sc.nextLine();
+				ply.playerLook(grid, lookDirection);
+				didPlayerTakeTurn = true;
+				break;
+
+			case "move":
+			case "m":
+			case "2":
+				ui.moveTurn();
+				movePlayerForTurn();
+				break;
+
+			case "3":
+			case "s":
+			case "shoot":
+				ui.shootTurn();
+				choice = sc.nextLine();
+				hasBullet  = ply.checkBulletPossession();
+				if (hasBullet == true) {
+					ply.useBullet();
+					ui.shotFired();
+					grid.shootGunCheck(ply.get_yPosition(), ply.get_xPosition(), choice);
+				} else {
+					ui.noBullet();
+				}
+				didPlayerTakeTurn = true;
+				break;
+
+			case "options":
+			case "o":
+			case "4":
+				setOption();
+				break;
+			case "exit":
+			case "e":
+			case "0":
+				ui.endScreen();
+				System.exit(0);
+				break;
+
+			default:
+				ui.invalidCMD();
+				repeat = true;
+				break;
+			}
+			System.out.println();
+		} while(repeat == true);
+	}
+
+	/**
+	 * menu to print after player has looked
+	 * 		(second half of turn)
+	 */
+	public void turnSelect2() {
+		ui.turnSelect2();
+		do{
+			choice = sc.nextLine().toLowerCase();
+			repeat = false;
+			switch(choice) {
+			case "dev":
+				sc.reset();
+				System.out.println("Which dev command do you want to execute?");
+				System.out.println("show, hide, check, on, off");
+				String cmd = sc.nextLine();
+				devMenu(cmd);
+				didPlayerTakeTurn = false;
+				break;
+
 			case "move":
 			case "m":
 			case "1":
 				ui.moveTurn();
 				movePlayerForTurn();
 				break;
-			
+
 			case "shoot":
 			case "s":
 			case "2":
@@ -392,7 +395,7 @@ public class GameEngine {
 				}
 				didPlayerTakeTurn = true;
 				break;
-				
+
 			case "options":
 			case "o":
 			case "3":
@@ -404,97 +407,97 @@ public class GameEngine {
 				ui.endScreen();
 				System.exit(0);
 				break;
-		
+
 			default:
 				ui.invalidCMD();
 				repeat = true;
 				break;
-		}
-	} while(repeat == true);}
+			}
+		} while(repeat == true);}
 
 	public void devMenu(String cmd){
-    	switch(cmd){
-			case "check":
-				System.out.println("Select y");
-				int ydir = sc.nextInt();
-				System.out.println("Select x");
-				int xdir = sc.nextInt();
-				sc.nextLine();
-				System.out.println(grid.checkForEnemy(ydir, xdir));
-				break;					
-			case "show":
-				grid.changeAllObjectStates(true);
-				break;
-			case "hide":
-				grid.changeAllObjectStates(false);
-				break;
-			case "on":
-				debugMode(true);
-				break;
-			case "off":
-				debugMode(false);	
-				break;
-			default:
-				ui.invalidCMD();
-				break;
-    	}
-    }
+		switch(cmd){
+		case "check":
+			System.out.println("Select y");
+			int ydir = sc.nextInt();
+			System.out.println("Select x");
+			int xdir = sc.nextInt();
+			sc.nextLine();
+			System.out.println(grid.checkForEnemy(ydir, xdir));
+			break;					
+		case "show":
+			grid.changeAllObjectStates(true);
+			break;
+		case "hide":
+			grid.changeAllObjectStates(false);
+			break;
+		case "on":
+			debugMode(true);
+			break;
+		case "off":
+			debugMode(false);	
+			break;
+		default:
+			ui.invalidCMD();
+			break;
+		}
+	}
 
-    public void setOption(){
+	public void setOption(){
 		ui.options();
 		do {
 			choice = sc.nextLine().toLowerCase();
-	    	repeat = false;
-	    	switch(choice){
-		    	case "debug":
-		    	case "d":
-		    	case "1":
-		    		setDebug();
-		    		break;
-		    		
-		    	case "save":
-				case "2":
-				case "s":
-					fh.fileLander("Save", grid, ply);
-					break;
-	
-		    	case "exit":
-		    	case "e":
-		    	case "0":
-		    		mainMenuSelect();
-		    		break;
-		    	
-		    	default:
-		    		ui.invalidCMD();
-		    		repeat = true;
-		    		break;
-	    	}
+			repeat = false;
+			switch(choice){
+			case "debug":
+			case "d":
+			case "1":
+				setDebug();
+				break;
+
+			case "save":
+			case "2":
+			case "s":
+				fh.fileLander("Save", grid, ply);
+				break;
+
+			case "exit":
+			case "e":
+			case "0":
+				mainMenuSelect();
+				break;
+
+			default:
+				ui.invalidCMD();
+				repeat = true;
+				break;
+			}
 		} while(repeat == true);
-		
+
 	}
 
 	public void setDebug(){
 		System.out.println("Please Select 'on' or 'off': ");
 		choice = sc.nextLine().toLowerCase();
-		
+
 		switch(choice){
-			case "on":
-			case "1":
-				debugModeState = true;
-				debugMode(true);
-				System.out.println("WECLOME TO DEBUG MODE");
-				break;
-			
-			case "off":
-			case "2":
-				debugModeState = false;
-				debugMode(false);
-				System.out.println("I guess you like being blind...");
-				break;
-			
-			default:
-				ui.invalidCMD();
-				break;
+		case "on":
+		case "1":
+			debugModeState = true;
+			debugMode(true);
+			System.out.println("WECLOME TO DEBUG MODE");
+			break;
+
+		case "off":
+		case "2":
+			debugModeState = false;
+			debugMode(false);
+			System.out.println("I guess you like being blind...");
+			break;
+
+		default:
+			ui.invalidCMD();
+			break;
 		}    	
 	}
 
@@ -503,9 +506,9 @@ public class GameEngine {
 		ply.movePlayer(input);
 		grid.rePopulateGrid(ply);
 		didPlayerTakeTurn = true;
-    }
+	}
 
-    public void debugMode(boolean on){
+	public void debugMode(boolean on){
 		if(on){
 			grid.getRadarVis(true);
 			grid.getEnemyVis(true);
@@ -525,27 +528,27 @@ public class GameEngine {
 			grid.getExtraAmmo().addAmmo(ply, 1);
 		}
 	}
-	
+
 	public void playerDefaultVision(){
 		switch(ply.getPlrMoveDirection()){
-			case "up":
-				ply.naturalVision(ply.getPlrMoveDirection(), grid);
-				break;
-			case "down":
-				ply.naturalVision(ply.getPlrMoveDirection(), grid);
-				break;
-			case "right":
-				ply.naturalVision(ply.getPlrMoveDirection(), grid);
-				break;
-			case "left":
-				ply.naturalVision(ply.getPlrMoveDirection(), grid);
-				break;
-			default:
-				ply.naturalVision("up", grid);
-				break;
+		case "up":
+			ply.naturalVision(ply.getPlrMoveDirection(), grid);
+			break;
+		case "down":
+			ply.naturalVision(ply.getPlrMoveDirection(), grid);
+			break;
+		case "right":
+			ply.naturalVision(ply.getPlrMoveDirection(), grid);
+			break;
+		case "left":
+			ply.naturalVision(ply.getPlrMoveDirection(), grid);
+			break;
+		default:
+			ply.naturalVision("up", grid);
+			break;
 		}
 	}
-	
+
 	public void removeDefaultVision(){
 		switch(ply.getPlrMoveDirection()){
 		case "up":

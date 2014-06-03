@@ -2,54 +2,54 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
 /**
  * @author Ben, Andrew
  *
  */
 public class Grid implements Serializable{
-	
+
 	/**
 	 * The grid is a 9x9 array of GameObject
 	 */
 	private GameObject[][] gog;
-	
+
 	private GameObject go;
-	
+
 	/**
 	 * The grid is filled with this
 	 */
 	private GameObject gameObj;
-	
+
 	private Room bcRoom;
-	
+
 	private Room[] room ;
-	
+
 	private ArrayList<Enemy> enemy;
-	
+
 	private Dice die;
-	
+
 	private Shield shield;
-	
+
 	private Radar radar;
-	
+
 	private ExtraAmmo extraAmmo;
-	
+
 	/**
 	 * Checks to see if we should print the name of the briefcase 
 	 */
 	private boolean showBriefcase;
-	
+
 	private int[] briefcasePos = new int[2];
-	
+
 	private int[] enemyPos = new int[2];
-	
+
 	private int[] shieldPos = new int[2];
-	
+
 	private int[] radarPos = new int[2];
-	
+
 	private int[] ammoPos = new int[2];
-	
+
 	private int numEnemies=0;
 
 	private boolean radarVis;
@@ -57,9 +57,9 @@ public class Grid implements Serializable{
 	private boolean extraAmmoVis;
 
 	private boolean shieldVis;
-	
+
 	private boolean enemyVis;
-	
+
 	/**
 	 * used to test the {@ link #shootGunCheck(int, int, String)]
 	 */
@@ -88,14 +88,14 @@ public class Grid implements Serializable{
 			}
 		}
 	}
-	
+
 	public void setUpGrid(){
 		setEnemy();
 		setPowerUps();
 		populateGrid();
 		setBriefcase();
 	}
-	
+
 	public void changeAllObjectStates(boolean toggle) {
 		if(toggle){
 			/*shield.showName();
@@ -111,7 +111,7 @@ public class Grid implements Serializable{
 				}
 			}
 		}else{
-		/*	shield.hideName();
+			/*	shield.hideName();
 			radar.hideName();
 			extraAmmo.hideName();
 			for(int i = 0; i < enemy.length; ++i){
@@ -125,7 +125,7 @@ public class Grid implements Serializable{
 			}
 		}	
 	}
-	
+
 	public void showObjectsWithinLocation(int y1, int x1, int y2, int x2, boolean toggle){
 		if(toggle){
 			gog[y1][x1].showName();
@@ -143,7 +143,7 @@ public class Grid implements Serializable{
 		}
 	}
 
-	
+
 	/**
 	 * Prints out the name of the object at that location
 	 */
@@ -155,17 +155,17 @@ public class Grid implements Serializable{
 			}
 			System.out.println();
 		}
-//		for(int i = 0; i < enemy.size(); ++i){
-//			enemy.get(i).printEnemyPos(i);				// for testing purpose only
-//		}
+		//		for(int i = 0; i < enemy.size(); ++i){
+		//			enemy.get(i).printEnemyPos(i);				// for testing purpose only
+		//		}
 	}
-	
+
 	public int gridSize(){
 		int size = 0;
 		size = gog.length;
 		return size;
 	}
-	
+
 	/**
 	 * Populates the grid with rooms in the position at {@link #go}
 	 */
@@ -183,12 +183,12 @@ public class Grid implements Serializable{
 		gog[4][7] = room[7];
 		gog[7][7] = room[8];
 	}
-	
+
 	public void rePopulateGrid(Player ply) {
 		gog[ply.get_yPosition()][ply.get_xPosition()] = ply;
-		
+
 		if (ply.get_yPosition() == ply.getYPre() && ply.get_xPosition() == ply.getXPre()) {
-				System.out.println("Invalid Command: Please try again.");
+			System.out.println("Invalid Command: Please try again.");
 		}
 		else{
 			gog[ply.getYPre()][ply.getXPre()] = new GameObject();
@@ -204,23 +204,23 @@ public class Grid implements Serializable{
 			gog[enemy.get(i).getYPosition()][enemy.get(i).getXPosition()] = enemy.get(i);
 		}
 	}
-	
+
 	public void changeObjectIntoBlank(int posY, int posX){
 		gog[posY][posX] = new GameObject();
 	}
-	
+
 	public GameObject getObjectAtLocation(int posY, int posX){
 		go = gog[posY][posX];
 		return go;
 	}
-	
+
 	public boolean checkIfLocationFree(int posY, int posX){
 		if(gog[posY][posX] instanceof GameObject)
 			return true;
 		else
 			return false;
 	}
-	
+
 	/**
 	 * @param yPosition
 	 * @param i
@@ -241,8 +241,8 @@ public class Grid implements Serializable{
 		}
 		return check;
 	}
-	
-	
+
+
 	public boolean checkEnemiesStacked(){
 		int x=0;
 		for(int i  = 0; i < enemy.size(); ++i){
@@ -259,7 +259,7 @@ public class Grid implements Serializable{
 		}
 		return false;
 	}
-	
+
 	/**
 	 * This method randomly places the briefcase by calling {@link Dice#roll()}. It then creates a temporary
 	 * {@code String[][]} that stores the briefcase. Any time a {@link Player} enters a room, it checks to
@@ -290,7 +290,7 @@ public class Grid implements Serializable{
 	public Room getBriefcaseRoom(){
 		return bcRoom;
 	}
-	
+
 	/**
 	 * This method randomly places 6 enemies.
 	 */
@@ -301,7 +301,7 @@ public class Grid implements Serializable{
 		for(int i = 0; i < 6; ++i){
 			enemy.add(new Enemy(enemyVis));
 		}
-		
+
 		for (int i = 0; i < 6;) {
 			spawnOne = die.roll(8);
 			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne > 6) {
@@ -311,7 +311,7 @@ public class Grid implements Serializable{
 			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo < 2) {
 				spawnTwo = die.roll(9);
 			}
-			
+
 			if (checkIfLocationFree(spawnOne, spawnTwo)) {
 				gog[spawnOne][spawnTwo] = enemy.get(i);
 				enemy.get(i).setYPosition(spawnOne);
@@ -321,17 +321,17 @@ public class Grid implements Serializable{
 			}
 		}
 	}
-	
+
 	public ArrayList<Enemy> getEnemy(){
 		return enemy;
 	}
-	
+
 	public boolean moveEnemy(Grid grid, Player ply) {
 		for (int i = 0; i < enemy.size(); i++) {
 			int ypos = enemy.get(i).getYPosition();
 			int xpos = enemy.get(i).getXPosition();
 			playerKilled = checkForPlayer(ypos, xpos, ply);
-			
+
 			if (!playerKilled) {
 				enemy.get(i).moveEnemy(grid);
 				rePopulateGrid();
@@ -350,25 +350,29 @@ public class Grid implements Serializable{
 	 */
 	public boolean checkForPlayer(int yPos, int xPos, Player ply) {
 		playerKilled = false;
-		
+
 		if(yPos - 1 >= 0 && yPos - 1 <= 8){
 			if(yPos - 1 == ply.get_yPosition() && xPos == ply.get_xPosition()){		//up
 				playerKilled = true;
+				gog[ply.getYPre()][ply.getXPre()] = new GameObject();
 				ply.playerDies();
 			}
 		}else if(yPos + 1 >= 0 && yPos + 1 <= 8){
 			if(yPos + 1 == ply.get_yPosition() && xPos == ply.get_xPosition()){		//down
 				playerKilled = true;
+				gog[ply.getYPre()][ply.getXPre()] = new GameObject();
 				ply.playerDies();
 			}
 		}else if(xPos - 1 >= 0 && xPos - 1 <= 8){
 			if(yPos == ply.get_yPosition() && xPos - 1 == ply.get_xPosition()){		//left
 				playerKilled = true;
+				gog[ply.getYPre()][ply.getXPre()] = new GameObject();
 				ply.playerDies();
 			}
 		}else if(xPos + 1 >= 0 && xPos + 1 <= 8){
 			if(yPos == ply.get_yPosition() && xPos + 1 == ply.get_xPosition()){		//right
 				playerKilled = true;
+				gog[ply.getYPre()][ply.getXPre()] = new GameObject();
 				ply.playerDies();
 			}
 		}else{
@@ -383,7 +387,7 @@ public class Grid implements Serializable{
 	public int getNumEnemies() {
 		return numEnemies;
 	}
-	
+
 	/**
 	 * This method randomly places 6 enemies.
 	 */
@@ -401,12 +405,12 @@ public class Grid implements Serializable{
 			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
 				spawnOne = die.roll(9);
 			}
-		
+
 			spawnTwo = die.roll();
 			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
 				spawnTwo = die.roll(9);
 			}
-		
+
 			if (checkIfLocationFree(spawnOne, spawnTwo)){
 				gog[spawnOne][spawnTwo] = radar;
 				radarPos[0] = spawnOne;
@@ -435,12 +439,12 @@ public class Grid implements Serializable{
 			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
 				spawnOne = die.roll(9);
 			}
-		
+
 			spawnTwo = die.roll();
 			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
 				spawnTwo = die.roll(9);
 			}
-		
+
 			if (checkIfLocationFree(spawnOne, spawnTwo)){
 				gog[spawnOne][spawnTwo] = extraAmmo;
 				ammoPos[0] = spawnOne;
@@ -461,7 +465,7 @@ public class Grid implements Serializable{
 			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
 				spawnTwo = die.roll(9);
 			}
-		
+
 			if (checkIfLocationFree(spawnOne, spawnTwo)){
 				gog[spawnOne][spawnTwo] = shield;
 				shieldPos[0] = spawnOne;
@@ -470,9 +474,9 @@ public class Grid implements Serializable{
 			}
 		}
 	}
-	
+
 	public int[] getRadarPos() {
-			return radarPos;
+		return radarPos;
 	}
 
 	public void activateRadar() {
@@ -481,51 +485,51 @@ public class Grid implements Serializable{
 	public int[] getExtraAmmoPos(){
 		return ammoPos;
 	}
-	
+
 	public void shootGunCheck(int yplr, int xplr, String dir) {
 		int c = 0;
-		
+
 		switch (dir) {
 		case "up":
 		case "u":
 		case "1":
 			for (int i =+ yplr; i >= 0; i--) {
-//				enemyInstance = checkForEnemy(i, xplr);
-//				System.out.print(i + " " + xplr);		// for testing
-//				System.out.println(enemyInstance);					
+				//				enemyInstance = checkForEnemy(i, xplr);
+				//				System.out.print(i + " " + xplr);		// for testing
+				//				System.out.println(enemyInstance);					
 				killenemy(i,xplr,c);
 			}
 			break;
-			
+
 		case "down":
 		case "d":
 		case "2":
 			for (int i =+ yplr; i < gog.length; i++) {
-//				enemyInstance = checkForEnemy(i, xplr);
-//				System.out.print(i + " " + xplr);		// for testing
-//				System.out.println(enemyInstance);
+				//				enemyInstance = checkForEnemy(i, xplr);
+				//				System.out.print(i + " " + xplr);		// for testing
+				//				System.out.println(enemyInstance);
 				killenemy(i,xplr, c);
 			}
 			break;
-			
+
 		case "left":
 		case "l":
 		case "4":
 			for (int i =+ xplr; i >= 0; i--) {
-//				enemyInstance = checkForEnemy(yplr, i);
-//				System.out.print(yplr + " " + i);		// for testing
-//				System.out.println(enemyInstance);
+				//				enemyInstance = checkForEnemy(yplr, i);
+				//				System.out.print(yplr + " " + i);		// for testing
+				//				System.out.println(enemyInstance);
 				killenemy(yplr,i, c);
 			}
 			break;
-			
+
 		case "right":
 		case "r":
 		case "3":
 			for (int i =+ xplr; i < gog.length; i++) {
-//				System.out.print(yplr + " " + i);		// for testing
-//				enemyInstance = checkForEnemy(yplr, i);
-//				System.out.println(enemyInstance);
+				//				System.out.print(yplr + " " + i);		// for testing
+				//				enemyInstance = checkForEnemy(yplr, i);
+				//				System.out.println(enemyInstance);
 				killenemy(yplr,i, c);
 			}
 			break;
@@ -582,14 +586,14 @@ public class Grid implements Serializable{
 		if(!(gog[shieldPos[0]][shieldPos[1]] instanceof Enemy))
 			gog[shieldPos[0]][shieldPos[1]] = shield;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public GameObject[][] getGOG() {
 		return gog;
 	}
-	
+
 	public void overwriteGOG(GameObject[][] saveGOG){
 		for(int i = 0; i < gog.length; ++i){
 			for(int j = 0; j < gog[i].length; ++j){

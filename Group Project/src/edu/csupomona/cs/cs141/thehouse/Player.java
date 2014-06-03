@@ -25,29 +25,29 @@ package edu.csupomona.cs.cs141.thehouse;
  * as well as reactions (death, shield, radar, new bullet).
  */
 public class Player extends GameObject{
-	
-//	private boolean isAlive = true;
+
+	//	private boolean isAlive = true;
 	private boolean isInvincible = false;
 	private boolean hasBullet = true;
 	private boolean hasShield = false;
 	private boolean hasRadar = false;
 	private boolean hasBriefCase = false;
-	
+
 	private int objID;
-	
+
 	private int ammo;
-	
+
 	private int xPosition;
 	private int yPosition;
 	private int xpre;
 	private int ypre;
-	
+
 	private int numLives;
 
 	private int lookPosY1, lookPosY2, lookPosX1, lookPosX2;
-	
+
 	private String plrMoveDir;
-	
+
 	public Player(){
 		super("[P]",0,8);
 		setHiddenName("[P]");
@@ -60,70 +60,70 @@ public class Player extends GameObject{
 		objID = setObjId(4);
 		plrMoveDir = "up";
 	}
-	
+
 	/**
 	 * {@link #movePlayer()} This method will move the player based on user input
 	 */
 	public void movePlayer(String input){
-        String cmd = input.toLowerCase();
+		String cmd = input.toLowerCase();
 		xpre = xPosition;
 		ypre = yPosition;
-        if (cmd.equals("up") || cmd.equals("u") || cmd.equals("1") && upPossible()) {
-        	if (yPosition-1 >= 0 && yPosition-1 <= 8) {
+		if (cmd.equals("up") || cmd.equals("u") || cmd.equals("1") && upPossible()) {
+			if (yPosition-1 >= 0 && yPosition-1 <= 8) {
 				setXY(xPosition, --yPosition);
 				plrMoveDir = "up";
-				
+
 			}
-        } else if (cmd.equals("down") || cmd.equals("d") || cmd.equals("2")&& downPossible()) {
-        	if (yPosition+1 >= 0 && yPosition+1 <= 8) {
+		} else if (cmd.equals("down") || cmd.equals("d") || cmd.equals("2")&& downPossible()) {
+			if (yPosition+1 >= 0 && yPosition+1 <= 8) {
 				setXY(xPosition, ++yPosition);
 				plrMoveDir = "down";
 			}
-        } else if (cmd.equals("right") || cmd.equals("r") || cmd.equals("3") && rightPossible()) {
-        	if (xPosition+1 >= 0 && xPosition+1 <= 8) {
+		} else if (cmd.equals("right") || cmd.equals("r") || cmd.equals("3") && rightPossible()) {
+			if (xPosition+1 >= 0 && xPosition+1 <= 8) {
 				setXY(++xPosition, yPosition);
 				plrMoveDir = "right";
 			}
-        } else if (cmd.equals("left") || cmd.equals("l") || cmd.equals("4")&& leftPossible()) {
-        	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
+		} else if (cmd.equals("left") || cmd.equals("l") || cmd.equals("4")&& leftPossible()) {
+			if (xPosition-1 >= 0 && xPosition-1 <= 8) {
 				setXY(--xPosition, yPosition);
 				plrMoveDir = "left";
 			}
-        }        
-    }
-	
+		}        
+	}
+
 	public String getPlrMoveDirection(){
 		return plrMoveDir;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int get_yPosition() {
 		return yPosition;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int get_xPosition() {
 		return xPosition;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int getYPre() {
 		return ypre;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int getXPre() {
 		return xpre;
 	}
-	
+
 	public void naturalVision(String direction, Grid grid){
 		direction = direction.toLowerCase();
 		switch(direction){
@@ -154,22 +154,22 @@ public class Player extends GameObject{
 			lookUp();
 			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, false);
 			break;
-			
+
 		case "down":
 			lookDown(grid);
 			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, false);
 			break;
-			
+
 		case "right":
 			lookRight();
 			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, false);
 			break;
-			
+
 		case "left":
 			lookLeft();
 			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, false);
 			break;
-			
+
 		default:
 			System.out.println("Something went wrong");
 		}
@@ -187,33 +187,34 @@ public class Player extends GameObject{
 			lookUp();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
-			
+
 		case "down":
 		case "d":
 		case "2":
 			lookDown(grid);
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
-			
+
 		case "right":
 		case "r":
 		case "3":
 			lookRight();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
-			
+
 		case "left":
 		case "l":
 		case "4":
 			lookLeft();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
 			break;
-			
+
 		default:
 			System.out.println("Something went wrong");
+			break;
 		}
 	}
-	
+
 	public void stopLooking(Grid grid, String direction){
 		direction = direction.toLowerCase();
 		switch(direction){
@@ -223,33 +224,33 @@ public class Player extends GameObject{
 			lookUp();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, false);
 			break;
-			
+
 		case "down":
 		case "d":
 		case "2":
 			lookDown(grid);
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, false);
 			break;
-			
+
 		case "right":
 		case "r":
 		case "3":
 			lookRight();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, false);
 			break;
-			
+
 		case "left":
 		case "l":
 		case "4":
 			lookLeft();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, false);
 			break;
-			
+
 		default:
 			System.out.println("Something went wrong");
 		}
 	}
-	
+
 	public void lookUp(){
 		//Up one
 		if(yPosition-1 >= 0 && yPosition-1 <= 8 && roomExists(yPosition-1,xPosition)){
@@ -286,7 +287,7 @@ public class Player extends GameObject{
 			lookPosY2 = yPosition ;
 			lookPosX2 = xPosition;
 		}
-	
+
 	}
 
 	public void lookRight(){
@@ -325,8 +326,8 @@ public class Player extends GameObject{
 			lookPosX2 = xPosition;
 		}
 	}
-	
-	
+
+
 	/**
 	 * {@link #checkBulletPossession()} This method will check if there is a bullet in the gun of the
 	 * player
@@ -339,7 +340,7 @@ public class Player extends GameObject{
 		else
 			return false;
 	}
-	
+
 	/**
 	 * {@link #pickUpBullet(boolean)} This method will allow the user to pick up a bullet based on the 
 	 * @param hasBullet
@@ -347,7 +348,7 @@ public class Player extends GameObject{
 	public void pickUpBullet(int amount) {
 		ammo = amount;
 	}
-	
+
 	/**
 	 * {@link #useBullet(boolean)} This method will will make the player use the bullet in his possession
 	 * if the @param hasBullet is true
@@ -355,18 +356,18 @@ public class Player extends GameObject{
 	public void useBullet() {
 		--ammo;
 	}
-	
+
 	public int getAmmo(){
 		return ammo;
 	}
-	
+
 	/**
 	 * {@link #checkBulletHit()} This method will check if the bullet hit the enemy ninja
 	 */
 	public void checkBulletHit() {
-		
+
 	}
-	
+
 	/**
 	 * {@link #pickUpInvincibility()} This method will allow the user to pick up the invincibility upgrade
 	 * @return 
@@ -374,30 +375,30 @@ public class Player extends GameObject{
 	public void pickUpInvincibility(boolean hasShield) {
 		hasShield = true;
 	}
-	
+
 	/**
 	 * {@link #useShield()} This method will toggle the {@link Shield} upgrade
 	 * @return The return value will determine if the player can die or not
 	 */
 	public void useShield(boolean hasShield) {
-		
+
 		hasShield = false;
 	}
-	
+
 	/**
 	 * {@link #pickUpRadar()} This method will let the user pick up the radar upgrade
 	 */
 	public void pickUpRadar(boolean hasRadar) {
 		hasRadar = true;
 	}
-	
+
 	/**
 	 * {@link #useRadar()} This method will reveal the location of the briefcase
 	 */
 	public void useRadar(boolean hasRadar) {
 		hasRadar = false;
 	}
-	
+
 	/**
 	 * {@link #playerDies(boolean)} This method will check if the enemy has attack the player
 	 * and kill the player if the parameter is true
@@ -410,16 +411,18 @@ public class Player extends GameObject{
 		yPosition = 8;
 		numLives--;
 	}
-	
+
 	private void checkbreifcase(int lookPosY1, int lookPosX1, Grid grid) {
 		int[] bcPos = grid.getBCpos();
 		if(lookPosY1==bcPos[0] && lookPosX1 == bcPos[1]){
 			hasBriefCase = true;
 		}
-		else
-			hasBriefCase = false;			
+		else{
+			hasBriefCase = false;
+			System.out.println("room is empty");
+		}
 	}
-	
+
 	public boolean getHasBriefCase() {
 		return hasBriefCase;
 	}
@@ -437,5 +440,5 @@ public class Player extends GameObject{
 	public int getNumLives() {
 		return numLives;
 	}
-	
+
 }
