@@ -119,12 +119,13 @@ public class GameEngine {
 	private String pickOption = null;
 
 	private String debugSelect;
-
-	private boolean hasRadar = false;
 	
 	private boolean hasBullet = false;
 
-	private boolean loadedSave = false;
+	private boolean hasRadar = false;
+	private boolean hasEAmmo = false;
+	private boolean hasShield = false; 
+	
 	
 	/**
      * The default constructor for GameEngine.
@@ -179,19 +180,28 @@ public class GameEngine {
     	int[] radarPos = grid.getRadarPos();
     	int[] extraAmmoPos = grid.getExtraAmmoPos();
     	int[] shieldPos = grid.getShieldPos();
-    	if (plr.get_yPosition() == radarPos[0] && plr.get_xPosition() == radarPos[1]) {
+    	if (plr.get_yPosition() == radarPos[0] && plr.get_xPosition() == radarPos[1] && !hasRadar) {
     		grid.activateRadar();
+    		hasRadar = true;
     		ui.radarActivated();
     	}
-    	if (plr.get_yPosition() == extraAmmoPos[0] && plr.get_xPosition() == extraAmmoPos[1]) {
+    	if (plr.get_yPosition() == extraAmmoPos[0] && plr.get_xPosition() == extraAmmoPos[1] && !hasEAmmo) {
     		grid.getExtraAmmo().addAmmo(plr,1);
+    		hasEAmmo = true;
     		ui.ammoActivated();
     	}
-    	if (plr.get_yPosition() == shieldPos[0] && plr.get_xPosition() == shieldPos[1]) {
+    	if (plr.get_yPosition() == shieldPos[0] && plr.get_xPosition() == shieldPos[1] && !hasShield) {
     		grid.getShield().activateShield(plr);
+    		hasShield = true;
     		ui.shieldActivated();
     	}
-	}
+    	if(!hasRadar)
+    		grid.respawnRadar();
+    	if(!hasEAmmo)
+    		grid.respawnEAmmo();
+    	if(!hasShield)
+    		grid.respawnShield();
+    }
 
     public Player getPlayer(){
     	return plr;
@@ -223,7 +233,6 @@ public class GameEngine {
 				case "continue":
 				case "c":
 				case "2":
-					loadedSave = true;
 					grid = fh.openGrid();
 					fh.fileLander("load", grid, plr);
 					plr = fh.loadPlayer();
