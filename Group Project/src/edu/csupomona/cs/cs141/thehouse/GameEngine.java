@@ -17,8 +17,6 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
-import java.io.EOFException;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -165,6 +163,7 @@ public class GameEngine {
     		//ui.printGrid(grid);
     		didPlayerTakeTurn = false;
     		while(!didPlayerTakeTurn){
+        		playerDefaultVision();
         		grid.rePopulateGrid(plr);
     			ui.mainGameCMD(); 		//print options available during each turn
     			System.out.println("Ammo Left: " + plr.ammoAmount());
@@ -317,7 +316,6 @@ public class GameEngine {
 				case "l":
 				case "1":
 					ui.lookDirections();
-					in.reset();
 					dir = in.next();
 					playerLook(dir);
 					ui.printGrid(grid);
@@ -516,5 +514,41 @@ public class GameEngine {
 			grid.changeAllObjectStates(false);
 			grid.getExtraAmmo().addAmmo(plr, 1);
 		}
+	}
+	
+	public void playerDefaultVision(){
+		switch(plr.getPlrMoveDirection()){
+			case "up":
+				plr.naturalVision(plr.getPlrMoveDirection(), grid);
+				break;
+			case "down":
+				plr.naturalVision(plr.getPlrMoveDirection(), grid);
+				break;
+			case "right":
+				plr.naturalVision(plr.getPlrMoveDirection(), grid);
+				break;
+			case "left":
+				plr.naturalVision(plr.getPlrMoveDirection(), grid);
+				break;
+			default:
+				plr.naturalVision("up", grid);
+		}
+		ui.printGrid(grid);
+		switch(plr.getPlrMoveDirection()){
+		case "up":
+			plr.removeNaturalVision(plr.getPlrMoveDirection(), grid);
+			break;
+		case "down":
+			plr.removeNaturalVision(plr.getPlrMoveDirection(), grid);
+			break;
+		case "right":
+			plr.removeNaturalVision(plr.getPlrMoveDirection(), grid);
+			break;
+		case "left":
+			plr.removeNaturalVision(plr.getPlrMoveDirection(), grid);
+			break;
+		default:
+			plr.removeNaturalVision("up", grid);
+	}
 	}
 }

@@ -48,6 +48,8 @@ public class Player extends GameObject{
 
 	private int lookPosY1, lookPosY2, lookPosX1, lookPosX2;
 	
+	private String plrMoveDir;
+	
 	public Player(){
 		super("[P]",0,8);
 		setHiddenName("[P]");
@@ -58,6 +60,7 @@ public class Player extends GameObject{
 		isAlive=true;
 		ammo = 1;
 		objID = setObjId(0);
+		plrMoveDir = "up";
 	}
 	
 	/**
@@ -91,21 +94,30 @@ public class Player extends GameObject{
         if (cmd.equals("up") || cmd.equals("u") || cmd.equals("1") && upPossible()) {
         	if (yPosition-1 >= 0 && yPosition-1 <= 8) {
 				setXY(xPosition, --yPosition);
+				plrMoveDir = "up";
+				
 			}
         } else if (cmd.equals("down") || cmd.equals("d") || cmd.equals("2")&& downPossible()) {
         	if (yPosition+1 >= 0 && yPosition+1 <= 8) {
 				setXY(xPosition, ++yPosition);
+				plrMoveDir = "down";
 			}
         } else if (cmd.equals("right") || cmd.equals("r") || cmd.equals("3") && rightPossible()) {
         	if (xPosition+1 >= 0 && xPosition+1 <= 8) {
 				setXY(++xPosition, yPosition);
+				plrMoveDir = "right";
 			}
         } else if (cmd.equals("left") || cmd.equals("l") || cmd.equals("4")&& leftPossible()) {
         	if (xPosition-1 >= 0 && xPosition-1 <= 8) {
 				setXY(--xPosition, yPosition);
+				plrMoveDir = "left";
 			}
         }        
     }
+	
+	public String getPlrMoveDirection(){
+		return plrMoveDir;
+	}
 	
 	/**
 	 * @return
@@ -139,25 +151,55 @@ public class Player extends GameObject{
 		return isAlive;
 	}
 	
-	public void playerDefaultVision(Grid grid){
-		if(yPosition+1 >= 0 && yPosition+1 <= 8 )
-			grid.showPlayerDefaultVision(yPosition + 1, xPosition, true);
-		if(yPosition-1 >= 0 && yPosition-1 <= 8 )
-			grid.showPlayerDefaultVision(yPosition - 1, xPosition, true);
-		if(xPosition - 1 >= 0 && xPosition - 1 <= 8 )
-			grid.showPlayerDefaultVision(yPosition, xPosition - 1, true);
-		if(xPosition+1 >= 0 && xPosition+1 <= 8 )
-			grid.showPlayerDefaultVision(yPosition, xPosition + 1, true);
+	public void naturalVision(String direction, Grid grid){
+		direction = direction.toLowerCase();
+		switch(direction){
+		case "up":
+			lookUp();
+			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, true);
+			break;	
+		case "down":
+			lookDown(grid);
+			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, true);
+			break;
+		case "right":
+			lookRight();
+			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, true);
+			break;	
+		case "left":
+			lookLeft();
+			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, true);
+			break;	
+		default:
+			System.out.println("Something went wrong");
+		}
 	}
-	public void clearDefaultVision(Grid grid){
-		if(yPosition+1 >= 0 && yPosition+1 <= 8 )
-			grid.showPlayerDefaultVision(yPosition + 1, xPosition, false);
-		if(yPosition-1 >= 0 && yPosition-1 <= 8 )
-			grid.showPlayerDefaultVision(yPosition - 1, xPosition, false);
-		if(xPosition - 1 >= 0 && xPosition - 1 <= 8 )
-			grid.showPlayerDefaultVision(yPosition, xPosition - 1, false);
-		if(xPosition+1 >= 0 && xPosition+1 <= 8 )
-			grid.showPlayerDefaultVision(yPosition, xPosition + 1, false);
+	public void removeNaturalVision(String direction, Grid grid){
+		direction = direction.toLowerCase();
+		switch(direction){
+		case "up":
+			lookUp();
+			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, false);
+			break;
+			
+		case "down":
+			lookDown(grid);
+			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, false);
+			break;
+			
+		case "right":
+			lookRight();
+			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, false);
+			break;
+			
+		case "left":
+			lookLeft();
+			grid.showPlayerDefaultVision(lookPosY1, lookPosX1, false);
+			break;
+			
+		default:
+			System.out.println("Something went wrong");
+		}
 	}
 	/**
 	 * {@link #playerLook()} This method will reveal two spaces in the desired direction
@@ -198,6 +240,7 @@ public class Player extends GameObject{
 			System.out.println("Something went wrong");
 		}
 	}
+	
 	public void stopLooking(Grid grid, String direction){
 		direction = direction.toLowerCase();
 		switch(direction){
