@@ -40,14 +40,15 @@ public class File_Handler {
 		case "load":
 			try {
 				openFile(grid);
+				System.out.println("Loaded the game!");
 			} catch (IOException | ClassNotFoundException e) {
 				System.out.println("Something went wrong");
 				e.printStackTrace();
 			}
-			break;
-			
+			break;	
 		case "save":
 			saveFile(grid, player);
+			System.out.println("Saved the game!");
 			break;
 
 		default:

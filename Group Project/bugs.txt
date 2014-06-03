@@ -1,9 +1,11 @@
 Enemies stack - Fixed
 Items disappear when enemies step on them - Fixed
+Remove loading after the game is started, add save to the turnSelect - Fixed
 
 Enemies don't die
 Player doesn't die
 Shield does nothing
-Remove loading after the game is started, add save to the turnSelect
 Options require to enter 0 twice to exit
 You should be able to look once then be able to move
+Natural sight
+Remove options from  mainmenu

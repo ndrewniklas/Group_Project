@@ -124,7 +124,9 @@ public class GameEngine {
 
 	private boolean hasRadar = false;
 	private boolean hasEAmmo = false;
-	private boolean hasShield = false; 
+	private boolean hasShield = false;
+
+	private boolean debugModeState; 
 	
 	
 	/**
@@ -172,6 +174,8 @@ public class GameEngine {
     		}
     		objectCheck();
 			grid.moveEnemy(grid);
+			if(debugModeState)
+				debugMode(true);
     	}
     	ui.endScreen();
     }
@@ -301,9 +305,6 @@ public class GameEngine {
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
-				case "file":
-					saveLoadFile();
-					break;
 				case "dev":
 					in.reset();
 					System.out.println("Which dev command do you want to execute?");
@@ -353,9 +354,9 @@ public class GameEngine {
 				case "options":
 				case "o":
 				case "4":
+					setOption();
 					ui.printGrid(grid);
 					break;
-					
 				case "exit":
 				case "e":
 				case "0":
@@ -438,7 +439,6 @@ public class GameEngine {
     	    	case "save":
 				case "5":
 					fh.fileLander("Save", grid, plr);
-					returnToMain();
 					break;
 
     	    	case "exit":
@@ -461,6 +461,7 @@ public class GameEngine {
 		switch(debugSelect){
 			case "on":
 			case "1":
+				debugModeState = true;
 				debugMode(true);
 				System.out.println("WECLOME TO DEBUG MODE");
 				//setOption();
@@ -468,6 +469,7 @@ public class GameEngine {
 			
 			case "off":
 			case "2":
+				debugModeState = false;
 				debugMode(false);
 				System.out.println("I guess you like being blind...");
 				//setOption();
@@ -486,22 +488,6 @@ public class GameEngine {
     	return userQuit;
     }
 
-    public void saveLoadFile(){
-    	Scanner userInput = new Scanner(System.in);
-    	System.out.println("Save or Load?");
-    	String choice = userInput.nextLine().toLowerCase();
-    	switch(choice){
-    		case "save":
-    			fh.fileLander("save", grid, plr);
-    			break;
-    		//case "load":
-    		//	//grid = fh.openGrid();
-    		//	fh.fileLander("load", grid);
-    		//		break;
-    			default: 
-    				ui.invalidCMD();
-    	}
-    }
 	
     /**
      * Used to send out {@link #foundBriefcase} which is checked within {@link #gameLoop()}.
@@ -531,5 +517,4 @@ public class GameEngine {
 			grid.getExtraAmmo().addAmmo(plr, 1);
 		}
 	}
-
 }
