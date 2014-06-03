@@ -197,7 +197,8 @@ public class UserInterface {
 	 */
 	public void playerDies() {
 		System.out.println("You have been killed!");
-		System.out.println("Respawing now...");
+		System.out.println("Respawing now....");
+		System.out.println("enter to continue");
 	}
 
 	/**

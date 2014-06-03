@@ -43,7 +43,7 @@ public class GameEngine {
 	/**
 	 * Instantiation for {@link Player}
 	 */
-	private Player plr;
+	private Player ply;
 	
 	/**
 	 * Instantiation for {@link UserInterface}
@@ -142,7 +142,7 @@ public class GameEngine {
     	foundBriefcase=false;
     	ui = new UserInterface();
     	fh = new File_Handler();
-    	plr = new Player();
+    	ply = new Player();
     	grid = new Grid();
     	ui = new UserInterface();
     	grid.setUpGrid();
@@ -161,20 +161,20 @@ public class GameEngine {
      * finding the briefcase, the player dying, or the user quitting.
      */
 	public void gameLoop(){
-		grid.rePopulateGrid(plr);
+		grid.rePopulateGrid(ply);
 		playerDefaultVision();
 		ui.printGrid(grid);
 		do{
 			//ui.printGrid(grid);
 			didPlayerTakeTurn = false;
 			do{
-				grid.rePopulateGrid(plr);
+				grid.rePopulateGrid(ply);
 				ui.mainGameCMD(); 			//print options available during each turn
-				System.out.println("Ammo Left: " + plr.ammoAmount());
+				System.out.println("Ammo Left: " + ply.ammoAmount());
 				turnSelect();
 				playerDefaultVision();
 				ui.printGrid(grid);
-				if(plr.getHasBriefCase()){
+				if(ply.getHasBriefCase()){
 					ui.foundBriefcase();
 					ui.pause();
 					gameOver = true;
@@ -184,7 +184,7 @@ public class GameEngine {
 					stopPlayerLook(lookDirection);
 			}while(!didPlayerTakeTurn);
 			objectCheck();
-			playerKilled = grid.moveEnemy(grid, null);
+			playerKilled = grid.moveEnemy(grid, ply);
 			if(playerKilled){
 				ui.playerDies();
 				ui.pause();
@@ -199,18 +199,18 @@ public class GameEngine {
     	int[] radarPos = grid.getRadarPos();
     	int[] extraAmmoPos = grid.getExtraAmmoPos();
     	int[] shieldPos = grid.getShieldPos();
-    	if (plr.get_yPosition() == radarPos[0] && plr.get_xPosition() == radarPos[1] && !hasRadar) {
+    	if (ply.get_yPosition() == radarPos[0] && ply.get_xPosition() == radarPos[1] && !hasRadar) {
     		grid.activateRadar();
     		hasRadar = true;
     		ui.radarActivated();
     	}
-    	if (plr.get_yPosition() == extraAmmoPos[0] && plr.get_xPosition() == extraAmmoPos[1] && !hasEAmmo) {
-    		grid.getExtraAmmo().addAmmo(plr,1);
+    	if (ply.get_yPosition() == extraAmmoPos[0] && ply.get_xPosition() == extraAmmoPos[1] && !hasEAmmo) {
+    		grid.getExtraAmmo().addAmmo(ply,1);
     		hasEAmmo = true;
     		ui.ammoActivated();
     	}
-    	if (plr.get_yPosition() == shieldPos[0] && plr.get_xPosition() == shieldPos[1] && !hasShield) {
-    		grid.getShield().activateShield(plr);
+    	if (ply.get_yPosition() == shieldPos[0] && ply.get_xPosition() == shieldPos[1] && !hasShield) {
+    		grid.getShield().activateShield(ply);
     		hasShield = true;
     		ui.shieldActivated();
     	}
@@ -223,7 +223,7 @@ public class GameEngine {
     }
 
     public Player getPlayer(){
-    	return plr;
+    	return ply;
     }
 	//For use with navigating the main menu
     /**
@@ -253,8 +253,8 @@ public class GameEngine {
 				case "c":
 				case "2":
 					grid = fh.openGrid();
-					fh.fileLander("load", grid, plr);
-					plr = fh.loadPlayer();
+					fh.fileLander("load", grid, ply);
+					ply = fh.loadPlayer();
 					gameLoop();
 					break;
 					
@@ -352,11 +352,11 @@ public class GameEngine {
 				case "shoot":
 					ui.shootTurn();
 					dir = sc.nextLine();
-					hasBullet  = plr.checkBulletPossession();
+					hasBullet  = ply.checkBulletPossession();
 					if (hasBullet == true) {
-						plr.useBullet();
+						ply.useBullet();
 						ui.shotFired();
-						grid.shootGunCheck(plr.get_yPosition(), plr.get_xPosition(), dir);
+						grid.shootGunCheck(ply.get_yPosition(), ply.get_xPosition(), dir);
 					} else {
 						ui.noBullet();
 					}
@@ -412,17 +412,17 @@ public class GameEngine {
 
     public void movePlayerForTurn(){
 		String input = sc.nextLine();
-		plr.movePlayer(input);
-		grid.rePopulateGrid(plr);
+		ply.movePlayer(input);
+		grid.rePopulateGrid(ply);
 	//	grid.printGrid();
 		didPlayerTakeTurn = true;
     }
     public void playerLook(String dir){
-    	plr.playerLook(grid, dir); 
+    	ply.playerLook(grid, dir); 
     	//grid.printGrid();
     }
     public void stopPlayerLook(String dir){
-    	plr.stopLooking(grid, dir);
+    	ply.stopLooking(grid, dir);
     }
     private void setOption(){
     	ui.options();
@@ -444,7 +444,7 @@ public class GameEngine {
     	    	case "save":
 				case "3":
 				case "s":
-					fh.fileLander("Save", grid, plr);
+					fh.fileLander("Save", grid, ply);
 					break;
 
     	    	case "exit":
@@ -511,7 +511,7 @@ public class GameEngine {
 			grid.getShieldVis(true);
 			grid.getExtraAmmoVis(true);	
 			grid.changeAllObjectStates(true);
-			grid.getExtraAmmo().addAmmo(plr, 9001);
+			grid.getExtraAmmo().addAmmo(ply, 9001);
 		}
 		else{
 			grid.getRadarVis(false);
@@ -520,46 +520,46 @@ public class GameEngine {
 			grid.getShieldVis(false);
 			grid.getExtraAmmoVis(false);	
 			grid.changeAllObjectStates(false);
-			grid.getExtraAmmo().addAmmo(plr, 1);
+			grid.getExtraAmmo().addAmmo(ply, 1);
 		}
 	}
 	
 	public void playerDefaultVision(){
-		switch(plr.getPlrMoveDirection()){
+		switch(ply.getPlrMoveDirection()){
 			case "up":
-				plr.naturalVision(plr.getPlrMoveDirection(), grid);
+				ply.naturalVision(ply.getPlrMoveDirection(), grid);
 				break;
 			case "down":
-				plr.naturalVision(plr.getPlrMoveDirection(), grid);
+				ply.naturalVision(ply.getPlrMoveDirection(), grid);
 				break;
 			case "right":
-				plr.naturalVision(plr.getPlrMoveDirection(), grid);
+				ply.naturalVision(ply.getPlrMoveDirection(), grid);
 				break;
 			case "left":
-				plr.naturalVision(plr.getPlrMoveDirection(), grid);
+				ply.naturalVision(ply.getPlrMoveDirection(), grid);
 				break;
 			default:
-				plr.naturalVision("up", grid);
+				ply.naturalVision("up", grid);
 				break;
 		}
 	}
 	
 	public void removeDefaultVision(){
-		switch(plr.getPlrMoveDirection()){
+		switch(ply.getPlrMoveDirection()){
 		case "up":
-			plr.removeNaturalVision(plr.getPlrMoveDirection(), grid);
+			ply.removeNaturalVision(ply.getPlrMoveDirection(), grid);
 			break;
 		case "down":
-			plr.removeNaturalVision(plr.getPlrMoveDirection(), grid);
+			ply.removeNaturalVision(ply.getPlrMoveDirection(), grid);
 			break;
 		case "right":
-			plr.removeNaturalVision(plr.getPlrMoveDirection(), grid);
+			ply.removeNaturalVision(ply.getPlrMoveDirection(), grid);
 			break;
 		case "left":
-			plr.removeNaturalVision(plr.getPlrMoveDirection(), grid);
+			ply.removeNaturalVision(ply.getPlrMoveDirection(), grid);
 			break;
 		default:
-			plr.removeNaturalVision("up", grid);
+			ply.removeNaturalVision("up", grid);
 			break;
 		}
 	}

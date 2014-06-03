@@ -57,7 +57,7 @@ public class Player extends GameObject{
 		yPosition = 8;	
 //		isAlive=true;
 		ammo = 1;
-		objID = setObjId(0);
+		objID = setObjId(4);
 		plrMoveDir = "up";
 	}
 	

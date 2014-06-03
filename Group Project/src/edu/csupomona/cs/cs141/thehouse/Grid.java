@@ -348,24 +348,32 @@ public class Grid implements Serializable{
 	/**
 	 * @param yPos 
 	 * @param xPos 
-	 * @param plr 
+	 * @param ply 
 	 * @return playerKilled
 	 */
-	public boolean checkForPlayer(int yPos, int xPos, Player plr) {
+	public boolean checkForPlayer(int yPos, int xPos, Player ply) {
 		playerKilled = false;
 		
-		if(gog[yPos-1][xPos].compareTo(plr) == 0){				//up
-			playerKilled = true;
-			plr.playerDies();
-		}else if(gog[yPos+1][xPos].compareTo(plr) == 0){		//down
-			playerKilled = true;
-			plr.playerDies();
-		}else if(gog[yPos][xPos-1].compareTo(plr) == 0){		//left
-			playerKilled = true;
-			plr.playerDies();
-		}else if(gog[yPos][xPos+1].compareTo(plr) == 0){		//right
-			playerKilled = true;
-			plr.playerDies();
+		if(yPos - 1 >= 0 && yPos - 1 <= 8){
+			if(gog[yPos-1][xPos].compareTo(ply) == 0){		//up
+				playerKilled = true;
+				ply.playerDies();
+			}
+		}else if(yPos + 1 >= 0 && yPos + 1 <= 8){
+			if(gog[yPos+1][xPos].compareTo(ply) == 0){		//down
+				playerKilled = true;
+				ply.playerDies();
+			}
+		}else if(xPos - 1 >= 0 && xPos - 1 <= 8){
+			if(gog[yPos][xPos-1].compareTo(ply) == 0){		//left
+				playerKilled = true;
+				ply.playerDies();
+			}
+		}else if(xPos + 1 >= 0 && xPos + 1 <= 8){
+			if(gog[yPos][xPos+1].compareTo(ply) == 0){		//right
+				playerKilled = true;
+				ply.playerDies();
+			}
 		}else{
 			playerKilled = false;
 		}
