@@ -448,11 +448,12 @@ public class Grid implements Serializable{
 		case "1":
 			for (int i =+ yplr; i >= 0; i--) {
 				enemyInstance = checkForEnemy(i, xplr);
-				System.out.print(i + " " + xplr);
+				System.out.print(i + " " + xplr);		// for testing
 				System.out.println(enemyInstance);
 				if(enemyInstance){
 					gog[i][xplr] = new GameObject();
 					enemydied = true;
+					enemy.remove(enemy.get(i));
 				}
 			}
 			printGrid();
@@ -463,8 +464,9 @@ public class Grid implements Serializable{
 		case "2":
 			for (int i =+ yplr; i < gog.length; i++) {
 				enemyInstance = checkForEnemy(i, xplr);
-				System.out.print(i + " " + xplr);
+				System.out.print(i + " " + xplr);		// for testing
 				System.out.println(enemyInstance);
+				enemy.remove(enemy.get(i));
 			}
 			break;
 			
@@ -473,9 +475,9 @@ public class Grid implements Serializable{
 		case "4":
 			for (int i =+ xplr; i >= 0; i--) {
 				enemyInstance = checkForEnemy(yplr, i);
-				System.out.print(yplr + " " + i);
+				System.out.print(yplr + " " + i);		// for testing
 				System.out.println(enemyInstance);
-
+				enemy.remove(enemy.get(i));
 			}
 			break;
 			
@@ -483,10 +485,10 @@ public class Grid implements Serializable{
 		case "r":
 		case "3":
 			for (int i =+ xplr; i < gog.length; i++) {
-				System.out.print(yplr + " " + i);
+				System.out.print(yplr + " " + i);		// for testing
 				enemyInstance = checkForEnemy(yplr, i);
 				System.out.println(enemyInstance);
-
+				enemy.remove(enemy.get(i));
 			}
 			break;
 		}
