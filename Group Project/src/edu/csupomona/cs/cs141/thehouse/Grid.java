@@ -437,30 +437,28 @@ public class Grid implements Serializable{
 	}
 	
 	public void shootGunCheck(int yplr, int xplr, String dir) {
+		int c = 0;
+		
 		switch (dir) {
 		case "up":
 		case "u":
 		case "1":
 			for (int i =+ yplr; i >= 0; i--) {
-				enemyInstance = checkForEnemy(i, xplr);
-				System.out.print(i + " " + xplr);		// for testing
-				System.out.println(enemyInstance);
-				if(enemyInstance){
-					gog[i][xplr] = new GameObject();
-					enemy.remove(enemy.get(i));
-				}
+//				enemyInstance = checkForEnemy(i, xplr);
+//				System.out.print(i + " " + xplr);		// for testing
+//				System.out.println(enemyInstance);					
+				killenemy(i,xplr,c);
 			}
-			printGrid();
 			break;
 			
 		case "down":
 		case "d":
 		case "2":
 			for (int i =+ yplr; i < gog.length; i++) {
-				enemyInstance = checkForEnemy(i, xplr);
-				System.out.print(i + " " + xplr);		// for testing
-				System.out.println(enemyInstance);
-				enemy.remove(enemy.get(i));
+//				enemyInstance = checkForEnemy(i, xplr);
+//				System.out.print(i + " " + xplr);		// for testing
+//				System.out.println(enemyInstance);
+				killenemy(i,xplr, c);
 			}
 			break;
 			
@@ -468,10 +466,10 @@ public class Grid implements Serializable{
 		case "l":
 		case "4":
 			for (int i =+ xplr; i >= 0; i--) {
-				enemyInstance = checkForEnemy(yplr, i);
-				System.out.print(yplr + " " + i);		// for testing
-				System.out.println(enemyInstance);
-				enemy.remove(enemy.get(i));
+//				enemyInstance = checkForEnemy(yplr, i);
+//				System.out.print(yplr + " " + i);		// for testing
+//				System.out.println(enemyInstance);
+				killenemy(yplr,i, c);
 			}
 			break;
 			
@@ -479,12 +477,29 @@ public class Grid implements Serializable{
 		case "r":
 		case "3":
 			for (int i =+ xplr; i < gog.length; i++) {
-				System.out.print(yplr + " " + i);		// for testing
-				enemyInstance = checkForEnemy(yplr, i);
-				System.out.println(enemyInstance);
-				enemy.remove(enemy.get(i));
+//				System.out.print(yplr + " " + i);		// for testing
+//				enemyInstance = checkForEnemy(yplr, i);
+//				System.out.println(enemyInstance);
+				killenemy(yplr,i, c);
 			}
 			break;
+		}
+	}
+
+	/**
+	 * @param y
+	 * @param x
+	 */
+	private void killenemy(int y, int x, int c) {
+		for (int index = 0; index < enemy.size(); index++) {
+			int x1 = enemy.get(index).getXPosition();
+			int y1 = enemy.get(index).getYPosition();
+			if(x1==x && y1==y && c<1){
+				enemy.remove(enemy.get(index));
+				gog[y][x] = new GameObject();
+				System.out.println("You hear a thud in the distance.");
+				c++;
+			}
 		}
 	}
 

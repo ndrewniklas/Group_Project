@@ -307,8 +307,7 @@ public class GameEngine {
     private void turnSelect() {
 		do{
 			String dir;
-			userChoice = in.next();
-			userChoice = userChoice.toLowerCase();
+			userChoice = in.next().toLowerCase();
 			repeat = false;
 			switch(userChoice) {
 				case "dev":
@@ -342,7 +341,6 @@ public class GameEngine {
 				case "3":
 				case "s":
 				case "shoot":
-					//ui.printGrid(grid);
 					ui.shootTurn();
 					in.reset();
 					dir = in.next();
@@ -354,7 +352,6 @@ public class GameEngine {
 					} else {
 						ui.noBullet();
 					}
-					//ui.printGrid(grid);
 					didPlayerTakeTurn = true;
 					break;
 					
