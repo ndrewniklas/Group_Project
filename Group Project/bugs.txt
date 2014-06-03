@@ -3,12 +3,12 @@ Items disappear when enemies step on them - Fixed
 Remove loading after the game is started, add save to the turnSelect - Fixed
 Remove options from  mainmenu - Fixed
 Options taking two 0 to exit - Fixed
+Natural sight - Fixed
 
 Enemies don't die
 Player doesn't die
 Shield does nothing
 You should be able to look once then be able to move
-Natural sight
 Report if enemy is in sight
 Powerups spawn on player
 
