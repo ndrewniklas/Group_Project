@@ -391,19 +391,19 @@ public class GameEngine {
 				break;					
 			case "show":
 				grid.changeAllObjectStates(true);
-				ui.printGrid(grid);
+				//ui.printGrid(grid);
 				break;
 			case "hide":
 				grid.changeAllObjectStates(false);
-				ui.printGrid(grid);
+				//ui.printGrid(grid);
 				break;
 			case "on":
 				debugMode(true);
-				ui.printGrid(grid);
+				//ui.printGrid(grid);
 				break;
 			case "off":
 				debugMode(false);	
-				ui.printGrid(grid);
+				//ui.printGrid(grid);
 				break;
 			default:
 				ui.invalidCMD();
