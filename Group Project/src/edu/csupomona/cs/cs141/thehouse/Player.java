@@ -18,8 +18,6 @@
 
 package edu.csupomona.cs.cs141.thehouse;
 
-import java.util.Scanner;
-
 /**
  * @author Dylan Nguyen
  * This {@link Player} class will contain parameters that will define the player's status, upgrade status, position, and number
@@ -28,7 +26,7 @@ import java.util.Scanner;
  */
 public class Player extends GameObject{
 	
-	private boolean isAlive = true;
+//	private boolean isAlive = true;
 	private boolean isInvincible = false;
 	private boolean hasBullet = true;
 	private boolean hasShield = false;
@@ -57,7 +55,7 @@ public class Player extends GameObject{
 		setObjectName("[P]");
 		xPosition = 0;
 		yPosition = 8;	
-		isAlive=true;
+//		isAlive=true;
 		ammo = 1;
 		objID = setObjId(0);
 		plrMoveDir = "up";
@@ -67,27 +65,6 @@ public class Player extends GameObject{
 	 * {@link #movePlayer()} This method will move the player based on user input
 	 */
 	public void movePlayer(String input){
-		
-/*        boolean upPossible = roomExists(xPosition, yPosition - 1);
-        boolean downPossible = roomExists(xPosition, yPosition + 1);
-        boolean rightPossible = roomExists(xPosition + 1, yPosition);
-        boolean leftPossible = roomExists(xPosition - 1, yPosition);*/
-        
-//        System.out.println("Where would you like to go :");
-//        if (upPossible) {
-//            System.out.print(" up");
-//        }
-//        if (rightPossible) {
-//            System.out.print(" right");
-//        }
-//        if (downPossible) {
-//            System.out.print(" down");
-//        }
-//        if (leftPossible) {
-//            System.out.print(" left");
-//        }
-//        System.out.print(" ? \n");
-  
         String cmd = input.toLowerCase();
 		xpre = xPosition;
 		ypre = yPosition;
@@ -147,9 +124,9 @@ public class Player extends GameObject{
 		return xpre;
 	}
 	
-	public boolean isAlive() {
-		return isAlive;
-	}
+//	public boolean isAlive() {
+//		return isAlive;
+//	}
 	
 	public void naturalVision(String direction, Grid grid){
 		direction = direction.toLowerCase();
@@ -432,15 +409,15 @@ public class Player extends GameObject{
 	 * @return 
 	 * @return
 	 */
-	public void playerDies(boolean enemyContact) {
-		isAlive = false;
+	public void playerDies() {
+		setXY(0, 8);
+		numLives--;
 	}
 	
 	private void checkbreifcase(int lookPosY1, int lookPosX1, Grid grid) {
 		int[] bcPos = grid.getBCpos();
 		if(lookPosY1==bcPos[0] && lookPosX1 == bcPos[1]){
 			hasBriefCase = true;
-		System.out.println("YOU FOUND THE BRIEFCASE");
 		}
 		else
 			hasBriefCase = false;			

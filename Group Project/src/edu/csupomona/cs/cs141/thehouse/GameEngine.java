@@ -126,7 +126,9 @@ public class GameEngine {
 
 	private boolean debugModeState;
 
-	private boolean didPlayerLook; 
+	private boolean didPlayerLook;
+
+	private boolean playerKilled; 
 	
 	
 	/**
@@ -158,33 +160,40 @@ public class GameEngine {
      * The loop is finished once {@link #gameOver} is set to be true either from
      * finding the briefcase, the player dying, or the user quitting.
      */
-    public void gameLoop(){
-    	grid.rePopulateGrid(plr);
+	public void gameLoop(){
+		grid.rePopulateGrid(plr);
 		playerDefaultVision();
 		ui.printGrid(grid);
-    	while(!gameOver){
-    		//ui.printGrid(grid);
-    		didPlayerTakeTurn = false;
-    		while(!didPlayerTakeTurn){
-        		grid.rePopulateGrid(plr);
-    			ui.mainGameCMD(); 		//print options available during each turn
-    			System.out.println("Ammo Left: " + plr.ammoAmount());
-    			turnSelect();
-        		playerDefaultVision();
-    			ui.printGrid(grid);
-        		if(plr.getHasBriefCase())
-        			gameOver = true;
-        		removeDefaultVision();
-        		if(didPlayerLook)
-        			stopPlayerLook(lookDirection);
-    		}
-    		objectCheck();
-			grid.moveEnemy(grid);
+		do{
+			//ui.printGrid(grid);
+			didPlayerTakeTurn = false;
+			do{
+				grid.rePopulateGrid(plr);
+				ui.mainGameCMD(); 			//print options available during each turn
+				System.out.println("Ammo Left: " + plr.ammoAmount());
+				turnSelect();
+				playerDefaultVision();
+				ui.printGrid(grid);
+				if(plr.getHasBriefCase()){
+					ui.foundBriefcase();
+					ui.pause();
+					gameOver = true;
+				}
+				removeDefaultVision();
+				if(didPlayerLook)
+					stopPlayerLook(lookDirection);
+			}while(!didPlayerTakeTurn);
+			objectCheck();
+			playerKilled = grid.moveEnemy(grid, null);
+			if(playerKilled){
+				ui.playerDies();
+				ui.pause();
+			}
 			if(debugModeState)
 				debugMode(true);
-    	}
-    	ui.endScreen();
-    }
+		}while(!gameOver);
+		ui.endScreen();
+	}
     
     private void objectCheck() {
     	int[] radarPos = grid.getRadarPos();
@@ -453,7 +462,7 @@ public class GameEngine {
     	
     }
     private void setDebug(){
-		System.out.println("Please Select 'on' or 'off' (all lowercase): ");
+		System.out.println("Please Select 'on' or 'off': ");
 		debugSelect = sc.nextLine().toLowerCase();
 		
 		switch(debugSelect){

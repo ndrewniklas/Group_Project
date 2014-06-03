@@ -191,4 +191,19 @@ public class UserInterface {
 	public void pause() {
 		sc.nextLine();
 	}
+
+	/**
+	 * 
+	 */
+	public void playerDies() {
+		System.out.println("You have been killed!");
+		System.out.println("Respawing now...");
+	}
+
+	/**
+	 * 
+	 */
+	public void foundBriefcase() {
+		System.out.println("YOU FOUND THE BRIEFCASE");
+	}
 }

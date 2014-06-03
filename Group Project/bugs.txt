@@ -11,4 +11,4 @@ Shield does nothing
 You should be able to look once then be able to move
 Report if enemy is in sight
 Powerups spawn on player
-
+enemies do not move on players first turn

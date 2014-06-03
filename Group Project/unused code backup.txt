@@ -1,0 +1,21 @@
+from player.movePlayer(String input){
+	boolean upPossible = roomExists(xPosition, yPosition - 1);
+	boolean downPossible = roomExists(xPosition, yPosition + 1);
+    boolean rightPossible = roomExists(xPosition + 1, yPosition);
+    boolean leftPossible = roomExists(xPosition - 1, yPosition);*/
+        
+    System.out.println("Where would you like to go :");
+    if (upPossible) {
+        System.out.print(" up");
+    }
+    if (rightPossible) {
+        System.out.print(" right");
+    }
+    if (downPossible) {
+        System.out.print(" down");
+    }
+    if (leftPossible) {
+        System.out.print(" left");
+    }
+    System.out.print(" ? \n");
+}

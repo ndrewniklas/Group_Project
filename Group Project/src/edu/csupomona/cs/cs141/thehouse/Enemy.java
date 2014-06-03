@@ -59,6 +59,7 @@ public class Enemy extends GameObject {
 	
 	/**
 	 * {@link #moveEnemy()} This method will move the enemy
+	 * @param plr 
 	 */
 	public void moveEnemy(Grid grid){
 			int ranNum = die.roll(4);		

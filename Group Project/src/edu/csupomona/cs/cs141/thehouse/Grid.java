@@ -60,7 +60,12 @@ public class Grid implements Serializable{
 	
 	private boolean enemyVis;
 	
-	private boolean enemyInstance;
+	/**
+	 * used to test the {@ link #shootGunCheck(int, int, String)]
+	 */
+	private boolean enemyInstance;		//used for testing
+
+	private boolean playerKilled;
 
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
@@ -324,11 +329,47 @@ public class Grid implements Serializable{
 		return enemy;
 	}
 	
-	public void moveEnemy(Grid grid) {
+	public boolean moveEnemy(Grid grid, Player ply) {
 		for (int i = 0; i < enemy.size(); i++) {
-			enemy.get(i).moveEnemy(grid);
-			rePopulateGrid();
+			int ypos = enemy.get(i).getYPosition();
+			int xpos = enemy.get(i).getXPosition();
+			playerKilled = checkForPlayer(ypos, xpos, ply);
+			
+			if (!playerKilled) {
+				enemy.get(i).moveEnemy(grid);
+				rePopulateGrid();
+			}else{
+				break;
+			}
 		}
+		return playerKilled;
+	}
+
+	/**
+	 * @param yPos 
+	 * @param xPos 
+	 * @param plr 
+	 * @return playerKilled
+	 */
+	public boolean checkForPlayer(int yPos, int xPos, Player plr) {
+		playerKilled = false;
+		
+		if(gog[yPos-1][xPos].compareTo(plr) == 0){				//up
+			playerKilled = true;
+			plr.playerDies();
+		}else if(gog[yPos+1][xPos].compareTo(plr) == 0){		//down
+			playerKilled = true;
+			plr.playerDies();
+		}else if(gog[yPos][xPos-1].compareTo(plr) == 0){		//left
+			playerKilled = true;
+			plr.playerDies();
+		}else if(gog[yPos][xPos+1].compareTo(plr) == 0){		//right
+			playerKilled = true;
+			plr.playerDies();
+		}else{
+			playerKilled = false;
+		}
+		return playerKilled;
 	}
 
 	/**
