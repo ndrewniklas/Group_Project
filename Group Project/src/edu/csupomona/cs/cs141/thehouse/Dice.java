@@ -21,7 +21,10 @@ import java.io.Serializable;
 import java.util.Random;
 
 /**
- * @author Ben
+ * This class solely deals with creating random numbers in the game. These numbers are 
+ * used primarily to spawn objects in the {@link Grid} and to move the {@link Enemy enemies}
+ * every turn.
+ * @author Ben Nickerson, Andrew Nipp
  *
  */
 public class Dice implements Serializable{
