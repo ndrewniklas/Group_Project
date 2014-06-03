@@ -17,23 +17,28 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
+ * 
+ * This class will assign {@link GameObject} to the Extra Bullet class.
+ * 
  * @author Kurt
- * This class will assign the power-up to the Extra Bullet powerup.
  * 
  */
 public class ExtraAmmo extends GameObject {
 
 	/**
-	 * This is the string for holding the amount of bullets.
+	 * This field represents a {@code String} with teh amount of bullets.
+	 * Its should only be "1" or "0".
 	 */
 	private String ExtraAmmo;
 	
+	/**
+	 * This field represents the symbol for the {@link ExtraAmmo} object in the 
+	 * {@link Grid}.
+	 */
 	private final String EXTRA_AMMO= "|A|";
 	
-	private int objID;
-	
 	/**
-	 * This is the method that gives powerup its type.  
+	 * This is the constructor defines the symbol and {@link GameObject#hiddenName}  
 	 */
 	public ExtraAmmo() {
 		// TODO Auto-generated constructor stub
@@ -42,7 +47,6 @@ public class ExtraAmmo extends GameObject {
 	}
 	public ExtraAmmo(boolean vis){
 		setRealName(EXTRA_AMMO);
-		objID = setObjId(4);
 		if(vis)
 			setObjectName(EXTRA_AMMO);
 		else
