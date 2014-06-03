@@ -442,7 +442,7 @@ public class GameEngine {
     	    	case "exit":
     	    	case "e":
     	    	case "0":
-    	    		returnToMain();
+    	    		mainMenuSelect();
     	    		break;
     	    	
     	    	default:

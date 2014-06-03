@@ -52,6 +52,9 @@ public class Test_Main {
 		System.out.println("-----------------------------------------------------");
 	}
 	
+	/**
+	 * tested movement of player by printing out player position in the grid
+	 */
 	public static void movementTest_Basic() {
 		System.out.println("Player movement test 1");
 		Player ply = new Player();
@@ -67,6 +70,9 @@ public class Test_Main {
 		}
 	}
 	
+	/**
+	 * tested movement of player and printing player on grid
+	 */
 	public static void playerMove_Test1() {
 		System.out.println("Player movement test 2");
 		Player ply = new Player();
@@ -87,6 +93,9 @@ public class Test_Main {
 		}
 	}
 
+	/**
+	 * tested spawning of enemies and placement on grid
+	 */
 	public static void printGrid_Test3(){
 		System.out.println("Grid: Print Test 3");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
@@ -98,6 +107,9 @@ public class Test_Main {
 		System.out.println("-----------------------------------------------------");
 	}
 	
+	/**
+	 * spawning player, enemies, and power-ups and player movement
+	 */
 	public static void playerMove_Test2() {
 		System.out.println("Player movement test 2");
 		System.out.println("Player movement w/ Other Object Spawn");
@@ -138,6 +150,9 @@ public class Test_Main {
 		System.out.println("-----------------------------------------------------");
 	}
 	
+	/**
+	 * tests random spawning of enemies
+	 */
 	public static void printGrid_Test5(){
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
@@ -153,6 +168,9 @@ public class Test_Main {
 		}
 	}
 	
+	/**
+	 * tests enemy random movementt
+	 */
 	public static void printGrid_Test6(){
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
@@ -171,6 +189,9 @@ public class Test_Main {
 		}
 	}
 	
+	/**
+	 * tests enemy movement with player movement
+	 */
 	public static void playerMove_Test3() {
 		System.out.println("Player movement test 4");
 		System.out.println("Enemies will move with player");
@@ -199,6 +220,9 @@ public class Test_Main {
 		}
 	}
 	
+	/**
+	 * check spawning of power-ups and enemies don't stack and not in rooms
+	 */
 	public static void printGrid_Test7(){
 		System.out.println("Grid: Print Test 7");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
@@ -221,6 +245,9 @@ public class Test_Main {
 		System.out.println("-----------------------------------------------------");
 	}
 	
+	/**
+	 * prints what object is at each location
+	 */
 	public static void playerMove_Test4() {
 		System.out.println("Player movement test 3");
 		System.out.println("Standard Player Movement w/ Other Object Spawn and Object Testing");
@@ -305,6 +332,9 @@ public class Test_Main {
 		}
 	}
 	
+	/**
+	 * tests function of debug mode 
+	 */
 	public static void toggleDebug_Test1(){
 		System.out.println("Enemy Movement Test 1");
 		Player ply = new Player();
@@ -338,6 +368,10 @@ public class Test_Main {
 			grid.printGrid();
 		}
 	}
+	
+	/**
+	 * tests functionality of entire game with ui
+	 */
 	public static void ui_Test1(){
 		GameEngine ge = new GameEngine();
 		ge.startGame();		
