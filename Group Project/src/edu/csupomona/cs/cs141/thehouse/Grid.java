@@ -193,10 +193,6 @@ public class Grid implements Serializable{
 		else{
 			gog[ply.getYPre()][ply.getXPre()] = new GameObject();
 		}
-		
-		/*for(int i = 0; i < enemy.length; ++i){
-			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
-		}*/
 	}
 
 	public void rePopulateGrid(){					//for testing only
@@ -233,11 +229,12 @@ public class Grid implements Serializable{
 	public boolean checkForEnemy(int yPos, int xPos) {
 		boolean check = false;
 		try{
-			if(gog[yPos][xPos].compareTo(enemy.get(0)) == 0){
-				check = true;
-			}
-			else{
-				check = false;
+			for (int i = 0; i < enemy.size(); i++) {
+				if (gog[yPos][xPos].compareTo(enemy.get(i)) == 0) {
+					check = true;
+				} else {
+					check = false;
+				}
 			}
 		}catch(ArrayIndexOutOfBoundsException e){
 			//System.out.println("Out of the grid");
@@ -355,22 +352,22 @@ public class Grid implements Serializable{
 		playerKilled = false;
 		
 		if(yPos - 1 >= 0 && yPos - 1 <= 8){
-			if(gog[yPos-1][xPos].compareTo(ply) == 0){		//up
+			if(yPos - 1 == ply.get_yPosition() && xPos == ply.get_xPosition()){		//up
 				playerKilled = true;
 				ply.playerDies();
 			}
 		}else if(yPos + 1 >= 0 && yPos + 1 <= 8){
-			if(gog[yPos+1][xPos].compareTo(ply) == 0){		//down
+			if(yPos + 1 == ply.get_yPosition() && xPos == ply.get_xPosition()){		//down
 				playerKilled = true;
 				ply.playerDies();
 			}
 		}else if(xPos - 1 >= 0 && xPos - 1 <= 8){
-			if(gog[yPos][xPos-1].compareTo(ply) == 0){		//left
+			if(yPos == ply.get_yPosition() && xPos - 1 == ply.get_xPosition()){		//left
 				playerKilled = true;
 				ply.playerDies();
 			}
 		}else if(xPos + 1 >= 0 && xPos + 1 <= 8){
-			if(gog[yPos][xPos+1].compareTo(ply) == 0){		//right
+			if(yPos == ply.get_yPosition() && xPos + 1 == ply.get_xPosition()){		//right
 				playerKilled = true;
 				ply.playerDies();
 			}

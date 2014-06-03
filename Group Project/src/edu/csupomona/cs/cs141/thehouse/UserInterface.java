@@ -207,4 +207,27 @@ public class UserInterface {
 	public void foundBriefcase() {
 		System.out.println("YOU FOUND THE BRIEFCASE");
 	}
+
+	/**
+	 * 
+	 */
+	public void printStats(Player ply) {
+		System.out.println("Ammo: " + ply.getAmmo());
+		System.out.println("Lives: " + ply.getNumLives());
+	}
+
+	/**
+	 * 
+	 */
+	public void congrats() {
+		System.out.println("Congratulations you found the briefcase and made it out alive!");
+	}
+
+	/**
+	 * 
+	 */
+	public void missionFailed() {
+		System.out.println("YOU HAVE FAILD ME!!!!!");
+		System.out.println("Maybe you can do better next time");
+	}
 }

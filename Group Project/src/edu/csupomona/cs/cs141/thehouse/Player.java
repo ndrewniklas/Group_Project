@@ -54,9 +54,9 @@ public class Player extends GameObject{
 		setRealName("[P]");
 		setObjectName("[P]");
 		xPosition = 0;
-		yPosition = 8;	
-//		isAlive=true;
+		yPosition = 8;
 		ammo = 1;
+		numLives = 3;
 		objID = setObjId(4);
 		plrMoveDir = "up";
 	}
@@ -123,10 +123,6 @@ public class Player extends GameObject{
 	public int getXPre() {
 		return xpre;
 	}
-	
-//	public boolean isAlive() {
-//		return isAlive;
-//	}
 	
 	public void naturalVision(String direction, Grid grid){
 		direction = direction.toLowerCase();
@@ -360,7 +356,7 @@ public class Player extends GameObject{
 		--ammo;
 	}
 	
-	public int ammoAmount(){
+	public int getAmmo(){
 		return ammo;
 	}
 	
@@ -410,7 +406,8 @@ public class Player extends GameObject{
 	 * @return
 	 */
 	public void playerDies() {
-		setXY(0, 8);
+		xPosition = 0;
+		yPosition = 8;
 		numLives--;
 	}
 	
@@ -432,6 +429,13 @@ public class Player extends GameObject{
 	 */
 	public void getBriefCase(boolean hasBriefCase) {
 		hasBriefCase = true;
+	}
+
+	/**
+	 * @return
+	 */
+	public int getNumLives() {
+		return numLives;
 	}
 	
 }
