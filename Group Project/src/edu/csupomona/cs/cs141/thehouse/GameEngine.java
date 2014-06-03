@@ -124,7 +124,9 @@ public class GameEngine {
 	private boolean hasEAmmo = false;
 	private boolean hasShield = false;
 
-	private boolean debugModeState; 
+	private boolean debugModeState;
+
+	private boolean didPlayerLook; 
 	
 	
 	/**
@@ -157,19 +159,24 @@ public class GameEngine {
      * finding the briefcase, the player dying, or the user quitting.
      */
     public void gameLoop(){
-    		grid.rePopulateGrid(plr);
+    	grid.rePopulateGrid(plr);
+		playerDefaultVision();
 		ui.printGrid(grid);
     	while(!gameOver){
     		//ui.printGrid(grid);
     		didPlayerTakeTurn = false;
     		while(!didPlayerTakeTurn){
-        		playerDefaultVision();
         		grid.rePopulateGrid(plr);
     			ui.mainGameCMD(); 		//print options available during each turn
     			System.out.println("Ammo Left: " + plr.ammoAmount());
     			turnSelect();
+        		playerDefaultVision();
+    			ui.printGrid(grid);
         		if(plr.getHasBriefCase())
         			gameOver = true;
+        		removeDefaultVision();
+        		if(didPlayerLook)
+        			stopPlayerLook(lookDirection);
     		}
     		objectCheck();
 			grid.moveEnemy(grid);
@@ -315,11 +322,13 @@ public class GameEngine {
 				case "look":
 				case "l":
 				case "1":
+					didPlayerLook = true;
 					ui.lookDirections();
 					dir = in.next();
+					lookDirection = dir;
 					playerLook(dir);
-					ui.printGrid(grid);
-					stopPlayerLook(dir);
+					//ui.printGrid(grid);
+					//stopPlayerLook(dir);
 					didPlayerTakeTurn = true;
 					break;
 				
@@ -333,7 +342,7 @@ public class GameEngine {
 				case "3":
 				case "s":
 				case "shoot":
-					ui.printGrid(grid);
+					//ui.printGrid(grid);
 					ui.shootTurn();
 					in.reset();
 					dir = in.next();
@@ -345,7 +354,7 @@ public class GameEngine {
 					} else {
 						ui.noBullet();
 					}
-					ui.printGrid(grid);
+					//ui.printGrid(grid);
 					didPlayerTakeTurn = true;
 					break;
 					
@@ -353,7 +362,7 @@ public class GameEngine {
 				case "o":
 				case "4":
 					setOption();
-					ui.printGrid(grid);
+					//ui.printGrid(grid);
 					break;
 				case "exit":
 				case "e":
@@ -405,12 +414,12 @@ public class GameEngine {
 		String input = in.next();
 		plr.movePlayer(input);
 		grid.rePopulateGrid(plr);
-		grid.printGrid();
+	//	grid.printGrid();
 		didPlayerTakeTurn = true;
     }
     public void playerLook(String dir){
     	plr.playerLook(grid, dir); 
-    	grid.printGrid();
+    	//grid.printGrid();
     }
     public void stopPlayerLook(String dir){
     	plr.stopLooking(grid, dir);
@@ -533,7 +542,8 @@ public class GameEngine {
 			default:
 				plr.naturalVision("up", grid);
 		}
-		ui.printGrid(grid);
+	}
+	public void removeDefaultVision(){
 		switch(plr.getPlrMoveDirection()){
 		case "up":
 			plr.removeNaturalVision(plr.getPlrMoveDirection(), grid);
