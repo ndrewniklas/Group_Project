@@ -33,7 +33,7 @@ public class GameEngine {
 	/**
 	 * Instantiation for {@link Scanner}
 	 */
-	private Scanner in = new Scanner(System.in);
+	private Scanner sc = new Scanner(System.in);
 	
 	/**
 	 * Instantiation for {@link Grid}
@@ -231,7 +231,7 @@ public class GameEngine {
     private void mainMenuSelect() {
 		do {
 			ui.mainMenu();
-    		menuSelection = in.next().toLowerCase();
+    		menuSelection = sc.nextLine().toLowerCase();
     		repeat = true;
     		switch(menuSelection) {
 				case "new":
@@ -307,14 +307,14 @@ public class GameEngine {
     private void turnSelect() {
 		do{
 			String dir;
-			userChoice = in.next().toLowerCase();
+			userChoice = sc.nextLine().toLowerCase();
 			repeat = false;
 			switch(userChoice) {
 				case "dev":
-					in.reset();
+					sc.reset();
 					System.out.println("Which dev command do you want to execute?");
 					System.out.println("show, hide, check, on, off");
-					String cmd = in.next();
+					String cmd = sc.nextLine();
 					devMenu(cmd);
 					break;
 					
@@ -323,7 +323,7 @@ public class GameEngine {
 				case "1":
 					didPlayerLook = true;
 					ui.lookDirections();
-					dir = in.next();
+					dir = sc.nextLine();
 					lookDirection = dir;
 					playerLook(dir);
 					//ui.printGrid(grid);
@@ -342,8 +342,7 @@ public class GameEngine {
 				case "s":
 				case "shoot":
 					ui.shootTurn();
-					in.reset();
-					dir = in.next();
+					dir = sc.nextLine();
 					hasBullet  = plr.checkBulletPossession();
 					if (hasBullet == true) {
 						plr.useBullet();
@@ -359,7 +358,6 @@ public class GameEngine {
 				case "o":
 				case "4":
 					setOption();
-					//ui.printGrid(grid);
 					break;
 				case "exit":
 				case "e":
@@ -379,11 +377,10 @@ public class GameEngine {
     public void devMenu(String cmd){
     	switch(cmd){
 			case "check":
-				in.reset();
 				System.out.println("Select y");
-				int ydir = in.nextInt();
+				int ydir = sc.nextInt();
 				System.out.println("Select x");
-				int xdir = in.nextInt();
+				int xdir = sc.nextInt();
 				System.out.println(grid.checkForEnemy(ydir, xdir));
 				break;					
 			case "show":
@@ -405,7 +402,7 @@ public class GameEngine {
     }
 
     public void movePlayerForTurn(){
-		String input = in.next();
+		String input = sc.nextLine();
 		plr.movePlayer(input);
 		grid.rePopulateGrid(plr);
 	//	grid.printGrid();
@@ -421,8 +418,7 @@ public class GameEngine {
     private void setOption(){
     	ui.options();
     	do {
-    		pickOption = in.next();
-        	pickOption = pickOption.toLowerCase();
+    		pickOption = sc.nextLine().toLowerCase();
         	repeat = false;
         	switch(pickOption){
     	    	case "ai":
@@ -437,7 +433,8 @@ public class GameEngine {
     	    		break;
     	    		
     	    	case "save":
-				case "5":
+				case "3":
+				case "s":
 					fh.fileLander("Save", grid, plr);
 					break;
 
@@ -457,8 +454,7 @@ public class GameEngine {
     }
     private void setDebug(){
 		System.out.println("Please Select 'on' or 'off' (all lowercase): ");
-		debugSelect = in.next();
-		debugSelect = debugSelect.toLowerCase();
+		debugSelect = sc.nextLine().toLowerCase();
 		
 		switch(debugSelect){
 			case "on":
@@ -466,7 +462,6 @@ public class GameEngine {
 				debugModeState = true;
 				debugMode(true);
 				System.out.println("WECLOME TO DEBUG MODE");
-				//setOption();
 				break;
 			
 			case "off":
@@ -474,7 +469,6 @@ public class GameEngine {
 				debugModeState = false;
 				debugMode(false);
 				System.out.println("I guess you like being blind...");
-				//setOption();
 				break;
 			
 			default:
