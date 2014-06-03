@@ -128,7 +128,9 @@ public class GameEngine {
 
 	private boolean didPlayerLook;
 
-	private boolean playerKilled; 
+	private boolean playerKilled;
+
+	private int moves; 
 	
 	
 	/**
@@ -146,6 +148,7 @@ public class GameEngine {
     	grid = new Grid();
     	ui = new UserInterface();
     	grid.setUpGrid();
+    	moves = 0;
     }
     
 	/**
@@ -165,33 +168,45 @@ public class GameEngine {
 		playerDefaultVision();
 		ui.printGrid(grid);
 		do{
-			//ui.printGrid(grid);
 			didPlayerTakeTurn = false;
-			do{
-				grid.rePopulateGrid(ply);
-				ui.mainGameCMD(); 			//print options available during each turn
-				System.out.println("Ammo Left: " + ply.ammoAmount());
+			while(!didPlayerTakeTurn){			
+				ui.printStats(ply);
+				ui.mainGameCMD();		//print options available during each turn
 				turnSelect();
 				playerDefaultVision();
-				ui.printGrid(grid);
 				if(ply.getHasBriefCase()){
 					ui.foundBriefcase();
-					ui.pause();
 					gameOver = true;
 				}
 				removeDefaultVision();
 				if(didPlayerLook)
 					stopPlayerLook(lookDirection);
-			}while(!didPlayerTakeTurn);
+			}
 			objectCheck();
 			playerKilled = grid.moveEnemy(grid, ply);
 			if(playerKilled){
 				ui.playerDies();
 				ui.pause();
+				if(ply.getNumLives() >= 0){
+					playerKilled = false;
+				}else{
+					gameOver = true;
+				}
 			}
-			if(debugModeState)
+			if(debugModeState){
 				debugMode(true);
+			}
+				grid.rePopulateGrid(ply);
+				playerDefaultVision();
+				ui.printGrid(grid);
+			moves++;
 		}while(!gameOver);
+		
+		if(ply.getHasBriefCase()){
+			ui.congrats();
+		}else if(playerKilled){
+			ui.missionFailed();
+		}
 		ui.endScreen();
 	}
     
@@ -287,31 +302,7 @@ public class GameEngine {
 		} while(repeat == true);
 	}
 
-//	/**
-//	 * This method contains a switch statement and do while loop that essentially serves to return the 
-//	 * user to the main menu.
-//	 */
-//    private void returnToMain() {
-//    	do{
-//    		menuSelection = in.next();
-//    		menuSelection = menuSelection.toLowerCase();
-//			switch (menuSelection) {
-//				case "return":
-//				case "r":
-//				case "0":
-//					// ui.mainMenu();
-//					mainMenuSelect();
-//					break;
-//
-//				default:
-//					ui.invalidCMD();
-//					repeat = true;
-//					break;
-//			}
-//		} while (repeat == true);
-//	}
-
-	// Main game methods
+// Main game methods
     
     private void turnSelect() {
 		do{
@@ -325,6 +316,7 @@ public class GameEngine {
 					System.out.println("show, hide, check, on, off");
 					String cmd = sc.nextLine();
 					devMenu(cmd);
+					didPlayerTakeTurn = false;
 					break;
 					
 				case "look":
@@ -334,9 +326,7 @@ public class GameEngine {
 					ui.lookDirections();
 					dir = sc.nextLine();
 					lookDirection = dir;
-					playerLook(dir);
-					//ui.printGrid(grid);
-					//stopPlayerLook(dir);
+					ply.playerLook(grid, dir);
 					didPlayerTakeTurn = true;
 					break;
 				
@@ -390,6 +380,7 @@ public class GameEngine {
 				int ydir = sc.nextInt();
 				System.out.println("Select x");
 				int xdir = sc.nextInt();
+				sc.nextLine();
 				System.out.println(grid.checkForEnemy(ydir, xdir));
 				break;					
 			case "show":
@@ -414,13 +405,11 @@ public class GameEngine {
 		String input = sc.nextLine();
 		ply.movePlayer(input);
 		grid.rePopulateGrid(ply);
-	//	grid.printGrid();
 		didPlayerTakeTurn = true;
     }
-    public void playerLook(String dir){
-    	ply.playerLook(grid, dir); 
-    	//grid.printGrid();
-    }
+//    public void playerLook(String dir){
+//    	ply.playerLook(grid, dir);
+//    }
     public void stopPlayerLook(String dir){
     	ply.stopLooking(grid, dir);
     }
