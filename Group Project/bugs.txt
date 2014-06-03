@@ -7,7 +7,7 @@ Natural sight - Fixed
 Enemies don't die - Fixed
 Player dies - Fixed
 
-natural site is not removed if you turn
+--Up natural sight is not removed if you change direction
 Once you see an enemy they stay visible
 Shield does nothing
 You should be able to look once then be able to move
