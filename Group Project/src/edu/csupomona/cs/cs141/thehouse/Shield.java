@@ -33,7 +33,7 @@ public class Shield extends GameObject {
 	
 	private int objID;
 	/**
-	 * This is the constructor for the shield powerup
+	 * This is the constructor for the shield power-up
 	 */
 	public Shield() {
 		// Invincibility, just felt like making it shield so it is quicker to type

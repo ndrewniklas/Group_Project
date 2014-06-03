@@ -5,10 +5,12 @@ Remove options from  mainmenu - Fixed
 Options taking two 0 to exit - Fixed
 Natural sight - Fixed
 Enemies don't die - Fixed
+Player dies - Fixed
 
-Player doesn't die
+
+Once you see an enemy they stay visible
 Shield does nothing
 You should be able to look once then be able to move
 Report if enemy is in sight
-Powerups spawn on player
+Power-ups spawn on player
 enemies do not move on players first turn

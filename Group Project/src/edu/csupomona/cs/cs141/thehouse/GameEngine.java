@@ -56,21 +56,6 @@ public class GameEngine {
 	private File_Handler fh;
 	
 	/**
-	 * Checks to see if the game is over
-	 */
-	private boolean gameOver;
-	
-	/**
-	 * Checks to see if the briefcase is found
-	 */
-	private boolean foundBriefcase;
-	
-	/** 
-	 * Checks to see if the user quit 
-	 */
-	private boolean userQuit;
-	
-	/**
 	 * This field holds the choice of the user. There are xx potential values for the user to select:
 	 * left,
 	 * right,
@@ -80,10 +65,8 @@ public class GameEngine {
 	 * save,
 	 * exit
 	 */
-	private String userChoice;
+	private String choice;
 	
-	private String moveChoice;
-
 	/**
 	 * This field holds the choice of direction for which the user will "look" before each turn.
 	 * There are four directions: 
@@ -95,17 +78,10 @@ public class GameEngine {
 	private String lookDirection;
 
 	/**
-	 * This field holds a string set by the user. It can be any of the following:
-	 * 
+	 * Checks to see if the game is over
 	 */
-	private String menuSelection;
+	private boolean gameOver;
 
-	private String input;
-
-	private String option;
-
-	private String cmd;
-	
 	private boolean didPlayerTakeTurn;
 	
 	/**
@@ -114,10 +90,6 @@ public class GameEngine {
 	 */
 	private boolean repeat;
 
-	private String pickOption = null;
-
-	private String debugSelect;
-	
 	private boolean hasBullet = false;
 
 	private boolean hasRadar = false;
@@ -130,7 +102,12 @@ public class GameEngine {
 
 	private boolean playerKilled;
 
-	private int moves; 
+	private int moves;
+
+	/**
+	 * turns remaining on shield use
+	 */
+	private int m; 
 	
 	
 	/**
@@ -141,7 +118,6 @@ public class GameEngine {
      */
     public GameEngine(){
     	gameOver = false;
-    	foundBriefcase=false;
     	ui = new UserInterface();
     	fh = new File_Handler();
     	ply = new Player();
@@ -169,18 +145,21 @@ public class GameEngine {
 		ui.printGrid(grid);
 		do{
 			didPlayerTakeTurn = false;
-			while(!didPlayerTakeTurn){			
-				ui.printStats(ply);
-				ui.mainGameCMD();		//print options available during each turn
-				turnSelect();
+			while(!didPlayerTakeTurn){	
+				ui.printStats(ply, hasRadar, hasShield, m);
+				if(hasShield)
+					m--;
+				turnSelect1();
 				playerDefaultVision();
 				if(ply.getHasBriefCase()){
 					ui.foundBriefcase();
 					gameOver = true;
 				}
 				removeDefaultVision();
-				if(didPlayerLook)
-					stopPlayerLook(lookDirection);
+				if(didPlayerLook){
+					turnSelect2();
+					ply.stopLooking(grid, lookDirection);
+				}
 			}
 			objectCheck();
 			playerKilled = grid.moveEnemy(grid, ply);
@@ -196,9 +175,9 @@ public class GameEngine {
 			if(debugModeState){
 				debugMode(true);
 			}
-				grid.rePopulateGrid(ply);
-				playerDefaultVision();
-				ui.printGrid(grid);
+			grid.rePopulateGrid(ply);
+			playerDefaultVision();
+			ui.printGrid(grid);
 			moves++;
 		}while(!gameOver);
 		
@@ -210,7 +189,7 @@ public class GameEngine {
 		ui.endScreen();
 	}
     
-    private void objectCheck() {
+    public void objectCheck() {
     	int[] radarPos = grid.getRadarPos();
     	int[] extraAmmoPos = grid.getExtraAmmoPos();
     	int[] shieldPos = grid.getShieldPos();
@@ -227,6 +206,7 @@ public class GameEngine {
     	if (ply.get_yPosition() == shieldPos[0] && ply.get_xPosition() == shieldPos[1] && !hasShield) {
     		grid.getShield().activateShield(ply);
     		hasShield = true;
+    		m = 5;
     		ui.shieldActivated();
     	}
     	if(!hasRadar)
@@ -237,9 +217,6 @@ public class GameEngine {
     		grid.respawnShield();
     }
 
-    public Player getPlayer(){
-    	return ply;
-    }
 	//For use with navigating the main menu
     /**
      * This method is called after {@link UserInterface#mainMenu()} prints the menu. It uses a 
@@ -252,12 +229,12 @@ public class GameEngine {
      * 			   , "options" calls {@link UserInterface#options()}
      * 			   , "exit" exits the program 
      */
-    private void mainMenuSelect() {
+    public void mainMenuSelect() {
 		do {
 			ui.mainMenu();
-    		menuSelection = sc.nextLine().toLowerCase();
+    		choice = sc.nextLine().toLowerCase();
     		repeat = true;
-    		switch(menuSelection) {
+    		switch(choice) {
 				case "new":
 				case "n":
 				case "1":
@@ -284,7 +261,6 @@ public class GameEngine {
 				case "o":
 				case "4":
 					setOption();
-					repeat = true;
 					break;
 					
 				case "exit":
@@ -304,12 +280,15 @@ public class GameEngine {
 
 // Main game methods
     
-    private void turnSelect() {
-		do{
-			String dir;
-			userChoice = sc.nextLine().toLowerCase();
+    /**
+     * first menu to print on each turn
+     */
+    public void turnSelect1() {
+    	ui.turnSelect1();
+    	do{
+			choice = sc.nextLine().toLowerCase();
 			repeat = false;
-			switch(userChoice) {
+			switch(choice) {
 				case "dev":
 					sc.reset();
 					System.out.println("Which dev command do you want to execute?");
@@ -324,9 +303,8 @@ public class GameEngine {
 				case "1":
 					didPlayerLook = true;
 					ui.lookDirections();
-					dir = sc.nextLine();
-					lookDirection = dir;
-					ply.playerLook(grid, dir);
+					lookDirection = sc.nextLine();
+					ply.playerLook(grid, lookDirection);
 					didPlayerTakeTurn = true;
 					break;
 				
@@ -341,12 +319,12 @@ public class GameEngine {
 				case "s":
 				case "shoot":
 					ui.shootTurn();
-					dir = sc.nextLine();
+					choice = sc.nextLine();
 					hasBullet  = ply.checkBulletPossession();
 					if (hasBullet == true) {
 						ply.useBullet();
 						ui.shotFired();
-						grid.shootGunCheck(ply.get_yPosition(), ply.get_xPosition(), dir);
+						grid.shootGunCheck(ply.get_yPosition(), ply.get_xPosition(), choice);
 					} else {
 						ui.noBullet();
 					}
@@ -373,7 +351,68 @@ public class GameEngine {
 		} while(repeat == true);
 	}
     
-    public void devMenu(String cmd){
+    /**
+	 * menu to print after player has looked
+	 * 		(second half of turn)
+	 */
+	public void turnSelect2() {
+		ui.turnSelect2();
+		do{
+		choice = sc.nextLine().toLowerCase();
+		repeat = false;
+		switch(choice) {
+			case "dev":
+				sc.reset();
+				System.out.println("Which dev command do you want to execute?");
+				System.out.println("show, hide, check, on, off");
+				String cmd = sc.nextLine();
+				devMenu(cmd);
+				didPlayerTakeTurn = false;
+				break;
+				
+			case "move":
+			case "m":
+			case "1":
+				ui.moveTurn();
+				movePlayerForTurn();
+				break;
+			
+			case "shoot":
+			case "s":
+			case "2":
+				ui.shootTurn();
+				choice = sc.nextLine();
+				hasBullet  = ply.checkBulletPossession();
+				if (hasBullet == true) {
+					ply.useBullet();
+					ui.shotFired();
+					grid.shootGunCheck(ply.get_yPosition(), ply.get_xPosition(), choice);
+				} else {
+					ui.noBullet();
+				}
+				didPlayerTakeTurn = true;
+				break;
+				
+			case "options":
+			case "o":
+			case "3":
+				setOption();
+				break;
+			case "exit":
+			case "e":
+			case "0":
+				ui.endScreen();
+				System.exit(0);
+				break;
+		
+			default:
+				ui.invalidCMD();
+				repeat = true;
+				break;
+		}
+	} while(repeat == true);}
+
+	public void devMenu(String cmd){
     	switch(cmd){
 			case "check":
 				System.out.println("Select y");
@@ -401,60 +440,44 @@ public class GameEngine {
     	}
     }
 
-    public void movePlayerForTurn(){
-		String input = sc.nextLine();
-		ply.movePlayer(input);
-		grid.rePopulateGrid(ply);
-		didPlayerTakeTurn = true;
-    }
-//    public void playerLook(String dir){
-//    	ply.playerLook(grid, dir);
-//    }
-    public void stopPlayerLook(String dir){
-    	ply.stopLooking(grid, dir);
-    }
-    private void setOption(){
-    	ui.options();
-    	do {
-    		pickOption = sc.nextLine().toLowerCase();
-        	repeat = false;
-        	switch(pickOption){
-    	    	case "ai":
-    	    	case "a":
-    	    	case "1":
-    	    		break;
-
-    	    	case "debug":
-    	    	case "d":
-    	    	case "2":
-    	    		setDebug();
-    	    		break;
-    	    		
-    	    	case "save":
-				case "3":
+    public void setOption(){
+		ui.options();
+		do {
+			choice = sc.nextLine().toLowerCase();
+	    	repeat = false;
+	    	switch(choice){
+		    	case "debug":
+		    	case "d":
+		    	case "1":
+		    		setDebug();
+		    		break;
+		    		
+		    	case "save":
+				case "2":
 				case "s":
 					fh.fileLander("Save", grid, ply);
 					break;
-
-    	    	case "exit":
-    	    	case "e":
-    	    	case "0":
-    	    		mainMenuSelect();
-    	    		break;
-    	    	
-    	    	default:
-    	    		ui.invalidCMD();
-    	    		repeat = true;
-    	    		break;
-        	}
-    	} while(repeat == true);
-    	
-    }
-    private void setDebug(){
-		System.out.println("Please Select 'on' or 'off': ");
-		debugSelect = sc.nextLine().toLowerCase();
+	
+		    	case "exit":
+		    	case "e":
+		    	case "0":
+		    		mainMenuSelect();
+		    		break;
+		    	
+		    	default:
+		    		ui.invalidCMD();
+		    		repeat = true;
+		    		break;
+	    	}
+		} while(repeat == true);
 		
-		switch(debugSelect){
+	}
+
+	public void setDebug(){
+		System.out.println("Please Select 'on' or 'off': ");
+		choice = sc.nextLine().toLowerCase();
+		
+		switch(choice){
 			case "on":
 			case "1":
 				debugModeState = true;
@@ -473,26 +496,16 @@ public class GameEngine {
 				ui.invalidCMD();
 				break;
 		}    	
+	}
+
+	public void movePlayerForTurn(){
+		String input = sc.nextLine();
+		ply.movePlayer(input);
+		grid.rePopulateGrid(ply);
+		didPlayerTakeTurn = true;
     }
 
-    /**
-     * Used to send out {@link #userQuit} which is checked by {@link #performUserAction()}.
-     * @return {@link #userQuit} value
-     */
-    public boolean userQuitGame(){
-    	return userQuit;
-    }
-
-	
-    /**
-     * Used to send out {@link #foundBriefcase} which is checked within {@link #gameLoop()}.
-     * @return {@link #foundBriefcase} value
-     */
-    public boolean plrFoundBriefcase(){
-    	return foundBriefcase;
-    }
-
-	public void debugMode(boolean on){
+    public void debugMode(boolean on){
 		if(on){
 			grid.getRadarVis(true);
 			grid.getEnemyVis(true);
@@ -551,5 +564,12 @@ public class GameEngine {
 			ply.removeNaturalVision("up", grid);
 			break;
 		}
+	}
+
+	/**
+	 * @return the moves
+	 */
+	public int getMoves() {
+		return moves;
 	}
 }

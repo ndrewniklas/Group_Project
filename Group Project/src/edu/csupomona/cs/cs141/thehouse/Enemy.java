@@ -38,8 +38,6 @@ public class Enemy extends GameObject {
 	private final String ENEMY_NAME = "|E|";
 	
 	
-	private int[] newPos = new int[2];
-	
 	public Enemy(){
 		setObjectName(ENEMY_NAME);
 		setHiddenName(getBlankName());

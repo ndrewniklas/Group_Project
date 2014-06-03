@@ -156,7 +156,7 @@ public class Grid implements Serializable{
 			System.out.println();
 		}
 //		for(int i = 0; i < enemy.size(); ++i){
-//			enemy.get(i).printEnemyPos(i);		// for testing purpose only
+//			enemy.get(i).printEnemyPos(i);				// for testing purpose only
 //		}
 	}
 	

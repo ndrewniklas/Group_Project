@@ -33,22 +33,6 @@ public class UserInterface {
 	 */
 	
 	/**
-	 * This method will print the main menu of the game to the user and give options such as, "continue"
-	 * 		or "new game".
-	 */
-	public void mainMenu() {
-		System.out.println("Welcome to The House Game!");
-		System.out.println();
-		System.out.println("What would you like to do?");
-		System.out.println("1)New");
-		System.out.println("2)Continue");
-		System.out.println("3)Rules");
-		System.out.println("4)Options");
-		System.out.println("0)Exit");
-		System.out.println("Please enter one of the commands or the corresponding number:");
-	}
-	
-	/**
 	 * This method is called by {@link #main Menu()}. 
 	 */
 	public void rules() {
@@ -74,12 +58,27 @@ public class UserInterface {
 		System.out.println();
 		System.out.println("Type \"return\" or 0 to return to the main menu:");
 	}
+
+	/**
+	 * This method will print the main menu of the game to the user and give options such as, "continue"
+	 * 		or "new game".
+	 */
+	public void mainMenu() {
+		System.out.println("Welcome to The House Game!");
+		System.out.println();
+		System.out.println("What would you like to do?");
+		System.out.println("1)New");
+		System.out.println("2)Continue");
+		System.out.println("3)Rules");
+		System.out.println("4)Options");
+		System.out.println("0)Exit");
+		System.out.println("Please enter one of the commands or the corresponding number:");
+	}
 	
 	public void options() {
 		System.out.println("You can change the options here:");
-		System.out.println("1) AI");
-		System.out.println("2) Debug Mode");
-		System.out.println("3) Save Game");
+		System.out.println("1) Debug Mode");
+		System.out.println("2) Save Game");
 		System.out.println("Type \"return\" or 0 to return to the main menu:");
 	}
 	 
@@ -92,7 +91,7 @@ public class UserInterface {
 		grid.printGrid();
 	}
 
-	public void mainGameCMD() {
+	public void turnSelect1() {
 		System.out.println("What would you like to do?");
 		System.out.println("1)Look");
 		System.out.println("2)Move");
@@ -101,7 +100,19 @@ public class UserInterface {
 		System.out.println("0)Exit");
 		System.out.println("Please enter one of the commands:");
 	}
-	
+
+	/**
+	 * 
+	 */
+	public void turnSelect2() {
+		System.out.println("What would you like to do?");
+		System.out.println("1)Move");
+		System.out.println("2)Shoot");
+		System.out.println("3)Options");
+		System.out.println("0)Exit");
+		System.out.println("Please enter one of the commands:");
+	}
+
 	public void setChoice(String choice){
 		userChoice = choice;
 	}
@@ -209,11 +220,18 @@ public class UserInterface {
 	}
 
 	/**
+	 * @param hasRadar 
+	 * @param hasShield 
+	 * @param m 
 	 * 
 	 */
-	public void printStats(Player ply) {
+	public void printStats(Player ply, boolean hasRadar, boolean hasShield, int m) {
 		System.out.println("Ammo: " + ply.getAmmo());
 		System.out.println("Lives: " + ply.getNumLives());
+		if(hasRadar)
+			System.out.println("Radar enabled");
+		else if(hasShield && m > 0)
+			System.out.println("Shield enabled: " + m + " turns remaining");
 	}
 
 	/**
