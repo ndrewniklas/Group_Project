@@ -124,8 +124,7 @@ public class UserInterface {
 		System.out.println("2)Down");
 		System.out.println("3)Right");
 		System.out.println("4)Left");
-		//TODO: make it so it accepts multiple values
-		System.out.println("Please enter one of the full command: ");
+		System.out.println("Please enter one of the commands, command numbers, or the letter: ");
 	}
 
 	public void invalidCMD() {

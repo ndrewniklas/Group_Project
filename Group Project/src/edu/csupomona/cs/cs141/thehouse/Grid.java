@@ -62,8 +62,6 @@ public class Grid implements Serializable{
 	
 	private boolean enemyInstance;
 
-	private boolean enemydied;
-	
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
 	 * Makes a new {@link Dice}
@@ -92,9 +90,6 @@ public class Grid implements Serializable{
 		populateGrid();
 		setBriefcase();
 	}
-	
-	//TODO MOVE TO GAME ENGINE!!!!!!!!!
-
 	
 	public void changeAllObjectStates(boolean toggle) {
 		if(toggle){
@@ -452,7 +447,6 @@ public class Grid implements Serializable{
 				System.out.println(enemyInstance);
 				if(enemyInstance){
 					gog[i][xplr] = new GameObject();
-					enemydied = true;
 					enemy.remove(enemy.get(i));
 				}
 			}

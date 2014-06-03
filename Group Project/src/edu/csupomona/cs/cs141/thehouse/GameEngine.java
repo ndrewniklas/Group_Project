@@ -33,7 +33,7 @@ public class GameEngine {
 	/**
 	 * Instantiation for {@link Scanner}
 	 */
-	private Scanner in = new Scanner(System.in);
+	private Scanner sc = new Scanner(System.in);
 	
 	/**
 	 * Instantiation for {@link Grid}
@@ -216,24 +216,23 @@ public class GameEngine {
     public Player getPlayer(){
     	return plr;
     }
-	//For use with navigating the main menu
-    /**
-     * This method is called after {@link UserInterface#mainMenu()} prints the menu. It uses a 
-     * switch statement to check each potential command, and a do-while loop to ensure that 
-     * proper input is received. When {@code default} is used, the code repeats, otherwise a 
-     * specific command is called:
-     * Specifically, "new" starts a new game
-     * 			   , "continue" continues the game from its last state
-     * 			   , "rules" calls {@link UserInterface#rules()}
-     * 			   , "options" calls {@link UserInterface#options()}
-     * 			   , "exit" exits the program 
-     */
-    private void mainMenuSelect() {
+	/**
+	 * This method is called after {@link UserInterface#mainMenu()} prints the menu. It uses a 
+	 * switch statement to check each potential command, and a do-while loop to ensure that 
+	 * proper input is received. When {@code default} is used, the code repeats, otherwise a 
+	 * specific command is called:
+	 * Specifically, "new" starts a new game
+	 * 			   , "continue" continues the game from its last state
+	 * 			   , "rules" calls {@link UserInterface#rules()}
+	 * 			   , "options" calls {@link UserInterface#options()}
+	 * 			   , "exit" exits the program 
+	 */
+	private void mainMenuSelect() {
 		do {
 			ui.mainMenu();
-    		menuSelection = in.next().toLowerCase();
-    		repeat = false;
-    		switch(menuSelection) {
+			menuSelection = sc.next().toLowerCase();
+			repeat = false;
+			switch(menuSelection) {
 				case "new":
 				case "n":
 				case "1":
@@ -253,14 +252,13 @@ public class GameEngine {
 				case "r":
 				case "3":
 					ui.rules();
-					returnToMain();
 					break;
 					
 				case "options":
 				case "o":
 				case "4":
 					setOption();
-					returnToMain();
+					repeat = true;
 					break;
 					
 				case "exit":
@@ -278,44 +276,44 @@ public class GameEngine {
 		} while(repeat == true);
 	}
 
-	/**
-	 * This method contains a switch statement and do while loop that essentially serves to return the 
-	 * user to the main menu.
-	 */
-    private void returnToMain() {
-    	do{
-    		menuSelection = in.next();
-    		menuSelection = menuSelection.toLowerCase();
-			switch (menuSelection) {
-				case "return":
-				case "r":
-				case "0":
-					// ui.mainMenu();
-					mainMenuSelect();
-					break;
-
-				default:
-					ui.invalidCMD();
-					repeat = true;
-					break;
-			}
-		} while (repeat == true);
-	}
+//	/**
+//	 * This method contains a switch statement and do while loop that essentially serves to return the 
+//	 * user to the main menu.
+//	 */
+//    private void returnToMain() {
+//    	do{
+//    		menuSelection = sc.next();
+//    		menuSelection = menuSelection.toLowerCase();
+//			switch (menuSelection) {
+//				case "return":
+//				case "r":
+//				case "0":
+//					// ui.mainMenu();
+//					mainMenuSelect();
+//					break;
+//
+//				default:
+//					ui.invalidCMD();
+//					repeat = true;
+//					break;
+//			}
+//		} while (repeat == true);
+//	}
 
 	// Main game methods
     
     private void turnSelect() {
 		do{
 			String dir;
-			userChoice = in.next();
+			userChoice = sc.next();
 			userChoice = userChoice.toLowerCase();
 			repeat = false;
 			switch(userChoice) {
 				case "dev":
-					in.reset();
+					sc.reset();
 					System.out.println("Which dev command do you want to execute?");
 					System.out.println("show, hide, check, on, off");
-					String cmd = in.next();
+					String cmd = sc.next();
 					devMenu(cmd);
 					break;
 					
@@ -324,7 +322,7 @@ public class GameEngine {
 				case "1":
 					didPlayerLook = true;
 					ui.lookDirections();
-					dir = in.next();
+					dir = sc.next();
 					lookDirection = dir;
 					playerLook(dir);
 					//ui.printGrid(grid);
@@ -344,8 +342,8 @@ public class GameEngine {
 				case "shoot":
 					//ui.printGrid(grid);
 					ui.shootTurn();
-					in.reset();
-					dir = in.next();
+					sc.reset();
+					dir = sc.next();
 					hasBullet  = plr.checkBulletPossession();
 					if (hasBullet == true) {
 						plr.useBullet();
@@ -354,7 +352,6 @@ public class GameEngine {
 					} else {
 						ui.noBullet();
 					}
-					//ui.printGrid(grid);
 					didPlayerTakeTurn = true;
 					break;
 					
@@ -362,7 +359,6 @@ public class GameEngine {
 				case "o":
 				case "4":
 					setOption();
-					//ui.printGrid(grid);
 					break;
 				case "exit":
 				case "e":
@@ -382,36 +378,33 @@ public class GameEngine {
     public void devMenu(String cmd){
     	switch(cmd){
 			case "check":
-				in.reset();
+				sc.reset();
 				System.out.println("Select y");
-				int ydir = in.nextInt();
+				int ydir = sc.nextInt();
 				System.out.println("Select x");
-				int xdir = in.nextInt();
+				int xdir = sc.nextInt();
 				System.out.println(grid.checkForEnemy(ydir, xdir));
 				break;					
 			case "show":
 				grid.changeAllObjectStates(true);
-				//ui.printGrid(grid);
 				break;
 			case "hide":
 				grid.changeAllObjectStates(false);
-				//ui.printGrid(grid);
 				break;
 			case "on":
 				debugMode(true);
-				//ui.printGrid(grid);
 				break;
 			case "off":
 				debugMode(false);	
-				//ui.printGrid(grid);
 				break;
 			default:
 				ui.invalidCMD();
+				break;
     	}
     }
 
     public void movePlayerForTurn(){
-		String input = in.next();
+		String input = sc.next();
 		plr.movePlayer(input);
 		grid.rePopulateGrid(plr);
 	//	grid.printGrid();
@@ -427,20 +420,19 @@ public class GameEngine {
     private void setOption(){
     	ui.options();
     	do {
-    		pickOption = in.next();
+    		pickOption = sc.next();
         	pickOption = pickOption.toLowerCase();
+        	repeat = false;
         	switch(pickOption){
     	    	case "ai":
     	    	case "a":
     	    	case "1":
-    	    		returnToMain();
     	    		break;
 
     	    	case "debug":
     	    	case "d":
     	    	case "2":
     	    		setDebug();
-    	    		returnToMain();
     	    		break;
     	    		
     	    	case "save":
@@ -456,22 +448,22 @@ public class GameEngine {
     	    	
     	    	default:
     	    		ui.invalidCMD();
+    	    		repeat = true;
+    	    		break;
         	}
-    	} while(repeat == false);
-    	
+    	} while(repeat == true);
     }
+    
     private void setDebug(){
-		System.out.println("Please Select 'on' or 'off' (all lowercase): ");
-		debugSelect = in.next();
-		debugSelect = debugSelect.toLowerCase();
-		
+		System.out.println("Please Select 'on' or 'off': ");
+		debugSelect = sc.next().toLowerCase();
+
 		switch(debugSelect){
 			case "on":
 			case "1":
 				debugModeState = true;
 				debugMode(true);
 				System.out.println("WECLOME TO DEBUG MODE");
-				//setOption();
 				break;
 			
 			case "off":
@@ -479,11 +471,11 @@ public class GameEngine {
 				debugModeState = false;
 				debugMode(false);
 				System.out.println("I guess you like being blind...");
-				//setOption();
 				break;
 			
 			default:
 				ui.invalidCMD();
+				break;
 		}    	
     }
 
@@ -541,6 +533,7 @@ public class GameEngine {
 				break;
 			default:
 				plr.naturalVision("up", grid);
+				break;
 		}
 	}
 	public void removeDefaultVision(){
@@ -559,6 +552,7 @@ public class GameEngine {
 			break;
 		default:
 			plr.removeNaturalVision("up", grid);
+			break;
 	}
 	}
 }

@@ -41,7 +41,6 @@ public class ExtraAmmo extends GameObject {
 	 * This is the constructor defines the symbol and {@link GameObject#hiddenName}  
 	 */
 	public ExtraAmmo() {
-		// TODO Auto-generated constructor stub
 		setObjectName(EXTRA_AMMO);
 		setHiddenName(getBlankName());		
 	}

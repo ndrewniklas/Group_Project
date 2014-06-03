@@ -150,7 +150,6 @@ public class GameObject implements Comparable<GameObject>, Serializable{
 
 	@Override
 	public int compareTo(GameObject g) {
-		// TODO Auto-generated method stub
 		return this.getObjID() - g.getObjID();
 	}
 }
