@@ -71,6 +71,7 @@ public class UserInterface {
 		System.out.println("7. Save - use this to save the game, and return to it later by selecting"
 				                  + " 'continue' in the main menu.");
 		System.out.println("8. Exit - use this to quit the game, be aware that progress will not be saved.");
+		System.out.println();
 		System.out.println("Type \"return\" or 0 to return to the main menu:");
 	}
 	
@@ -184,5 +185,10 @@ public class UserInterface {
 		System.out.println("Thanks for playing!");
 	}
 
-
+	/**
+	 * 
+	 */
+	public void pause() {
+		sc.nextLine();
+	}
 }
