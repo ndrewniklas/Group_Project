@@ -3,8 +3,8 @@
  */
 package edu.csupomona.cs.cs141.thehouse.test;
 import java.util.Scanner;
-
 import edu.csupomona.cs.cs141.thehouse.*;
+
 /**
  * @author Andrew
  *
@@ -169,7 +169,7 @@ public class Test_Main {
 	}
 	
 	/**
-	 * tests enemy random movementt
+	 * tests enemy random movement
 	 */
 	public static void printGrid_Test6(){
 		System.out.println("Grid: Print Test 4");
