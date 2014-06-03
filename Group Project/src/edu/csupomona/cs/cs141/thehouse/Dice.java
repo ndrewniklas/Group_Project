@@ -18,8 +18,6 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 /**
