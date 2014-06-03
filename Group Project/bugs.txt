@@ -8,4 +8,5 @@ Shield does nothing
 Options require to enter 0 twice to exit
 You should be able to look once then be able to move
 Natural sight
+Report if enemy is in sight
 Remove options from  mainmenu

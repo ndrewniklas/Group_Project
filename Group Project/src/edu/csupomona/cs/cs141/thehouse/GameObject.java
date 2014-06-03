@@ -22,7 +22,7 @@ public class GameObject implements Comparable<GameObject>, Serializable{
 	
 	private int objId;
 	
-	private final String EMPTY_OBJECT = "|X|";
+	private final String EMPTY_OBJECT = "|-|";
 	
 	private final String EMPTY_OBJECT_REAL = "| |";
 	
