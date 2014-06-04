@@ -127,6 +127,17 @@ public class GameEngine {
 		moves = 0;
 	}
 
+	public void newGame(){
+		gameOver = false;
+		ui = new UserInterface();
+		fh = new File_Handler();
+		ply = new Player();
+		grid = new Grid();
+		ui = new UserInterface();
+		grid.setUpGrid();
+		moves = 0;
+	}
+
 	/**
 	 * 
 	 */
@@ -299,6 +310,10 @@ public class GameEngine {
 			choice = sc.nextLine().toLowerCase();
 			repeat = false;
 			switch(choice) {
+			case "new":
+				newGame();
+				gameLoop();
+				break;
 			case "dev":
 				sc.reset();
 				System.out.println("Which dev command do you want to execute?");
@@ -373,6 +388,10 @@ public class GameEngine {
 			choice = sc.nextLine().toLowerCase();
 			repeat = false;
 			switch(choice) {
+			case "new":
+				newGame();
+				gameLoop();
+				break;
 			case "dev":
 				sc.reset();
 				System.out.println("Which dev command do you want to execute?");
