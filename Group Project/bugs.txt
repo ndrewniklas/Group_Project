@@ -18,5 +18,5 @@ ________________________________________________________________________________
 Known Issues:
 
 Power-ups spawn on player
-
+weird stuff with options menu
 
