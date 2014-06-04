@@ -412,6 +412,7 @@ public class Player extends GameObject{
 		xPosition = 0;
 		yPosition = 8;
 		numLives--;
+		plrMoveDir = "up";
 	}
 
 	private void checkbreifcase(int lookPosY1, int lookPosX1, Grid grid) {
