@@ -407,6 +407,8 @@ public class Player extends GameObject{
 	 * @return
 	 */
 	public void playerDies() {
+		ypre = 8;
+		xpre = 0;
 		xPosition = 0;
 		yPosition = 8;
 		numLives--;
@@ -419,7 +421,7 @@ public class Player extends GameObject{
 		}
 		else{
 			hasBriefCase = false;
-			System.out.println("room is empty");
+			//System.out.println("room is empty");
 		}
 	}
 

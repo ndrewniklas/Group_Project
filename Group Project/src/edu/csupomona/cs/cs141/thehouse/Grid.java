@@ -195,14 +195,14 @@ public class Grid implements Serializable{
 		}
 	}
 
-	public void rePopulateGrid(){					//for testing only
+	public void rePopulateGrid(int index){					//for testing only
 		/*for(int i = 0; i < enemy.length; ++i){
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
 			gog[enemy[i].getYPre()][enemy[i].getXPre()] = gameObj;
 		}	*/
-		for(int i = 0; i < enemy.size(); ++i){
-			gog[enemy.get(i).getYPosition()][enemy.get(i).getXPosition()] = enemy.get(i);
-		}
+		//for(int i = 0; i < enemy.size(); ++i){
+		gog[enemy.get(index).getYPosition()][enemy.get(index).getXPosition()] = enemy.get(index);
+		//}
 	}
 
 	public void changeObjectIntoBlank(int posY, int posX){
@@ -326,19 +326,22 @@ public class Grid implements Serializable{
 		return enemy;
 	}
 
-	public boolean moveEnemy(Grid grid, Player ply) {
+	public void moveEnemy(Grid grid, Player ply) {
 		for (int i = 0; i < enemy.size(); i++) {
+			enemy.get(i).moveEnemy(grid);
+			rePopulateGrid(i);
 			int ypos = enemy.get(i).getYPosition();
 			int xpos = enemy.get(i).getXPosition();
-			playerKilled = checkForPlayer(ypos, xpos, ply);
-
-			if (!playerKilled) {
-				enemy.get(i).moveEnemy(grid);
-				rePopulateGrid();
-			}else{
+			checkForPlayer(ypos, xpos, ply);
+			if(playerKilled){
+				rePopulateGrid(i);
 				break;
 			}
 		}
+		//return playerKilled;
+	}
+
+	public boolean getPlayerKilled(){
 		return playerKilled;
 	}
 
@@ -351,33 +354,33 @@ public class Grid implements Serializable{
 	public boolean checkForPlayer(int yPos, int xPos, Player ply) {
 		playerKilled = false;
 
-		if(yPos - 1 >= 0 && yPos - 1 <= 8){
-			if(yPos - 1 == ply.get_yPosition() && xPos == ply.get_xPosition()){		//up
-				playerKilled = true;
-				gog[ply.getYPre()][ply.getXPre()] = new GameObject();
-				ply.playerDies();
-			}
-		}else if(yPos + 1 >= 0 && yPos + 1 <= 8){
-			if(yPos + 1 == ply.get_yPosition() && xPos == ply.get_xPosition()){		//down
-				playerKilled = true;
-				gog[ply.getYPre()][ply.getXPre()] = new GameObject();
-				ply.playerDies();
-			}
-		}else if(xPos - 1 >= 0 && xPos - 1 <= 8){
-			if(yPos == ply.get_yPosition() && xPos - 1 == ply.get_xPosition()){		//left
-				playerKilled = true;
-				gog[ply.getYPre()][ply.getXPre()] = new GameObject();
-				ply.playerDies();
-			}
-		}else if(xPos + 1 >= 0 && xPos + 1 <= 8){
-			if(yPos == ply.get_yPosition() && xPos + 1 == ply.get_xPosition()){		//right
-				playerKilled = true;
-				gog[ply.getYPre()][ply.getXPre()] = new GameObject();
-				ply.playerDies();
-			}
-		}else{
-			playerKilled = false;
+		//if(yPos - 1 >= 0 && yPos - 1 <= 8){
+		if(yPos == ply.get_yPosition() && xPos == ply.get_xPosition()){		//up
+			playerKilled = true;
+			gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
+			ply.playerDies();
 		}
+		//}else if(yPos + 1 >= 0 && yPos + 1 <= 8){
+		if(yPos == ply.get_yPosition() && xPos == ply.get_xPosition()){		//down
+			playerKilled = true;
+			gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
+			ply.playerDies();
+		}
+		//}else if(xPos - 1 >= 0 && xPos - 1 <= 8){
+		if(yPos == ply.get_yPosition() && xPos  == ply.get_xPosition()){		//left
+			playerKilled = true;
+			gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
+			ply.playerDies();
+		}
+		//}else if(xPos + 1 >= 0 && xPos + 1 <= 8){
+		if(yPos == ply.get_yPosition() && xPos == ply.get_xPosition()){		//right
+			playerKilled = true;
+			gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
+			ply.playerDies();
+		}
+		//}else{
+		//	playerKilled = false;
+		//}
 		return playerKilled;
 	}
 

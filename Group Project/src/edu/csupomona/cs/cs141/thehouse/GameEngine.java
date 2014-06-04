@@ -151,36 +151,44 @@ public class GameEngine {
 				if(hasShield)
 					m--;
 				turnSelect1();
-				playerDefaultVision();
 				if(ply.getHasBriefCase()){
 					ui.foundBriefcase();
 					gameOver = true;
 				}
-				removeDefaultVision();
+				if(debugModeState){
+					debugMode(true);
+				}
 				if(didPlayerLook &&!gameOver){
 					ui.printGrid(grid);
-					turnSelect2();
 					ply.stopLooking(grid, lookDirection);
+					turnSelect2();
+				}
+				if(debugModeState){
+					debugMode(true);
 				}
 			}
 			objectCheck();
-			playerKilled = grid.moveEnemy(grid, ply);
+			grid.moveEnemy(grid, ply);
+			playerKilled = grid.getPlayerKilled();
 			if(playerKilled){
-				ui.playerDies();
-				ui.pause();
+				ui.printGrid(grid);
 				if(ply.getNumLives() >= 0){
 					playerKilled = false;
 				}else{
 					gameOver = true;
 				}
+				ui.playerDies();
+				ui.pause();
 			}
-			if(debugModeState){
-				debugMode(true);
-			}
+
 			grid.rePopulateGrid(ply);
 			playerDefaultVision();
 			ui.printGrid(grid);
+			removeDefaultVision();
 			moves++;
+			if(debugModeState){
+				debugMode(true);
+			}
 		}while(!gameOver);
 
 		if(ply.getHasBriefCase()){
@@ -298,6 +306,7 @@ public class GameEngine {
 				String cmd = sc.nextLine();
 				devMenu(cmd);
 				didPlayerTakeTurn = false;
+				ui.printGrid(grid);
 				break;
 
 			case "look":
@@ -432,9 +441,11 @@ public class GameEngine {
 			grid.changeAllObjectStates(false);
 			break;
 		case "on":
+			debugModeState = true;
 			debugMode(true);
 			break;
 		case "off":
+			debugModeState = true;
 			debugMode(false);	
 			break;
 		default:

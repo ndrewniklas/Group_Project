@@ -3,7 +3,10 @@
  */
 package edu.csupomona.cs.cs141.thehouse.test;
 import java.util.Scanner;
-import edu.csupomona.cs.cs141.thehouse.*;
+
+import edu.csupomona.cs.cs141.thehouse.GameEngine;
+import edu.csupomona.cs.cs141.thehouse.Grid;
+import edu.csupomona.cs.cs141.thehouse.Player;
 
 /**
  * @author Andrew
@@ -15,26 +18,26 @@ public class Test_Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		printGrid_Test1();
-//		printGrid_Test2();
-//		movementTest_Basic();
-//		playerMove_Test1();
-//		playerMoveControl();
-//		printGrid_Test3();
-//		playerMove_Test2();
-//		printGrid_Test4();		
-//		printGrid_Test5();
-//		printGrid_Test6();
-//		playerMove_Test3();
-//		printGrid_Test7();
-//		playerMove_Test4();
-//		enemyMovement_Test1();
-//		enemyMovement_Test2(100);
-//		toggleDebug_Test1();
+		//		printGrid_Test1();
+		//		printGrid_Test2();
+		//		movementTest_Basic();
+		//		playerMove_Test1();
+		//		playerMoveControl();
+		//		printGrid_Test3();
+		//		playerMove_Test2();
+		//		printGrid_Test4();		
+		//		printGrid_Test5();
+		//		printGrid_Test6();
+		//		playerMove_Test3();
+		//		printGrid_Test7();
+		//		playerMove_Test4();
+		//		enemyMovement_Test1();
+		//		enemyMovement_Test2(100);
+		//		toggleDebug_Test1();
 		ui_Test1();
 	}
-	
-	
+
+
 	public static void printGrid_Test1(){
 		System.out.println("Grid: Print Test 1");
 		System.out.println("R is the room");
@@ -42,23 +45,23 @@ public class Test_Main {
 		grid.printGrid();
 		System.out.println("-----------------------------------------------------");
 	}
-	
+
 	public static void printGrid_Test2(){
 		System.out.println("Grid: Print Test 2");
 		System.out.println("B is the briefcase, R is the room, P is the player");
 		Grid grid = new Grid();
-//		grid.setBriefcase();
+		//		grid.setBriefcase();
 		grid.printGrid();		
 		System.out.println("-----------------------------------------------------");
 	}
-	
+
 	/**
 	 * tested movement of player by printing out player position in the grid
 	 */
 	public static void movementTest_Basic() {
 		System.out.println("Player movement test 1");
 		Player ply = new Player();
-		
+
 		while (true) {
 			for(int i:ply.getPosition()){
 				System.out.println(i);
@@ -66,10 +69,10 @@ public class Test_Main {
 			Scanner sc = new Scanner(System.in);
 			String input = sc.next();
 			ply.movePlayer(input);
-			
+
 		}
 	}
-	
+
 	/**
 	 * tested movement of player and printing player on grid
 	 */
@@ -79,7 +82,7 @@ public class Test_Main {
 		Grid grid = new Grid();
 		grid.rePopulateGrid(ply);
 		grid.printGrid();
-		
+
 		while(true){
 			for(int i:ply.getPosition()){
 				System.out.println(i);
@@ -89,7 +92,7 @@ public class Test_Main {
 			ply.movePlayer(input);
 			grid.rePopulateGrid(ply);
 			grid.printGrid();
-			
+
 		}
 	}
 
@@ -100,13 +103,13 @@ public class Test_Main {
 		System.out.println("Grid: Print Test 3");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
 		Grid grid = new Grid();
-//		grid.setBriefcase();
-//		grid.setEnemy();
+		//		grid.setBriefcase();
+		//		grid.setEnemy();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
 	}
-	
+
 	/**
 	 * spawning player, enemies, and power-ups and player movement
 	 */
@@ -116,11 +119,11 @@ public class Test_Main {
 		Player ply = new Player();
 		Grid grid = new Grid();
 		grid.rePopulateGrid(ply);
-//		grid.setBriefcase();
-//		grid.setEnemy();
-//		grid.setPowerUps();
+		//		grid.setBriefcase();
+		//		grid.setEnemy();
+		//		grid.setPowerUps();
 		grid.printGrid();
-		
+
 		while(true){
 			for(int i:ply.getPosition()){
 				System.out.print(i + " ");
@@ -136,20 +139,20 @@ public class Test_Main {
 			System.out.println("-----------------------------------------------------");
 		}
 	}
-	
+
 	public static void printGrid_Test4(){
 		System.out.println("Grid: Print Test 4");
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
 		System.out.println("Spawn PowerUps, Enemies, and the Briefcase room");
 		Grid grid = new Grid();
-//		grid.setBriefcase();
-//		grid.setEnemy();
-//		grid.setPowerUps();
+		//		grid.setBriefcase();
+		//		grid.setEnemy();
+		//		grid.setPowerUps();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
 	}
-	
+
 	/**
 	 * tests random spawning of enemies
 	 */
@@ -159,15 +162,15 @@ public class Test_Main {
 		System.out.println("Spawn PowerUps, Enemies, and the Briefcase room in an infinte loop");
 		while(true){
 			Grid grid = new Grid();
-//			grid.setBriefcase();
-//			grid.setEnemy();
-//			grid.setPowerUps();
+			//			grid.setBriefcase();
+			//			grid.setEnemy();
+			//			grid.setPowerUps();
 			grid.printGrid();
 			System.out.println("Number of Enemies: " + grid.getNumEnemies());
 			System.out.println("-----------------------------------------------------");
 		}
 	}
-	
+
 	/**
 	 * tests enemy random movement
 	 */
@@ -176,9 +179,9 @@ public class Test_Main {
 		System.out.println("B is the briefcase, R is the room, P is the player, E is the Enemy");
 		System.out.println("Enemies will move every loop");
 		Grid grid = new Grid();
-//		grid.setBriefcase();
-//		grid.setEnemy();
-//		grid.setPowerUps();
+		//		grid.setBriefcase();
+		//		grid.setEnemy();
+		//		grid.setPowerUps();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
@@ -188,7 +191,7 @@ public class Test_Main {
 			System.out.println("-----------------------------------------------------");
 		}
 	}
-	
+
 	/**
 	 * tests enemy movement with player movement
 	 */
@@ -197,14 +200,14 @@ public class Test_Main {
 		System.out.println("Enemies will move with player");
 		Player ply = new Player();
 		Grid grid = new Grid();
-//		grid.setEnemy();
+		//		grid.setEnemy();
 		grid.rePopulateGrid(ply);
-//		grid.setBriefcase();
-//		grid.setPowerUps();
+		//		grid.setBriefcase();
+		//		grid.setPowerUps();
 		grid.printGrid();
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
-		
+
 		while(true){
 			for(int i:ply.getPosition()){
 				System.out.println(i);
@@ -219,7 +222,7 @@ public class Test_Main {
 			System.out.println("-----------------------------------------------------");
 		}
 	}
-	
+
 	/**
 	 * check spawning of power-ups and enemies don't stack and not in rooms
 	 */
@@ -229,9 +232,9 @@ public class Test_Main {
 		System.out.println("Checks if the object is free then prints out the object at each location");
 		Grid grid = new Grid();
 		Player ply = new Player();
-//		grid.setBriefcase();
-//		grid.setEnemy();
-//		grid.setPowerUps();
+		//		grid.setBriefcase();
+		//		grid.setEnemy();
+		//		grid.setPowerUps();
 		grid.rePopulateGrid(ply);
 		for(int i = 0; i < grid.gridSize(); ++i){
 			for(int j = 0; j < grid.gridSize(); ++j){
@@ -244,7 +247,7 @@ public class Test_Main {
 		System.out.println("Number of Enemies: " + grid.getNumEnemies());
 		System.out.println("-----------------------------------------------------");
 	}
-	
+
 	/**
 	 * prints what object is at each location
 	 */
@@ -254,9 +257,9 @@ public class Test_Main {
 		System.out.println("|-----------------------------------------------------------");
 		Player ply = new Player();
 		Grid grid = new Grid();
-//		grid.setBriefcase();
-//		grid.setEnemy();
-//		grid.setPowerUps();
+		//		grid.setBriefcase();
+		//		grid.setEnemy();
+		//		grid.setPowerUps();
 		grid.rePopulateGrid(ply);
 		for(int i = 0; i < grid.gridSize(); ++i){
 			for(int j = 0; j < grid.gridSize(); ++j){
@@ -287,7 +290,7 @@ public class Test_Main {
 			System.out.println("|-----------------------------------------------------------");
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -295,18 +298,18 @@ public class Test_Main {
 		System.out.println("Enemy Movement Test 1");
 		Player ply = new Player();
 		Grid grid = new Grid();
-//		grid.setBriefcase();
-//		grid.setEnemy();
-//		grid.setPowerUps();
+		//		grid.setBriefcase();
+		//		grid.setEnemy();
+		//		grid.setPowerUps();
 		grid.rePopulateGrid(ply);
 		grid.printGrid();
-		
-		
+
+
 		while (true) {
 			Scanner sc = new Scanner(System.in);
 			String input=sc.nextLine();
 			ply.movePlayer(input);
-			
+
 			grid.moveEnemy(grid, null);
 			grid.rePopulateGrid(ply);
 			grid.printGrid();
@@ -317,13 +320,13 @@ public class Test_Main {
 		System.out.println("Enemy Movement Test 1");
 		Player ply = new Player();
 		Grid grid = new Grid();
-//		grid.setBriefcase();
-//		grid.setEnemy();
-//		grid.setPowerUps();
+		//		grid.setBriefcase();
+		//		grid.setEnemy();
+		//		grid.setPowerUps();
 		grid.rePopulateGrid(ply);
 		grid.printGrid();
-		
-		
+
+
 		while (i>=0) {
 			grid.moveEnemy(grid, ply);
 			grid.rePopulateGrid(ply);
@@ -331,7 +334,7 @@ public class Test_Main {
 			i--;
 		}
 	}
-	
+
 	/**
 	 * tests function of debug mode 
 	 */
@@ -340,35 +343,35 @@ public class Test_Main {
 		Player ply = new Player();
 		Grid grid = new Grid();
 		GameEngine ge = new GameEngine();
-//		grid.setBriefcase();
-//		grid.setEnemy();
-//		grid.setPowerUps();
-		grid.rePopulateGrid();
+		//		grid.setBriefcase();
+		//		grid.setEnemy();
+		//		grid.setPowerUps();
+		//grid.rePopulateGrid();
 		grid.printGrid();
-		
-		
+
+
 		while (true) {
 			Scanner sc = new Scanner(System.in);
 			System.out.print("Please Select 'on' or 'off' (all lowercase): ");
 			String input = sc.nextLine();
 			switch(input){
-				case "on":
-					ge.debugMode(true);
-					System.out.println("WECLOME TO DEBUG MODE");
-					break;
-				case "off":
-					ge.debugMode(false);
-					System.out.println("I guess you like being blind...");
-					break;
-				default:
-					System.out.println("BAD CMD");
+			case "on":
+				ge.debugMode(true);
+				System.out.println("WECLOME TO DEBUG MODE");
+				break;
+			case "off":
+				ge.debugMode(false);
+				System.out.println("I guess you like being blind...");
+				break;
+			default:
+				System.out.println("BAD CMD");
 			}
 			grid.moveEnemy(grid, ply);
-			grid.rePopulateGrid();
+			//grid.rePopulateGrid();
 			grid.printGrid();
 		}
 	}
-	
+
 	/**
 	 * tests functionality of entire game with ui
 	 */
