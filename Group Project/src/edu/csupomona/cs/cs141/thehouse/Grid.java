@@ -403,13 +403,13 @@ public class Grid implements Serializable{
 		int spawnOne;
 		int spawnTwo;
 		for(int i = 0; i < 1;){
-			spawnOne = die.roll(9);
-			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
+			spawnOne = die.roll(9);			//y position
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne == 8) {
 				spawnOne = die.roll(9);
 			}
 
-			spawnTwo = die.roll();
-			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
+			spawnTwo = die.roll();			//x position
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo == 0) {
 				spawnTwo = die.roll(9);
 			}
 
@@ -436,13 +436,13 @@ public class Grid implements Serializable{
 		int spawnOne;
 		int spawnTwo;
 		for(int i = 0; i < 1;){
-			spawnOne = die.roll(9);
-			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
+			spawnOne = die.roll(9);			//y position
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne == 8) {
 				spawnOne = die.roll(9);
 			}
 
-			spawnTwo = die.roll();
-			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
+			spawnTwo = die.roll();			//x position
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo == 0) {
 				spawnTwo = die.roll(9);
 			}
 
@@ -458,6 +458,7 @@ public class Grid implements Serializable{
 	public ExtraAmmo getExtraAmmo(){
 		return extraAmmo;
 	}
+	
 	public int[] getExtraAmmoPos(){
 		return ammoPos;
 	}
@@ -466,12 +467,12 @@ public class Grid implements Serializable{
 		int spawnOne;
 		int spawnTwo;
 		for(int i = 0; i < 1;){
-			spawnOne = die.roll(9);
-			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne < 0) {
+			spawnOne = die.roll(9);			//y position
+			while (spawnOne == 1 || spawnOne == 4 || spawnOne == 7 || spawnOne == 8) {
 				spawnOne = die.roll(9);
 			}
-			spawnTwo = die.roll();
-			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo > 8) {
+			spawnTwo = die.roll();			//x position
+			while (spawnTwo == 1 || spawnTwo == 4 || spawnTwo == 7 || spawnTwo == 0) {
 				spawnTwo = die.roll(9);
 			}
 
@@ -487,9 +488,11 @@ public class Grid implements Serializable{
 	public Shield getShield(){
 		return shield;
 	}
+	
 	public int[] getShieldPos(){
 		return shieldPos;
 	}
+	
 	public void shootGunCheck(int yplr, int xplr, String dir) {
 		boolean ran = false;
 		switch (dir) {

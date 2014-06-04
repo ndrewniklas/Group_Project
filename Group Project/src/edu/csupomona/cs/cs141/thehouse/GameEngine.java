@@ -224,7 +224,7 @@ public class GameEngine {
 			ui.ammoActivated();
 		}
 		if (ply.get_yPosition() == shieldPos[0] && ply.get_xPosition() == shieldPos[1] && !hasShield) {
-			//			grid.getShield().activateShield(ply);		//does nothing
+//			grid.getShield().activateShield(ply);		//does nothing
 			hasShield = true;
 			ply.setHasShield(true);
 			m = 5;

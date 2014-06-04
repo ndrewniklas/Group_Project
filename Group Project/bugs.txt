@@ -15,9 +15,7 @@ Looking in the same direction of natural site will block the first tile of looki
 Shield does nothing (now it does something) - Fixed
 Report if enemy is in sight - Fixed
 weird stuff with options menu - Fixed
+Power-ups spawn on player - Fixed
 _____________________________________________________________________________________________
 Known Issues:
-
-Power-ups spawn on player
-
 
