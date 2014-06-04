@@ -230,7 +230,7 @@ public class UserInterface {
 	 * @param m 
 	 * 
 	 */
-	public void printStats(Player ply, boolean hasRadar, boolean hasShield, int m) {
+	public void printStats(Player ply, boolean hasRadar, int m) {
 		System.out.println("Ammo: " + ply.getAmmo());
 		System.out.println("Lives: " + ply.getNumLives());
 		if(hasRadar)

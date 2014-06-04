@@ -18,22 +18,22 @@ public class Test_Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//		printGrid_Test1();
-		//		printGrid_Test2();
-		//		movementTest_Basic();
-		//		playerMove_Test1();
-		//		playerMoveControl();
-		//		printGrid_Test3();
-		//		playerMove_Test2();
-		//		printGrid_Test4();		
-		//		printGrid_Test5();
-		//		printGrid_Test6();
-		//		playerMove_Test3();
-		//		printGrid_Test7();
-		//		playerMove_Test4();
-		//		enemyMovement_Test1();
-		//		enemyMovement_Test2(100);
-		//		toggleDebug_Test1();
+//		printGrid_Test1();
+//		printGrid_Test2();
+//		movementTest_Basic();
+//		playerMove_Test1();
+//		playerMoveControl();
+//		printGrid_Test3();
+//		playerMove_Test2();
+//		printGrid_Test4();		
+//		printGrid_Test5();
+//		printGrid_Test6();
+//		playerMove_Test3();
+//		printGrid_Test7();
+//		playerMove_Test4();
+//		enemyMovement_Test1();
+//		enemyMovement_Test2(100);
+//		toggleDebug_Test1();
 		ui_Test1();
 	}
 

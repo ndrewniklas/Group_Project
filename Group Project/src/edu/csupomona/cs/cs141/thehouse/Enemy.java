@@ -36,14 +36,14 @@ public class Enemy extends GameObject {
 	private int ypre;
 	private int objID;
 	private final String ENEMY_NAME = "|E|";
-	
-	
+
+
 	public Enemy(){
 		setObjectName(ENEMY_NAME);
 		setHiddenName(getBlankName());
 		objID = setObjId(1);
 	}
-	
+
 	//This method will show enemy dependent on boolean value taken
 	public Enemy(boolean showEnemy) {
 		setRealName(ENEMY_NAME);
@@ -54,49 +54,49 @@ public class Enemy extends GameObject {
 		else
 			setHiddenName(getBlankName());
 	}
-	
+
 	/**
 	 * {@link #moveEnemy()} This method will move the enemy
 	 * @param plr 
 	 */
 	public void moveEnemy(Grid grid){
-			int ranNum = die.roll(4);		
-			xpre = xPosition;
-			ypre = yPosition;
-			if (ranNum == 0 && upPossible()) {
-				if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
-					if (!grid.checkForEnemy(yPosition - 1, xPosition)){
-						setXY(xPosition, --yPosition);
-						cleanEnemies(grid);
-					}
+		int ranNum = die.roll(4);		
+		xpre = xPosition;
+		ypre = yPosition;
+		if (ranNum == 0 && upPossible()) {
+			if (yPosition - 1 >= 0 && yPosition - 1 <= 8) {
+				if (!grid.checkForEnemy(yPosition - 1, xPosition)){
+					setXY(xPosition, --yPosition);
+					cleanEnemies(grid);
 				}
-			} else if (ranNum == 1 && downPossible()) {
-				if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
-					if (!grid.checkForEnemy(yPosition+1, xPosition)){
-						setXY(xPosition, ++yPosition);
-						cleanEnemies(grid);
-					}
-				}
-			} else if (ranNum == 2 && rightPossible()) {
-				if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
-					if (!grid.checkForEnemy(yPosition, xPosition+1)){
-						setXY(++xPosition, yPosition);
-						cleanEnemies(grid);
-					}
-				}
-			} else if (ranNum == 3 && leftPossible()) {
-				if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
-					if (!grid.checkForEnemy(yPosition, xPosition-1)){
-						setXY(--xPosition, yPosition);
-						cleanEnemies(grid);
-					}
-				}
-			} else {
-				ranNum = die.roll(4);
-				moveEnemy(grid);
 			}
+		} else if (ranNum == 1 && downPossible()) {
+			if (yPosition + 1 >= 0 && yPosition + 1 <= 8) {
+				if (!grid.checkForEnemy(yPosition+1, xPosition)){
+					setXY(xPosition, ++yPosition);
+					cleanEnemies(grid);
+				}
+			}
+		} else if (ranNum == 2 && rightPossible()) {
+			if (xPosition + 1 >= 0 && xPosition + 1 <= 8) {
+				if (!grid.checkForEnemy(yPosition, xPosition+1)){
+					setXY(++xPosition, yPosition);
+					cleanEnemies(grid);
+				}
+			}
+		} else if (ranNum == 3 && leftPossible()) {
+			if (xPosition - 1 >= 0 && xPosition - 1 <= 8) {
+				if (!grid.checkForEnemy(yPosition, xPosition-1)){
+					setXY(--xPosition, yPosition);
+					cleanEnemies(grid);
+				}
+			}
+		} else {
+			ranNum = die.roll(4);
+			moveEnemy(grid);
+		}
 	}
-	
+
 	private void cleanEnemies(Grid grid) {
 		if (getYPosition() == getYPre() && getXPosition() == getXPre()) {
 		}
@@ -110,64 +110,42 @@ public class Enemy extends GameObject {
 	public int getYPosition() {
 		return yPosition;
 	}
-	
+
 	public int setYPosition(int y){
 		yPosition = y;
 		return yPosition;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int getXPosition() {
 		return xPosition;
 	}
-	
+
 	public int setXPosition(int x){
 		xPosition = x;
 		return xPosition;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int getYPre() {
 		return ypre;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int getXPre() {
 		return xpre;
 	}
-	
+
 	/**
-	 * {@link #checkForPlayer()} This method will let the enemy check if the player is
-	 * in the adjacent space
+	 * for testing
+	 * @param i
 	 */
-	public void checkForPlayer() {
-		
-	}
-	
-	/**
-	 * {@link #killPlayer()} This method will kill the player
-	 */
-	public void killPlayer() {
-		
-	}
-	
-	public void killEnemy(){
-		
-	}
-	
-	/**
-	 * {@link #ninjaDies()} This method will kill the ninja if the player fires a bullet
-	 */
-	public boolean enemyDied() {
-		return enemyDead;
-	}
-	
 	public void printEnemyPos(int i) {
 		System.out.println("Enemy"+ i + ": " + xPosition + " " + yPosition);
 	}

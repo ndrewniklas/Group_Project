@@ -157,7 +157,7 @@ public class GameEngine {
 			didPlayerTakeTurn = false;
 			didPlayerLook = false;
 			while(!didPlayerTakeTurn){	
-				ui.printStats(ply, hasRadar, hasShield, m);
+				ui.printStats(ply, hasRadar, m);
 				if(ply.isHasShield())
 					m--;
 				turnSelect1();
@@ -224,7 +224,7 @@ public class GameEngine {
 			ui.ammoActivated();
 		}
 		if (ply.get_yPosition() == shieldPos[0] && ply.get_xPosition() == shieldPos[1] && !hasShield) {
-			grid.getShield().activateShield(ply);
+			//			grid.getShield().activateShield(ply);		//does nothing
 			hasShield = true;
 			ply.setHasShield(true);
 			m = 5;

@@ -13,10 +13,10 @@ Once you see an enemy they stay visible - Fixed
 enemies do not move on players first turn - Fixed
 Looking in the same direction of natural site will block the first tile of looking - Fixed
 Shield does nothing (now it does something) - Fixed
+Report if enemy is in sight - Fixed
 _____________________________________________________________________________________________
 Known Issues:
 
-Report if enemy is in sight
 Power-ups spawn on player
 
 

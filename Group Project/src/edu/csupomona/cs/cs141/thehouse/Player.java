@@ -188,6 +188,7 @@ public class Player extends GameObject{
 		case "1":
 			lookUp();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
+			grid.lookReport(lookPosY1, lookPosX1, lookPosY2, lookPosX2);
 			break;
 
 		case "down":
@@ -195,6 +196,7 @@ public class Player extends GameObject{
 		case "2":
 			lookDown(grid);
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
+			grid.lookReport(lookPosY1, lookPosX1, lookPosY2, lookPosX2);
 			break;
 
 		case "right":
@@ -202,6 +204,7 @@ public class Player extends GameObject{
 		case "3":
 			lookRight();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
+			grid.lookReport(lookPosY1, lookPosX1, lookPosY2, lookPosX2);
 			break;
 
 		case "left":
@@ -209,6 +212,7 @@ public class Player extends GameObject{
 		case "4":
 			lookLeft();
 			grid.showObjectsWithinLocation(lookPosY1, lookPosX1, lookPosY2, lookPosX2, true);
+			grid.lookReport(lookPosY1, lookPosX1, lookPosY2, lookPosX2);
 			break;
 
 		default:

@@ -491,53 +491,53 @@ public class Grid implements Serializable{
 		return shieldPos;
 	}
 	public void shootGunCheck(int yplr, int xplr, String dir) {
-		int c = 0;
-
 		switch (dir) {
 		case "up":
 		case "u":
 		case "1":
 			for (int i =+ yplr; i >= 0; i--) {
-				//				enemyInstance = checkForEnemy(i, xplr);
-				//				System.out.print(i + " " + xplr);		// for testing
-				//				System.out.println(enemyInstance);					
-				killenemy(i,xplr,c);
+//				shootGunPrintResults(i, xplr);			// for testing					
+				killenemy(i,xplr,0);
 			}
 			break;
-
 		case "down":
 		case "d":
 		case "2":
 			for (int i =+ yplr; i < gog.length; i++) {
-				//				enemyInstance = checkForEnemy(i, xplr);
-				//				System.out.print(i + " " + xplr);		// for testing
-				//				System.out.println(enemyInstance);
-				killenemy(i,xplr, c);
+//				shootGunPrintResults(i, xplr);			// for testing
+				killenemy(i,xplr, 0);
 			}
 			break;
-
 		case "left":
 		case "l":
 		case "4":
 			for (int i =+ xplr; i >= 0; i--) {
-				//				enemyInstance = checkForEnemy(yplr, i);
-				//				System.out.print(yplr + " " + i);		// for testing
-				//				System.out.println(enemyInstance);
-				killenemy(yplr,i, c);
+//				shootGunPrintResults(yplr, i);			// for testing
+				killenemy(yplr,i, 0);
 			}
 			break;
-
 		case "right":
 		case "r":
 		case "3":
 			for (int i =+ xplr; i < gog.length; i++) {
-				//				System.out.print(yplr + " " + i);		// for testing
-				//				enemyInstance = checkForEnemy(yplr, i);
-				//				System.out.println(enemyInstance);
-				killenemy(yplr,i, c);
+//				shootGunPrintResults(yplr, i);			// for testing
+				killenemy(yplr,i, 0);
 			}
 			break;
 		}
+	}
+	/** 
+	 * prints results of whether there is an enemy at 
+	 * each position that the bullet travels over
+	 * 
+	 * used for testing
+	 * @param y
+	 * @param x
+	 */
+	private void shootGunPrintResults(int y, int x) {
+		enemyInstance = checkForEnemy(y, x);
+		System.out.print(y + " " + x);
+		System.out.println(enemyInstance);
 	}
 
 	/**
@@ -545,14 +545,13 @@ public class Grid implements Serializable{
 	 * @param x
 	 */
 	public void killenemy(int y, int x, int c) {
-		for (int index = 0; index < enemy.size(); index++) {
+		for (int index = 0; index < enemy.size() && c<1; index++) {
 			int x1 = enemy.get(index).getXPosition();
 			int y1 = enemy.get(index).getYPosition();
-			if(x1==x && y1==y && c<1){
+			if(x1==x && y1==y){
 				enemy.remove(enemy.get(index));
 				gog[y][x] = new GameObject();
 				System.out.println("You hear a thud in the distance.");
-				c++;
 			}
 		}
 	}
@@ -561,18 +560,22 @@ public class Grid implements Serializable{
 		enemyVis = vis;
 		return enemyVis;		
 	}
+
 	public boolean getRadarVis(boolean vis){
 		radarVis = vis;
 		return radarVis;
 	}
+
 	public boolean getExtraAmmoVis(boolean vis){
 		extraAmmoVis = vis;
 		return extraAmmoVis;
 	}
+
 	public boolean getShieldVis(boolean vis){
 		shieldVis = vis;
 		return shieldVis;
 	}
+
 	public boolean getBriefcaseVis(boolean vis){
 		showBriefcase = vis;
 		return showBriefcase;
@@ -604,5 +607,22 @@ public class Grid implements Serializable{
 				gog[i][j] = saveGOG[i][j];
 			}
 		}
+	}
+
+	/**
+	 * @param lookPosX2 
+	 * @param lookPosY2 
+	 * @param lookPosX1 
+	 * @param lookPosY1 
+	 * 
+	 */
+	public void lookReport(int lookPosY1, int lookPosX1, int lookPosY2, int lookPosX2) {
+		int count=0;
+		if(getObjectAtLocation(lookPosY1, lookPosX1).getObjectName().compareTo("|E|") == 0){
+			count++;
+		}else if(getObjectAtLocation(lookPosY2, lookPosX2).getObjectName().compareTo("|E|") == 0){
+			count++;
+		}
+		System.out.println("There are " + count + " enemies in front of you.");
 	}
 }
