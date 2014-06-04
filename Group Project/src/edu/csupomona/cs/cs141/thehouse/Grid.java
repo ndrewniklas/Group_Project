@@ -19,7 +19,7 @@ public class Grid implements Serializable{
 	/**
 	 * The grid is filled with this
 	 */
-	private GameObject gameObj;
+//	private GameObject gameObj;
 
 	private Room bcRoom;
 
@@ -42,7 +42,7 @@ public class Grid implements Serializable{
 
 	private int[] briefcasePos = new int[2];
 
-	private int[] enemyPos = new int[2];
+//	private int[] enemyPos = new int[2];
 
 	private int[] shieldPos = new int[2];
 
@@ -74,7 +74,7 @@ public class Grid implements Serializable{
 	 */
 	public Grid() {
 		gog = new GameObject[9][9];
-		gameObj = new GameObject();
+//		gameObj = new GameObject();
 		room = new Room[9];
 		enemy = new ArrayList<Enemy>(6);
 		die = new Dice();
@@ -394,7 +394,7 @@ public class Grid implements Serializable{
 	 * This method randomly places 6 enemies.
 	 */
 	public void setPowerUps() {
-		boolean showPowerUps = true;
+//		boolean showPowerUps = true;
 		spawnRadar();
 		spawnExtraAmmo();
 		spawnShield();

@@ -24,12 +24,6 @@ package edu.csupomona.cs.cs141.thehouse;
  * 
  */
 public class ExtraAmmo extends GameObject {
-
-	/**
-	 * This field represents a {@code String} with teh amount of bullets.
-	 * Its should only be "1" or "0".
-	 */
-	private String ExtraAmmo;
 	
 	/**
 	 * This field represents the symbol for the {@link ExtraAmmo} object in the 

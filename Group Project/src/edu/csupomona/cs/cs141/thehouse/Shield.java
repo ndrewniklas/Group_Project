@@ -18,16 +18,11 @@ package edu.csupomona.cs.cs141.thehouse;
 
 /**
  * @author Kurt
- * This class will assign the power-up to the invincibility powerup.
+ * This class will assign the power-up to the invincibility power-up.
  * 
  */
 public class Shield extends GameObject {
 
-
-	/**
-	 *  This is the int that holds the shield value.
-	 */
-	private int Shield;
 
 	private final String SHIELD = "|S|";
 
@@ -36,7 +31,6 @@ public class Shield extends GameObject {
 	 * This is the constructor for the shield power-up
 	 */
 	public Shield() {
-		// Invincibility, just felt like making it shield so it is quicker to type
 		setObjectName(SHIELD);
 		setHiddenName(getBlankName());
 	}
@@ -49,11 +43,4 @@ public class Shield extends GameObject {
 		else
 			setHiddenName(getBlankName());		
 	}
-	//	
-	//	/**
-	//	 * {@link Player} This is the method that gives invincibility
-	//	 */
-	//	public void activateShield(Player plr){
-	//		
-	//	}
 }

@@ -27,10 +27,10 @@ package edu.csupomona.cs.cs141.thehouse;
 public class Player extends GameObject{
 
 	//	private boolean isAlive = true;
-	private boolean isInvincible = false;
-	private boolean hasBullet = true;
+//	private boolean isInvincible = false;
+//	private boolean hasBullet = true;
 	private boolean hasShield = false;
-	private boolean hasRadar = false;
+//	private boolean hasRadar = false;
 	private boolean hasBriefCase = false;
 
 	private int objID;
@@ -368,50 +368,12 @@ public class Player extends GameObject{
 		return ammo;
 	}
 
-	//	/**
-	//	 * {@link #checkBulletHit()} This method will check if the bullet hit the enemy ninja
-	//	 */
-	//	public void checkBulletHit() {
-	//
-	//	}
-
-	//	/**
-	//	 * {@link #pickUpInvincibility()} This method will allow the user to pick up the invincibility upgrade
-	//	 * @return 
-	//	 */
-	//	public void pickUpInvincibility(boolean hasShield) {
-	//		hasShield = true;
-	//	}
-
-	//	/**
-	//	 * {@link #useShield()} This method will toggle the {@link Shield} upgrade
-	//	 * @return The return value will determine if the player can die or not
-	//	 */
-	//	public void useShield(boolean hasShield) {
-	//
-	//		hasShield = false;
-	//	}
-
 	/**
 	 * @return the hasShield
 	 */
 	public boolean isHasShield() {
 		return hasShield;
 	}
-
-	//	/**
-	//	 * {@link #pickUpRadar()} This method will let the user pick up the radar upgrade
-	//	 */
-	//	public void pickUpRadar(boolean hasRadar) {
-	//		hasRadar = true;
-	//	}
-
-	//	/**
-	//	 * {@link #useRadar()} This method will reveal the location of the briefcase
-	//	 */
-	//	public void useRadar(boolean hasRadar) {
-	//		hasRadar = false;
-	//	}
 
 	/**
 	 * @param hasShield the hasShield to set

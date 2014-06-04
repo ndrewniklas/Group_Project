@@ -8,7 +8,7 @@ Natural sight - Fixed
 Enemies don't die - Fixed
 Player dies - Fixed
 You should be able to look once then be able to move -Fixed
---Up natural sight is not removed if you change direction - Fixed
+Up natural sight is not removed if you change direction - Fixed
 Once you see an enemy they stay visible - Fixed
 enemies do not move on players first turn - Fixed
 Looking in the same direction of natural site will block the first tile of looking - Fixed
