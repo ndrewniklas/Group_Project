@@ -491,13 +491,14 @@ public class Grid implements Serializable{
 		return shieldPos;
 	}
 	public void shootGunCheck(int yplr, int xplr, String dir) {
+		boolean ran = false;
 		switch (dir) {
 		case "up":
 		case "u":
 		case "1":
 			for (int i =+ yplr; i >= 0; i--) {
 //				shootGunPrintResults(i, xplr);			// for testing					
-				killenemy(i,xplr,0);
+				ran = killenemy(i,xplr, ran);
 			}
 			break;
 		case "down":
@@ -505,7 +506,7 @@ public class Grid implements Serializable{
 		case "2":
 			for (int i =+ yplr; i < gog.length; i++) {
 //				shootGunPrintResults(i, xplr);			// for testing
-				killenemy(i,xplr, 0);
+				ran = killenemy(i,xplr, ran);
 			}
 			break;
 		case "left":
@@ -513,7 +514,7 @@ public class Grid implements Serializable{
 		case "4":
 			for (int i =+ xplr; i >= 0; i--) {
 //				shootGunPrintResults(yplr, i);			// for testing
-				killenemy(yplr,i, 0);
+				ran = killenemy(yplr,i, ran);
 			}
 			break;
 		case "right":
@@ -521,7 +522,7 @@ public class Grid implements Serializable{
 		case "3":
 			for (int i =+ xplr; i < gog.length; i++) {
 //				shootGunPrintResults(yplr, i);			// for testing
-				killenemy(yplr,i, 0);
+				ran = killenemy(yplr,i, ran);
 			}
 			break;
 		}
@@ -543,17 +544,23 @@ public class Grid implements Serializable{
 	/**
 	 * @param y
 	 * @param x
+	 * @param ran 
+	 * @return 
 	 */
-	public void killenemy(int y, int x, int c) {
-		for (int index = 0; index < enemy.size() && c<1; index++) {
+	public boolean killenemy(int y, int x, boolean ran) {
+		for (int index = 0; index < enemy.size(); index++) {
 			int x1 = enemy.get(index).getXPosition();
 			int y1 = enemy.get(index).getYPosition();
-			if(x1==x && y1==y){
-				enemy.remove(enemy.get(index));
-				gog[y][x] = new GameObject();
-				System.out.println("You hear a thud in the distance.");
+			if (!ran) {
+				if (x1 == x && y1 == y) {
+					enemy.remove(enemy.get(index));
+					gog[y][x] = new GameObject();
+					System.out.println("You hear a thud in the distance.");
+					ran = true;
+				}
 			}
 		}
+		return ran;
 	}
 
 	public boolean getEnemyVis(boolean vis){

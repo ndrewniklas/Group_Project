@@ -26,10 +26,7 @@ package edu.csupomona.cs.cs141.thehouse;
 
 public class Enemy extends GameObject {
 
-	private boolean enemyDead;
 	private Dice die = new Dice();
-	private int initialX;
-	private int initialY;
 	private int xPosition;
 	private int yPosition;
 	private int xpre;
@@ -47,7 +44,6 @@ public class Enemy extends GameObject {
 	//This method will show enemy dependent on boolean value taken
 	public Enemy(boolean showEnemy) {
 		setRealName(ENEMY_NAME);
-		enemyDead = false;
 		objID = setObjId(1);
 		if(showEnemy)
 			setObjectName(ENEMY_NAME);
