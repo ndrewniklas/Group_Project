@@ -104,10 +104,7 @@ public class GameEngine {
 
 	private int moves;
 
-	/**
-	 * turns remaining on shield use
-	 */
-	private int m = 5;
+	private int m;
 
 	/**
 	 * The default constructor for GameEngine.
@@ -157,9 +154,11 @@ public class GameEngine {
 			didPlayerTakeTurn = false;
 			didPlayerLook = false;
 			while(!didPlayerTakeTurn){	
-				ui.printStats(ply, hasRadar, m);
-				if(ply.isHasShield())
-					m--;
+				ui.printStats(ply, hasRadar, ply.getM());
+				if(ply.isHasShield()){
+					m = ply.getM();
+					ply.setM(--m);
+				}
 				turnSelect1();
 				if(ply.getHasBriefCase()){
 					ui.foundBriefcase();
@@ -224,10 +223,8 @@ public class GameEngine {
 			ui.ammoActivated();
 		}
 		if (ply.get_yPosition() == shieldPos[0] && ply.get_xPosition() == shieldPos[1] && !hasShield) {
-//			grid.getShield().activateShield(ply);		//does nothing
+			grid.getShield().activateShield(ply, 5);
 			hasShield = true;
-			ply.setHasShield(true);
-			m = 5;
 			ui.shieldActivated();
 		}
 		if(!hasRadar)
@@ -236,7 +233,7 @@ public class GameEngine {
 			grid.respawnEAmmo();
 		if(!hasShield)
 			grid.respawnShield();
-		if(m==0){
+		if(ply.getM() == 0){
 			ply.setHasShield(false);
 		}
 	}
@@ -606,5 +603,12 @@ public class GameEngine {
 	 */
 	public int getMoves() {
 		return moves;
+	}
+
+	/**
+	 * @param m the m to set
+	 */
+	public void setM(int m) {
+		this.m = m;
 	}
 }

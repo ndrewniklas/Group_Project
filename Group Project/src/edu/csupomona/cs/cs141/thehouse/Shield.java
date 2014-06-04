@@ -27,6 +27,7 @@ public class Shield extends GameObject {
 	private final String SHIELD = "|S|";
 
 	private int objID;
+
 	/**
 	 * This is the constructor for the shield power-up
 	 */
@@ -42,5 +43,13 @@ public class Shield extends GameObject {
 			setObjectName(SHIELD);
 		else
 			setHiddenName(getBlankName());		
+	}
+
+	/**
+	 * @param ply
+	 */
+	public void activateShield(Player ply, int m) {
+		ply.setHasShield(true);
+		ply.setM(m);
 	}
 }

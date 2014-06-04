@@ -47,6 +47,11 @@ public class Player extends GameObject{
 	private int lookPosY1, lookPosY2, lookPosX1, lookPosX2;
 
 	private String plrMoveDir;
+	
+	/**
+	 * turns remaining on shield use
+	 */
+	private int m;
 
 	public Player(){
 		super("[P]",0,8);
@@ -383,6 +388,20 @@ public class Player extends GameObject{
 	}
 
 	/**
+	 * @return the m
+	 */
+	public int getM() {
+		return m;
+	}
+
+	/**
+	 * @param m the m to set
+	 */
+	public void setM(int m) {
+		this.m = m;
+	}
+
+	/**
 	 * {@link #playerDies(boolean)} This method will check if the enemy has attack the player
 	 * and kill the player if the parameter is true
 	 * @param enemyContact Is the boolean parameter that will determine if the player dies
@@ -392,8 +411,8 @@ public class Player extends GameObject{
 	public void playerDies() {
 		ypre = 8;
 		xpre = 0;
-		xPosition = 0;
 		yPosition = 8;
+		xPosition = 0;
 		numLives--;
 		plrMoveDir = "up";
 	}
@@ -428,5 +447,4 @@ public class Player extends GameObject{
 	public int getNumLives() {
 		return numLives;
 	}
-
 }

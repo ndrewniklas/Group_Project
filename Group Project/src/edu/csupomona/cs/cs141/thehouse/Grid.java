@@ -380,6 +380,9 @@ public class Grid implements Serializable{
 				gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
 				ply.playerDies();
 			}
+			if (checkForEnemy(8, 0)){
+				shield.activateShield(ply, 1);
+			}
 		}
 	}
 
