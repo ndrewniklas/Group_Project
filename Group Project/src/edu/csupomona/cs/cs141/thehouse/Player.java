@@ -147,6 +147,7 @@ public class Player extends GameObject{
 			System.out.println("Something went wrong");
 		}
 	}
+
 	public void removeNaturalVision(String direction, Grid grid){
 		direction = direction.toLowerCase();
 		switch(direction){
@@ -174,6 +175,7 @@ public class Player extends GameObject{
 			System.out.println("Something went wrong");
 		}
 	}
+
 	/**
 	 * {@link #playerLook()} This method will reveal two spaces in the desired direction
 	 * on the grid based on user input
@@ -269,6 +271,7 @@ public class Player extends GameObject{
 			lookPosX2 = xPosition;
 		}
 	}
+
 	public void lookDown(Grid grid){
 		//Down one
 		if(yPosition+1 >= 0 && yPosition+1 <= 8 ){
@@ -308,6 +311,7 @@ public class Player extends GameObject{
 			lookPosX2 = xPosition;
 		}
 	}
+
 	public void lookLeft(){
 		//Left one
 		if(xPosition - 1 >= 0 && xPosition - 1 <= 8 && roomExists(yPosition,xPosition-1)){
@@ -326,7 +330,6 @@ public class Player extends GameObject{
 			lookPosX2 = xPosition;
 		}
 	}
-
 
 	/**
 	 * {@link #checkBulletPossession()} This method will check if there is a bullet in the gun of the
@@ -361,42 +364,56 @@ public class Player extends GameObject{
 		return ammo;
 	}
 
-	/**
-	 * {@link #checkBulletHit()} This method will check if the bullet hit the enemy ninja
-	 */
-	public void checkBulletHit() {
+	//	/**
+	//	 * {@link #checkBulletHit()} This method will check if the bullet hit the enemy ninja
+	//	 */
+	//	public void checkBulletHit() {
+	//
+	//	}
 
+	//	/**
+	//	 * {@link #pickUpInvincibility()} This method will allow the user to pick up the invincibility upgrade
+	//	 * @return 
+	//	 */
+	//	public void pickUpInvincibility(boolean hasShield) {
+	//		hasShield = true;
+	//	}
+
+	//	/**
+	//	 * {@link #useShield()} This method will toggle the {@link Shield} upgrade
+	//	 * @return The return value will determine if the player can die or not
+	//	 */
+	//	public void useShield(boolean hasShield) {
+	//
+	//		hasShield = false;
+	//	}
+
+	/**
+	 * @return the hasShield
+	 */
+	public boolean isHasShield() {
+		return hasShield;
 	}
 
-	/**
-	 * {@link #pickUpInvincibility()} This method will allow the user to pick up the invincibility upgrade
-	 * @return 
-	 */
-	public void pickUpInvincibility(boolean hasShield) {
-		hasShield = true;
-	}
+	//	/**
+	//	 * {@link #pickUpRadar()} This method will let the user pick up the radar upgrade
+	//	 */
+	//	public void pickUpRadar(boolean hasRadar) {
+	//		hasRadar = true;
+	//	}
+
+	//	/**
+	//	 * {@link #useRadar()} This method will reveal the location of the briefcase
+	//	 */
+	//	public void useRadar(boolean hasRadar) {
+	//		hasRadar = false;
+	//	}
 
 	/**
-	 * {@link #useShield()} This method will toggle the {@link Shield} upgrade
-	 * @return The return value will determine if the player can die or not
+	 * @param hasShield the hasShield to set
 	 */
-	public void useShield(boolean hasShield) {
-
-		hasShield = false;
-	}
-
-	/**
-	 * {@link #pickUpRadar()} This method will let the user pick up the radar upgrade
-	 */
-	public void pickUpRadar(boolean hasRadar) {
-		hasRadar = true;
-	}
-
-	/**
-	 * {@link #useRadar()} This method will reveal the location of the briefcase
-	 */
-	public void useRadar(boolean hasRadar) {
-		hasRadar = false;
+	public void setHasShield(boolean hasShield) {
+		this.hasShield = hasShield;
 	}
 
 	/**
@@ -422,7 +439,9 @@ public class Player extends GameObject{
 		}
 		else{
 			hasBriefCase = false;
-			//System.out.println("room is empty");
+			if (!roomExists(lookPosX1,lookPosY1)) {
+				System.out.println("room is empty");
+			}
 		}
 	}
 

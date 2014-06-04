@@ -107,8 +107,7 @@ public class GameEngine {
 	/**
 	 * turns remaining on shield use
 	 */
-	private int m = 5; 
-
+	private int m = 5;
 
 	/**
 	 * The default constructor for GameEngine.
@@ -159,7 +158,7 @@ public class GameEngine {
 			didPlayerLook = false;
 			while(!didPlayerTakeTurn){	
 				ui.printStats(ply, hasRadar, hasShield, m);
-				if(hasShield)
+				if(ply.isHasShield())
 					m--;
 				turnSelect1();
 				if(ply.getHasBriefCase()){
@@ -227,6 +226,7 @@ public class GameEngine {
 		if (ply.get_yPosition() == shieldPos[0] && ply.get_xPosition() == shieldPos[1] && !hasShield) {
 			grid.getShield().activateShield(ply);
 			hasShield = true;
+			ply.setHasShield(true);
 			m = 5;
 			ui.shieldActivated();
 		}
@@ -236,6 +236,9 @@ public class GameEngine {
 			grid.respawnEAmmo();
 		if(!hasShield)
 			grid.respawnShield();
+		if(m==0){
+			ply.setHasShield(false);
+		}
 	}
 
 	//For use with navigating the main menu
@@ -441,7 +444,8 @@ public class GameEngine {
 				repeat = true;
 				break;
 			}
-		} while(repeat == true);}
+		} while(repeat == true);
+	}
 
 	public void devMenu(String cmd){
 		switch(cmd){
@@ -503,7 +507,7 @@ public class GameEngine {
 				break;
 			}
 		} while(repeat == true);
-
+		repeat = true;
 	}
 
 	public void setDebug(){

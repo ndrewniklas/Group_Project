@@ -96,6 +96,40 @@ public class Grid implements Serializable{
 		setBriefcase();
 	}
 
+	/**
+	 * Populates the grid with rooms in the position at {@link #go}
+	 */
+	public void populateGrid(){
+		for(int i = 0; i < 9; ++i){
+			room[i] = new Room(false);
+		}
+		gog[1][1] = room[0];
+		gog[4][1] = room[1];
+		gog[7][1] = room[2];
+		gog[1][4] = room[3];
+		gog[4][4] = room[4];
+		gog[7][4] = room[5];
+		gog[1][7] = room[6];
+		gog[4][7] = room[7];
+		gog[7][7] = room[8];
+	}
+
+	/**
+	 * Prints out the name of the object at that location
+	 */
+	public void printGrid(){
+
+		for(int i = 0; i < gog.length; ++i){
+			for(int j = 0; j < gog[i].length; ++j){
+				gog[i][j].printObject();
+			}
+			System.out.println();
+		}
+		//		for(int i = 0; i < enemy.size(); ++i){
+		//			enemy.get(i).printEnemyPos(i);				// for testing purpose only
+		//		}
+	}
+
 	public void changeAllObjectStates(boolean toggle) {
 		if(toggle){
 			/*shield.showName();
@@ -145,43 +179,13 @@ public class Grid implements Serializable{
 
 
 	/**
-	 * Prints out the name of the object at that location
+	 * used in testing only
+	 * @return
 	 */
-	public void printGrid(){
-
-		for(int i = 0; i < gog.length; ++i){
-			for(int j = 0; j < gog[i].length; ++j){
-				gog[i][j].printObject();
-			}
-			System.out.println();
-		}
-		//		for(int i = 0; i < enemy.size(); ++i){
-		//			enemy.get(i).printEnemyPos(i);				// for testing purpose only
-		//		}
-	}
-
 	public int gridSize(){
 		int size = 0;
 		size = gog.length;
 		return size;
-	}
-
-	/**
-	 * Populates the grid with rooms in the position at {@link #go}
-	 */
-	public void populateGrid(){
-		for(int i = 0; i < 9; ++i){
-			room[i] = new Room(false);
-		}
-		gog[1][1] = room[0];
-		gog[4][1] = room[1];
-		gog[7][1] = room[2];
-		gog[1][4] = room[3];
-		gog[4][4] = room[4];
-		gog[7][4] = room[5];
-		gog[1][7] = room[6];
-		gog[4][7] = room[7];
-		gog[7][7] = room[8];
 	}
 
 	public void rePopulateGrid(Player ply) {
@@ -349,39 +353,34 @@ public class Grid implements Serializable{
 	 * @param yPos 
 	 * @param xPos 
 	 * @param ply 
-	 * @return playerKilled
 	 */
-	public boolean checkForPlayer(int yPos, int xPos, Player ply) {
+	public void checkForPlayer(int yPos, int xPos, Player ply) {
 		playerKilled = false;
 
-		//if(yPos - 1 >= 0 && yPos - 1 <= 8){
-		if(yPos == ply.get_yPosition() && xPos == ply.get_xPosition()){		//up
-			playerKilled = true;
-			gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
-			ply.playerDies();
+		if (ply.isHasShield()) {
+
+		}else{
+			if (yPos == ply.get_yPosition() && xPos == ply.get_xPosition()) { //up
+				playerKilled = true;
+				gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
+				ply.playerDies();
+			}
+			if (yPos == ply.get_yPosition() && xPos == ply.get_xPosition()) { //down
+				playerKilled = true;
+				gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
+				ply.playerDies();
+			}
+			if (yPos == ply.get_yPosition() && xPos == ply.get_xPosition()) { //left
+				playerKilled = true;
+				gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
+				ply.playerDies();
+			}
+			if (yPos == ply.get_yPosition() && xPos == ply.get_xPosition()) { //right
+				playerKilled = true;
+				gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
+				ply.playerDies();
+			}
 		}
-		//}else if(yPos + 1 >= 0 && yPos + 1 <= 8){
-		if(yPos == ply.get_yPosition() && xPos == ply.get_xPosition()){		//down
-			playerKilled = true;
-			gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
-			ply.playerDies();
-		}
-		//}else if(xPos - 1 >= 0 && xPos - 1 <= 8){
-		if(yPos == ply.get_yPosition() && xPos  == ply.get_xPosition()){		//left
-			playerKilled = true;
-			gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
-			ply.playerDies();
-		}
-		//}else if(xPos + 1 >= 0 && xPos + 1 <= 8){
-		if(yPos == ply.get_yPosition() && xPos == ply.get_xPosition()){		//right
-			playerKilled = true;
-			gog[ply.get_yPosition()][ply.get_xPosition()] = new GameObject();
-			ply.playerDies();
-		}
-		//}else{
-		//	playerKilled = false;
-		//}
-		return playerKilled;
 	}
 
 	/**
@@ -425,15 +424,14 @@ public class Grid implements Serializable{
 	public Radar getRadar(){
 		return radar;
 	}
-	public ExtraAmmo getExtraAmmo(){
-		return extraAmmo;
+	public int[] getRadarPos() {
+		return radarPos;
 	}
-	public Shield getShield(){
-		return shield;
+
+	public void activateRadar() {
+		radar.activateRadar(bcRoom);
 	}
-	public int[] getShieldPos(){
-		return shieldPos;
-	}
+
 	public void spawnExtraAmmo(){
 		int spawnOne;
 		int spawnTwo;
@@ -456,6 +454,14 @@ public class Grid implements Serializable{
 			}
 		}
 	}
+
+	public ExtraAmmo getExtraAmmo(){
+		return extraAmmo;
+	}
+	public int[] getExtraAmmoPos(){
+		return ammoPos;
+	}
+
 	public void spawnShield(){
 		int spawnOne;
 		int spawnTwo;
@@ -478,17 +484,12 @@ public class Grid implements Serializable{
 		}
 	}
 
-	public int[] getRadarPos() {
-		return radarPos;
+	public Shield getShield(){
+		return shield;
 	}
-
-	public void activateRadar() {
-		radar.activateRadar(bcRoom);
+	public int[] getShieldPos(){
+		return shieldPos;
 	}
-	public int[] getExtraAmmoPos(){
-		return ammoPos;
-	}
-
 	public void shootGunCheck(int yplr, int xplr, String dir) {
 		int c = 0;
 
@@ -543,7 +544,7 @@ public class Grid implements Serializable{
 	 * @param y
 	 * @param x
 	 */
-	private void killenemy(int y, int x, int c) {
+	public void killenemy(int y, int x, int c) {
 		for (int index = 0; index < enemy.size(); index++) {
 			int x1 = enemy.get(index).getXPosition();
 			int y1 = enemy.get(index).getYPosition();

@@ -235,7 +235,7 @@ public class UserInterface {
 		System.out.println("Lives: " + ply.getNumLives());
 		if(hasRadar)
 			System.out.println("Radar enabled");
-		else if(hasShield && m > 0)
+		else if(ply.isHasShield())
 			System.out.println("Shield enabled: " + m + " turns remaining");
 	}
 
