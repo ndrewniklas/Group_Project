@@ -364,6 +364,7 @@ public class GameEngine {
 			case "o":
 			case "4":
 				setOption();
+				ui.printGrid(grid);
 				break;
 			case "exit":
 			case "e":
@@ -431,6 +432,7 @@ public class GameEngine {
 			case "o":
 			case "3":
 				setOption();
+				ui.printGrid(grid);
 				break;
 			case "exit":
 			case "e":
@@ -479,9 +481,7 @@ public class GameEngine {
 
 	public void setOption(){
 		ui.options();
-		do {
 			choice = sc.nextLine().toLowerCase();
-			repeat = false;
 			switch(choice){
 			case "debug":
 			case "d":
@@ -503,11 +503,9 @@ public class GameEngine {
 
 			default:
 				ui.invalidCMD();
-				repeat = true;
+				setOption();
 				break;
 			}
-		} while(repeat == true);
-		repeat = true;
 	}
 
 	public void setDebug(){
