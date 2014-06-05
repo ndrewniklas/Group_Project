@@ -195,7 +195,6 @@ public class UserInterface {
 	public void endScreen(){
 		System.out.println("------------------------");
 		System.out.println("Thanks for playing!");
-		System.out.println("Press enter to quit");
 		System.out.println("------------------------");
 	}
 

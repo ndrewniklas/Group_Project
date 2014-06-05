@@ -104,9 +104,9 @@ public class File_Handler {
 		switch (choice) {
 		case "load":
 			try {
-				grid = openGrid();
+
 				openFile(grid);
-				player = loadPlayer();
+
 				System.out.println("Loaded the game!");
 			} catch (IOException | ClassNotFoundException e) {
 				System.out.println("Something went wrong");
@@ -148,10 +148,15 @@ public class File_Handler {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public Grid openGrid() throws IOException, ClassNotFoundException{
+	public Grid openGrid() {
+		savedGrid = new Grid();
+		try{
 		fis = new FileInputStream(SAVE_GRID_CLASS);
 		ois = new ObjectInputStream(fis);
 		savedGrid = (Grid)ois.readObject();
+		}catch(IOException | ClassNotFoundException e){
+			System.out.println("Could not load the grid");
+		}
 		return savedGrid;
 	}
 
@@ -165,11 +170,15 @@ public class File_Handler {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public Player loadPlayer() throws IOException, ClassNotFoundException{
-		Player savedPlayer = null;
+	public Player loadPlayer(){
+		Player savedPlayer = new Player();
+		try{
 		fis = new FileInputStream(SAVE_PLAYER);
 		ois = new ObjectInputStream(fis);
 		savedPlayer = (Player)ois.readObject();
+		}catch(IOException | ClassNotFoundException e){
+			System.out.println("Could not load player");
+		}
 		return savedPlayer;
 	}
 	
