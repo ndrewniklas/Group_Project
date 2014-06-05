@@ -617,6 +617,7 @@ public class GameEngine {
 			grid.getExtraAmmoVis(true);	
 			grid.changeAllObjectStates(true);
 			grid.getExtraAmmo().addAmmo(ply, 9001);
+			grid.getShield().activateShield(ply, 9001);
 		}
 		else{
 			grid.getRadarVis(false);
@@ -626,6 +627,7 @@ public class GameEngine {
 			grid.getExtraAmmoVis(false);	
 			grid.changeAllObjectStates(false);
 			grid.getExtraAmmo().addAmmo(ply, 1);
+			grid.getShield().activateShield(ply, 5);
 		}
 	}
 
