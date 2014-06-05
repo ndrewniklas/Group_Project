@@ -37,10 +37,10 @@ public class UserInterface {
 	 */
 	public void rules() {
 		System.out.println("The rules to the game are very simple:");
-		System.out.println("You will be spawned in the bottom left-hand corner of a building. There will "
-				+ "also be six enemies in the building with you. \nLocated throughout the building "
+		System.out.println("You will be spawned in the bottom left-hand corner of a building. "
+				+ "\nThere will also be six enemies in the building with you. \nLocated throughout the building "
 				+ "are nine rooms and in one of these rooms is a briefcase. \nFind the briefcase"
-				+ "and win the game.");
+				+ " and win the game.");
 		System.out.println();
 		System.out.println("User Commands: ");
 		System.out.println("You have several options available to you while the game is running.");

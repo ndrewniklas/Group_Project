@@ -104,11 +104,14 @@ public class File_Handler {
 		switch (choice) {
 		case "load":
 			try {
+				grid = openGrid();
 				openFile(grid);
+				player = loadPlayer();
 				System.out.println("Loaded the game!");
 			} catch (IOException | ClassNotFoundException e) {
 				System.out.println("Something went wrong");
-				e.printStackTrace();
+//				e.printStackTrace();
+				noFileError();
 			}
 			break;	
 		case "save":
@@ -142,20 +145,16 @@ public class File_Handler {
 	 * {@link #savedGrid}.
 	 * @return
 	 * 	{@link Grid} {@link #savedGrid}
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public Grid openGrid(){
-		try{
-			fis = new FileInputStream(SAVE_GRID_CLASS);
-			ois = new ObjectInputStream(fis);
-			savedGrid = (Grid)ois.readObject();		
-		}catch(ClassNotFoundException | IOException e){
-			System.out.println("Something went wrong");
-			e.printStackTrace();
-		}
-		
+	public Grid openGrid() throws IOException, ClassNotFoundException{
+		fis = new FileInputStream(SAVE_GRID_CLASS);
+		ois = new ObjectInputStream(fis);
+		savedGrid = (Grid)ois.readObject();
 		return savedGrid;
 	}
-	
+
 	/**
 	 * This method returns the {@link Player} object to be used when the game is continued.
 	 * It does this by reading the {@link Player} with {@link #ois} and saving it to
@@ -163,17 +162,14 @@ public class File_Handler {
 	 * @return
 	 * 	{@link Player} {@code savedPlayer} - object containing the {@link Player} object 
 	 * 		from the save file.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public Player loadPlayer(){
+	public Player loadPlayer() throws IOException, ClassNotFoundException{
 		Player savedPlayer = null;
-		try{
-			fis = new FileInputStream(SAVE_PLAYER);
-			ois = new ObjectInputStream(fis);
-			savedPlayer = (Player)ois.readObject();		
-		}catch(ClassNotFoundException | IOException e){
-			System.out.println("Something went wrong loading the player!");
-			e.printStackTrace();
-		}
+		fis = new FileInputStream(SAVE_PLAYER);
+		ois = new ObjectInputStream(fis);
+		savedPlayer = (Player)ois.readObject();
 		return savedPlayer;
 	}
 	
@@ -203,6 +199,14 @@ public class File_Handler {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 
+	 */
+	public void noFileError() {
+		System.out.println("Save files do not exist.");
+		System.out.println("Starting a new game.");
 	}
 
 }

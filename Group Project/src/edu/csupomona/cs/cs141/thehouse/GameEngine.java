@@ -265,9 +265,7 @@ public class GameEngine {
 			case "continue":
 			case "c":
 			case "2":
-				grid = fh.openGrid();
 				fh.fileLander("load", grid, ply);
-				ply = fh.loadPlayer();
 				gameLoop();
 				break;
 
