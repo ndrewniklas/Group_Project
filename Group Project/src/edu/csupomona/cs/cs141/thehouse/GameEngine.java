@@ -165,6 +165,7 @@ public class GameEngine {
 				}
 				turnSelect1();
 				if(ply.getHasBriefCase()){
+					sound.stopBackgroundLoop();
 					ui.foundBriefcase();
 					gameOver = true;
 				}
