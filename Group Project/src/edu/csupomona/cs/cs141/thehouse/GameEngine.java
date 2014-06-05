@@ -106,7 +106,7 @@ public class GameEngine {
 
 	private int m;
 
-	private boolean musicOn;
+	private boolean musicOn = true;
 
 
 
@@ -334,12 +334,14 @@ public class GameEngine {
 				didPlayerTakeTurn = false;
 				ui.printGrid(grid);
 				break;
+				
 			case "mute":
 				musicOn = !musicOn;
 				if(musicOn)
 					sound.backgroundMusicLoop();
 				else
 					sound.stopBackgroundLoop();
+				break;
 
 			case "look":
 			case "l":
@@ -421,6 +423,14 @@ public class GameEngine {
 				String cmd = sc.nextLine();
 				devMenu(cmd);
 				didPlayerTakeTurn = false;
+				break;
+				
+			case "mute":
+				musicOn = !musicOn;
+				if(musicOn)
+					sound.backgroundMusicLoop();
+				else
+					sound.stopBackgroundLoop();
 				break;
 
 			case "move":
