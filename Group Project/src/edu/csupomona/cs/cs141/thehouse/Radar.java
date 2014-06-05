@@ -17,43 +17,63 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * @author Kurt
- * This class will assign the power-up to the Radar powerup.
+ * @author Kurt This class will assign the power-up to the Radar powerup.
  * 
  */
 public class Radar extends GameObject {
-	
+
 	/**
 	 * This is the string for the name of the radar.
 	 */
 	private final String RADAR = "|D|";
-	
+
 	private int objID;
+
 	/**
-	 * This is the constructor for the radar powerup
+	 * This is the constructor for the radar powerup which sets
+	 * {@link #setHiddenName(String)} and {@link #setObjectName(String)} to
+	 * {@link #RADAR} and {@link #getBlankName()
+
 	 */
 	public Radar() {
 		setObjectName(RADAR);
 		setHiddenName(getBlankName());
 	}
-	
-	public Radar(boolean vis){
+
+	/**
+	 * This is the constructor for the radar powerup which sets
+	 * {@link #setHiddenName(String)} and {@link #setObjectName(String)} to
+	 * {@link #RADAR} and {@link #getBlankName() but with the visibly
+	 */
+	public Radar(boolean vis) {
 		setRealName(RADAR);
 		objID = setObjId(3);
-		if(vis)
+		if (vis) {
 			setObjectName(RADAR);
-		else
+		} else {
 			setHiddenName(getBlankName());
+		}
 	}
-	
+
 	/**
-	 * {@link Radar} This is the method that activates the radar powerup
+	 * This is the method that activates the radar powerup by calling
+	 * {@link Room#changeRoomState(boolean)} and setting it to {@code true}
+	 * 
+	 * @param bcRoom
+	 *            The room we want to change
 	 */
-	public void activateRadar(Room bcRoom){
+	public void activateRadar(Room bcRoom) {
 		bcRoom.changeRoomState(true);
 	}
-	public void unactivateRadar(Room bcRoom){
+
+	/**
+	 * This is the method that deactivates the radar powerup by calling
+	 * {@link Room#changeRoomState(boolean)} and setting it to {@code false}
+	 * 
+	 * @param bcRoom
+	 */
+	public void unactivateRadar(Room bcRoom) {
 		bcRoom.changeRoomState(false);
 	}
-	
+
 }
