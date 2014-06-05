@@ -227,16 +227,19 @@ public class GameEngine {
 			grid.activateRadar();
 			hasRadar = true;
 			ui.radarActivated();
+			sound.foundPowerup();
 		}
 		if (ply.get_yPosition() == extraAmmoPos[0] && ply.get_xPosition() == extraAmmoPos[1] && !hasEAmmo) {
 			grid.getExtraAmmo().addAmmo(ply,1);
 			hasEAmmo = true;
 			ui.ammoActivated();
+			sound.foundPowerup();
 		}
 		if (ply.get_yPosition() == shieldPos[0] && ply.get_xPosition() == shieldPos[1] && !hasShield) {
 			grid.getShield().activateShield(ply, 5);
 			hasShield = true;
 			ui.shieldActivated();
+			sound.foundPowerup();
 		}
 		if(!hasRadar)
 			grid.respawnRadar();
@@ -350,6 +353,8 @@ public class GameEngine {
 				ui.lookDirections();
 				lookDirection = sc.nextLine();
 				ply.playerLook(grid, lookDirection);
+				if(grid.getEnemyFound())
+					sound.foundEnemy();
 				didPlayerTakeTurn = true;
 				break;
 

@@ -69,6 +69,8 @@ public class Grid implements Serializable{
 
 	private boolean enemyDead;
 
+	private boolean enemyFound;
+
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
 	 * Makes a new {@link Dice}
@@ -639,9 +641,17 @@ public class Grid implements Serializable{
 		int count=0;
 		if(getObjectAtLocation(lookPosY1, lookPosX1).getObjectName().compareTo("|E|") == 0){
 			count++;
+			enemyFound = true;
 		}else if(getObjectAtLocation(lookPosY2, lookPosX2).getObjectName().compareTo("|E|") == 0){
 			count++;
+			enemyFound = true;
+		}
+		else{
+			enemyFound = false;
 		}
 		System.out.println("There are " + count + " enemies in front of you.");
+	}
+	public boolean getEnemyFound(){
+		return enemyFound;
 	}
 }

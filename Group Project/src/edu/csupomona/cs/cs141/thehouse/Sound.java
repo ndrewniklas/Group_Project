@@ -92,6 +92,24 @@ public class Sound {
 			e.printStackTrace();
 		}
 	}
+	public void foundEnemy(){
+		try{
+		in = new FileInputStream(path + "found.wav");
+		as = new AudioStream(in);
+		AudioPlayer.player.start(as);
+		}catch( IOException e){
+			e.printStackTrace();
+		}
+	}
+	public void foundPowerup(){
+		try{
+		in = new FileInputStream(path + "item.wav");
+		as = new AudioStream(in);
+		AudioPlayer.player.start(as);
+		}catch( IOException e){
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * 
 	 */

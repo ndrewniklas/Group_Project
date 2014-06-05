@@ -358,7 +358,7 @@ public class Player extends GameObject{
 	 * @param hasBullet
 	 */
 	public void pickUpBullet(int amount) {
-		ammo = amount;
+		ammo += amount;
 	}
 
 	/**
