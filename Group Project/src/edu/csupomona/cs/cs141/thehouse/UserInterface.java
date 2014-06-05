@@ -23,14 +23,15 @@ public class UserInterface {
 	 */
 	private String userChoice;
 
+	/**
+	 * This field holds the input from the user.
+	 */
 	private String input;
 
-	Scanner sc = new Scanner(System.in);
 	/**
-	 * This constructor will build the {@link UserInterface} for use with {@link GameEngine}.
-	 * Then it will check after each round whether or not the game has ended and print out the appropriate
-	 * results.
+	 * This field instantiates the {@link Scanner}
 	 */
+	private Scanner sc = new Scanner(System.in);
 
 	/**
 	 * This method is called by {@link #main Menu()}. 
@@ -95,6 +96,12 @@ public class UserInterface {
 		System.out.println("Please enter one of the commands or the corresponding number:");
 	}
 
+	/**
+	 * This method simply prints out all potential options for the User to choose from during the game's
+	 * runtime. "Debug Mode" will show all objects on the grid and give the user infinite ammo; "Save"
+	 * will save the game's state. "New Game" will reset the game's state. "Mute the music" will end the 
+	 * sound byte for the background music, if the music is already off it will start again.
+	 */
 	public void options() {
 		System.out.println("You can change the options here:");
 		System.out.println("1) Debug Mode");
@@ -113,6 +120,11 @@ public class UserInterface {
 		grid.printGrid();
 	}
 
+	/**
+	 * This method simply prints out all possible actions the User can make during runtime. Primarily,
+	 * the actions that will affect the game state are "Look", "Move", and "Shoot". Selecting options will
+	 * call {@link #options()}. Selecting exit will end the program.
+	 */
 	public void turnSelect1() {
 		System.out.println("What would you like to do?");
 		System.out.println("1)Look");
@@ -124,7 +136,10 @@ public class UserInterface {
 	}
 
 	/**
-	 * 
+	 * This method simply prints out all possible actions the User can make during runtime; specifically
+	 * after they select the "Look" function. Primarily, the actions that will affect the game state are 
+	 * "Move" and "Shoot". Selecting options will call {@link #options()}. Selecting exit will end the 
+	 * program. 
 	 */
 	public void turnSelect2() {
 		System.out.println("What would you like to do?");
@@ -135,14 +150,26 @@ public class UserInterface {
 		System.out.println("Please enter one of the commands:");
 	}
 
+	/**
+	 * This method will set the userChoice to whatever {@code String} is passed to it.
+	 * @param choice
+	 * 	- {@code String} containing some value intended for {@link #userChoice}.
+	 */
 	public void setChoice(String choice){
 		userChoice = choice;
 	}
 
+	/**
+	 * This method will pass {@link #userChoice} to whatever calls it.
+	 * @return
+	 */
 	public String getChoice(){
 		return userChoice;
 	}
 
+	/**
+	 * This method simply prints out the four cardinal directions that the user can move.
+	 */
 	public void moveTurn() {
 		System.out.println("Which direction will you move?");
 		System.out.println("1)Up");
@@ -152,6 +179,9 @@ public class UserInterface {
 		System.out.println("Please enter one of the commands, command numbers, or the letter: ");
 	}
 
+	/**
+	 * This method simply prints out the four cardinal directions that the User can look.
+	 */
 	public void lookDirections(){
 		System.out.println("Which direction will you look?");
 		System.out.println("1)Up");
@@ -161,28 +191,41 @@ public class UserInterface {
 		System.out.println("Please enter one of the commands, command numbers, or the letter: ");
 	}
 
+	/**
+	 * This method prints whenever an invalid command is entered
+	 */
 	public void invalidCMD() {
 		System.out.println("Invalid Command: Please try again");
 	}
 
 
 	/**
-	 * 
+	 * This method will pass an input - saved as a {@code String} to whatever calls it, after collecting it
+	 * from the user.
 	 */
 	public String getInput() {
 		input = sc.nextLine();
 		return input;
 	}
 
+	/**
+	 * This method prints whenever the {@link Player} collects the {@link Radar bomb detector}
+	 */
 	public void radarActivated() {
 		System.out.println("You've picked up the detector!");
 		System.out.println("You can now see which reactor the bomb is planted in!");
 	}
 
+	/**
+	 * This prints whenever the {@link Player} picks up {@link ExtraAmmo} and can actually hold it. 
+	 */
 	public void ammoActivated(){
 		System.out.println("You have picked up ammo!");
 	}
 
+	/**
+	 * This method prints whenever the {@link Player} picks up the {@link Shield}.
+	 */
 	public void shieldActivated() {
 		System.out.println("You have picked up the shield!");
 		System.out.println("You will block attacks for 5 turns");
@@ -191,16 +234,25 @@ public class UserInterface {
 
 	}
 
+	/**
+	 * This method will print whenever the {@link Player} shoots and kills an {@link Enemy}.
+	 */
 	public void killEnemy() {
 		System.out.println("You've killed an enemy!");
 		System.out.println("But you are out of ammo...");
 	}
 
+	/**
+	 * This method will print whenever the {@link Player} fires a bullet
+	 */
 	public void shotFired() {
 		System.out.println("You fired your bullet...");
 
 	}
 
+	/**
+	 * This method simply prints out the four cardinal directions that the {@link Player} can shoot.
+	 */
 	public void shootTurn() {
 		System.out.println("Which direction will you fire?");
 		System.out.println("1)Up");
@@ -210,10 +262,17 @@ public class UserInterface {
 		System.out.println("Please enter one of the commands, command numbers, or the letter: ");
 	}
 
+	/**
+	 * This method prints when the user tries to shoot and does not have ammo.
+	 */
 	public void noBullet() {
 		System.out.println("You have no bullet to fire.");
 
 	}	
+	
+	/**
+	 * This method prints when the game ends
+	 */
 	public void endScreen(){
 		System.out.println("--------------------------------------");
 		System.out.println("Thanks for playing!");
@@ -221,6 +280,10 @@ public class UserInterface {
 		System.out.println("Yes or No");
 		System.out.println("--------------------------------------");
 	}
+	
+	/**
+	 * This method prints when the user exits
+	 */
 	public void exitScreen(){
 		System.out.println("--------------------------------------");
 		System.out.println("Thanks for playing!");
@@ -228,12 +291,17 @@ public class UserInterface {
 	}
 
 	/**
-	 * 
+	 * This method exists to force the user to hit {@code Enter} before the next line is called.
 	 */
 	public void pause() {
 		sc.nextLine();
 	}
 
+	/**
+	 * This method exists to determine whether or not a new game will be created.
+	 * @return
+	 * 		{@code Boolean} answer - true if the user selects yes, false if the user selects no
+	 */
 	public boolean newGame(){
 		boolean answer = false;
 		String question = sc.nextLine().toLowerCase();
@@ -254,7 +322,7 @@ public class UserInterface {
 	}
 
 	/**
-	 * 
+	 * This method prints when the {@link Player} is murdered by an {@link Enemy}
 	 */
 	public void playerDies() {
 		System.out.println();
@@ -268,16 +336,21 @@ public class UserInterface {
 	}
 
 	/**
-	 * 
+	 * This method prints when the {@link Player} finds the bomb
 	 */
 	public void foundBriefcase() {
 		System.out.println("YOU DISARMED THE BOMB");
 	}
 
 	/**
+	 * This method prints out information pertinent to the game state. Such as: how much ammo the player
+	 * has and whether they have a shield activated.
+	 * @param ply
+	 * 	- {@link Player} object
 	 * @param hasRadar 
-	 * @param hasShield 
+	 * 	- {@code boolean} true when {@link Player} has radar, false otherwise.
 	 * @param m 
+	 * 	- {@code int} containing the amount of turns left for {@link Shield}.
 	 * 
 	 */
 	public void printStats(Player ply, boolean hasRadar, int m) {
@@ -290,14 +363,14 @@ public class UserInterface {
 	}
 
 	/**
-	 * 
+	 * This method prints whenever the {@link Player} wins
 	 */
 	public void congrats() {
 		System.out.println("Congratulations you disarmed the bomb and made it out alive!");
 	}
 
 	/**
-	 * 
+	 * This method prints whenever the {@link Player} loses.
 	 */
 	public void missionFailed() {
 		System.out.println("YOU HAVE EXPLODED!!");
