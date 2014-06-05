@@ -41,7 +41,6 @@ public class Sound {
 			e.printStackTrace();
 		}
 	}
-	
 	public void playerDied(){
 		try{
 		in = new FileInputStream(path + "death.wav");
@@ -72,6 +71,15 @@ public class Sound {
 	public void enemyDeath(){
 		try{
 		in = new FileInputStream(path + "enemydead.wav");
+		as = new AudioStream(in);
+		AudioPlayer.player.start(as);
+		}catch( IOException e){
+			e.printStackTrace();
+		}
+	}
+	public void winGame(){
+		try{
+		in = new FileInputStream(path + "wingame.wav");
 		as = new AudioStream(in);
 		AudioPlayer.player.start(as);
 		}catch( IOException e){

@@ -206,11 +206,14 @@ public class GameEngine {
 		}while(!gameOver);
 
 		if(ply.getHasBriefCase()){
+			sound.winGame();
 			ui.congrats();
 		}else if(playerKilled){
 			ui.missionFailed();
 		}
 		ui.endScreen();
+		ui.pause();
+		System.exit(0);
 	}
 
 	public void objectCheck() {
