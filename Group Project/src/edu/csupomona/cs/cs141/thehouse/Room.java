@@ -5,36 +5,41 @@ package edu.csupomona.cs.cs141.thehouse;
 
 /**
  * @author Andrew
- *
+ * 
  */
 public class Room extends GameObject {
 	private final String ROOM_NAME = "[R]";
 	private final String BRIEFCASE_NAME = "[B]";
 	private boolean briefcaseRoom;
 	private int objID;
+
 	/**
-	 * Sets the name of the room
+	 * Sets up the standard room name and the {@link #setObjId(int)}
 	 */
-	public Room(){
+	public Room() {
 		setObjectName(ROOM_NAME);
 		setHiddenName(ROOM_NAME);
 		setRealName(ROOM_NAME);
 		objID = setObjId(2);
 	}
-	
+
 	/**
-	 * Sets the name of the briefcase room
-	 * @param showBriefcase
-	 * 			-A boolean that determines the name of the Room with the briefcase
+	 * Checks to see if the room we are accessing is the briefcase room, if it
+	 * is then it will set {@link #briefcaseRoom} to {@code true}, and set the
+	 * {@link #setRealName(String)} to {@link #BRIEFCASE_NAME}. If not then it
+	 * will set the room name to {@link #ROOM_NAME}
+	 * 
+	 * @param isBriefcase
+	 *            -A boolean that determines the name of the Room with the
+	 *            briefcase
 	 */
-	public Room(boolean isBriefcase){
-		if(isBriefcase){
+	public Room(boolean isBriefcase) {
+		if (isBriefcase) {
 			briefcaseRoom = true;
 			setRealName(BRIEFCASE_NAME);
 			setObjectName(ROOM_NAME);
 			setHiddenName(ROOM_NAME);
-		}
-		else{
+		} else {
 			briefcaseRoom = false;
 			setRealName(ROOM_NAME);
 			setObjectName(ROOM_NAME);
@@ -42,19 +47,31 @@ public class Room extends GameObject {
 		}
 		objID = setObjId(2);
 	}
-	public void changeRoomState(boolean change){
-		if(change){
+
+	/**
+	 * Changes the name of the briefcase room to show {@link #BRIEFCASE_NAME}
+	 * 
+	 * @param change
+	 *            The {@code boolean} for changing the name of the room
+	 */
+	public void changeRoomState(boolean change) {
+		if (change) {
 			setHiddenName(ROOM_NAME);
 			setObjectName(BRIEFCASE_NAME);
 			setRealName(BRIEFCASE_NAME);
-		}else{
+		} else {
 			setHiddenName(ROOM_NAME);
 			setObjectName(BRIEFCASE_NAME);
 			setRealName(BRIEFCASE_NAME);
 		}
 	}
-	
-	public boolean isBriefcaseRoom(){
+
+	/**
+	 * Used to check if the room is a briefcase room
+	 * 
+	 * @return The {@code boolean} {@link #BRIEFCASE_NAME}
+	 */
+	public boolean isBriefcaseRoom() {
 		return briefcaseRoom;
 	}
 
