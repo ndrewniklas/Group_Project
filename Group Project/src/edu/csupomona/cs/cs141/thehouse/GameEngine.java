@@ -130,8 +130,8 @@ public class GameEngine {
 	}
 
 	public void newGame(){
-		sound.stopBackgroundLoop();
 		sound.shootSound();
+		musicOn = true;
 		gameOver = false;
 		hasBullet = false;
 		hasRadar = false;
@@ -139,12 +139,9 @@ public class GameEngine {
 		hasShield = false;
 		debugModeState = false;
 		playerKilled = false;
-		ui = new UserInterface();
 		fh = new File_Handler();
 		grid = new Grid();
 		ply = new Player();
-		ui = new UserInterface();
-		sound = new Sound();
 		grid.setUpGrid();
 		moves = 0;
 		m = 0;
