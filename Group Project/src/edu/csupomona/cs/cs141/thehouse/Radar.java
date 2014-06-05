@@ -26,7 +26,7 @@ public class Radar extends GameObject {
 	/**
 	 * This is the string for the name of the radar.
 	 */
-	private final String RADAR = "|N|";
+	private final String RADAR = "|D|";
 	
 	private int objID;
 	/**
