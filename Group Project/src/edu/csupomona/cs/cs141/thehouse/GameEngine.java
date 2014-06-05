@@ -323,7 +323,7 @@ public class GameEngine {
 			case "exit":
 			case "e":
 			case "0":
-				ui.endScreen();
+				ui.exitScreen();
 				System.exit(0);
 				break;
 
@@ -415,7 +415,7 @@ public class GameEngine {
 			case "exit":
 			case "e":
 			case "0":
-				ui.endScreen();
+				ui.exitScreen();
 				System.exit(0);
 				break;
 
@@ -491,7 +491,7 @@ public class GameEngine {
 			case "exit":
 			case "e":
 			case "0":
-				ui.endScreen();
+				ui.exitScreen();
 				System.exit(0);
 				break;
 

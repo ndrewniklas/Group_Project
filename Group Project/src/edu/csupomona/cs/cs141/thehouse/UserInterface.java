@@ -201,6 +201,11 @@ public class UserInterface {
 		System.out.println("Yes or No");
 		System.out.println("--------------------------------------");
 	}
+	public void exitScreen(){
+		System.out.println("--------------------------------------");
+		System.out.println("Thanks for playing!");
+		System.out.println("--------------------------------------");
+	}
 
 	/**
 	 * 
