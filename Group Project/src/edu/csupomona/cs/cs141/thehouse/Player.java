@@ -386,6 +386,10 @@ public class Player extends GameObject{
 	public void pickUpBullet(int amount) {
 		ammo += amount;
 	}
+	
+	public void forceAmmo(int ammo){
+		this.ammo = ammo;
+	}
 
 	/**
 	 * {@link #useBullet(boolean)} This method will will make the player use the bullet in his possession
