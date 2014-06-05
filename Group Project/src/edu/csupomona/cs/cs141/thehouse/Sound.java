@@ -65,15 +65,6 @@ public class Sound {
 			e.printStackTrace();
 		}
 	}
-	public void emptySound(){
-		try{
-		in = new FileInputStream(path + "empty.wav");
-		as = new AudioStream(in);
-		AudioPlayer.player.start(as);
-		}catch( IOException e){
-			e.printStackTrace();
-		}
-	}
 	public void enemyDeath(){
 		try{
 		in = new FileInputStream(path + "enemydead.wav");

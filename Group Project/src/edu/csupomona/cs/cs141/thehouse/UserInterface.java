@@ -79,6 +79,7 @@ public class UserInterface {
 		System.out.println("You can change the options here:");
 		System.out.println("1) Debug Mode");
 		System.out.println("2) Save Game");
+		System.out.println("3) New Game");
 		System.out.println("Type \"return\" or 0 to return to the main menu:");
 	}
 
@@ -193,9 +194,11 @@ public class UserInterface {
 
 	}	
 	public void endScreen(){
-		System.out.println("------------------------");
+		System.out.println("--------------------------------------");
 		System.out.println("Thanks for playing!");
-		System.out.println("------------------------");
+		System.out.println("Would you like to start a new game?");
+		System.out.println("Yes or No");
+		System.out.println("--------------------------------------");
 	}
 
 	/**
@@ -203,6 +206,25 @@ public class UserInterface {
 	 */
 	public void pause() {
 		sc.nextLine();
+	}
+
+	public boolean newGame(){
+		boolean answer = false;
+		String question = sc.nextLine().toLowerCase();
+		switch(question){
+		case "yes":
+		case "y":
+			answer = true;
+			break;
+		case "no":
+		case "n":
+			answer = false;
+			break;
+		default:
+			System.out.println("Not a valid input! Please try again!");
+			newGame();
+		}
+		return answer;
 	}
 
 	/**

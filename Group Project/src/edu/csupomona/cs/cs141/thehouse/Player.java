@@ -73,23 +73,49 @@ public class Player extends GameObject{
 		String cmd = input.toLowerCase();
 		xpre = xPosition;
 		ypre = yPosition;
-		if (cmd.equals("up") || cmd.equals("u") || cmd.equals("1") && upPossible()) {
+
+		switch(cmd){
+			case "up":
+			case "u":
+			case "1":
+				cmd = "up";
+				break;
+			case "down":
+			case "d":
+			case "2":
+				cmd = "down";
+				break;
+			case "right":
+			case "r":
+			case "3":
+				cmd = "right";
+				break;
+			case "left":
+			case "l":
+			case "4":
+				cmd = "left";
+				break;
+			default:
+				cmd = "up";
+		}
+
+		if (upPossible() && cmd.equals("up")) {
 			if (yPosition-1 >= 0 && yPosition-1 <= 8) {
 				setXY(xPosition, --yPosition);
 				plrMoveDir = "up";
 
 			}
-		} else if (cmd.equals("down") || cmd.equals("d") || cmd.equals("2")&& downPossible()) {
+		} else if (downPossible()&& cmd.equals("down")) {
 			if (yPosition+1 >= 0 && yPosition+1 <= 8) {
 				setXY(xPosition, ++yPosition);
 				plrMoveDir = "down";
 			}
-		} else if (cmd.equals("right") || cmd.equals("r") || cmd.equals("3") && rightPossible()) {
+		} else if (rightPossible() && cmd.equals("right")) {
 			if (xPosition+1 >= 0 && xPosition+1 <= 8) {
 				setXY(++xPosition, yPosition);
 				plrMoveDir = "right";
 			}
-		} else if (cmd.equals("left") || cmd.equals("l") || cmd.equals("4")&& leftPossible()) {
+		} else if (leftPossible() && cmd.equals("left")) {
 			if (xPosition-1 >= 0 && xPosition-1 <= 8) {
 				setXY(--xPosition, yPosition);
 				plrMoveDir = "left";

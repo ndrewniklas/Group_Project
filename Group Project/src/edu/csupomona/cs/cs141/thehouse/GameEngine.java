@@ -91,7 +91,6 @@ public class GameEngine {
 	private boolean repeat;
 
 	private boolean hasBullet = false;
-
 	private boolean hasRadar = false;
 	private boolean hasEAmmo = false;
 	private boolean hasShield = false;
@@ -107,6 +106,8 @@ public class GameEngine {
 	private int m;
 
 	private boolean musicOn = true;
+
+	private boolean newGameStart;
 
 
 
@@ -129,14 +130,24 @@ public class GameEngine {
 	}
 
 	public void newGame(){
+		sound.stopBackgroundLoop();
+		sound.shootSound();
 		gameOver = false;
+		hasBullet = false;
+		hasRadar = false;
+		hasEAmmo = false;
+		hasShield = false;
+		debugModeState = false;
+		playerKilled = false;
 		ui = new UserInterface();
 		fh = new File_Handler();
-		ply = new Player();
 		grid = new Grid();
+		ply = new Player();
 		ui = new UserInterface();
+		sound = new Sound();
 		grid.setUpGrid();
 		moves = 0;
+		m = 0;
 	}
 
 	/**
@@ -155,6 +166,7 @@ public class GameEngine {
 		grid.rePopulateGrid(ply);
 		playerDefaultVision();
 		ui.printGrid(grid);
+		removeDefaultVision();
 		sound.backgroundMusicLoop();
 		do{
 			didPlayerTakeTurn = false;
@@ -200,8 +212,10 @@ public class GameEngine {
 
 			grid.rePopulateGrid(ply);
 			playerDefaultVision();
-			ui.printGrid(grid);
+			ui.printGrid(grid);	
+			//grid.showPlayerDefaultVision(7, 0, false);
 			removeDefaultVision();
+
 			moves++;
 			if(debugModeState){
 				debugMode(true);
@@ -215,8 +229,16 @@ public class GameEngine {
 			ui.missionFailed();
 		}
 		ui.endScreen();
-		ui.pause();
-		System.exit(0);
+		newGameStart = ui.newGame();
+		if(newGameStart){
+			newGame();
+			gameLoop();
+		}else
+			System.exit(0);
+	}
+
+	public boolean getNewGameStart(){
+		return newGameStart;
 	}
 
 	public void objectCheck() {
@@ -337,7 +359,7 @@ public class GameEngine {
 				didPlayerTakeTurn = false;
 				ui.printGrid(grid);
 				break;
-				
+
 			case "mute":
 				musicOn = !musicOn;
 				if(musicOn)
@@ -379,7 +401,6 @@ public class GameEngine {
 					if(grid.getEnemyDeath())
 						sound.enemyDeath();
 				} else {
-					sound.emptySound();
 					ui.noBullet();
 				}
 				didPlayerTakeTurn = true;
@@ -429,7 +450,7 @@ public class GameEngine {
 				devMenu(cmd);
 				didPlayerTakeTurn = false;
 				break;
-				
+
 			case "mute":
 				musicOn = !musicOn;
 				if(musicOn)
@@ -514,31 +535,37 @@ public class GameEngine {
 
 	public void setOption(){
 		ui.options();
-			choice = sc.nextLine().toLowerCase();
-			switch(choice){
-			case "debug":
-			case "d":
-			case "1":
-				setDebug();
-				break;
+		choice = sc.nextLine().toLowerCase();
+		switch(choice){
+		case "debug":
+		case "d":
+		case "1":
+			setDebug();
+			break;
 
-			case "save":
-			case "2":
-			case "s":
-				fh.fileLander("Save", grid, ply);
-				break;
+		case "save":
+		case "2":
+		case "s":
+			fh.fileLander("Save", grid, ply);
+			break;
 
-			case "exit":
-			case "e":
-			case "0":
-				mainMenuSelect();
-				break;
+		case "new":
+		case "n":
+		case "3":
+			newGame();
+			gameLoop();
+			break;
+		case "exit":
+		case "e":
+		case "0":
+			mainMenuSelect();
+			break;
 
-			default:
-				ui.invalidCMD();
-				setOption();
-				break;
-			}
+		default:
+			ui.invalidCMD();
+			setOption();
+			break;
+		}
 	}
 
 	public void setDebug(){
