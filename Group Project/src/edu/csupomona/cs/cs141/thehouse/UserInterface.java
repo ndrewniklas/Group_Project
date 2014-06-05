@@ -80,6 +80,7 @@ public class UserInterface {
 		System.out.println("1) Debug Mode");
 		System.out.println("2) Save Game");
 		System.out.println("3) New Game");
+		System.out.println("4) Mute the music");
 		System.out.println("Type \"return\" or 0 to return to the main menu:");
 	}
 

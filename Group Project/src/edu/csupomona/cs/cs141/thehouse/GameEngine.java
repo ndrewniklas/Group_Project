@@ -555,6 +555,17 @@ public class GameEngine {
 			newGame();
 			gameLoop();
 			break;
+			
+		case "mute":
+		case "m":
+		case "4":
+			musicOn = !musicOn;
+			if(musicOn)
+				sound.backgroundMusicLoop();
+			else
+				sound.stopBackgroundLoop();
+			break;
+			
 		case "exit":
 		case "e":
 		case "0":
