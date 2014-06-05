@@ -569,6 +569,8 @@ public class Grid implements Serializable{
 					ran = true;
 					enemyDead = true;
 				}
+				else
+					enemyDead = false;
 			}
 		}
 		return ran;

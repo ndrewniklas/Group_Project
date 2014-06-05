@@ -33,7 +33,7 @@ public class Sound {
 		AudioPlayer.player.start(as);
 		
 		}catch( IOException e){
-			e.printStackTrace();
+			System.out.println("Could not load " + "red.wav");
 		}
 	}
 	public void backgroundMusicLoop(){
@@ -44,7 +44,7 @@ public class Sound {
 		cas = new ContinuousAudioDataStream (data);
 		AudioPlayer.player.start(cas);
 		}catch(IOException e){
-			e.printStackTrace();
+			System.out.println("Could not load " + "red.wav");
 		}
 	}
 	public void playerDied(){
@@ -53,7 +53,7 @@ public class Sound {
 		as = new AudioStream(in);
 		AudioPlayer.player.start(as);
 		}catch( IOException e){
-			e.printStackTrace();
+			System.out.println("Could not load " + "death.wav");
 		}
 	}
 	public void shootSound(){
@@ -62,7 +62,7 @@ public class Sound {
 		as = new AudioStream(in);
 		AudioPlayer.player.start(as);
 		}catch( IOException e){
-			e.printStackTrace();
+			System.out.println("Could not load " + "shoot.wav");
 		}
 	}
 	public void enemyDeath(){
@@ -71,7 +71,7 @@ public class Sound {
 		as = new AudioStream(in);
 		AudioPlayer.player.start(as);
 		}catch( IOException e){
-			e.printStackTrace();
+			System.out.println("Could not load " + "enemydead.wav");
 		}
 	}
 	public void winGame(){
@@ -80,7 +80,7 @@ public class Sound {
 		as = new AudioStream(in);
 		AudioPlayer.player.start(as);
 		}catch( IOException e){
-			e.printStackTrace();
+			System.out.println("Could not load " + "wingame.wav");
 		}
 	}
 	public void foundEnemy(){
@@ -89,7 +89,7 @@ public class Sound {
 		as = new AudioStream(in);
 		AudioPlayer.player.start(as);
 		}catch( IOException e){
-			e.printStackTrace();
+			System.out.println("Could not load " + "found.wav");
 		}
 	}
 	public void foundPowerup(){
@@ -98,7 +98,7 @@ public class Sound {
 		as = new AudioStream(in);
 		AudioPlayer.player.start(as);
 		}catch( IOException e){
-			e.printStackTrace();
+			System.out.println("Could not load " + "item.wav");
 		}
 	}
 	/**
