@@ -36,10 +36,23 @@ public class UserInterface {
 	 * This method is called by {@link #main Menu()}. 
 	 */
 	public void rules() {
+		System.out.println("BackGround");
+		System.out.println();
+		System.out.println("The Galactic Empire has spread its forces too thin in its war against the Alliance to Restore the Republic."
+				+ " \nIn the wake of the ongoing battles, pirates make easy targets out of innocent freighters, stealing wares and selling them on the black market. "
+				+ "\nMaking supply runs is now so risky a business that only the toughest are willing to make the trips.");
+		System.out.println();
+		System.out.println("You are one of these so-called smugglers; however, nothing could prepare you for the brilliant ambush by Pirate Captain Rodriguez. "
+				+ "\nThey cut power to your ship, massacred your crew, stole your supplies, and planted a bomb in one of the ship’s many reactor cores. "
+				+ "\nYou find yourself with only one bullet against a ship full of pirates and a limited amount of time before the bomb goes off.");
+		System.out.println();
+		System.out.println("Forget honor, bravery, or ferocity – you just want to disarm the bomb so you can get off of the ship alive! "
+				+ "\nIn the words of Rodriguez, “Why are you waiting around? Get to it already! Now!”");
+		System.out.println();
 		System.out.println("The rules to the game are very simple:");
-		System.out.println("You will be spawned in the bottom left-hand corner of a building. "
-				+ "\nThere will also be six enemies in the building with you. \nLocated throughout the building "
-				+ "are nine rooms and in one of these rooms is a briefcase. \nFind the briefcase"
+		System.out.println("You will be spawned in the bottom left-hand corner of your ship. "
+				+ "\nThere will also be six enemies in the ship with you. \nLocated throughout the ship "
+				+ "are nine reactors and in one of these reactors is a bomb. \nFind the bomb"
 				+ " and win the game.");
 		System.out.println();
 		System.out.println("User Commands: ");
@@ -64,7 +77,14 @@ public class UserInterface {
 	 * 		or "new game".
 	 */
 	public void mainMenu() {
-		System.out.println("Welcome to The House Game!");
+		System.out.println("Welcome to: ");
+		System.out.println();
+		System.out.println("     _______..______      ___       ______  _______    .______    __  .______          ___   .___________. _______     _______.");
+		System.out.println("    /       ||   _  \\    /   \\     /      ||   ____|   |   _  \\  |  | |   _  \\        /   \\  |           ||   ____|   /       |");
+		System.out.println("   |   (----`|  |_)  |  /  ^  \\   |  ,----'|  |__      |  |_)  | |  | |  |_)  |      /  ^  \\ `---|  |----`|  |__     |   (----`");
+		System.out.println("    \\   \\    |   ___/  /  /_\\  \\  |  |     |   __|     |   ___/  |  | |      /      /  /_\\  \\    |  |     |   __|     \\   \\    ");
+		System.out.println(".----)   |   |  |     /  _____  \\ |  `----.|  |____    |  |      |  | |  |\\  \\----./  _____  \\   |  |     |  |____.----)   |   ");
+		System.out.println("|_______/    | _|    /__/     \\__\\ \\______||_______|   | _|      |__| | _| `._____/__/     \\__\\  |__|     |_______|_______/    ");
 		System.out.println();
 		System.out.println("What would you like to do?");
 		System.out.println("1)New");
@@ -155,8 +175,8 @@ public class UserInterface {
 	}
 
 	public void radarActivated() {
-		System.out.println("You've picked up the radar!");
-		System.out.println("You can now see which room holds the briefcase!");
+		System.out.println("You've picked up the detector!");
+		System.out.println("You can now see which reactor the bomb is planted in!");
 	}
 
 	public void ammoActivated(){
@@ -251,7 +271,7 @@ public class UserInterface {
 	 * 
 	 */
 	public void foundBriefcase() {
-		System.out.println("YOU FOUND THE BRIEFCASE");
+		System.out.println("YOU DISARMED THE BOMB");
 	}
 
 	/**
@@ -264,7 +284,7 @@ public class UserInterface {
 		System.out.println("Ammo: " + ply.getAmmo());
 		System.out.println("Lives: " + ply.getNumLives());
 		if(hasRadar)
-			System.out.println("Radar enabled");
+			System.out.println("Detector enabled");
 		else if(ply.isHasShield())
 			System.out.println("Shield enabled: " + m + " turns remaining");
 	}
@@ -273,14 +293,14 @@ public class UserInterface {
 	 * 
 	 */
 	public void congrats() {
-		System.out.println("Congratulations you found the briefcase and made it out alive!");
+		System.out.println("Congratulations you disarmed the bomb and made it out alive!");
 	}
 
 	/**
 	 * 
 	 */
 	public void missionFailed() {
-		System.out.println("YOU HAVE FAILD ME!!!!!");
+		System.out.println("YOU HAVE EXPLODED!!");
 		System.out.println("Maybe you can do better next time");
 	}
 }
