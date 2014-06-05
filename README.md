@@ -31,3 +31,4 @@ All power-ups are initially randomly placed across the grid. The player has 3 'l
 Finally, the player can quit the game at any time and save his progress. Later on, he can restart the game and reload the previous save.
 
 Your task is to come up with a design for this game, given the specification above. You will used OO techniques for your design. You will be graded both on the functionality and the design of your program.
+ 

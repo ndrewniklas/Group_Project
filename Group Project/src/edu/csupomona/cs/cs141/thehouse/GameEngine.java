@@ -106,6 +106,8 @@ public class GameEngine {
 
 	private int m;
 
+	private boolean musicOn;
+
 
 
 	/**
@@ -165,6 +167,7 @@ public class GameEngine {
 				}
 				turnSelect1();
 				if(ply.getHasBriefCase()){
+					sound.stopBackgroundLoop();
 					ui.foundBriefcase();
 					gameOver = true;
 				}
@@ -331,6 +334,12 @@ public class GameEngine {
 				didPlayerTakeTurn = false;
 				ui.printGrid(grid);
 				break;
+			case "mute":
+				musicOn = !musicOn;
+				if(musicOn)
+					sound.backgroundMusicLoop();
+				else
+					sound.stopBackgroundLoop();
 
 			case "look":
 			case "l":

@@ -17,9 +17,15 @@ import sun.audio.ContinuousAudioDataStream;
  *
  */
 public class Sound {
-	InputStream in;
-	AudioStream as;
-	String path = "src/sound/";
+	
+	private InputStream in;
+	
+	private AudioStream as;
+	
+	private ContinuousAudioDataStream cas;
+	
+	private String path = "src/sound/";
+	
 	public void backgroundMusic(){
 		try{
 		in = new FileInputStream(path + "red.wav");
@@ -35,7 +41,7 @@ public class Sound {
 		in = new FileInputStream(path + "red.wav");
 		as = new AudioStream(in);
 		AudioData data = as.getData();
-		ContinuousAudioDataStream cas = new ContinuousAudioDataStream (data);
+		cas = new ContinuousAudioDataStream (data);
 		AudioPlayer.player.start(cas);
 		}catch(IOException e){
 			e.printStackTrace();
@@ -85,5 +91,11 @@ public class Sound {
 		}catch( IOException e){
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * 
+	 */
+	public void stopBackgroundLoop() {
+		AudioPlayer.player.stop(cas);
 	}
 }
