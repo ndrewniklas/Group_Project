@@ -54,7 +54,7 @@ public class GameEngine {
 	 * Instantiation for {@link File_Handler}
 	 */
 	private File_Handler fh;
-
+	private Sound sound;
 	/**
 	 * This field holds the choice of the user. There are xx potential values for the user to select:
 	 * left,
@@ -106,6 +106,8 @@ public class GameEngine {
 
 	private int m;
 
+
+
 	/**
 	 * The default constructor for GameEngine.
 	 * 
@@ -119,6 +121,7 @@ public class GameEngine {
 		ply = new Player();
 		grid = new Grid();
 		ui = new UserInterface();
+		sound = new Sound();
 		grid.setUpGrid();
 		moves = 0;
 	}
@@ -150,6 +153,7 @@ public class GameEngine {
 		grid.rePopulateGrid(ply);
 		playerDefaultVision();
 		ui.printGrid(grid);
+		sound.backgroundMusicLoop();
 		do{
 			didPlayerTakeTurn = false;
 			didPlayerLook = false;
@@ -180,6 +184,7 @@ public class GameEngine {
 			grid.moveEnemy(grid, ply);
 			playerKilled = grid.getPlayerKilled();
 			if(playerKilled){
+				sound.playerDied();
 				ui.printGrid(grid);
 				if(ply.getNumLives() >= 0){
 					playerKilled = false;
@@ -346,10 +351,14 @@ public class GameEngine {
 				choice = sc.nextLine();
 				hasBullet  = ply.checkBulletPossession();
 				if (hasBullet == true) {
+					sound.shootSound();
 					ply.useBullet();
 					ui.shotFired();
 					grid.shootGunCheck(ply.get_yPosition(), ply.get_xPosition(), choice);
+					if(grid.getEnemyDeath())
+						sound.enemyDeath();
 				} else {
+					sound.emptySound();
 					ui.noBullet();
 				}
 				didPlayerTakeTurn = true;

@@ -67,6 +67,8 @@ public class Grid implements Serializable{
 
 	private boolean playerKilled;
 
+	private boolean enemyDead;
+
 	/**
 	 * The constructor fills {@link #go} with new {@link GameObject} 
 	 * Makes a new {@link Dice}
@@ -563,10 +565,14 @@ public class Grid implements Serializable{
 					gog[y][x] = new GameObject();
 					System.out.println("You hear a thud in the distance.");
 					ran = true;
+					enemyDead = true;
 				}
 			}
 		}
 		return ran;
+	}
+	public boolean getEnemyDeath(){
+		return enemyDead;
 	}
 
 	public boolean getEnemyVis(boolean vis){
