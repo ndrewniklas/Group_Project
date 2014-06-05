@@ -24,32 +24,48 @@ package edu.csupomona.cs.cs141.thehouse;
  * 
  */
 public class ExtraAmmo extends GameObject {
-	
+
 	/**
-	 * This field represents the symbol for the {@link ExtraAmmo} object in the 
+	 * This field represents the symbol for the {@link ExtraAmmo} object in the
 	 * {@link Grid}.
 	 */
-	private final String EXTRA_AMMO= "|A|";
-	
+	private final String EXTRA_AMMO = "|A|";
+
 	/**
-	 * This is the constructor defines the symbol and {@link GameObject#hiddenName}  
+	 * This is the constructor defines {@link #setObjectName(String)} and
+	 * {@link GameObject#hiddenName}
 	 */
 	public ExtraAmmo() {
 		setObjectName(EXTRA_AMMO);
-		setHiddenName(getBlankName());		
+		setHiddenName(getBlankName());
 	}
-	public ExtraAmmo(boolean vis){
-		setRealName(EXTRA_AMMO);
-		if(vis)
-			setObjectName(EXTRA_AMMO);
-		else
-			setHiddenName(getBlankName());
-	}
-	 
+
 	/**
-	 * This is the method that adds another bullet to the clip. 
+	 * This is the constructor defines {@link #setObjectName(String)} and
+	 * {@link GameObject#hiddenName} but with visibility
+	 * 
+	 * @param vis
+	 *            The {@code boolean} for toggling visibility
 	 */
-	public void addAmmo(Player ply, int amount){
+	public ExtraAmmo(boolean vis) {
+		setRealName(EXTRA_AMMO);
+		if (vis) {
+			setObjectName(EXTRA_AMMO);
+		} else {
+			setHiddenName(getBlankName());
+		}
+	}
+
+	/**
+	 * This is the method that adds another bullet to the clip by calling
+	 * {@link Player#pickUpBullet(int)}
+	 * 
+	 * @param ply
+	 *            The player object we want to access
+	 * @param ammount
+	 *            The ammount of ammo to add
+	 */
+	public void addAmmo(Player ply, int amount) {
 		ply.pickUpBullet(amount);
 	}
 

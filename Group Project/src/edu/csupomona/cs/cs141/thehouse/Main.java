@@ -19,12 +19,14 @@ package edu.csupomona.cs.cs141.thehouse;
 
 /**
  * @author Andrew
- *
+ * 
  */
 public class Main {
 
 	/**
-	 * The main class
+	 * The main class which creates {@link GameEngine} and calls
+	 * {@link GameEngine#startGame()}
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
