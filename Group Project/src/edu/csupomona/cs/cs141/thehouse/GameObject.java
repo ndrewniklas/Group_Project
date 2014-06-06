@@ -12,22 +12,40 @@ import java.io.Serializable;
 public class GameObject implements Comparable<GameObject>, Serializable{
 
 	/**
-	 * The name of the object
+	 * This field holds the displayed name of the object
 	 */
 	private String objName;
 	
+	/**
+	 * This field holds the actual name of the object
+	 */
 	private String realName;
 	
+	/**
+	 * This field is what will be displayed when the object is hidden
+	 */
 	private String hiddenName;
 	
+	/**
+	 * This field is the object ID, unique to each object type
+	 */
 	private int objId;
 	
+	/**
+	 * This field represents an empty object that is hidden
+	 */
 	private final String EMPTY_OBJECT = "[?]";
 	
+	/**
+	 * This field represents an empty slot that is not hidden
+	 */
 	private final String EMPTY_OBJECT_REAL = "| |";
 	
 	
-	int[] pos = new int[2];
+	/**
+	 * This field holds the coordinates of an object to make finding it easier.
+	 */
+	private int[] pos = new int[2];
 
 	/**
 	 * The constructor sets the default name for {@link #objName}
