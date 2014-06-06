@@ -18,7 +18,9 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * This class gives the program a starting point. Its only method is {@link #main(String[])}.
+ * This class gives the program a starting point. Its only method is
+ * {@link #main(String[])}.
+ * 
  * @author Ben Nickerson, Andrew Nipp, Andrew Niklas
  * 
  */

@@ -17,8 +17,9 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * This class gives the Radar the ability to show where the {@link Room} containing the 
- * briefcase is located on the {@link Grid}.
+ * This class gives the Radar the ability to show where the {@link Room}
+ * containing the briefcase is located on the {@link Grid}.
+ * 
  * @author Kurt Newcomb, Andrew Nipp, Andrew Niklas, Ben Nickerson
  */
 public class Radar extends GameObject {
@@ -29,15 +30,15 @@ public class Radar extends GameObject {
 	private final String RADAR = "|D|";
 
 	/**
-	 * This field represents the unique ID of the object, used for comparing two {@link GameObject}s
+	 * This field represents the unique ID of the object, used for comparing two
+	 * {@link GameObject}s
 	 */
 	private int objID;
 
 	/**
 	 * This is the constructor for the radar powerup which sets
 	 * {@link #setHiddenName(String)} and {@link #setObjectName(String)} to
-	 * {@link #RADAR} and {@link #getBlankName()
-
+	 * {@link #RADAR} and {@link #getBlankName()}
 	 */
 	public Radar() {
 		setObjectName(RADAR);
@@ -47,7 +48,7 @@ public class Radar extends GameObject {
 	/**
 	 * This is the constructor for the radar powerup which sets
 	 * {@link #setHiddenName(String)} and {@link #setObjectName(String)} to
-	 * {@link #RADAR} and {@link #getBlankName() but with the visibly
+	 * {@link #RADAR} and {@link #getBlankName()} but with the visibly
 	 */
 	public Radar(boolean vis) {
 		setRealName(RADAR);

@@ -18,8 +18,9 @@ package edu.csupomona.cs.cs141.thehouse;
 
 /**
  * 
- * This class will assign {@link GameObject} to the Extra Bullet class and make it possible for 
- * the {@link Player} to get an extra bullet when the pick it up.
+ * This class will assign {@link GameObject} to the Extra Bullet class and make
+ * it possible for the {@link Player} to get an extra bullet when the pick it
+ * up.
  * 
  * @author Kurt Newcomb, Andrew Nipp, Andrew Niklas, Ben Nickerson
  * 
@@ -63,8 +64,8 @@ public class ExtraAmmo extends GameObject {
 	 * 
 	 * @param ply
 	 *            The player object we want to access
-	 * @param ammount
-	 *            The ammount of ammo to add
+	 * @param amount
+	 *            The amount of ammo to add
 	 */
 	public void addAmmo(Player ply, int amount) {
 		ply.pickUpBullet(amount);

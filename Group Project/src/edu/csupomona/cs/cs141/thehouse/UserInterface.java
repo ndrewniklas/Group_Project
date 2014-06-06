@@ -6,9 +6,11 @@ package edu.csupomona.cs.cs141.thehouse;
 import java.util.Scanner;
 
 /**
- * This class basically serves to print all information to the command prompt. It will take input from the 
- * user in specific circumstances, but for the most part is called from {@link GameEngine}. 
- * @author Ben Nickerson, Andrew Niklas, Andrew Nipp 
+ * This class basically serves to print all information to the command prompt.
+ * It will take input from the user in specific circumstances, but for the most
+ * part is called from {@link GameEngine}.
+ * 
+ * @author Ben Nickerson, Andrew Niklas, Andrew Nipp
  * 
  */
 public class UserInterface {
@@ -30,7 +32,7 @@ public class UserInterface {
 	private Scanner sc = new Scanner(System.in);
 
 	/**
-	 * This method is called by {@link #main Menu()}.
+	 * This method is called by {@link #mainMenu()}.
 	 */
 	public void rules() {
 		System.out.println("BackGround");
@@ -127,8 +129,8 @@ public class UserInterface {
 
 	/**
 	 * This method prints the {@link Grid} in its current state. This will occur
-	 * after every round. It will pull the {@link Grid} class from
-	 * {@link GameEngine#getGrid()} and then call {@link Grid#getfullGrid()}
+	 * after every round. It will pull the {@link Grid} class from the param and
+	 * then call {@link Grid#printGrid()}
 	 * 
 	 * @param grid
 	 */

@@ -4,34 +4,37 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * This class represents intances of room objects. They have the unique quality of being able to carry
- * the bomb. If the {@link Player} finds the bomb within the room, the game ends. There are also instances
- * of empty rooms on the {@link Grid}.
+ * This class represents intances of room objects. They have the unique quality
+ * of being able to carry the bomb. If the {@link Player} finds the bomb within
+ * the room, the game ends. There are also instances of empty rooms on the
+ * {@link Grid}.
+ * 
  * @author Andrew Nipp, Andrew Niklas, Ben Nickerson
  * 
  */
 public class Room extends GameObject {
-	
+
 	/**
-	 * This field represents a {@code constant} {@code String} containing "[R]", the symbol for a 
-	 * general {@link Room} object
+	 * This field represents a {@code constant} {@code String} containing "[R]",
+	 * the symbol for a general {@link Room} object
 	 */
 	private final String ROOM_NAME = "[R]";
-	
+
 	/**
-	 * This field represents a {@code constant} {@code String} containing "[B]", the symbol for a 
-	 * bomb.
+	 * This field represents a {@code constant} {@code String} containing "[B]",
+	 * the symbol for a bomb.
 	 */
 	private final String BRIEFCASE_NAME = "[B]";
 
 	/**
-	 * This field represents a {@code boolean} that is {@code true} when the {@link Room} contains the
-	 * bomb and {@code false} otherwise.
+	 * This field represents a {@code boolean} that is {@code true} when the
+	 * {@link Room} contains the bomb and {@code false} otherwise.
 	 */
 	private boolean briefcaseRoom;
-	
+
 	/**
-	 * This field represents the unique ID of the object, used for comparing two {@link GameObject}s
+	 * This field represents the unique ID of the object, used for comparing two
+	 * {@link GameObject}s
 	 */
 	private int objID;
 

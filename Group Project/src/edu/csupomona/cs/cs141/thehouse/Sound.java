@@ -12,10 +12,9 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
 
-//import the sun.audio package
-
 /**
  * This class runs the audio for the game.
+ * 
  * @author Andrew Nipp, Ben Nickerson
  */
 public class Sound {

@@ -124,8 +124,8 @@ public class File_Handler {
 
 	/**
 	 * This method serves to overwrite the Game Object Grid by calling
-	 * {@link Grid#overwriteGOG(GameObject[][]) where the
-	 * {@code GameObject[][]} is the first object read by {@link #ois}.
+	 * {@link Grid#overwriteGOG(GameObject[][])} where the {@link GameObject
+	 * [][]} is the first object read by {@link #ois}.
 	 * 
 	 * @param grid
 	 *            {@link Grid} object that will be overwritten.
@@ -144,8 +144,6 @@ public class File_Handler {
 	 * saving it to {@link #savedGrid}.
 	 * 
 	 * @return {@link Grid} {@link #savedGrid}
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	public Grid openGrid() {
 		savedGrid = new Grid();
@@ -166,8 +164,6 @@ public class File_Handler {
 	 * 
 	 * @return {@link Player} {@code savedPlayer} - object containing the
 	 *         {@link Player} object from the save file.
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	public Player loadPlayer() {
 		Player savedPlayer = new Player();
@@ -185,8 +181,6 @@ public class File_Handler {
 	 * This method saves {@link Grid#gog}, {@link Grid}, and {@link Player} into
 	 * three separate files named "save.obj", "save.grid", and "save.plr"
 	 * respectively. It uses {@link #oos} to perform these functions.
-	 * 
-	 * @throws IOException
 	 * 
 	 */
 	public void saveFile(Grid grid, Player plr) {
