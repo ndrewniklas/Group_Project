@@ -4,7 +4,10 @@ package edu.csupomona.cs.cs141.thehouse;
 import java.io.Serializable;
 import java.util.ArrayList;
 /**
- * @author Ben, Andrew
+ * This class deals with all {@link GameObject}s on the 9x9 grid that the game takes place on. It helps
+ * {@linl GameEngine} to move objects around and also re-populates itself after every turn. While {@link 
+ * GameEngine} runs the game, the actual actions take place on the grid itself.
+ * @author Ben Nickerson, Andrew Nipp, Andrew Niklas
  *
  */
 public class Grid implements Serializable{
@@ -14,25 +17,44 @@ public class Grid implements Serializable{
 	 */
 	private GameObject[][] gog;
 
+	/**
+	 * Instantiation for {@link GameObject}
+	 */
 	private GameObject go;
 
 	/**
-	 * The grid is filled with this
+	 * This field holds the {@link Room} containing a bomb
 	 */
-//	private GameObject gameObj;
-
 	private Room bcRoom;
 
+	/**
+	 * This field holds the {@link Room} objects in an {@code array}
+	 */
 	private Room[] room ;
 
+	/**
+	 * This field creates an {@link ArrayList} of {@link Enemy Enemies}
+	 */
 	private ArrayList<Enemy> enemy;
 
+	/**
+	 * This field instantiates {@link Dice}
+	 */
 	private Dice die;
 
+	/**
+	 * This field instantiates {@link Shield}
+	 */
 	private Shield shield;
 
+	/**
+	 * This field instantiates {@link Radar}
+	 */
 	private Radar radar;
 
+	/**
+	 * This field instantiates {@link ExtraAmmo}
+	 */
 	private ExtraAmmo extraAmmo;
 
 	/**
@@ -40,41 +62,89 @@ public class Grid implements Serializable{
 	 */
 	private boolean showBriefcase;
 
+	/**
+	 * This field represents an {@link int[]} containing the coordinates of the bomb
+	 */
 	private int[] briefcasePos = new int[2];
 
 //	private int[] enemyPos = new int[2];
 
+	/**
+	 * This field represents an {@link int[]} containing the coordinates of the {@link Shield}
+	 */
 	private int[] shieldPos = new int[2];
 
+	/**
+	 * This field represents an {@link int[]} containing the coordinates of the {@link Radar}
+	 */
 	private int[] radarPos = new int[2];
 
+	/**
+	 * This field represents an {@link int[]} containing the coordinates of the {@link ExtraAmmo}
+	 */
 	private int[] ammoPos = new int[2];
 
+	/**
+	 * This field represents the number of {@link Enemy Enemies} as an {@code int}
+	 */
 	private int numEnemies=0;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} when the location of the {@link Radar}
+	 * can be seen, and {@code false} otherwise
+	 */
 	private boolean radarVis;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} when the location of the {@link ExtraAmmo}
+	 * can be seen, and {@code false} otherwise
+	 */
 	private boolean extraAmmoVis;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} when the location of the {@link Shield}
+	 * can be seen, and {@code false} otherwise
+	 */
 	private boolean shieldVis;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} when the location of an {@link Enemy}
+	 * can be seen, and {@code false} otherwise
+	 */
 	private boolean enemyVis;
 
 	/**
-	 * used to test the {@ link #shootGunCheck(int, int, String)]
+	 * used to test the {@link #shootGunCheck(int, int, String)}
 	 */
 	private boolean enemyInstance;		//used for testing
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} when the {@link Player} is killed, and
+	 * {@code false} otherwise
+	 */
 	private boolean playerKilled;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} when an {@link Enemy} is killed, and
+	 * {@code false} otherwise
+	 */
 	private boolean enemyDead;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} when an {@link Enemy} is found, and
+	 * {@code false} otherwise
+	 */
 	private boolean enemyFound;
 
 	/**
-	 * The constructor fills {@link #go} with new {@link GameObject} 
-	 * Makes a new {@link Dice}
-	 * Sets {@link #showBriefcase}
+	 * The constructor fills {@link #go} with new {@link GameObject}, 
+	 * Makes a new {@link Dice},
+	 * Sets {@link #showBriefcase}.
+	 * Instantiates {@link #enemy} with 6 {@link Enemy} Objects, 
+	 * {@link #shield} by calling {@link Shield#Shield(boolean)},
+	 * {@link #radar} by calling {@link Radar#Radar(boolean)},
+	 * {@link #extraAmmo} by calling {@link ExtraAmmo#ExtraAmmo(boolean)},
+	 * and fills {@link #gog} with {@link GameObject}s.
 	 */
 	public Grid() {
 		gog = new GameObject[9][9];
@@ -93,6 +163,10 @@ public class Grid implements Serializable{
 		}
 	}
 
+	/**
+	 * This method essentially populates the {@link Grid} for a new game. It calls {@link #setEnemy()},
+	 * {@link #setPowerUps()}, {@link #populateGrid()}, and {@link #setBriefcase()} in that order.
+	 */
 	public void setUpGrid(){
 		setEnemy();
 		setPowerUps();
@@ -119,7 +193,7 @@ public class Grid implements Serializable{
 	}
 
 	/**
-	 * Prints out the name of the object at that location
+	 * Prints out the {@link Grid}
 	 */
 	public void printGrid(){
 
@@ -134,6 +208,14 @@ public class Grid implements Serializable{
 		//		}
 	}
 
+	/**
+	 * This method will change all object states to visible/invisible depending on the value of the 
+	 * parameter. All it has to do is go through every square in {@link #gog} and call {@link GameObject#showName()}
+	 * or {@link GameObject#hideName()}.
+	 * @param toggle
+	 * 	- {@code boolean} containing {@code true/false}. {@code True} when all objects are intended to be 
+	 * 		shown. {@code False} when all objects are intended to be hidden.
+	 */
 	public void changeAllObjectStates(boolean toggle) {
 		if(toggle){
 			/*shield.showName();
@@ -164,6 +246,22 @@ public class Grid implements Serializable{
 		}	
 	}
 
+	/**
+	 * This method will show the objects in a specific location so long as the {@code boolean} parameter
+	 * is {@code true}; otherwise it serves to hide the object at that specific location. Primarily used
+	 * for the look function
+	 * @param y1
+	 * 	- {@code int} containing the initial y coordinate
+	 * @param x1
+	 * 	- {@code int} containing the initial x coordinate
+	 * @param y2
+	 * 	- {@code int} containing the secondary y coordinate
+	 * @param x2
+	 * 	- {@code int} containing the secondary x coordinate
+	 * @param toggle
+	 * 	- {@code boolean} when {@code true} will show the objects in that location, when {@code false} will
+	 * 		hide them.
+	 */
 	public void showObjectsWithinLocation(int y1, int x1, int y2, int x2, boolean toggle){
 		if(toggle){
 			gog[y1][x1].showName();
@@ -173,6 +271,20 @@ public class Grid implements Serializable{
 			gog[y2][x2].hideName();
 		}
 	}
+	
+	/**
+	 * This method is used to make the {@link Player}'s default visibility work. It will use the coordinates
+	 * of the direction that the player is looking and call {@link GameObject#showName()} or 
+	 * {@link GameObject#hideName()} depending on whether the {@code boolean} parameter is {@code true}
+	 * or {@code false} respectively.
+	 * @param y1
+	 * 	- {@code int} containing the y coordinate of the direction the {@link Player} is looking}
+	 * @param x1
+	 * 	- {@code int} containing the x coordinate of the direction the {@link Player} is looking}
+	 * @param toggle
+	 * 	- {@code boolean} when {@code true} will show the objects in that location, when {@code false} will
+	 * 		hide them.
+	 */
 	public void showPlayerDefaultVision(int y1, int x1, boolean toggle){
 		if(toggle){
 			gog[y1][x1].showName();
@@ -192,6 +304,12 @@ public class Grid implements Serializable{
 		return size;
 	}
 
+	/**
+	 * This method will replace the [P] tile to the new position on the {@link Grid} as long as the 
+	 * {@link Player} is able to move to that location
+	 * @param ply
+	 * 	- {@code Player} {@link Player}
+	 */
 	public void rePopulateGrid(Player ply) {
 		gog[ply.get_yPosition()][ply.get_xPosition()] = ply;
 
@@ -203,6 +321,11 @@ public class Grid implements Serializable{
 		}
 	}
 
+	/**
+	 * This method will repopulate the {@link Grid} with all of the {@link Enemy} objects. It is used for
+	 * testing purposes only.
+	 * @param index
+	 */
 	public void rePopulateGrid(int index){					//for testing only
 		/*for(int i = 0; i < enemy.length; ++i){
 			gog[enemy[i].getYPosition()][enemy[i].getXPosition()] = enemy[i];
@@ -213,15 +336,43 @@ public class Grid implements Serializable{
 		//}
 	}
 
+	/**
+	 * This method will cause the object at the given location to be replaced with a generic empty 
+	 * {@link GameObject}.
+	 * @param posY
+	 * 	- {@code int} containing the y coordinate of the object
+	 * @param posX
+	 * 	- {@code int} containing the x coordinate of the object
+	 */
 	public void changeObjectIntoBlank(int posY, int posX){
 		gog[posY][posX] = new GameObject();
 	}
 
+	/**
+	 * This method will find an object at a specified location and pass that to whatever calls it. It does 
+	 * this by setting {@link #go} to the location of {@link #gog}
+	 * @param posY
+	 * 	- {@code int} containing the y coordinate of the object
+	 * @param posX
+	 * 	- {@code int} containing the x coordinate of the object
+	 * @return
+	 * 	- {@link GameObject} {@link #go}
+	 */
 	public GameObject getObjectAtLocation(int posY, int posX){
 		go = gog[posY][posX];
 		return go;
 	}
 
+	/**
+	 * This method is responsible for checking if a location is free. If there is no {@link GameObject} at 
+	 * the location, it returns {@code false}; otherwise it returns {@code true}.
+	 * @param posY
+	 * 	- {@code int} containing the y coordinate of the object
+	 * @param posX
+	 * 	- {@code int} containing the x coordinate of the object
+	 * @return
+	 * 	- {@code boolean} that is {@code true} is the location is taken, and {@code false} otherwise
+	 */
 	public boolean checkIfLocationFree(int posY, int posX){
 		if(gog[posY][posX] instanceof GameObject)
 			return true;
@@ -230,9 +381,13 @@ public class Grid implements Serializable{
 	}
 
 	/**
-	 * @param yPosition
-	 * @param i
+	 * This method will check for an {@link Enemy} in the specified location and return a {@code boolean}.
+	 * @param yPos
+	 * 	- {@code int} containing the y coordinate of the object 
+	 * @param xPos
+	 * 	- {@code int} containing the y coordinate of the object
 	 * @return
+	 * 	- {@code boolean} that is {@code true} when there is an {@link Enemy} and {@code false} otherwise
 	 */
 	public boolean checkForEnemy(int yPos, int xPos) {
 		boolean check = false;
@@ -251,6 +406,12 @@ public class Grid implements Serializable{
 	}
 
 
+	/**
+	 * This method will check to ensure that the {@link Enemy} objects are not stacked by comparing them.
+	 * @return
+	 * 	- {@code boolean} that is {@code true} when {@link Enemy} objects are in the same square and {@code false
+	 * 		otherwise.
+	 */
 	public boolean checkEnemiesStacked(){
 		int x=0;
 		for(int i  = 0; i < enemy.size(); ++i){
@@ -292,15 +453,28 @@ public class Grid implements Serializable{
 		briefcasePos[0] = firstRandom;
 		briefcasePos[1] = secondRandom;
 	}
+	
+	/**
+	 * This method will give the location of the bomb as an {@code int[]} to whatever calls it
+	 * @return
+	 * 	- {@code int[]} {@link #briefcasePos}
+	 */
 	public int[] getBCpos() {
 		return briefcasePos;
 	}
+	
+	/**
+	 * This method will give the {@link Room} object containing the bomb to whatever calls it
+	 * @return
+	 * 	- {@link Room} containing bomb
+	 */
 	public Room getBriefcaseRoom(){
 		return bcRoom;
 	}
 
 	/**
-	 * This method randomly places 6 enemies.
+	 * This method randomly places 6 enemies on the {@link Grid} at least two squares away from the 
+	 * {@link Player}
 	 */
 	public void setEnemy() {
 		int spawnOne;
@@ -330,10 +504,23 @@ public class Grid implements Serializable{
 		}
 	}
 
+	/**
+	 * This method will return an {@link ArrayList} of {@link Enemy} objects to whatever calls it
+	 * @return
+	 * 	- {@link ArrayList} of {@link Enemy Enemies}
+	 */
 	public ArrayList<Enemy> getEnemy(){
 		return enemy;
 	}
 
+	/**
+	 * This method will move the {@link Enemy} object on the {@link Grid} while also checking to see if 
+	 * a {@link Player} needs to be stabbed.
+	 * @param grid
+	 * 	- {@link Grid}
+	 * @param ply
+	 * 	- {@link Player}
+	 */
 	public void moveEnemy(Grid grid, Player ply) {
 		for (int i = 0; i < enemy.size(); i++) {
 			enemy.get(i).moveEnemy(grid);
@@ -349,14 +536,24 @@ public class Grid implements Serializable{
 		//return playerKilled;
 	}
 
+	/**
+	 * This method returns the {@link #playerKilled} {@code boolean} to whatever calls it
+	 * @return
+	 * 	- {@code boolean} {@link #playerKilled}
+	 */
 	public boolean getPlayerKilled(){
 		return playerKilled;
 	}
 
 	/**
+	 * This method is called whenever the {@link Enemy Enemies} move. It checks to see if a {@link Player}
+	 * has a {@link Shield} activated before killing them for being within striking distance.
 	 * @param yPos 
+	 * 	- {@code int} containing the y coordinate of the object
 	 * @param xPos 
+	 *	- {@code int} containing the X coordinate of the object
 	 * @param ply 
+	 * 	- {@link Player}
 	 */
 	public void checkForPlayer(int yPos, int xPos, Player ply) {
 		playerKilled = false;
@@ -391,14 +588,16 @@ public class Grid implements Serializable{
 	}
 
 	/**
-	 * @return the numEnemies
+	 * This method will pass {@link #numEnemies} to whatever calls it
+	 * @return
+	 * 	- {@code int} {@link #numEnemies}
 	 */
 	public int getNumEnemies() {
 		return numEnemies;
 	}
 
 	/**
-	 * This method randomly places 6 enemies.
+	 * This method calls the methods that spawn each individual power up.
 	 */
 	public void setPowerUps() {
 //		boolean showPowerUps = true;
@@ -406,6 +605,10 @@ public class Grid implements Serializable{
 		spawnExtraAmmo();
 		spawnShield();
 	}	
+	
+	/**
+	 * This method randomly places the {@link Radar} at least 2 squares away from the {@link Player}
+	 */
 	public void spawnRadar(){
 		int spawnOne;
 		int spawnTwo;
@@ -428,17 +631,35 @@ public class Grid implements Serializable{
 			}
 		}
 	}
+	
+	/**
+	 * This method will pass the {@link Radar} to whatever calls it
+	 * @return
+	 * 	- {@link Radar}
+	 */
 	public Radar getRadar(){
 		return radar;
 	}
+	
+	/**
+	 * This method will pass the location of the {@link Radar} as an {@code int[]} to whatever calls it
+	 * @return
+	 * 	- {@code int[]} {@link #radarPos}
+	 */
 	public int[] getRadarPos() {
 		return radarPos;
 	}
 
+	/**
+	 * This method simply calls {@link Radar#activateRadar(Room)} and passes along the {@link #bcRoom}
+	 */
 	public void activateRadar() {
 		radar.activateRadar(bcRoom);
 	}
 
+	/**
+	 * This method randomly places the {@link ExtraAmmo} at least 2 squares away from the {@link Player}
+	 */
 	public void spawnExtraAmmo(){
 		int spawnOne;
 		int spawnTwo;
@@ -462,14 +683,27 @@ public class Grid implements Serializable{
 		}
 	}
 
+	/**
+	 * This method will return the {@link ExtraAmmo} object to whatever calls it
+	 * @return
+	 * 	- {@link ExtraAmmo}
+	 */
 	public ExtraAmmo getExtraAmmo(){
 		return extraAmmo;
 	}
 	
+	/**
+	 * This method will return the location of the {@link ExtraAmmo} object as an {@code int[]}
+	 * @return
+	 * 	- {@code int[]} {@link #ammoPos}
+	 */
 	public int[] getExtraAmmoPos(){
 		return ammoPos;
 	}
 
+	/**
+	 * This method randomly places the {@link Shield} at least 2 squares away from the {@link Player}
+	 */
 	public void spawnShield(){
 		int spawnOne;
 		int spawnTwo;
@@ -492,14 +726,34 @@ public class Grid implements Serializable{
 		}
 	}
 
+	/**
+	 * This method will return the {@link Shield} object to whatever calls it
+	 * @return
+	 * 	- {@link Shield}
+	 */
 	public Shield getShield(){
 		return shield;
 	}
 	
+	/**
+	 * This method will return the location of the {@link Shield} object as an {@code int[]}
+	 * @return
+	 * 	- {@code int[]} {@link #shieldPos}
+	 */
 	public int[] getShieldPos(){
 		return shieldPos;
 	}
 	
+	/**
+	 * This method will check to see if any {@link Enemy} objects are in the way of the bullet when the 
+	 * {@link Player} shoots
+	 * @param yplr
+	 * 	- {@code int} containing the y coordinate of the {@link Player}
+	 * @param xplr
+	 * 	- {@code int} containing the x coordinate of the {@link Player}
+	 * @param dir
+	 * 	- {@code String} containing a cardinal direction desiginating where the bullet will travel.
+	 */
 	public void shootGunCheck(int yplr, int xplr, String dir) {
 		boolean ran = false;
 		switch (dir) {
@@ -543,7 +797,9 @@ public class Grid implements Serializable{
 	 * 
 	 * used for testing
 	 * @param y
+	 * 	- {@code int} containing the y coordinate
 	 * @param x
+	 * 	- {@code int} containing the x coordinate
 	 */
 	private void shootGunPrintResults(int y, int x) {
 		enemyInstance = checkForEnemy(y, x);
@@ -552,10 +808,15 @@ public class Grid implements Serializable{
 	}
 
 	/**
+	 * This method will kill an {@link Enemy} when it is hit by a bullet
 	 * @param y
+	 * 	- {@code int} containing the y coordinate to be checked by the {@link Enemy}'s
 	 * @param x
+	 * 	- {@code int} containing the x coordinate to be checked by the {@link Enemy}'s
 	 * @param ran 
+	 * 	- {@code boolean} that will runs the location check only if it is {@code false}
 	 * @return 
+	 * 	- {@code boolean} that was passed in as a parameter
 	 */
 	public boolean killenemy(int y, int x, boolean ran) {
 		for (int index = 0; index < enemy.size(); index++) {
@@ -575,55 +836,114 @@ public class Grid implements Serializable{
 		}
 		return ran;
 	}
+	
+	/**
+	 * This method will pass {@link #enemyDead} to whatever calls it
+	 * @return
+	 * 	- {@code boolean} {@link #enemyDead}
+	 */
 	public boolean getEnemyDeath(){
 		return enemyDead;
 	}
 
+	/**
+	 * This method will set {@link #enemyVis} to whatever the parameter is and return it to whatever calls it
+	 * @param vis
+	 * 	- {@code boolean} containing the value intended for {@link #enemyVis}
+	 * @return
+	 * 	- {@code boolean} {@link #enemyVis}
+	 */
 	public boolean getEnemyVis(boolean vis){
 		enemyVis = vis;
 		return enemyVis;		
 	}
 
+	/**
+	 * This method will set {@link #radarVis} to whatever the parameter is and return it to whatever calls it
+	 * @param vis
+	 * 	- {@code boolean} containing the value intended for {@link #radarVis}
+	 * @return
+	 * 	- {@code boolean} {@link #radarVis}
+	 */
 	public boolean getRadarVis(boolean vis){
 		radarVis = vis;
 		return radarVis;
 	}
 
+	/**
+	 * This method will set {@link #extraAmmoVis} to whatever the parameter is and return it to whatever calls it
+	 * @param vis
+	 * 	- {@code boolean} containing the value intended for {@link #extraAmmoVis}
+	 * @return
+	 * 	- {@code boolean} {@link #extraAmmoVis}
+	 */
 	public boolean getExtraAmmoVis(boolean vis){
 		extraAmmoVis = vis;
 		return extraAmmoVis;
 	}
 
+	/**
+	 * This method will set {@link #shieldVis} to whatever the parameter is and return it to whatever calls it
+	 * @param vis
+	 * 	- {@code boolean} containing the value intended for {@link #shieldVis}
+	 * @return
+	 * 	- {@code boolean} {@link #shieldVis}
+	 */
 	public boolean getShieldVis(boolean vis){
 		shieldVis = vis;
 		return shieldVis;
 	}
 
+	/**
+	 * This method will set {@link #showBriefcase} to whatever the parameter is and return it to whatever calls it
+	 * @param vis
+	 * 	- {@code boolean} containing the value intended for {@link #showBriefcase}
+	 * @return
+	 * 	- {@code boolean} {@link #showBriefcase}
+	 */
 	public boolean getBriefcaseVis(boolean vis){
 		showBriefcase = vis;
 		return showBriefcase;
 	}
 
+	/**
+	 * This method will respawn the {@link Radar} at its location if an {@link Enemy} walks over it
+	 */
 	public void respawnRadar(){
 		if(!(gog[radarPos[0]][radarPos[1]] instanceof Enemy))
 			gog[radarPos[0]][radarPos[1]] = radar;
 	}
+	
+	/**
+	 * This method will respawn the {@link ExtraAmmo} at its location if an {@link Enemy} walks over it
+	 */
 	public void respawnEAmmo(){		
 		if(!(gog[ammoPos[0]][ammoPos[1]] instanceof Enemy))
 			gog[ammoPos[0]][ammoPos[1]] = extraAmmo;
 	}
+	
+	/**
+	 * This method will respawn the {@link Shield} at its location if an {@link Enemy} walks over it
+	 */
 	public void respawnShield(){
 		if(!(gog[shieldPos[0]][shieldPos[1]] instanceof Enemy))
 			gog[shieldPos[0]][shieldPos[1]] = shield;
 	}
 
 	/**
+	 * This method will pass {@link #gog} to whatever calls it
 	 * @return
+	 * 	- {@code GameObject[][]} {@link #gog}
 	 */
 	public GameObject[][] getGOG() {
 		return gog;
 	}
 
+	/**
+	 * This method will overwrite the initial {@link #gog} with one taken from a save state
+	 * @param saveGOG
+	 * 	- {@code GameObject[][]} taken from a save file
+	 */
 	public void overwriteGOG(GameObject[][] saveGOG){
 		for(int i = 0; i < gog.length; ++i){
 			for(int j = 0; j < gog[i].length; ++j){
@@ -633,10 +953,16 @@ public class Grid implements Serializable{
 	}
 
 	/**
+	 * This method will find the amount of {@link Enemy Enemies} that are in front of the {@link Player} 
+	 * when they use the look function.
 	 * @param lookPosX2 
+	 * 	- {@code int} the second x coordinate
 	 * @param lookPosY2 
+	 * 	- {@code int} the second y coordinate
 	 * @param lookPosX1 
+	 * 	- {@code int} the first x coordinate
 	 * @param lookPosY1 
+	 * 	- {@code int} the first y coordinate
 	 * 
 	 */
 	public void lookReport(int lookPosY1, int lookPosX1, int lookPosY2, int lookPosX2) {
@@ -653,6 +979,12 @@ public class Grid implements Serializable{
 		}
 		System.out.println("There are " + count + " enemies in front of you.");
 	}
+	
+	/**
+	 * This method will return {@link #enemyFound} to whatever calls it
+	 * @return
+	 * 	- {@code boolean} {@link #enemyFound}
+	 */
 	public boolean getEnemyFound(){
 		return enemyFound;
 	}
