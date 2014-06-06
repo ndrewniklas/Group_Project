@@ -8,9 +8,28 @@ package edu.csupomona.cs.cs141.thehouse;
  * 
  */
 public class Room extends GameObject {
+	
+	/**
+	 * This field represents a {@code constant} {@code String} containing "[R]", the symbol for a 
+	 * general {@link Room} object
+	 */
 	private final String ROOM_NAME = "[R]";
+	
+	/**
+	 * This field represents a {@code constant} {@code String} containing "[B]", the symbol for a 
+	 * bomb.
+	 */
 	private final String BRIEFCASE_NAME = "[B]";
+
+	/**
+	 * This field represents a {@code boolean} that is {@code true} when the {@link Room} contains the
+	 * bomb and {@code false} otherwise.
+	 */
 	private boolean briefcaseRoom;
+	
+	/**
+	 * This field represents the unique ID of the object, used for comparing two {@link GameObject}s
+	 */
 	private int objID;
 
 	/**
