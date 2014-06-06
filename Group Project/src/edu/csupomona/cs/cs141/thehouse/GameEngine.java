@@ -20,13 +20,14 @@ package edu.csupomona.cs.cs141.thehouse;
 import java.util.Scanner;
 
 /**
- * 
  *	GameEngine is where almost everything from the other classes contribute to the game.
  *	The GameEngine takes user commands from {@link UserInterface}, checks with {@link Player},
  * 	and then performs the tasks. It is also where the {@link Enemy} class performs the actions 
  * 	it decides. GameEngine updates the {@link Grid} and retrieves positions from it. GameEngine
  * 	also checks to see if the {@link Player} has picked up any {@link PowerUp}s or if they have 
  * 	ammo left.
+ * 
+ * @author Andrew Nipp, Andrew Niklas, Ben Nickerson, Kurt Newcomd, Dylan Nguyen
  */
 public class GameEngine {
 
@@ -82,6 +83,9 @@ public class GameEngine {
 	 */
 	private boolean gameOver;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} whenever the {@link Player} takes a turn
+	 */
 	private boolean didPlayerTakeTurn;
 
 	/**
@@ -90,32 +94,59 @@ public class GameEngine {
 	 */
 	private boolean repeat;
 
+	/**
+	 * This field represents one of the 4 {@code booleans} in charge of determining what is in the {@link 
+	 * Player}'s possession.
+	 */
 	private boolean hasBullet = false;
 	private boolean hasRadar = false;
 	private boolean hasEAmmo = false;
 	private boolean hasShield = false;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} whenever debug mode is on
+	 */
 	private boolean debugModeState;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} whenever the {@link Player} uses
+	 * the look function
+	 */
 	private boolean didPlayerLook;
 
+	/**
+	 * This field represents a {@code boolean} that is {@code true} whenever the player is killed by an 
+	 * {@link Enemy}
+	 */
 	private boolean playerKilled;
 
+	/**
+	 * This field is an {@code int} that tracks the {@link Player}'s moves
+	 */
 	private int moves;
 
+	/**
+	 * This field is an {@code int} that assigns a number of moves that the {@link Shield} object will be
+	 * active for after being enabled.
+	 */
 	private int m;
 
+	/**
+	 * This field is a {@code boolean} that is true whenever the music is on
+	 */
 	private boolean musicOn = true;
 
+	/**
+	 * This field represents a {@code boolean} that is true whenever a new game is started
+	 */
 	private boolean newGameStart;
 
 
 
 	/**
-	 * The default constructor for GameEngine.
-	 * 
-	 * Currently it is only filling up the instances of the classes and forcing {@link #gameOver}
-	 * to be false.
+	 * The default constructor for GameEngine. It instantiates all of the other objects: {@link UserInterface},
+	 * {@link File_Handler}, {@link Player}, {@link Grid}, and {@link Sound}. It then calls {@link Grid#setUpGrid()}
+	 * to populate it and sets the {@link #moves} to {@code 0}.
 	 */
 	public GameEngine(){
 		gameOver = false;
@@ -129,6 +160,11 @@ public class GameEngine {
 		moves = 0;
 	}
 
+	/**
+	 * This constructor is used whenever the user beats the game and starts a new one. It follows the 
+	 * same instantiation as the initial constructor, but also sets all {@code boolean} values to 
+	 * {@code false}. 
+	 */
 	public void newGame(){
 		sound.shootSound();
 		musicOn = true;
@@ -148,7 +184,7 @@ public class GameEngine {
 	}
 
 	/**
-	 * 
+	 * This method simply calls {@link #mainMenuSelect()}, but exists to be called from {@link Main}
 	 */
 	public void startGame() {
 		mainMenuSelect();
@@ -234,10 +270,21 @@ public class GameEngine {
 			System.exit(0);
 	}
 
+	/**
+	 * This method will return the {@code boolean} {@link #newGameStart} to whatever calls it
+	 * @return
+	 * 	- {@code boolean} {@link #newGameStart}
+	 */
 	public boolean getNewGameStart(){
 		return newGameStart;
 	}
 
+	/**
+	 * This method checks every turn to see if there is an object wherever the {@link Player} moved.
+	 * It does this by comparing the {@link Player#get_yPosition()} and {@link Player#get_xPosition()}
+	 * to the location of the {@link GameObject}s. Each power up has a different set of methods that it will
+	 * call when activated, but all of them call {@link Sound#foundPowerup()}.
+	 */
 	public void objectCheck() {
 		int[] radarPos = grid.getRadarPos();
 		int[] extraAmmoPos = grid.getExtraAmmoPos();
@@ -335,7 +382,20 @@ public class GameEngine {
 	// Main game methods
 
 	/**
-	 * first menu to print on each turn
+	 * This method is the top menu during the beginning of each round. It calls {@link UserInterface#turnSelect1()}
+	 * to print out the menu, then asks for input. The input is then run through a {@code switch} statement.
+	 * There are 8 {@code cases} for the statement:
+	 * 	"new" - calls {@link #newGame()} and starts over again;
+	 * 	"dev" - calls up the dev menu, which basically allows the user to enter god mode;
+	 * 	"mute" - sets {@link #musicOn} to false and calls {@link Sound#stopBackgroundLoop()};
+	 * 	"look" - calls up {@link UserInterface#lookDirections()} and moves the user to that menu;
+	 * 	"move" - calls up {@link UserInterface#moveTurn()} and allows the user to select a direction;
+	 * 	"shoot" - calls up {@link UserInterface#shootTurn()} and allows the user to select a direction;
+	 * 	"options" - calls up {@link UserInterface#options()} and allows the user to make a selection before 
+	 * 		returning to the game;
+	 * 	"exit" - exits the game;
+	 * Finally, the {@code default case} will simply restart the {@code do-while} loop and call
+	 * {@link UserInterface#invalidCMD()}.
 	 */
 	public void turnSelect1() {
 		ui.turnSelect1();
@@ -426,8 +486,20 @@ public class GameEngine {
 	}
 
 	/**
-	 * menu to print after player has looked
-	 * 		(second half of turn)
+	 * This method is the top menu during the beginning of each round specifically after the look function 
+	 * has been used. It calls {@link UserInterface#turnSelect2()} to print out the menu, 
+	 * then asks for input. The input is then run through a {@code switch} statement.
+	 * There are 8 {@code cases} for the statement:
+	 * 	"new" - calls {@link #newGame()} and starts over again;
+	 * 	"dev" - calls up the dev menu, which basically allows the user to enter god mode;
+	 * 	"mute" - sets {@link #musicOn} to false and calls {@link Sound#stopBackgroundLoop()};
+	 * 	"move" - calls up {@link UserInterface#moveTurn()} and allows the user to select a direction;
+	 * 	"shoot" - calls up {@link UserInterface#shootTurn()} and allows the user to select a direction;
+	 * 	"options" - calls up {@link UserInterface#options()} and allows the user to make a selection before 
+	 * 		returning to the game;
+	 * 	"exit" - exits the game;
+	 * Finally, the {@code default case} will simply restart the {@code do-while} loop and call
+	 * {@link UserInterface#invalidCMD()}.
 	 */
 	public void turnSelect2() {
 		ui.turnSelect2();
@@ -500,6 +572,18 @@ public class GameEngine {
 		} while(repeat == true);
 	}
 
+	/**
+	 * This method is called whenever "dev" is selected in one of the {@link #turnSelect1() turnSelects}. It 
+	 * will ask for a new input and send that input to this method as a parameter. Dev mode is not very robust
+	 * since it is specifically used by the developers, therefore it can crash the game if someone does not
+	 * know what they are doing. There are 4 main functions:
+	 * 	"check" - asks for input for the (x, y) coordinates and checks to see if an {@link Enemy} is present
+	 * 	"show" - shows all objects on the {@link Grid}
+	 * 	"hide" - hides all objects on the {@link Grid}
+	 * "on/off" - turns dev mode (god mode) on. Shows all objects and gives infinite ammo and shield.
+	 * @param cmd
+	 * 	- {@code String} containing the value of one of the {@code cases} in the {@code switch} statement.
+	 */
 	public void devMenu(String cmd){
 		switch(cmd){
 		case "check":
@@ -530,6 +614,17 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * This method deals with input received after it calls {@link UserInterface#options()}. It can be called
+	 * at any point during a game and has 5 functions:
+	 * 	"debug" - turns on debug mode;
+	 * 	"save" - saves the game's state by calling {@link File_Handler#fileLander(String, Grid, Player)};
+	 * 	"new" - starts a new game;
+	 * 	"mute" mutes the music;
+	 * 	"exit" - exits the game;
+	 * Finally, {@code default} will call itself to essentially loop the method after printing 
+	 * {@link UserInterface#invalidCMD()}
+	 */
 	public void setOption(){
 		ui.options();
 		choice = sc.nextLine().toLowerCase();
@@ -576,6 +671,10 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * This method is called when debug is selected from the options menus. It only has one function, 
+	 * to turn debug on/off. It will print a message displaying verification of the user's selection.
+	 */
 	public void setDebug(){
 		System.out.println("Please Select 'on' or 'off': ");
 		choice = sc.nextLine().toLowerCase();
@@ -601,6 +700,10 @@ public class GameEngine {
 		}    	
 	}
 
+	/**
+	 * This method will move the {@link Player} by calling {@link Player#movePlayer(String)} and 
+	 * {@link Grid#rePopulateGrid(Player)}. It then sets {@link #didPlayerTakeTurn} to true and moves on.
+	 */
 	public void movePlayerForTurn(){
 		String input = sc.nextLine();
 		ply.movePlayer(input);
@@ -608,6 +711,14 @@ public class GameEngine {
 		didPlayerTakeTurn = true;
 	}
 
+	/**
+	 * This method activates debug mode. Basically it runs through all of the visibilities in {@link Grid}
+	 * and sets them to true. It then adds over 9000 to both the ammo supply and shield turns. If 
+	 * {@code boolean} on is {@code false} it will do the opposite, but will not remove any bullets or shield
+	 * turns. This mode is not recommended while playing the game seriously.
+	 * @param on
+	 * 	- {@code boolean} containing a value that will activate or deactivate debug mode.
+	 */
 	public void debugMode(boolean on){
 		if(on){
 			grid.getRadarVis(true);
@@ -631,6 +742,11 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * This method gives the {@link Player} sight in the direction that they are looking. It is assumed
+	 * that the {@link Player} is looking in the direction that they last moved or looked. Its {@code default case}
+	 * assumes the {@link Player} is looking up at spawn.
+	 */
 	public void playerDefaultVision(){
 		switch(ply.getPlrMoveDirection()){
 		case "up":
@@ -651,6 +767,10 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * This method is needed to ensure that the square that was visible before the {@link Player} moves or\
+	 * looks is set back to hidden.
+	 */
 	public void removeDefaultVision(){
 		switch(ply.getPlrMoveDirection()){
 		case "up":
@@ -672,14 +792,18 @@ public class GameEngine {
 	}
 
 	/**
-	 * @return the moves
+	 * This method will pass {@link #moves} to whatever calls it
+	 * @return 
+	 * 	- {@code int} {@link #moves}
 	 */
 	public int getMoves() {
 		return moves;
 	}
 
 	/**
-	 * @param m the m to set
+	 * This method will set {@link #m} to whatever is passed in as an {@code int} in the parameter.
+	 * @param m
+	 * 	- {@code int} containing the intended value for {@link #m}
 	 */
 	public void setM(int m) {
 		this.m = m;
