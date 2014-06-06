@@ -18,10 +18,10 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * @author Dylan Nguyen
  * This class has parameters that will define the position of the enemy pirate
  * as well as whether they are alive. Furthermore, the methods that will be contained in this class
  * will allow for the pirate to move, and to check for, kill, or be killed by the {@link Player}.
+ * @author Dylan Nguyen, Andrew Nipp, Andrew Niklas, Ben Nickerson
  */
 
 public class Enemy extends GameObject {

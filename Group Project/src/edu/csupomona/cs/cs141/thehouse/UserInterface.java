@@ -6,7 +6,9 @@ package edu.csupomona.cs.cs141.thehouse;
 import java.util.Scanner;
 
 /**
- * @author Andrew
+ * This class basically serves to print all information to the command prompt. It will take input from the 
+ * user in specific circumstances, but for the most part is called from {@link GameEngine}. 
+ * @author Ben Nickerson, Andrew Niklas, Andrew Nipp 
  * 
  */
 public class UserInterface {

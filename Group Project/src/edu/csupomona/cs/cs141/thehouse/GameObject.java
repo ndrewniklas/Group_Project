@@ -6,7 +6,10 @@ package edu.csupomona.cs.cs141.thehouse;
 import java.io.Serializable;
 
 /**
- * @author Andrew
+ * This method is the super class for all game objects: {@link Player}, {@link Enemy}, {@link Shield}, 
+ * {@link Room}, {@link Radar}, and {@link ExtraAmmo}. Its primary function is to ensure that they can 
+ * interact with each other and the {@link Grid} appropriately.
+ * @author Andrew Niklas, Andrew Nipp, Ben Nickerson
  *
  */
 public class GameObject implements Comparable<GameObject>, Serializable{

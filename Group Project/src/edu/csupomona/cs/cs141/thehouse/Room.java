@@ -4,7 +4,10 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * @author Andrew
+ * This class represents intances of room objects. They have the unique quality of being able to carry
+ * the bomb. If the {@link Player} finds the bomb within the room, the game ends. There are also instances
+ * of empty rooms on the {@link Grid}.
+ * @author Andrew Nipp, Andrew Niklas, Ben Nickerson
  * 
  */
 public class Room extends GameObject {

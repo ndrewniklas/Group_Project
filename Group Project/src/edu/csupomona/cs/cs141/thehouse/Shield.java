@@ -17,14 +17,21 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * @author Kurt This class will assign the power-up to the invincibility
- *         power-up.
+ * This class represents the shield object, it will protect the {@link Player} from being stabbed
+ * by an {@link Enemy} for a set number of turns.
  * 
+ * @author Kurt Newcomb, Andrew Nipp, Andrew Niklas, Ben Nickerson
  */
 public class Shield extends GameObject {
 
+	/**
+	 * This is the string for the name of the {@link Shield}.
+	 */
 	private final String SHIELD = "|S|";
 
+	/**
+	 * This field represents the unique ID of the object, used for comparing two {@link GameObject}s
+	 */
 	private int objID;
 
 	/**

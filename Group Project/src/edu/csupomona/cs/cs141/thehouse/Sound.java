@@ -15,14 +15,24 @@ import sun.audio.ContinuousAudioDataStream;
 //import the sun.audio package
 
 /**
- * @author amnipp
+ * This class runs the audio for the game.
+ * @author Andrew Nipp, Ben Nickerson
  */
 public class Sound {
 
+	/**
+	 * Instantiates the {@link InputStream}
+	 */
 	private InputStream in;
 
+	/**
+	 * Instantiates the {@link AudioStream}
+	 */
 	private AudioStream as;
 
+	/**
+	 * Instantiates the {@link ContinuousAudioDataStream}
+	 */
 	private ContinuousAudioDataStream cas;
 
 	/**

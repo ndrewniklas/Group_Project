@@ -18,9 +18,10 @@ package edu.csupomona.cs.cs141.thehouse;
 
 /**
  * 
- * This class will assign {@link GameObject} to the Extra Bullet class.
+ * This class will assign {@link GameObject} to the Extra Bullet class and make it possible for 
+ * the {@link Player} to get an extra bullet when the pick it up.
  * 
- * @author Kurt
+ * @author Kurt Newcomb, Andrew Nipp, Andrew Niklas, Ben Nickerson
  * 
  */
 public class ExtraAmmo extends GameObject {

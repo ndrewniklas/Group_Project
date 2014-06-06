@@ -17,8 +17,9 @@
 package edu.csupomona.cs.cs141.thehouse;
 
 /**
- * @author Kurt This class will assign the power-up to the Radar powerup.
- * 
+ * This class gives the Radar the ability to show where the {@link Room} containing the 
+ * briefcase is located on the {@link Grid}.
+ * @author Kurt Newcomb, Andrew Nipp, Andrew Niklas, Ben Nickerson
  */
 public class Radar extends GameObject {
 
@@ -27,6 +28,9 @@ public class Radar extends GameObject {
 	 */
 	private final String RADAR = "|D|";
 
+	/**
+	 * This field represents the unique ID of the object, used for comparing two {@link GameObject}s
+	 */
 	private int objID;
 
 	/**
