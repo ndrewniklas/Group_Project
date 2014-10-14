@@ -106,8 +106,7 @@ public class UserInterface {
 		System.out.println("3)Rules");
 		System.out.println("4)Options");
 		System.out.println("0)Exit");
-		System.out
-				.println("Please enter one of the commands or the corresponding number:");
+		System.out.println("Please enter one of the commands or the corresponding number:");
 	}
 
 	/**
@@ -201,8 +200,7 @@ public class UserInterface {
 		System.out.println("2)Down");
 		System.out.println("3)Right");
 		System.out.println("4)Left");
-		System.out
-				.println("Please enter one of the commands, command numbers, or the letter: ");
+		System.out.println("Please enter one of the commands, command numbers, or the letter: ");
 	}
 
 	/**
@@ -215,8 +213,7 @@ public class UserInterface {
 		System.out.println("2)Down");
 		System.out.println("3)Right");
 		System.out.println("4)Left");
-		System.out
-				.println("Please enter one of the commands, command numbers, or the letter: ");
+		System.out.println("Please enter one of the commands, command numbers, or the letter: ");
 	}
 
 	/**
@@ -293,8 +290,7 @@ public class UserInterface {
 		System.out.println("2)Down");
 		System.out.println("3)Right");
 		System.out.println("4)Left");
-		System.out
-				.println("Please enter one of the commands, command numbers, or the letter: ");
+		System.out.println("Please enter one of the commands, command numbers, or the letter: ");
 	}
 
 	/**
